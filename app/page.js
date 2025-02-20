@@ -24,7 +24,7 @@ const App = () => {
         }`}
       >
         
-        <div className="flex flex-col">
+        <div className="flex flex-col min-h-screen">
 
         <Navbar />
         <Body/>
