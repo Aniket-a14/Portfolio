@@ -14,7 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar = () => {
   return (
-    <div className="container bg-custom-gradient flex justify-between items-center mx-auto px-8 py-4">
+    <div className="container bg-custom-gradient rounded-xl flex justify-between items-center mx-auto px-8 py-4">
       <div className="text-xl font-bold tracking-tight pt-1">
         <Link href="/">
           <Avatar>
