@@ -1,16 +1,13 @@
 import React from "react";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
 
 const Navbar = () => {
   return (
@@ -26,35 +23,28 @@ const Navbar = () => {
 
       <NavigationMenu>
         <NavigationMenuList className="flex gap-8 text-lg font-semibold ">
-        <NavigationMenuItem className="bg-transparent transition-all duration-200">
-            <Link href="https://www.github.com/Aniket-a14" legacyBehavior passHref>
-              <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} `}
-              >
+          <NavigationMenuItem className="bg-transparent transition-all duration-200">
+            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+              <Link href="https://www.github.com/Aniket-a14"> 
                 <span className="text-lg">Github</span>
-              </NavigationMenuLink>
-            </Link>
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
 
-          <NavigationMenuItem className=" bg-transparent transition-all duration-200">
-            <Link href="/About" legacyBehavior passHref>
-              <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} `}
-              >
-                <span className="text-lg">About</span>
-              </NavigationMenuLink>
-            </Link>
+          <NavigationMenuItem className="bg-transparent transition-all duration-200">
+            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+              <Link href="#contact">
+                <span className="text-lg">Contact</span>
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
 
-
-          <NavigationMenuItem className=" bg-transparent transition-all duration-200">
-            <Link href="/Projects" legacyBehavior passHref>
-              <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} `}
-              >
+          <NavigationMenuItem className="bg-transparent transition-all duration-200">
+            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+              <Link href="#projects">
                 <span className="text-lg">Projects</span>
-              </NavigationMenuLink>
-            </Link>
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

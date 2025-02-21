@@ -16,7 +16,7 @@
   } 
 }
 
-/* 🎭 Curtain Moves Up Effect */
+
 @keyframes upward {
   0% { 
     transform: translateY(0); 
@@ -24,16 +24,16 @@
     box-shadow: 0px 25px 50px rgba(0, 0, 0, 0.8); 
   }
   80% {
-    box-shadow: 0px -15px 40px rgba(0, 0, 0, 0.6); /* Dark lingering shadow */
+    box-shadow: 0px -15px 40px rgba(0, 0, 0, 0.6); 
   }
   100% { 
-    transform: translateY(-100%); /* Moves completely out */
+    transform: translateY(-100%); 
     opacity: 0; 
     box-shadow: none;
   }
 }
 
-/* 📜 Text Drops Slightly Down */
+
 @keyframes textDown {
   0% { 
     transform: translateY(-5px); /* Slight downward movement */
@@ -45,11 +45,11 @@
   }
 }
 
-/* ✨ Stronger Fade-in from Bottom with Darker Shadow */
+
 @keyframes fadeInUp {
   0% { 
     opacity: 0; 
-    transform: translateY(20); /* More noticeable downward entry */
+    transform: translateY(20); 
     
   }
   100% { 
@@ -171,11 +171,13 @@
 /* Hide scrollbar for Firefox */
 html {
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
 /* Hide scrollbar for IE, Edge, and older versions of Firefox */
 * {
   -ms-overflow-style: none;
 }
+
 
 

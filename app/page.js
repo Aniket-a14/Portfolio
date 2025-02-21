@@ -4,6 +4,8 @@ import Loader from "./Loader";
 import Navbar from "./Components/Navbar";
 import Body from "./Components/Body";
 import About from "./Components/About";
+import Languages from "./Components/Languages";
+import Project from "./Components/Project";
 
 const App = () => {
   const [showContent, setShowContent] = useState(false);
@@ -24,14 +26,24 @@ const App = () => {
         }`}
       >
         
-        <div className="flex flex-col min-h-screen">
+        <div className="fixed top-0 left-0 w-full z-50">
+          <Navbar />
+        </div>
 
-        <Navbar />
-        <Body/>
+        <div className="pt-[4rem] h-screen overflow-auto">
+          <Body />
         </div>
         
         <div className="bg-black">
           <About/>
+        </div>
+
+        <div className="">
+          <Languages/>
+        </div>
+
+        <div className="bg-black">
+          <Project/>
         </div>
         
         
