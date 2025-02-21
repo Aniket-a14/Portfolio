@@ -42,7 +42,7 @@ const projects = [
 ];
 
 const ProjectCard = ({ project }) => (
-  <div className="transition-all duration-300 ease-in-out w-[350px] h-full text-left flex flex-col items-center border border-white/25 rounded-2xl bg-white/0 shadow-[0_8px_32px_0_rgba(31,38,135,0.25)] backdrop-blur-[18px] hover:translate-y-[-10px] hover:shadow-[0_16px_64px_0_rgba(31,38,135,0.25)] group-hover:blur-[3px] hover:!blur-none p-4">
+  <div className="transition-all duration-300 ease-in-out w-[350px] h-full text-left flex flex-col items-center border border-white/25 rounded-2xl bg-white/0 shadow-[0_8px_32px_0_rgba(31,38,135,0.25)] backdrop-blur-[18px] hover:translate-y-[-10px] hover:translate-x-[2px] hover:shadow-[0_16px_64px_0_rgba(31,38,135,0.25)] group-hover:blur-[3px] hover:!blur-none p-4">
     <Image
       height={300}
       width={300}
