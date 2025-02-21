@@ -80,8 +80,8 @@ const ProjectCard = ({ project }) => (
 
 const Project = () => {
   return (
-    <div className="container text-white min-h-[110vh] mx-auto" id="projects">
-      <h1 className={`text-5xl flex relative underline justify-center items-center pt-20 font-bold ${playfair.className}`}>
+    <div className="container text-white min-h-[120vh] mx-auto" id="projects">
+      <h1 className={`text-5xl flex relative underline justify-center items-center pt-36 font-bold ${playfair.className}`}>
         Recent Projects 
       </h1>
       <div className="flex flex-wrap max-w-[1200px] justify-center gap-10 pt-16 mx-auto group">
