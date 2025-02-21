@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { FaGithub } from "react-icons/fa";
 
 const Navbar = () => {
   return (
@@ -26,7 +27,7 @@ const Navbar = () => {
           <NavigationMenuItem className="bg-transparent transition-all duration-200">
             <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
               <Link href="https://www.github.com/Aniket-a14"> 
-                <span className="text-lg">Github</span>
+                <span className="text-lg flex justify-center items-center gap-2 "><FaGithub />Github</span>
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
