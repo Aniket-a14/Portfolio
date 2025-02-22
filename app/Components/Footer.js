@@ -97,7 +97,7 @@ const Footer = () => {
         >
           <span className="flex items-center gap-3">
             <span className=" after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full">Geeksforgeeks</span>
-            <span className="text-white/60 mb-0.5">- 20+ Problems Solved</span>
+            <span className="text-white/60 mb-0.5">- 30+ Problems Solved</span>
         </span>
         </Link>
       </div>
