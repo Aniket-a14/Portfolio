@@ -29,7 +29,7 @@ const Footer = () => {
         <span className="pb-2 text-white/70">SOCIALS</span>
         <div>
           <Link
-            href="https://www.linkedin.com/in/aniket-saha/"
+            href="https://www.linkedin.com/in/aniketsaha2005"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-2"
@@ -40,7 +40,7 @@ const Footer = () => {
         </div>
         <div>
           <Link
-            href="https://github.com/aniket-saha"
+            href="https://github.com/Aniket-a14"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-3"
@@ -51,7 +51,7 @@ const Footer = () => {
         </div>
         <div>
           <Link
-            href="https://www.instagram.com/aniket_saha/"
+            href="https://www.instagram.com/aniket_a14/"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-3"
@@ -62,7 +62,7 @@ const Footer = () => {
         </div>
         <div>
           <Link
-            href="https://twitter.com/aniket_saha"
+            href="https://x.com/AniketSaha41043"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-3"
@@ -77,7 +77,7 @@ const Footer = () => {
       <span className="pb-2 text-white/70">CODING PROFILES</span>
       <div>
         <Link
-          href="https://leetcode.com/aniket_saha/"
+          href="https://leetcode.com/u/Wizard_a14/"
           target="_blank"
           rel="noopener noreferrer"
           className="group flex items-center gap-3"
@@ -90,7 +90,7 @@ const Footer = () => {
       </div>
       <div>
         <Link
-          href="https://www.geeksforgeeks.org/user/aniket_saha/"
+          href="https://www.geeksforgeeks.org/user/aniketsaha5353/"
           target="_blank"
           rel="noopener noreferrer"
           className="group flex items-center gap-3"

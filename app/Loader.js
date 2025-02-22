@@ -8,8 +8,8 @@ const Loader = () => {
   const greetings = [
     "Hi", "Hola", 
     "Bonjour", "Hallo", "Ciao", "こんにちは", "안녕하세요", "Olá", "Привет", "שלום", 
-    "Zdravstvuyte", "Hej", "Sawasdee", "Merhaba", "Aloha", "Chào bạn", "Xin chào", 
-    "Salaam","Kamusta", "হ্যালো", "Xin chào", "Namaste"
+    "Zdravstvuyte", "Hej", "Sawasdee", "Merhaba", "Aloha", "Xin chào", 
+    "Salaam","Kamusta", "হ্যালো", "Namaste"
   ];
 
   useEffect(() => {

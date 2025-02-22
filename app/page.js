@@ -28,7 +28,7 @@ const App = () => {
   useEffect(() => {
     timeoutRef.current = setTimeout(() => {
       startTransition(() => setShowContent(true));
-    }, 5200);
+    }, 4900);
 
     return () => clearTimeout(timeoutRef.current);
   }, []);
