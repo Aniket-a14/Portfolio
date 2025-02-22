@@ -38,7 +38,7 @@ const App = () => {
           <About/>
         </div>
 
-        <div className="">
+        <div className="overflow-auto">
           <Languages/>
         </div>
 

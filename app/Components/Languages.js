@@ -38,19 +38,27 @@ const Languages = () => {
     <div>
       <div className="container min-h-screen mx-auto">
         <div className="flex flex-col justify-center items-center">
-          <h1 className={`text-2xl flex justify-center items-center pt-20 ${playfairMin.className}`}> Explore my</h1>
-          <h2 className={`text-5xl flex relative underline justify-center pt-3 items-center font-bold ${playfair.className}`}>
+          <h1
+            className={`text-2xl flex justify-center items-center pt-20 ${playfairMin.className}`}
+          >
+            {" "}
+            Explore my
+          </h1>
+          <h2
+            className={`text-5xl flex relative text-center underline justify-center pt-3 items-center font-bold ${playfair.className} `}
+          >
             Languages and Tools Proficiency
           </h2>
         </div>
         <div className="flex flex-col xl:flex-row  justify-between items-center">
-        <IconCloud images={images} />
-          <AnimatedBeamDemo />
-        <IconCloud images={images} />
-          
+          <IconCloud images={images} />
+          <span className="pb-10 sm:ml-4 w-full xl:pb-0">
+            <AnimatedBeamDemo />
+          </span>
+          <span className="xl:block hidden">
+            <IconCloud images={images} />
+          </span>
         </div>
-
-        
       </div>
     </div>
   );

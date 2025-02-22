@@ -49,9 +49,9 @@ const UnderlineLink = ({ href, children }) => (
 
 export default function Page() {
   return (
-    <main className="flex flex-col p-10 pt-24 min-h-[90vh] bg-custom-gradient">
+    <main className="flex flex-col p-10 md:justify-center xl:justify-start xl:pt-24 min-h-[90vh] bg-custom-gradient pt-16">
       <h1 className={`text-5xl ${robotoMedium.className}`}>Hello</h1>
-      <h2 className={`text-7xl mt-2 mb-3 ${playfair.className}`}>
+      <h2 className={`text-7xl mt-2 mb-3 ${playfair.className} `}>
         I'm{" "}
         <ReactTyped
           strings={["a Web Developer", "Aniket Saha", "a Software Dev"]}
@@ -86,13 +86,13 @@ export default function Page() {
         Let’s build something amazing together!
         <span className="ml-6">
           <Link href="microsoft.pdf" target="_blank">
-            <ShinyButton className="bg-[rgba(255,255,255,.55)]">
+            <ShinyButton className="bg-[rgba(255,255,255,.55)] ">
               Resume
             </ShinyButton>
           </Link>
         </span>
       </p>
-      <div className="relative justify-end bottom-0 sm:bottom-5 md:bottom-10 lg:bottom-14 mt-28 mr-20 md:flex hidden">
+      <div className="relative justify-end bottom-0 sm:bottom-5  lg:bottom-36 mt-28 mr-20 xl:flex hidden">
         <SpinningText>adapt • innovate • change •</SpinningText>
       </div>
     </main>

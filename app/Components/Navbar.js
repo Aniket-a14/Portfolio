@@ -12,8 +12,8 @@ import { FaGithub } from "react-icons/fa";
 
 const Navbar = () => {
   return (
-    <div className="container bg-custom-gradient rounded-xl flex justify-between items-center mx-auto px-8 py-4">
-      <div className="text-xl font-bold tracking-tight pt-1">
+    <div className="container flex bg-custom-gradient rounded-xl justify-between items-center mx-auto px-8 py-4">
+      <div className="text-xl font-bold tracking-tight items-center">
         <Link href="/">
           <Avatar>
             <AvatarImage src="logo.jpeg" />
@@ -22,6 +22,7 @@ const Navbar = () => {
         </Link>
       </div>
 
+      <div>
       <NavigationMenu>
         <NavigationMenuList className="flex gap-8 text-lg font-semibold ">
           <NavigationMenuItem className="bg-transparent transition-all duration-200">
@@ -49,6 +50,7 @@ const Navbar = () => {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
+      </div>
     </div>
   );
 };
