@@ -50,10 +50,10 @@ const UnderlineLink = ({ href, children }) => (
 export default function Page() {
   return (
     <>
-      <div className="flex justify-between ">
+      <div className="flex justify-between lg:flex-row flex-col">
         <main className="flex flex-col p-10 md:justify-center xl:justify-start xl:pt-24 min-h-[90vh] pt-16 max-w-[75%] ">
-          <h1 className={`text-5xl ${robotoMedium.className}`}>Hello</h1>
-          <h2 className={`text-7xl mt-2 mb-3 ${playfair.className} `}>
+          <h1 className={`text-3xl sm:text-3xl md:text-4xl xl:text-5xl ${robotoMedium.className}`}>Hello</h1>
+          <h2 className={`text-5xl sm:text-5xl md:text-6xl xl:text-7xl mt-2 mb-3 ${playfair.className} `}>
             I'm{" "}
             <ReactTyped
               strings={["a Web Developer", "Aniket Saha", "a Software Dev"]}
@@ -97,7 +97,7 @@ export default function Page() {
             </span>
           </p>
         </main>
-        <div className="max-w-[25%] flex relative justify-center items-center right-20">
+        <div className="max-w-[25%]  relative justify-center items-center right-20 lg:flex hidden">
           <TiltedCard
             imageSrc="/logo.jpeg"
             altText="Aniket Saha - Wiz"

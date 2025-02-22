@@ -1,17 +1,17 @@
 import React from "react";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
-import { Playfair_Display } from "next/font/google";
 import Link from "next/link";
 import Marquee from "@/components/ui/Marquee";
+import { Roboto } from "next/font/google";
 
-const playfair = Playfair_Display({
-  weight: ["700"],
+
+const roboto = Roboto({
+  weight: ["400"],
   style: ["normal"],
   subsets: ["latin"],
   display: "swap",
 });
-
 const projects = [
   {
     id: 1,
@@ -109,7 +109,7 @@ const ProjectCard = ({ project }) => (
 const Project = () => {
   return (
     <div className="container text-white min-h-[120vh] mx-auto" id="projects">
-      <h1 className={`text-5xl flex relative justify-center items-center pt-12  font-bold $`}>
+      <h1 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl flex relative justify-center items-center pt-12  font-bold ${roboto.className}`}>
       <Marquee texts={["RECENT", "WORKS"]} speed={40} />
       </h1>
       <div className="flex flex-wrap max-w-[1200px] justify-center gap-10 pt-12  mx-auto group">

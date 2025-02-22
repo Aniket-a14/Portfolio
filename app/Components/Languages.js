@@ -29,7 +29,7 @@ const Languages = () => {
             Explore my
           </h1>
           <h2
-            className={`text-5xl text-white flex relative text-center justify-center pt-3  items-center font-bold ${roboto.className} `}
+            className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl text-white flex relative text-center justify-center pt-3  items-center font-bold ${roboto.className} `}
           >
             LANGUAGES AND TOOLS PROFICIENCY
           </h2>

@@ -150,7 +150,7 @@ const Footer = () => {
         </nav>
 
         <div className={`flex flex-col gap-2 ${roboto.className}`}>
-          <span className="text-white/70 text-base font-medium">CONTACT</span>
+          <span className="text-white/70 text-base text-center md:text-left font-medium">CONTACT</span>
           <div>
             <Link
               href="mailto:aniketsahaworkspace@gmail.com"
@@ -162,9 +162,9 @@ const Footer = () => {
         </div>
       </div>
       
-      <div className="text-white flex justify-between items-center pb-20 pt-20 text-base">
-        <span className={`flex relative items-center left-10 gap-2 top-6 ${roboto.className}`}> <RiCopyrightLine className="text-xl pt-1" /> 2025 Aniket Saha. All rights reserved.</span>
-        <div className="relative right-28">
+      <div className="text-white flex md:justify-between justify-center items-center pb-20 pt-20 text-base ">
+        <span className={`flex relative items-center left-0 md:left-10 gap-2 top-6 ${roboto.className}`}> <RiCopyrightLine className="text-xl pt-1" /> 2025 Aniket Saha. All rights reserved.</span>
+        <div className="relative right-28 md:flex hidden">
             <SpinningText>adapt • innovate • change •</SpinningText>
           </div>
       </div>

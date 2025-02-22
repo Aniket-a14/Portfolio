@@ -78,7 +78,7 @@ export function Comments() {
   return (
     <>
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden pt-40" id="testimonials">
-        <h1 className={`${roboto.className} text-white text-5xl text-center mb-12`}>WHAT PEOPLE SAY</h1>
+        <h1 className={`${roboto.className} text-white text-2xl sm:text-3xl md:text-4xl xl:text-5xl text-center mb-12`}>WHAT PEOPLE SAY</h1>
       <Marquee pauseOnHover className="[--duration:20s]">
         {firstRow.map((review) => (
           <ReviewCard key={review.username} {...review} />
