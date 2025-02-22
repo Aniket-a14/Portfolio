@@ -1,63 +1,42 @@
 import React from "react";
-import { AnimatedBeamDemo } from "./beam";
-import { IconCloud } from "@/components/magicui/icon-cloud";
-import { Playfair_Display } from "next/font/google";
+import IconCloudDemo from "./Icon";
+import { Roboto } from "next/font/google";
 
-const playfair = Playfair_Display({
-  weight: ["700"],
+const roboto = Roboto({
+  weight: "700",
   style: ["normal"],
   subsets: ["latin"],
   display: "swap",
 });
 
-const playfairMin = Playfair_Display({
-  weight: ["500"],
+const RobotoMin = Roboto({
+  weight: "400",
   style: ["normal"],
   subsets: ["latin"],
   display: "swap",
 });
 
-const images = [
-  "/logo.jpeg",
-  "/logo.jpeg",
-  "/logo.jpeg",
-  "/logo.jpeg",
-  "/logo.jpeg",
-  "/logo.jpeg",
-  "/logo.jpeg",
-  "/logo.jpeg",
-  "/logo.jpeg",
-  "/logo.jpeg",
-  "/logo.jpeg",
-  "/logo.jpeg",
-  "/logo.jpeg",
-];
 
 const Languages = () => {
   return (
     <div>
       <div className="container min-h-[110vh] mx-auto">
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center bg-[#040407] items-center">
           <h1
-            className={`text-2xl flex justify-center items-center pt-24 ${playfairMin.className}`}
+            className={`text-2xl text-white flex justify-center items-center pt-24 ${RobotoMin.className}`}
           >
             {" "}
             Explore my
           </h1>
           <h2
-            className={`text-5xl flex relative text-center underline justify-center pt-3 items-center font-bold ${playfair.className} `}
+            className={`text-5xl text-white flex relative text-center justify-center pt-3  items-center font-bold ${roboto.className} `}
           >
-            Languages and Tools Proficiency
+            LANGUAGES AND TOOLS PROFICIENCY
           </h2>
         </div>
-        <div className="flex flex-col xl:flex-row  justify-between items-center">
-          <IconCloud images={images} />
-          <span className="pb-10 sm:ml-4 w-full xl:pb-0">
-            <AnimatedBeamDemo />
-          </span>
-          <span className="xl:block hidden">
-            <IconCloud images={images} />
-          </span>
+        <div className="flex flex-col pt-20  xl:flex-row bg-[#040407] justify-center items-center">
+          <IconCloudDemo />
+          
         </div>
       </div>
     </div>

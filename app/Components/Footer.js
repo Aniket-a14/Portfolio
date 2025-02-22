@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { RiCopyrightLine } from "react-icons/ri";
 import { Roboto } from "next/font/google";
+import { SpinningText } from "@/components/magicui/spinning-text";
 
 const roboto = Roboto({
   weight: "400",
@@ -161,8 +162,11 @@ const Footer = () => {
         </div>
       </div>
       
-      <div className="text-white flex justify-center py-8 text-base">
-        <span className={`flex items-center gap-2 ${roboto.className}`}> <RiCopyrightLine className="text-xl pt-1" /> 2025 Aniket Saha. All rights reserved.</span>
+      <div className="text-white flex justify-between items-center pb-20 pt-20 text-base">
+        <span className={`flex relative items-center left-10 gap-2 top-6 ${roboto.className}`}> <RiCopyrightLine className="text-xl pt-1" /> 2025 Aniket Saha. All rights reserved.</span>
+        <div className="relative right-28">
+            <SpinningText>adapt • innovate • change •</SpinningText>
+          </div>
       </div>
     </>
   );

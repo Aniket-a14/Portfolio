@@ -145,12 +145,6 @@
 
 
 
-.bg-custom-gradient {
-  background: linear-gradient(90deg, #edecec, #ffffff);
-}
-
-
-
 @layer base {
   * {
     @apply border-border outline-ring/50; 

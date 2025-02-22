@@ -93,9 +93,9 @@ export function IconCloud({
       const z = Math.sin(phi) * r;
 
       newIcons.push({
-        x: x * 100,
-        y: y * 100,
-        z: z * 100,
+        x: x * 150,
+        y: y * 150,
+        z: z * 150,
         scale: 1,
         opacity: 1,
         id: i,
@@ -129,7 +129,7 @@ export function IconCloud({
       const screenY = canvasRef.current.height / 2 + rotatedY;
 
       const scale = (rotatedZ + 200) / 300;
-      const radius = 20 * scale;
+      const radius = 30 * scale;
       const dx = x - screenX;
       const dy = y - screenY;
 
@@ -250,7 +250,7 @@ export function IconCloud({
             iconCanvasesRef.current[index] &&
             imagesLoadedRef.current[index]
           ) {
-            ctx.drawImage(iconCanvasesRef.current[index], -20, -20, 40, 40);
+            ctx.drawImage(iconCanvasesRef.current[index], -20, -20, 60, 60);
           }
         } else {
           // Show numbered circles if no icons/images are provided

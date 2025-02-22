@@ -21,7 +21,6 @@ const Project = lazy(() => import("./Components/Project"));
 
 const App = () => {
   const [showContent, setShowContent] = useState(false);
-  const [isProjectHovered, setIsProjectHovered] = useState(false);
   const [isPending, startTransition] = useTransition();
   const timeoutRef = useRef(null);
 
@@ -33,17 +32,8 @@ const App = () => {
     return () => clearTimeout(timeoutRef.current);
   }, []);
 
-  const handleProjectHover = useCallback((hovered) => {
-    setIsProjectHovered(hovered);
-  }, []);
-
-  const backgroundClass = useMemo(
-    () => (isProjectHovered ? "bg-[#040407]" : "bg-custom-gradient"),
-    [isProjectHovered]
-  );
-
   return (
-    <div className={`relative transition-colors duration-1000 ${backgroundClass}`}>
+    <div className="relative transition-colors duration-1000">
       {!showContent && <Loader aria-hidden="true" />}
 
       <div
@@ -65,17 +55,13 @@ const App = () => {
           </Suspense>
         </div>
 
-        <div className="overflow-auto min-h-[300px]">
+        <div className="overflow-auto bg-[#040407] min-h-[300px]">
           <Suspense fallback={<MiniLoader />}>
             <Languages />
           </Suspense>
         </div>
 
-        <div
-          className="bg-[#040407] transition-colors duration-1000 min-h-[300px]"
-          onMouseEnter={() => handleProjectHover(true)}
-          onMouseLeave={() => handleProjectHover(false)}
-        >
+        <div className="bg-[#040407] transition-colors duration-1000 min-h-[300px]">
           <Suspense fallback={<MiniLoader />}>
             <Project />
           </Suspense>

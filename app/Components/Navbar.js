@@ -12,7 +12,7 @@ import { FaGithub } from "react-icons/fa";
 
 const Navbar = () => {
   return (
-    <div id="home" className="container flex bg-custom-gradient rounded-xl justify-between items-center mx-auto px-8 py-4">
+    <div id="home" className="flex rounded-xl justify-between items-center mx-auto px-8 py-4">
       <div className="text-xl font-bold tracking-tight items-center">
         <Link href="/">
           <Avatar>
