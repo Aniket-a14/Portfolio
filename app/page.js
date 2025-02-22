@@ -34,7 +34,7 @@ const App = () => {
           <Body />
         </div>
         
-        <div className="bg-black">
+        <div className="bg-[#040407]">
           <About/>
         </div>
 
@@ -42,7 +42,7 @@ const App = () => {
           <Languages/>
         </div>
 
-        <div className="bg-black">
+        <div className="bg-[#040407]">
           <Project/>
         </div>
         

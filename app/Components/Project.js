@@ -56,7 +56,7 @@ const ProjectCard = ({ project }) => (
           href={project.repoLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-500 hover:underline ml-2"
+          className="text-blue-600 hover:underline ml-2"
         >
           {project.title}
         </Link>

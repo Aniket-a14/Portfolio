@@ -92,7 +92,7 @@ export default function Page() {
           </Link>
         </span>
       </p>
-      <div className="relative justify-end bottom-0 sm:bottom-5  lg:bottom-36 mt-28 mr-20 xl:flex hidden">
+      <div className="relative justify-end xl:bottom-14 mt-28 mr-20 xl:flex hidden">
         <SpinningText>adapt • innovate • change •</SpinningText>
       </div>
     </main>
