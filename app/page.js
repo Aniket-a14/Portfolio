@@ -13,6 +13,7 @@ import Loader from "./Loader";
 import Navbar from "./Components/Navbar";
 import Body from "./Components/Body";
 import MiniLoader from "../components/ui/Miniloader";
+import Comments from "./Components/Comments";
 
 const About = lazy(() => import("./Components/About"));
 const Languages = lazy(() => import("./Components/Languages"));
@@ -79,6 +80,11 @@ const App = () => {
             <Project />
           </Suspense>
         </div>
+      </div>
+      <div className="bg-[#040407] min-h-[800px]">
+        <Suspense fallback={<MiniLoader />}>
+          <Comments />
+        </Suspense>
       </div>
     </div>
   );
