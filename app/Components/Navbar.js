@@ -27,7 +27,7 @@ const Navbar = () => {
         <NavigationMenuList className="flex gap-8 text-lg font-semibold ">
           <NavigationMenuItem className="bg-transparent transition-all duration-200">
             <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-              <Link href="https://www.github.com/Aniket-a14"> 
+              <Link href="https://www.github.com/Aniket-a14" target="_blank"> 
                 <span className="text-lg flex justify-center items-center gap-2 "><FaGithub />Github</span>
               </Link>
             </NavigationMenuLink>

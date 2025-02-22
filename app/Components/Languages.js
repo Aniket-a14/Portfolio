@@ -36,10 +36,10 @@ const images = [
 const Languages = () => {
   return (
     <div>
-      <div className="container min-h-screen mx-auto">
+      <div className="container min-h-[110vh] mx-auto">
         <div className="flex flex-col justify-center items-center">
           <h1
-            className={`text-2xl flex justify-center items-center pt-20 ${playfairMin.className}`}
+            className={`text-2xl flex justify-center items-center pt-24 ${playfairMin.className}`}
           >
             {" "}
             Explore my

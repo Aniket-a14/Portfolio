@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import { Playfair_Display } from "next/font/google";
 import Link from "next/link";
+import Marquee from "@/components/ui/Marquee";
 
 const playfair = Playfair_Display({
   weight: ["700"],
@@ -32,6 +33,33 @@ const projects = [
   },
   {
     id: 3,
+    title: "Virtual Quiz Game",
+    repoLink: "https://github.com/Aniket-a14",
+    image: "/logo.jpeg",
+    languages: ["Python", "Tkinter", "SQLite"],
+    description: "A Python-based quiz game with a leaderboard.",
+    stars: 0,
+  },
+  {
+    id: 4,
+    title: "Virtual Quiz Game",
+    repoLink: "https://github.com/Aniket-a14",
+    image: "/logo.jpeg",
+    languages: ["Python", "Tkinter", "SQLite"],
+    description: "A Python-based quiz game with a leaderboard.",
+    stars: 0,
+  },
+  {
+    id: 5,
+    title: "Virtual Quiz Game",
+    repoLink: "https://github.com/Aniket-a14",
+    image: "/logo.jpeg",
+    languages: ["Python", "Tkinter", "SQLite"],
+    description: "A Python-based quiz game with a leaderboard.",
+    stars: 0,
+  },
+  {
+    id: 6,
     title: "Virtual Quiz Game",
     repoLink: "https://github.com/Aniket-a14",
     image: "/logo.jpeg",
@@ -81,10 +109,10 @@ const ProjectCard = ({ project }) => (
 const Project = () => {
   return (
     <div className="container text-white min-h-[120vh] mx-auto" id="projects">
-      <h1 className={`text-5xl flex relative underline justify-center items-center pt-36 font-bold ${playfair.className}`}>
-        Recent Projects 
+      <h1 className={`text-5xl flex relative justify-center items-center pt-12  font-bold $`}>
+      <Marquee texts={["RECENT", "WORKS"]} speed={40} />
       </h1>
-      <div className="flex flex-wrap max-w-[1200px] justify-center gap-10 pt-16 mx-auto group">
+      <div className="flex flex-wrap max-w-[1200px] justify-center gap-10 pt-12  mx-auto group">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
