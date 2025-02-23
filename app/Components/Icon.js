@@ -3,7 +3,6 @@ import { IconCloud } from "@/components/magicui/icon-cloud";
 const slugs = [
   "typescript",
   "javascript",
-  "java",
   "react",
   "html5",
   "css3",
@@ -18,7 +17,6 @@ const slugs = [
   "git",
   "github",
   "gitlab",
-  "visualstudiocode",
   "figma",
   "mysql",
   "cplusplus",

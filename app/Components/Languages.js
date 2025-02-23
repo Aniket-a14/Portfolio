@@ -20,7 +20,7 @@ const RobotoMin = Roboto({
 const Languages = () => {
   return (
     <div>
-      <div className="container min-h-[110vh] mx-auto pb-44">
+      <div className="container md:min-h-[80vh] xl:min-h-[110vh] mx-auto pb-44 md:pb-10 xl:pb-44">
         <div className="flex flex-col justify-center bg-[#040407] items-center">
           <h1
             className={`text-lg text-white flex justify-center items-center pt-24 ${RobotoMin.className}`}

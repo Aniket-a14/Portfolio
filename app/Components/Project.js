@@ -70,7 +70,7 @@ const projects = [
 ];
 
 const ProjectCard = ({ project }) => (
-  <div className="transition-all duration-300 ease-in-out w-[350px] h-full text-left flex flex-col items-center border border-white/25 rounded-2xl bg-white/0 shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] backdrop-blur-[18px] hover:translate-y-[-10px] hover:translate-x-[2px] hover:shadow-[0_16px_64px_0_rgba(255,255,255,0.15)] group-hover:blur-[3px] hover:!blur-none p-4">
+  <div className="transition-all duration-300 ease-in-out w-[350px]  h-full  text-left flex flex-col items-center border border-white/25 rounded-2xl bg-white/0 shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] backdrop-blur-[18px] hover:translate-y-[-10px] hover:translate-x-[2px] hover:shadow-[0_16px_64px_0_rgba(255,255,255,0.15)] group-hover:blur-[3px] hover:!blur-none p-4">
     <Image
       height={300}
       width={1000}
@@ -108,7 +108,7 @@ const ProjectCard = ({ project }) => (
 
 const Project = () => {
   return (
-    <div className="container text-white min-h-[120vh] mx-auto" id="projects">
+    <div className="container text-white mt-0 mx-auto" id="projects">
       <h1 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl flex relative justify-center items-center pb-2 font-bold ${roboto.className}`}>
       <Marquee texts={["RECENT", "WORKS"]} speed={40} />
       </h1>

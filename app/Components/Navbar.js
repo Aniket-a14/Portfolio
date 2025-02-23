@@ -12,7 +12,7 @@ import { FaGithub } from "react-icons/fa";
 
 const Navbar = () => {
   return (
-    <div id="home" className="flex justify-between items-center mx-auto px-8 py-4">
+    <div id="home" className="flex bg-white justify-between items-center mx-auto px-8 py-4">
       <div className="text-xl font-bold tracking-tight items-center">
         <Link href="/">
           <Avatar>
@@ -22,7 +22,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div>
+      <div className="bg-white xl:block hidden">
       <NavigationMenu>
         <NavigationMenuList className="flex gap-8 text-lg font-semibold ">
           <NavigationMenuItem className="bg-transparent transition-all duration-200">
