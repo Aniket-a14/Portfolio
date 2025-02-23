@@ -22,7 +22,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="bg-white xl:block hidden">
+      <div className="bg-white sm:block hidden">
       <NavigationMenu>
         <NavigationMenuList className="flex gap-8 text-lg font-semibold ">
           <NavigationMenuItem className="bg-transparent transition-all duration-200">
