@@ -52,6 +52,12 @@ const reviews = [
     username: "@Pollobi.pb",
     body: "I like this website,  well done. Keep it up  dude .",
     img: "/pallavi.jpg",
+  },
+  {
+    name: "Abhipsa",
+    username: "@.abhipsaghosh.",
+    body: "I love this website. It's so beautiful and I'm so happy to see it.",
+    img: "/abhipsa.jpg",
   }
 ];
 
