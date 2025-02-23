@@ -45,7 +45,7 @@ const App = () => {
           <Navbar />
         </div>
 
-        <div className="pt-[4rem] min-h-screen overflow-auto">
+        <div className="pt-[4rem] overflow-auto">
           <Body />
         </div>
 

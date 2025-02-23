@@ -50,10 +50,10 @@ const UnderlineLink = ({ href, children }) => (
 export default function Page() {
   return (
     <>
-      <div className="flex justify-between items-center bg-white min-h-[95vh] md:min-h-[95vh] lg:min-h-[97vh] xl:min-h-[95vh] lg:flex-row flex-col">
-        <main className="flex flex-col p-10 md:justify-center xl:justify-start xl:pt-24 min-h-[90vh] pt-16 max-w-[75%] md:max-w-[65%] lg:max-w-[70%] xl:max-w-[75%] ">
-          <h1 className={`text-3xl sm:text-3xl md:text-4xl xl:text-5xl ${robotoMedium.className}`}>Hello</h1>
-          <h2 className={`text-5xl sm:text-5xl md:text-6xl xl:text-7xl mt-2 mb-3 ${playfair.className} `}>
+      <div className="flex justify-between items-center bg-white max-h-[75vh] md:min-h-[60vh] lg:min-h-[97vh] xl:min-h-[95vh] lg:flex-row flex-col">
+        <main className="flex flex-col p-10 justify-start  md:min-h-[65vh] xl:min-h-[75vh]  max-w-[100%] md:max-w-[100%] lg:max-w-[70%] xl:max-w-[75%] ">
+          <h1 className={`text-xl sm:text-3xl md:text-4xl xl:text-5xl ${robotoMedium.className}`}>Hello</h1>
+          <h2 className={`text-3xl sm:text-5xl md:text-6xl xl:text-7xl mt-2 mb-3 ${playfair.className} `}>
             I'm{" "}
             <ReactTyped
               strings={["a Web Developer", "Aniket Saha", "a Software Dev"]}
@@ -63,7 +63,7 @@ export default function Page() {
             />
           </h2>
 
-          <p className={`text-2xl mt-1 ${robotoMin.className}`}>
+          <p className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-1 ${robotoMin.className}`}>
             I build dynamic web apps with{" "}
             <UnderlineLink href="https://react.dev/">React</UnderlineLink> and{" "}
             <UnderlineLink href="https://nextjs.org/">Next.js</UnderlineLink>{" "}
@@ -72,7 +72,7 @@ export default function Page() {
             and impact.
           </p>
 
-          <p className={`text-xl mt-14 ${robotoMin.className}`}>
+          <p className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-14 ${robotoMin.className}`}>
             Many know me from{" "}
             <UnderlineLink href="https://www.linkedin.com/in/aniketsaha2005/">
               LinkedIn
@@ -85,7 +85,7 @@ export default function Page() {
           </p>
 
           <p
-            className={`text-lg mt-1 flex items-center ${robotoMax.className}`}
+            className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-1 flex items-center ${robotoMax.className}`}
           >
             Let’s build something amazing together!
             <span className="ml-6">
@@ -97,7 +97,7 @@ export default function Page() {
             </span>
           </p>
         </main>
-        <div className="max-w-[25%] xl:max-w-[20%] relative justify-center items-center right-20 lg:flex hidden">
+        <div className="max-w-[25%] xl:max-w-[20%] relative justify-start md:bottom-7 xl:bottom-5 right-20 lg:flex hidden">
           <TiltedCard
             imageSrc="/logo.jpeg"
             altText="Aniket Saha - Wiz"
