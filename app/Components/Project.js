@@ -52,7 +52,7 @@ const projects = [
   {
     id: 5,
     title: "Butterfly",
-    repoLink: "https://github.com/Aniket-a14/Butterfly",
+    repoLink: "https://aniket-a14.github.io/Butterfly/",
     image: "/butterfly.png",
     languages: ["JavaScript", "CSS", "HTML"],
     description: "A JavaScript-based butterfly animation.",

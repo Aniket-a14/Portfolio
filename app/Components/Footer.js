@@ -24,7 +24,7 @@ const robotoMin = Roboto({
 const Footer = () => {
   return (
     <>
-      <div className="text-white flex justify-evenly min-h-[400px] pt-16 mt-1">
+      <div className="text-white flex justify-evenly min-h-[400px] pt-32">
         <div className="flex flex-col gap-3  md:block hidden">
           <span className="text-white/70 text-base mb-3">VER A.S.W</span>
           <div className="pt-2">
@@ -162,7 +162,7 @@ const Footer = () => {
         </div>
       </div>
       
-      <div className="text-white flex md:justify-between justify-center items-center pb-20  text-base ">
+      <div className="text-white flex md:justify-between justify-center items-center pb-20 pt-20 text-base ">
         <span className={`flex relative items-center left-0 md:left-10 gap-2 top-6 ${roboto.className}`}> <RiCopyrightLine className="text-xl pt-1" /> 2025 Aniket Saha. All rights reserved.</span>
         <div className="relative right-28 md:flex hidden">
             <SpinningText>adapt • innovate • change •</SpinningText>
