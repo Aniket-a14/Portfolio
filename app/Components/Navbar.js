@@ -22,7 +22,10 @@ const Navbar = () => {
   return (
     <div id="home" className="flex bg-white justify-between items-center mx-auto px-8 py-4">
       <div className="text-xl font-bold tracking-tight items-center cursor-pointer">
-        <Link href="/" onClick={window.location.reload}>
+        <Link href="/" onClick={()=>{
+          window.location.reload();
+          setIsOpen(false);
+        }}>
           <Avatar>
             <AvatarImage src="logo.jpeg" loading="lazy" />
             <AvatarFallback>AS</AvatarFallback>
