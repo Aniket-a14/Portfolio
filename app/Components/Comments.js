@@ -18,6 +18,12 @@ const reviews = [
     img: "/snehasis.jpg",
   },
   {
+    name: "Ankit Kumar",
+    username: "@Ankit_03",
+    body: "Nice Website, Really appreciable.",
+    img: "/ankit.jpg",
+  },
+  {
     name: "Koushik",
     username: "@koushik.04",
     body: "Its Simple, Elegant and Classic. Just Fantastic...",
@@ -30,23 +36,23 @@ const reviews = [
     img: "/himanshu.jpg",
   },
   {
+    name: "Arghya Dutta",
+    username: "@Arghya.007",
+    body: "Could be better, but still good.",
+    img: "/arghya.jpg",
+  },
+  {
     name: "Sachin",
     username: "@sachin.69",
     body: " I can’t even describe how I feel. Just wow.",
     img: "/sachin.jpg",
   },
   {
-    name: "Arghya",
-    username: "@Arghya.007",
-    body: "Could be better, but still good.",
-    img: "/arghya.jpg",
-  },
-  {
-    name: "Ankit",
-    username: "@Ankit_03",
-    body: "Nice Website, Really appreciable.",
-    img: "/ankit.jpg",
-  },
+    name: "Pallavi Thakur",
+    username: "@Pollobi.pb",
+    body: "I like this website,  well done. Keep it up  dude .",
+    img: "/pallavi.jpg",
+  }
 ];
 
 const firstRow = reviews.slice(0, reviews.length / 2);
