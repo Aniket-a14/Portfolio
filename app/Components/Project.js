@@ -109,10 +109,10 @@ const ProjectCard = ({ project }) => (
 const Project = () => {
   return (
     <div className="container text-white min-h-[120vh] mx-auto" id="projects">
-      <h1 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl flex relative justify-center items-center pt-12  font-bold ${roboto.className}`}>
+      <h1 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl flex relative justify-center items-center pb-2 font-bold ${roboto.className}`}>
       <Marquee texts={["RECENT", "WORKS"]} speed={40} />
       </h1>
-      <div className="flex flex-wrap max-w-[1200px] justify-center gap-10 pt-12  mx-auto group">
+      <div className="flex flex-wrap max-w-[1200px] justify-center gap-10 pt-6 pb-56  mx-auto group">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}

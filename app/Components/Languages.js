@@ -10,7 +10,7 @@ const roboto = Roboto({
 });
 
 const RobotoMin = Roboto({
-  weight: "400",
+  weight: "300",
   style: ["normal"],
   subsets: ["latin"],
   display: "swap",
@@ -20,13 +20,13 @@ const RobotoMin = Roboto({
 const Languages = () => {
   return (
     <div>
-      <div className="container min-h-[110vh] mx-auto">
+      <div className="container min-h-[110vh] mx-auto pb-44">
         <div className="flex flex-col justify-center bg-[#040407] items-center">
           <h1
-            className={`text-2xl text-white flex justify-center items-center pt-24 ${RobotoMin.className}`}
+            className={`text-lg text-white flex justify-center items-center pt-24 ${RobotoMin.className}`}
           >
             {" "}
-            Explore my
+            EXPLORE MY
           </h1>
           <h2
             className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl text-white flex relative text-center justify-center pt-3  items-center font-bold ${roboto.className} `}
