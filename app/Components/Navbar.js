@@ -20,7 +20,7 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <div id="home" className="flex bg-white justify-between items-center mx-auto px-8 py-4">
+    <div id="home" className="flex bg-white justify-between sm:items-center items-start mx-auto px-8 py-4">
       <div className="text-xl font-bold tracking-tight items-center cursor-pointer">
         <Link href="/" onClick={()=>{
           window.location.reload();
@@ -55,7 +55,7 @@ const Navbar = () => {
         >
           <motion.button
             onClick={() => setIsOpen(false)}
-            className="text-white text-3xl mb-8 self-end mt-[-20px]"
+            className="text-white text-3xl mb-8 self-end mt-[-13px] ml-[8px]"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.3 }}
@@ -63,7 +63,7 @@ const Navbar = () => {
             <X size={40} />
           </motion.button>
           <NavigationMenu className="w-full">
-            <NavigationMenuList className="flex flex-col text-2xl space-y-6 w-full">
+            <NavigationMenuList className="flex flex-col text-3xl space-y-6 w-full">
               {[
                 { name: "Github", href: "https://www.github.com/Aniket-a14" },
                 { name: "Testimonials", href: "#testimonials" },
