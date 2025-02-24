@@ -52,8 +52,8 @@ export default function Page() {
     <>
       <div className="flex justify-between items-center bg-white min-h-[95vh]  lg:flex-row flex-col">
         <main className="flex flex-col p-10 justify-center md:justify-center xl:justify-start lg:justify-start min-h-[75vh]  max-w-[100%] md:max-w-[100%] lg:max-w-[70%] xl:max-w-[75%] ">
-          <h1 className={`text-xl sm:text-3xl md:text-4xl xl:text-5xl ${robotoMedium.className}`}>Hello</h1>
-          <h2 className={`text-3xl sm:text-5xl md:text-6xl xl:text-7xl mt-2 mb-3 ${playfair.className} `}>
+          <h1 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl ${robotoMedium.className}`}>Hello</h1>
+          <p className={`text-3xl sm:text-5xl md:text-6xl xl:text-7xl mt-2 mb-3 ${playfair.className} `}>
             I'm{" "}
             <ReactTyped
               strings={["a Web Developer", "Aniket Saha", "a Software Dev"]}
@@ -61,7 +61,7 @@ export default function Page() {
               backSpeed={90}
               loop
             />
-          </h2>
+          </p>
 
           <p className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-1 ${robotoMin.className}`}>
             I build dynamic web apps with{" "}

@@ -79,7 +79,7 @@ const ProjectCard = ({ project }) => (
       className="w-[300px] h-[300px] object-cover rounded-lg"
     />
     <div className="repo-content w-full">
-      <h3 className="flex items-center justify-between mt-5">
+      <h6 className="flex items-center justify-between mt-5">
         <Link
           href={project.repoLink}
           target="_blank"
@@ -92,7 +92,7 @@ const ProjectCard = ({ project }) => (
           <FaStar />
           <span className="ml-1">{project.stars}</span>
         </span>
-      </h3>
+      </h6>
       <div className="repo-stats text-sm text-gray-300 mt-2 ml-2">
         {project.languages.map((lang, index) => (
           <span key={index} className="language-item">
@@ -109,9 +109,9 @@ const ProjectCard = ({ project }) => (
 const Project = () => {
   return (
     <div className="container text-white mt-0 mx-auto" id="projects">
-      <h1 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl flex relative justify-center items-center pb-2 font-bold ${roboto.className}`}>
+      <h4 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl flex relative justify-center items-center pb-2 font-bold ${roboto.className}`}>
       <Marquee texts={["RECENT", "WORKS"]} speed={40} />
-      </h1>
+      </h4>
       <div className="flex flex-wrap max-w-[1200px] justify-center gap-10 pt-6 pb-56  mx-auto group">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />

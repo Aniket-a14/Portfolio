@@ -22,17 +22,17 @@ const Languages = () => {
     <div>
       <div className="container md:min-h-[80vh] xl:min-h-[110vh] mx-auto pb-44 md:pb-10 xl:pb-44">
         <div className="flex flex-col justify-center bg-[#040407] items-center">
-          <h1
+          <h2
             className={`text-lg text-white flex justify-center items-center pt-24 ${RobotoMin.className}`}
           >
             {" "}
             EXPLORE MY
-          </h1>
-          <h2
+          </h2>
+          <h3
             className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl text-white flex relative text-center justify-center pt-3  items-center font-bold ${roboto.className} `}
           >
             LANGUAGES AND TOOLS PROFICIENCY
-          </h2>
+          </h3>
         </div>
         <div className="flex flex-col pt-20  xl:flex-row bg-[#040407] justify-center items-center">
           <IconCloudDemo />
