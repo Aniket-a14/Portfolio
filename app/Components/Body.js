@@ -78,7 +78,7 @@ export default function Page() {
               LinkedIn
             </UnderlineLink>{" "}
             and{" "}
-            <UnderlineLink href="https://github.com/Aniket-a14">
+            <UnderlineLink href="https://github.com/Aniket-a14/">
               GitHub
             </UnderlineLink>
             , where I share projects and learnings.
