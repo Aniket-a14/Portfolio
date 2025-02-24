@@ -27,7 +27,7 @@ const Navbar = () => {
           setIsOpen(false);
         }}>
           <Avatar>
-            <AvatarImage src="logo.jpeg" loading="lazy" />
+            <AvatarImage src="logo.jpeg" loading="lazy" alt="Aniket Saha" />
             <AvatarFallback>AS</AvatarFallback>
           </Avatar>
         </Link>

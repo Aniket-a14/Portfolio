@@ -16,55 +16,63 @@ const reviews = [
     username: "@snehasis.18",
     body: "Very nice website. I like it. Very animating website. Looking like a wow",
     img: "/snehasis.jpg",
+    alt: "Snehasis",
   },
   {
     name: "Ankit Kumar",
     username: "@Ankit_03",
     body: "Nice Website, Really appreciable.",
     img: "/ankit.jpg",
+    alt: "Ankit Kumar",
   },
   {
     name: "Koushik",
     username: "@koushik.04",
     body: "Its Simple, Elegant and Classic. Just Fantastic...",
     img: "/koushik.jpg",
+    alt: "Koushik",
   },
   {
     name: "Himanshu",
     username: "@himanshu720",
     body: "This is seriously impressive, and I’m loving it.",
     img: "/himanshu.jpg",
+    alt: "Himanshu",
   },
   {
     name: "Arghya Dutta",
     username: "@Arghya.007",
     body: "Could be better, but still good.",
     img: "/arghya.jpg",
+    alt: "Arghya Dutta",
   },
   {
     name: "Sachin",
     username: "@sachin.69",
     body: " I can’t even describe how I feel. Just wow.",
     img: "/sachin.jpg",
+    alt: "Sachin",
   },
   {
     name: "Pallavi Thakur",
     username: "@Pollobi.pb",
     body: "I like this website,  well done. Keep it up  dude .",
     img: "/pallavi.jpg",
+    alt: "Pallavi Thakur",
   },
   {
     name: "Abhipsa",
     username: "@.abhipsaghosh.",
     body: "I love this website. It's so beautiful and I'm so happy to see it.",
     img: "/abhipsa.jpg",
+    alt: "Abhipsa",
   }
 ];
 
 const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
 
-const ReviewCard = ({ img, name, username, body }) => {
+const ReviewCard = ({ img, name, username, body, alt }) => {
     return (
       <figure
         className={cn(
@@ -73,7 +81,7 @@ const ReviewCard = ({ img, name, username, body }) => {
         )}
       >
         <div className="flex flex-row items-center gap-2">
-          <img className="rounded-full" width="50" height="50" alt={name} src={img} />
+          <img className="rounded-full" width="50" height="50" alt={alt} src={img} />
           <div className="flex flex-col">
             <figcaption className="text-sm font-medium text-white">{name}</figcaption>
             <p className="text-xs font-medium text-white/60">{username}</p>
