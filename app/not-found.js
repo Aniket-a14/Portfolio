@@ -35,19 +35,19 @@ export default function NotFound() {
         </AnimatedSpan>
 
         <AnimatedSpan delay={3000} className="text-red-500">
-          <span>✔ Could not validate import alias.</span>
+          <span>✘ Could not validate import alias.</span>
         </AnimatedSpan>
 
         <AnimatedSpan delay={3500} className="text-red-500">
-          <span>✔ Error: Writing components.json.</span>
+          <span>✘ Error: Writing components.json.</span>
         </AnimatedSpan>
 
         <AnimatedSpan delay={4000} className="text-red-500">
-          <span>✔ Error: Updating tailwind.config.ts</span>
+          <span>✘ Error: Updating tailwind.config.ts</span>
         </AnimatedSpan>
 
         <AnimatedSpan delay={4500} className="text-red-500">
-          <span>✔ Error: Updating app/globals.css</span>
+          <span>✘ Error: Updating app/globals.css</span>
         </AnimatedSpan>
 
         <AnimatedSpan delay={5000} className="text-green-500">
