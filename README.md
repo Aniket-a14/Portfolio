@@ -4,6 +4,10 @@ This repository contains the source code for my personal portfolio website, buil
 
 ## Features
 
+- **SEO Best Practices:** Ensure that the website follows SEO guidelines for better visibility.
+- **Accessibility Considerations:** Implement ARIA roles and attributes to enhance accessibility for all users.
+
+
 - **Responsive Design:** Ensures optimal viewing across various devices, including desktops, tablets, and mobile phones.
 
 - **Modern UI:** Incorporates a clean and contemporary user interface to enhance user experience.
@@ -65,5 +69,3 @@ This project is licensed under the MIT License. You are free to use, modify, and
 ---
 
 Thank you for visiting my portfolio repository. Feel free to explore the code, and don't hesitate to reach out if you have any questions or feedback.
-
-
