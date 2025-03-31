@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <div className="relative transition-colors duration-1000">
-      {!showContent && <Loader aria-hidden="true" />}
+      {!showContent && <Loader aria-hidden="true" role="status" />}
 
       <div
         className={`transition-opacity transform duration-1000 ${
@@ -49,26 +49,26 @@ const App = () => {
           <Body />
         </div>
 
-        <div className="bg-[#040407] min-h-[300px]">
-          <Suspense fallback={<MiniLoader />}>
+        <div className="bg-[#040407] min-h-[300px]" role="region" aria-labelledby="about-section">
+          <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <About />
           </Suspense>
         </div>
 
-        <div className="overflow-auto bg-[#040407] min-h-[300px]">
-          <Suspense fallback={<MiniLoader />}>
+        <div className="overflow-auto bg-[#040407] min-h-[300px]" role="region" aria-labelledby="languages-section">
+          <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Languages />
           </Suspense>
         </div>
 
-        <div className="bg-[#040407] transition-colors duration-1000 min-h-[300px]">
-          <Suspense fallback={<MiniLoader />}>
+        <div className="bg-[#040407] transition-colors duration-1000 min-h-[300px]" role="region" aria-labelledby="project-section">
+          <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Project />
           </Suspense>
         </div>
       </div>
       <div className="bg-[#040407] min-h-[800px]">
-        <Suspense fallback={<MiniLoader />}>
+        <Suspense fallback={<MiniLoader aria-hidden="true" />}>
           <Comments />
         </Suspense>
       </div>

@@ -41,7 +41,9 @@ export default function RootLayout({ children }) {
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Aniket Saha" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="keywords" content="Aniket Saha, Full Stack Developer, Portfolio, Projects, Skills" />
         <link rel="canonical" href="https://aniketdev.vercel.app/" />
+        <meta name="description" content="Explore Aniket Saha's portfolio showcasing projects, skills, and experience." />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

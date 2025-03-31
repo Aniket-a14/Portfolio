@@ -20,8 +20,6 @@ const Loader = () => {
         index++;
       }, 500);
 
-      
-
       if (index >= greetings.length) {
         clearInterval(greetingInterval);
         setTimeout(() => setMoveUp(true), 100);
@@ -38,6 +36,8 @@ const Loader = () => {
         shadow-[0_10px_20px_rgba(0,0,0,0.2)]
         transform ${moveUp ? 'scale-105' : 'scale-100'}
         transition-transform duration-500 ease-out`}
+      role="status"
+      aria-live="polite"
     >
       <div className="text-white text-5xl font-bold mb-4 animate-textDown">
         {greetings[greetingIndex]}

@@ -112,6 +112,8 @@ export default function TiltedCard({
           style={{
             width: imageWidth,
             height: imageHeight,
+            maxWidth: "100%",
+            maxHeight: "100%",
           }}
         />
 
