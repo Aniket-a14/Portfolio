@@ -56,7 +56,7 @@ To run this project locally, follow these steps:
 
 ## Deployment
 
-The portfolio is deployed and accessible online at [aniketdev.vercel.app](https://aniketdev.vercel.app). The deployment is managed through Vercel, offering seamless integration with Next.js applications.
+The portfolio is deployed and accessible online at [aniketdev.in](https://aniketdev.in). The deployment is managed through Vercel, offering seamless integration with Next.js applications.
 
 ## Contributing
 
