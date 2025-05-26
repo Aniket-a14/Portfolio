@@ -89,7 +89,7 @@ export default function Page() {
           >
             Let’s build something amazing together!
             <span className="ml-6">
-              <Link href="microsoft.pdf" target="_blank">
+              <Link href="aniket_cv.pdf" target="_blank">
                 <ShinyButton className="bg-[rgba(255,255,255,.55)] ">
                   Resume
                 </ShinyButton>
