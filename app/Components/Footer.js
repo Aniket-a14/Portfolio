@@ -118,7 +118,7 @@ const Footer = () => {
               <span className={`${robotoMin.className} after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
                 Leetcode
               </span>
-              <span className="text-white/60 mb-0.5">- 100+ Problems Solved</span>
+              <span className="text-white/60 mb-0.5">- 200+ Problems Solved</span>
             </Link>
           </div>
           <div className="pt-0.5">
@@ -152,12 +152,12 @@ const Footer = () => {
         <div className={`flex flex-col gap-2 ${roboto.className}`}>
           <span className="text-white/70 text-base text-center md:text-left font-medium">CONTACT</span>
           <div>
-            <Link
+            <a
               href="mailto:aniketsahaworkspace@gmail.com"
               className={`${robotoMin.className} relative inline-block after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full text-lg`}
             >
               @WizardDesigns
-            </Link>
+            </a>
           </div>
         </div>
       </div>
