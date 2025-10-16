@@ -118,7 +118,7 @@ const Footer = () => {
               <span className={`${robotoMin.className} after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
                 Leetcode
               </span>
-              <span className="text-white/60 mb-0.5">- 200+ Problems Solved</span>
+              <span className="text-white/60 mb-0.5">- 350+ Problems Solved</span>
             </Link>
           </div>
           <div className="pt-0.5">
