@@ -24,6 +24,13 @@ This repository contains the source code for my personal portfolio website, buil
 
 - **JavaScript:** The primary programming language used for functionality.
 
+## Project Structure
+
+- **`app/`**: Contains the Next.js App Router pages and layouts.
+- **`components/`**: Reusable UI components used throughout the application.
+- **`public/`**: Static assets like images and fonts.
+- **`lib/`**: Utility functions and shared logic.
+
 ## Getting Started
 
 To run this project locally, follow these steps:
