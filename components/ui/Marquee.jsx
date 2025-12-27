@@ -1,14 +1,7 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Roboto } from "next/font/google";
 
-const roboto = Roboto({
-  weight: ["700"],
-  style: ["normal"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const Marquee = ({ text = "RECENT WORK", speed = 50 }) => {
   const containerRef = useRef(null);
@@ -31,7 +24,7 @@ const Marquee = ({ text = "RECENT WORK", speed = 50 }) => {
   return (
     <div ref={containerRef} className="relative overflow-hidden w-full p-4">
       <motion.div
-        className={`flex whitespace-nowrap text-white ${roboto.className} text-6xl font-bold`}
+        className={`flex whitespace-nowrap text-white font-roboto text-6xl font-bold`}
         initial={{ x: 0 }}
         animate={{ x: -textWidth }}
         transition={{

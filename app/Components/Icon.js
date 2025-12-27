@@ -1,40 +1,8 @@
 import { IconCloud } from "@/components/magicui/icon-cloud";
-
-const slugs = [
-  "typescript",
-  "javascript",
-  "react",
-  "html5",
-  "nodedotjs",
-  "express",
-  "nextdotjs",
-  "firebase",
-  "nginx",
-  "vercel",
-  "testinglibrary",
-  "docker",
-  "git",
-  "github",
-  "gitlab",
-  "figma",
-  "mysql",
-  "cplusplus",
-  "pytorch",
-  "tensorflow",
-  "opencv",
-  "pandas",
-  "sqlite",
-  "mongodb",
-  "tailwindcss",
-  "bootstrap",
-  "sass",
-  "jquery",
-  "reactrouter",
-  "redux",
-];
+import { skillsSlugs } from "../lib/data";
 
 export function IconCloudDemo() {
-  const images = slugs.map(
+  const images = skillsSlugs.map(
     (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`,
   );
 

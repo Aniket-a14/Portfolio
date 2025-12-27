@@ -24,22 +24,17 @@ const App = () => {
   const [isPending, startTransition] = useTransition();
   const timeoutRef = useRef(null);
 
-  useEffect(() => {
-    timeoutRef.current = setTimeout(() => {
-      startTransition(() => setShowContent(true));
-    }, 4900);
-
-    return () => clearTimeout(timeoutRef.current);
+  const handleLoaderComplete = useCallback(() => {
+    startTransition(() => setShowContent(true));
   }, []);
 
   return (
     <div className="relative transition-colors duration-1000">
-      {!showContent && <Loader aria-hidden="true" role="status" />}
+      {!showContent && <Loader onComplete={handleLoaderComplete} aria-hidden="true" role="status" />}
 
       <div
-        className={`transition-opacity transform duration-1000 ${
-          showContent ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
-        }`}
+        className={`transition-opacity transform duration-1000 ${showContent ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
+          }`}
       >
         <div className="fixed top-0 left-0 w-full z-50">
           <Navbar />

@@ -1,25 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import {
-  FaLinkedin,
-  FaGithub,
-  FaInstagram,
-  FaTwitter,
-  FaFacebook,
-} from "react-icons/fa";
+import { socialLinks, codingProfiles } from "../lib/data";
 import { RiCopyrightLine } from "react-icons/ri";
-import { Roboto } from "next/font/google";
 import { SpinningText } from "@/components/magicui/spinning-text";
-
-const roboto = Roboto({
-  weight: "400",
-  subsets: ["latin"],
-});
-
-const robotoMin = Roboto({
-  weight: "300",
-  subsets: ["latin"],
-}); 
 
 const Footer = () => {
   return (
@@ -38,135 +21,63 @@ const Footer = () => {
         </div>
 
         <nav className="flex flex-col gap-3 md:block hidden">
-          <span className={`${roboto.className} pb-3 text-white/70 text-base font-medium`}>SOCIALS</span>
-          <div className="pt-2">
-            <Link
-              href="https://www.linkedin.com/in/aniketsaha2005"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-lg"
-            >
-              <FaLinkedin className="text-xl my-1 group-hover:text-blue-600 transition-colors" />
-              <span className={`${robotoMin.className} hidden md:inline-block relative inline-block after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
-                LinkedIn
-              </span>
-            </Link>
-          </div>
-          <div className="pt-0.5">
-            <Link
-              href="https://github.com/Aniket-a14"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-lg"
-            >
-              <FaGithub className="text-xl my-1 group-hover:text-gray-600 transition-colors" />
-              <span className={`${robotoMin.className} hidden md:inline-block relative inline-block after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
-                GitHub
-              </span>
-            </Link>
-          </div>
-          <div className="pt-0.5">
-            <Link
-              href="https://www.instagram.com/aniket_a14/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-lg"
-            >
-              <FaInstagram className="text-xl my-1 group-hover:text-pink-600 transition-colors" />
-              <span className={`${robotoMin.className} hidden md:inline-block relative inline-block after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
-                Instagram
-              </span>
-            </Link>
-          </div>
-          <div className="pt-0.5">
-            <Link
-              href="https://www.facebook.com/aniket.saha.904"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-lg"
-            >
-              <FaFacebook className="text-xl my-1 group-hover:text-blue-600 transition-colors" />
-              <span className={`${robotoMin.className} hidden md:inline-block relative inline-block after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
-                Facebook
-              </span>
-            </Link>
-          </div>
-          <div className="pt-0.5">
-            <Link
-              href="https://x.com/AniketSaha41043"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-lg"
-            >
-              <FaTwitter className="text-xl my-1 group-hover:text-blue-400 transition-colors" />
-              <span className={`${robotoMin.className} hidden md:inline-block relative inline-block after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
-                Twitter
-              </span>
-            </Link>
-          </div>
+          <span className={`font-roboto pb-3 text-white/70 text-base font-medium`}>SOCIALS</span>
+          {socialLinks.map((social) => (
+            <div key={social.name} className="pt-2">
+              <Link
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 text-lg"
+                aria-label={social.name}
+              >
+                <social.icon className={`text-xl my-1 transition-colors ${social.colorClass}`} />
+                <span className={`font-roboto font-light hidden md:inline-block relative inline-block after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
+                  {social.name}
+                </span>
+              </Link>
+            </div>
+          ))}
         </nav>
 
         <nav className="flex flex-col gap-3 md:block hidden">
-          <span className={`${roboto.className} pb-3 text-white/70 text-base font-medium`}>CODING PROFILES</span>
-          <div className="pt-2">
-            <Link
-              href="https://leetcode.com/u/Wizard_a14/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-lg"
-            >
-              <span className={`${robotoMin.className} after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
-                Leetcode
-              </span>
-              <span className="text-white/60 mb-0.5">- 450+ Problems Solved</span>
-            </Link>
-          </div>
-          <div className="pt-0.5">
-            <Link
-              href="https://www.geeksforgeeks.org/user/aniketsaha5353/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-lg"
-            >
-              <span className={`${robotoMin.className} after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
-                Geeksforgeeks
-              </span>
-              <span className="text-white/60 mb-0.5">- 100+ Problems Solved</span>
-            </Link>
-          </div>
-          <div className="pt-0.5">
-            <Link
-              href="https://www.hackerrank.com/aniket_saha"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-lg"
-            >
-              <span className={`${robotoMin.className} after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
-                HackerRank
-              </span>
-              <span className="text-white/60 mb-0.5">- 5 stars on C++, Python</span>
-            </Link>
-          </div>
+          <span className={`font-roboto pb-3 text-white/70 text-base font-medium`}>CODING PROFILES</span>
+          {codingProfiles.map((profile) => (
+            <div key={profile.name} className="pt-2">
+              <Link
+                href={profile.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 text-lg"
+                aria-label={`${profile.name} Profile`}
+              >
+                <span className={`font-roboto font-light after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full`}>
+                  {profile.name}
+                </span>
+                <span className="text-white/60 mb-0.5">{profile.stats}</span>
+              </Link>
+            </div>
+          ))}
         </nav>
 
-        <div className={`flex flex-col gap-2 ${roboto.className}`}>
+        <div className={`flex flex-col gap-2 font-roboto`}>
           <span className="text-white/70 text-base text-center md:text-left font-medium">CONTACT</span>
           <div>
             <a
               href="mailto:aniketsahaworkspace@gmail.com"
-              className={`${robotoMin.className} relative inline-block after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full text-lg`}
+              className={`font-roboto font-light relative inline-block after:block after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full text-lg`}
             >
               @WizardDesigns
             </a>
           </div>
         </div>
       </div>
-      
+
       <div className="text-white flex md:justify-between justify-center items-center pb-20 pt-20 text-base ">
-        <span className={`flex relative items-center left-0 md:left-10 gap-2 top-6 ${roboto.className}`}> <RiCopyrightLine className="text-xl" /> 2025 Aniket Saha. All rights reserved.</span>
+        <span className={`flex relative items-center left-0 md:left-10 gap-2 top-6 font-roboto`}> <RiCopyrightLine className="text-xl" /> 2025 Aniket Saha. All rights reserved.</span>
         <div className="relative right-28 md:flex hidden">
-            <SpinningText>adapt • innovate • change •</SpinningText>
-          </div>
+          <SpinningText>adapt • innovate • change •</SpinningText>
+        </div>
       </div>
     </>
   );

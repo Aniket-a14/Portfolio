@@ -2,38 +2,10 @@
 
 import React from "react";
 import Link from "next/link";
-import { Roboto, Playfair_Display } from "next/font/google";
 import { ShinyButton } from "@/components/magicui/shiny-button";
 import { ReactTyped } from "react-typed";
 import TiltedCard from "@/components/TiltedCard/TiltedCard";
-
-const robotoMin = Roboto({
-  weight: ["300"],
-  style: ["normal"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const robotoMedium = Roboto({
-  weight: ["400"],
-  style: ["normal"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const robotoMax = Roboto({
-  weight: ["500"],
-  style: ["normal"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  weight: ["400"],
-  style: ["normal"],
-  subsets: ["latin"],
-  display: "swap",
-});
+import { heroData } from "../lib/data";
 
 const UnderlineLink = ({ href, children }) => (
   <Link
@@ -47,49 +19,53 @@ const UnderlineLink = ({ href, children }) => (
   </Link>
 );
 
+
+
+// ... existing imports ...
+
 export default function Page() {
   return (
     <>
       <div className="flex justify-between items-center bg-white min-h-[95vh]  lg:flex-row flex-col">
         <main className="flex flex-col p-10 justify-center md:justify-center xl:justify-start lg:justify-start min-h-[75vh]  max-w-[100%] md:max-w-[100%] lg:max-w-[70%] xl:max-w-[75%] ">
-          <h1 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl ${robotoMedium.className}`}>Hello</h1>
-          <p className={`text-3xl sm:text-5xl md:text-6xl xl:text-7xl mt-2 mb-3 ${playfair.className} `}>
-            I&apos;m{" "}
+          <h1 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-roboto font-medium`}>{heroData.title}</h1>
+          <p className={`text-3xl sm:text-5xl md:text-6xl xl:text-7xl mt-2 mb-3 font-playfair `}>
+            {heroData.subTitle}{" "}
             <ReactTyped
-              strings={["a Web Developer", "Aniket Saha", "a Software Dev"]}
+              strings={heroData.roles}
               typeSpeed={80}
               backSpeed={90}
               loop
             />
           </p>
 
-          <p className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-1 ${robotoMin.className}`}>
+          <p className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-1 font-roboto font-light`}>
             I build dynamic web apps with{" "}
-            <UnderlineLink href="https://react.dev/">React</UnderlineLink> and{" "}
-            <UnderlineLink href="https://nextjs.org/">Next.js</UnderlineLink>{" "}
+            <UnderlineLink href={heroData.links.react}>React</UnderlineLink> and{" "}
+            <UnderlineLink href={heroData.links.nextjs}>Next.js</UnderlineLink>{" "}
             while exploring machine learning and data analysis. My projects span
             full-stack platforms to AI-driven solutions, aiming for efficiency
             and impact.
           </p>
 
-          <p className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-14 ${robotoMin.className}`}>
+          <p className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-14 font-roboto font-light`}>
             Many know me from{" "}
-            <UnderlineLink href="https://www.linkedin.com/in/aniketsaha2005/">
+            <UnderlineLink href={heroData.links.linkedin}>
               LinkedIn
             </UnderlineLink>{" "}
             and{" "}
-            <UnderlineLink href="https://github.com/Aniket-a14/">
+            <UnderlineLink href={heroData.links.github}>
               GitHub
             </UnderlineLink>
             , where I share projects and learnings.
           </p>
 
           <p
-            className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-1 flex items-center ${robotoMax.className}`}
+            className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-1 flex items-center font-roboto font-medium`}
           >
             Let’s build something amazing together!
             <span className="ml-6">
-              <a href="/aniket_cv.pdf" target="_blank" rel="noopener noreferrer">
+              <a href={heroData.links.resume} target="_blank" rel="noopener noreferrer" aria-label="Download Resume">
                 <ShinyButton className="bg-[rgba(255,255,255,.55)] ">
                   Resume
                 </ShinyButton>

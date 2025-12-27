@@ -22,10 +22,7 @@ const Navbar = () => {
   return (
     <div id="home" className="flex bg-white justify-between sm:items-center items-start mx-auto px-8 py-4">
       <div className="text-xl font-bold tracking-tight items-center cursor-pointer">
-        <Link href="/" onClick={()=>{
-          window.location.reload();
-          setIsOpen(false);
-        }}>
+        <Link href="/" onClick={() => setIsOpen(false)}>
           <Avatar>
             <AvatarImage src="logo.jpeg" loading="lazy" alt="Aniket Saha" />
             <AvatarFallback>AS</AvatarFallback>
@@ -89,8 +86,8 @@ const Navbar = () => {
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
                 <Link href="https://www.github.com/Aniket-a14" target="_blank" className="text-xl flex justify-center items-center gap-2">
-                <span className="flex justify-center items-center gap-2 text-lg"><FaGithub className="size-4" /> Github</span>
-                  
+                  <span className="flex justify-center items-center gap-2 text-lg"><FaGithub className="size-4" /> Github</span>
+
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>

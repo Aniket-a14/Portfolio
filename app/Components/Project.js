@@ -3,80 +3,17 @@ import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import Link from "next/link";
 import Marquee from "@/components/ui/Marquee";
-import { Roboto } from "next/font/google";
-
-
-const roboto = Roboto({
-  weight: ["400"],
-  style: ["normal"],
-  subsets: ["latin"],
-  display: "swap",
-});
-const projects = [
-  {
-    id: 1,
-    title: "Wizard-w1",
-    repoLink: "https://github.com/Aniket-a14/Wizard-w1",
-    image: "/download.jpg",
-    languages: ["Python"],
-    description: "A Python based AI agent for Data Processing and Analysis.",
-    stars: 0,
-  },
-  {
-    id: 2,
-    title: "Patreon Clone",
-    repoLink: "https://github.com/Aniket-a14/get_me_a_biriyani",
-    image: "/patreon.png",
-    languages: ["React", "Node.js", "MongoDB"],
-    description: "A fully functional Patreon-like platform with subscriptions.",
-    stars: 0,
-  },
-  {
-    id: 3,
-    title: "Virtual Quiz Game",
-    repoLink: "https://github.com/Aniket-a14/Virtual_Quiz_Game",
-    image: "/quiz.avif",
-    languages: ["Python", "Tkinter", "SQLite"],
-    description: "A Python-based quiz game with a leaderboard.",
-    stars: 0,
-  },
-  {
-    id: 4,
-    title: "Url-Shortener",
-    repoLink: "https://github.com/Aniket-a14/url_shortner",
-    image: "/url.jpg",
-    languages: ["React", "Node.js", "MongoDB"],
-    description: "A React-based URL shortening service.",
-    stars: 0,
-  },
-  {
-    id: 5,
-    title: "Butterfly",
-    repoLink: "https://aniket-a14.github.io/Butterfly/",
-    image: "/butterfly.png",
-    languages: ["JavaScript", "CSS", "HTML"],
-    description: "A JavaScript-based butterfly animation.",
-    stars: 1,
-  },
-  {
-    id: 6,
-    title: "Univeristy Management System",
-    repoLink: "https://github.com/Aniket-a14/Uni_Management_System",
-    image: "/ums.jpg",
-    languages: ["C++", "MySQL"],
-    description: "A Management System for a University.",
-    stars: 0,
-  },
-];
+import { projects } from "../lib/data";
 
 const ProjectCard = ({ project }) => (
-  <div className="transition-all duration-300 ease-in-out w-[350px]  h-full  text-left flex flex-col items-center border border-white/25 rounded-2xl bg-white/0 shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] backdrop-blur-[18px] hover:translate-y-[-10px] hover:translate-x-[2px] hover:shadow-[0_16px_64px_0_rgba(255,255,255,0.15)] group-hover:blur-[3px] hover:!blur-none p-4">
+  // Use w-full and max-w-sm to ensure it shrinks on small screens but doesn't grow too large
+  <div className="transition-all duration-300 ease-in-out w-full max-w-[350px] h-full text-left flex flex-col items-center border border-white/25 rounded-2xl bg-white/0 shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] backdrop-blur-[18px] hover:translate-y-[-10px] hover:translate-x-[2px] hover:shadow-[0_16px_64px_0_rgba(255,255,255,0.15)] group-hover:blur-[3px] hover:!blur-none p-4">
     <Image
       height={300}
-      width={1000}
+      width={300} // Set width to match the displayed size or intrinsic aspect ratio
       src={project.image}
       alt={project.title}
-      className="w-[300px] h-[300px] object-cover rounded-lg"
+      className="w-full h-auto object-cover rounded-lg aspect-square" // Ensure image scales correcty
     />
     <div className="repo-content w-full">
       <h6 className="flex items-center justify-between mt-5">
@@ -108,11 +45,11 @@ const ProjectCard = ({ project }) => (
 
 const Project = () => {
   return (
-    <div className="container text-white mt-0 mx-auto" id="projects">
-      <h4 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl flex relative justify-center items-center pb-2 font-bold ${roboto.className}`}>
-      <Marquee texts={["RECENT", "WORKS"]} speed={40} />
+    <div className="w-full text-white mt-0" id="projects">
+      <h4 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl flex relative justify-center items-center pb-2 font-bold font-roboto`}>
+        <Marquee texts={["RECENT", "WORKS"]} speed={40} />
       </h4>
-      <div className="flex flex-wrap max-w-[1200px] justify-center gap-10 pt-6 pb-56  mx-auto group">
+      <div className="flex flex-wrap max-w-[1200px] justify-center gap-10 pt-6 pb-56 mx-auto group px-4">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}

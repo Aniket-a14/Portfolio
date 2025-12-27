@@ -1,7 +1,7 @@
 /*
-	jsrepo 1.39.3
-	Installed from https://reactbits.dev/tailwind/
-	2-22-2025
+  jsrepo 1.39.3
+  Installed from https://reactbits.dev/tailwind/
+  2-22-2025
 */
 
 import { useRef, useState } from "react";
@@ -105,6 +105,8 @@ export default function TiltedCard({
           scale,
         }}
       >
+
+
         <motion.img
           src={imageSrc}
           alt={altText}
