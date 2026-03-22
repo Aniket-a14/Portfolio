@@ -25,13 +25,17 @@ const playfair = Playfair_Display({
   weight: ["400"],
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1.0,
+};
+
 export const metadata = {
   metadataBase: new URL("https://www.aniketdesign.in/"),
   title: "Aniket Saha - Portfolio",
   description: "Explore Aniket Saha's portfolio – a Full Stack Developer, Designer, and Machine Learning Enthusiast. Showcasing projects, skills, and experience.",
   keywords: ["Aniket Saha", "Full Stack Developer", "Portfolio", "Projects", "Skills"],
   authors: [{ name: "Aniket Saha" }],
-  viewport: "width=device-width, initial-scale=1.0",
   robots: {
     index: true,
     follow: true,
