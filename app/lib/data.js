@@ -104,7 +104,7 @@ export const codingProfiles = [
     {
         name: "HackerRank",
         url: "https://www.hackerrank.com/aniket_saha",
-        stats: "- 5 stars on C++, Python",
+        stats: "- 5 stars on C++, Python, Java",
     },
 ];
 
