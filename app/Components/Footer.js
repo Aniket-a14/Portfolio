@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { socialLinks, codingProfiles } from "../lib/data";
+import { socialLinks, codingProfiles as initialCodingProfiles } from "../lib/data";
 import { RiCopyrightLine } from "react-icons/ri";
 import { SpinningText } from "@/components/magicui/spinning-text";
 
 const Footer = () => {
+  const [codingProfilesData, setCodingProfilesData] = useState(initialCodingProfiles);
+
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      try {
+        const response = await fetch("/api/coding-profiles");
+        if (response.ok) {
+          const data = await response.json();
+          setCodingProfilesData(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch coding profiles data:", error);
+      }
+    };
+
+    fetchProfiles();
+  }, []);
+
   return (
     <>
       <div className="text-white flex justify-evenly min-h-[400px] pt-32">
@@ -42,7 +60,7 @@ const Footer = () => {
 
         <nav className="flex flex-col gap-3 md:block hidden">
           <span className={`font-roboto pb-3 text-white/70 text-base font-medium`}>CODING PROFILES</span>
-          {codingProfiles.map((profile) => (
+          {codingProfilesData.map((profile) => (
             <div key={profile.name} className="pt-2">
               <Link
                 href={profile.url}
