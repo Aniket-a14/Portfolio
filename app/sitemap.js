@@ -1,7 +1,7 @@
 export default function sitemap() {
     return [
         {
-            url: 'https://aniketdev.vercel.app',
+            url: 'https://www.aniketdesign.in',
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 1,

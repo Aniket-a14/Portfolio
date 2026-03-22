@@ -26,7 +26,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://aniketdev.vercel.app/"),
+  metadataBase: new URL("https://www.aniketdesign.in/"),
   title: "Aniket Saha - Portfolio",
   description: "Explore Aniket Saha's portfolio – a Full Stack Developer, Designer, and Machine Learning Enthusiast. Showcasing projects, skills, and experience.",
   keywords: ["Aniket Saha", "Full Stack Developer", "Portfolio", "Projects", "Skills"],
@@ -39,7 +39,7 @@ export const metadata = {
   openGraph: {
     title: "Aniket Saha - Portfolio",
     description: "Explore my projects, skills, and experience in development and machine learning.",
-    url: "https://aniketdev.vercel.app/",
+    url: "https://www.aniketdesign.in/",
     siteName: "Aniket Saha's Portfolio",
     images: [
       {
@@ -66,7 +66,7 @@ export default function RootLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Aniket Saha",
-              url: "https://aniketdev.vercel.app/",
+              url: "https://www.aniketdesign.in/",
               jobTitle: "Full Stack Developer & Coding Enthusiast",
               sameAs: [
                 "https://github.com/Aniket-a14",
