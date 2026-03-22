@@ -10,9 +10,10 @@ const ProjectCard = ({ project }) => (
   <div className="transition-all duration-300 ease-in-out w-full max-w-[350px] h-[520px] text-left flex flex-col items-center border border-white/25 rounded-2xl bg-white/0 shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] backdrop-blur-[18px] hover:translate-y-[-10px] hover:translate-x-[2px] hover:shadow-[0_16px_64px_0_rgba(255,255,255,0.15)] p-4">
     <Image
       height={300}
-      width={300} 
+      width={300}
       src={project.image}
       alt={project.title}
+      priority={true}
       className="w-full h-[350px] object-cover object-top rounded-lg" // Fixed height for uniformity, full width for centering
     />
     <div className="repo-content w-full flex flex-col flex-grow mt-2">

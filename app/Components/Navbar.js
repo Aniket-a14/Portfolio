@@ -24,7 +24,7 @@ const Navbar = () => {
       <div className="text-xl font-bold tracking-tight items-center cursor-pointer">
         <Link href="/" onClick={() => setIsOpen(false)}>
           <Avatar>
-            <AvatarImage src="logo.jpeg" loading="lazy" alt="Aniket Saha" />
+            <AvatarImage src="logo.jpeg" loading="eager" alt="Aniket Saha" />
             <AvatarFallback>AS</AvatarFallback>
           </Avatar>
         </Link>
