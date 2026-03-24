@@ -13,7 +13,7 @@ export const TextReveal = ({ text, className }) => {
   const words = text.split(" ");
 
   return (
-    <div ref={targetRef} className={cn("relative z-0 h-[120vh]", className)}>
+    <div ref={targetRef} className={cn("relative z-0 h-[100vh]", className)}>
       <div className="sticky top-0 flex justify-center items-start bg-transparent px-4 pt-20">
         <p className="flex flex-wrap p-5 text-2xl font-bold leading-loose text-white/10 md:p-8 md:text-3xl lg:p-10 lg:text-4xl xl:text-5xl">
           {words.map((word, i) => {

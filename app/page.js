@@ -14,6 +14,7 @@ import Navbar from "./Components/Navbar";
 import Body from "./Components/Body";
 import MiniLoader from "../components/ui/Miniloader";
 import Comments from "./Components/Comments";
+import Image from "next/image";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
 const About = lazy(() => import("./Components/About"));
@@ -36,41 +37,43 @@ const App = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const backgroundColor = useTransform(
-    scrollY,
-    [vh * 0.1, vh * 0.4],
-    ["#ffffff", "#040407"]
-  );
 
   const textColor = useTransform(
     scrollY,
-    [vh * 0.1, vh * 0.4],
-    ["#000000", "#ffffff"]
+    [vh * 0.2, vh * 0.5],
+    ["#ffffff", "#ffffff"] 
   );
 
-  useMotionValueEvent(backgroundColor, "change", (latest) => {
-    if (typeof window !== "undefined") {
-      document.documentElement.style.backgroundColor = latest;
-      document.body.style.backgroundColor = latest;
-    }
-  });
 
   const handleLoaderComplete = useCallback(() => {
     startTransition(() => setShowContent(true));
   }, []);
 
   return (
-    <div className="relative transition-colors duration-1000 min-h-[100dvh]">
+    <div className="relative transition-colors duration-1000 min-h-[100dvh] overflow-x-hidden w-full max-w-[100vw]">
       {!showContent && <Loader onComplete={handleLoaderComplete} aria-hidden="true" role="status" />}
 
       <motion.div 
-        style={{ backgroundColor, color: textColor }}
+        style={{ color: textColor }}
         className={`fixed inset-0 z-0 transition-opacity duration-1000 ${showContent ? "opacity-100" : "opacity-0"}`}
       >
+        <motion.div className="absolute inset-0 z-[-1] bg-[#040407]">
+          <Image
+            src="/bg_logo.png"
+            alt="Hero Background"
+            fill
+            priority
+            unoptimized
+            className="object-cover"
+          />
+          {/* Subtle cinematic dark gradient to make white text pop */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent w-full md:w-[65%]" />
+        </motion.div>
+        
         <div className="absolute top-0 left-0 w-full z-50">
           <Navbar />
         </div>
-        <div className="pt-[4rem] h-full overflow-hidden">
+        <div className="pt-[4rem] h-full overflow-hidden relative z-10">
           <Body />
         </div>
       </motion.div>
