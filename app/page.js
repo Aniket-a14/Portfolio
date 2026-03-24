@@ -14,7 +14,7 @@ import Navbar from "./Components/Navbar";
 import Body from "./Components/Body";
 import MiniLoader from "../components/ui/Miniloader";
 import Comments from "./Components/Comments";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
 const About = lazy(() => import("./Components/About"));
 const Languages = lazy(() => import("./Components/Languages"));
@@ -48,17 +48,24 @@ const App = () => {
     ["#000000", "#ffffff"]
   );
 
+  useMotionValueEvent(backgroundColor, "change", (latest) => {
+    if (typeof window !== "undefined") {
+      document.documentElement.style.backgroundColor = latest;
+      document.body.style.backgroundColor = latest;
+    }
+  });
+
   const handleLoaderComplete = useCallback(() => {
     startTransition(() => setShowContent(true));
   }, []);
 
   return (
-    <div className="relative transition-colors duration-1000 min-h-screen">
+    <div className="relative transition-colors duration-1000 min-h-[100dvh]">
       {!showContent && <Loader onComplete={handleLoaderComplete} aria-hidden="true" role="status" />}
 
       <motion.div 
         style={{ backgroundColor, color: textColor }}
-        className={`fixed top-0 left-0 w-full h-screen z-0 transition-opacity duration-1000 ${showContent ? "opacity-100" : "opacity-0"}`}
+        className={`fixed inset-0 z-0 transition-opacity duration-1000 ${showContent ? "opacity-100" : "opacity-0"}`}
       >
         <div className="absolute top-0 left-0 w-full z-50">
           <Navbar />
@@ -69,7 +76,7 @@ const App = () => {
       </motion.div>
 
       <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ${showContent ? "opacity-100" : "opacity-0"}`}>
-        <div className="h-screen" />
+        <div className="h-[100vh]" />
 
         <div className="bg-[#040407] min-h-[300px] pointer-events-auto" role="region" aria-labelledby="about-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
