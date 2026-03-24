@@ -6,11 +6,10 @@ const Languages = () => {
   return (
     <div>
       <div className="container md:min-h-[80vh] xl:min-h-[110vh] mx-auto pb-44 md:pb-10 xl:pb-44">
-        <div className="flex flex-col justify-center bg-[#040407] items-center">
+        <div className="flex flex-col justify-center items-center relative z-10 w-full">
           <h2
-            className={`text-lg text-white flex justify-center items-center pt-24 font-roboto font-light`}
+            className={`text-lg text-white/50 flex justify-center items-center pt-24 font-roboto font-light tracking-[0.2em]`}
           >
-            {" "}
             EXPLORE MY
           </h2>
           <h3
@@ -19,9 +18,8 @@ const Languages = () => {
             LANGUAGES AND TOOLS PROFICIENCY
           </h3>
         </div>
-        <div className="flex flex-col pt-20  xl:flex-row bg-[#040407] justify-center items-center">
+        <div className="flex flex-col pt-20 xl:flex-row justify-center items-center relative z-10 w-full mb-12">
           <IconCloudDemo />
-
         </div>
       </div>
     </div>
