@@ -38,13 +38,13 @@ const App = () => {
 
   const backgroundColor = useTransform(
     scrollY,
-    [vh * 0.3, vh * 0.7],
+    [vh * 0.1, vh * 0.4],
     ["#ffffff", "#040407"]
   );
 
   const textColor = useTransform(
     scrollY,
-    [vh * 0.3, vh * 0.7],
+    [vh * 0.1, vh * 0.4],
     ["#000000", "#ffffff"]
   );
 
