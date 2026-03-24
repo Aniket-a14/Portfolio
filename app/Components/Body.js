@@ -71,7 +71,7 @@ export default function Page() {
         </main>
         <div className="max-w-[25%] xl:max-w-[20%] relative justify-center lg:bottom-16  xl:bottom-10  right-20 lg:flex hidden">
           <TiltedCard
-            imageSrc="/logo.jpeg"
+            imageSrc="/logo_new.png"
             altText="Aniket Saha - Wiz"
             captionText="Aniket Saha"
             containerHeight="300px"
