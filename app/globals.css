@@ -171,5 +171,10 @@ html {
   -ms-overflow-style: none;
 }
 
+/* Force-hide default browser cursor globally */
+* {
+  cursor: none !important;
+}
+
 
 
