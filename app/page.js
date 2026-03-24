@@ -14,6 +14,7 @@ import Navbar from "./Components/Navbar";
 import Body from "./Components/Body";
 import MiniLoader from "../components/ui/Miniloader";
 import Comments from "./Components/Comments";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const About = lazy(() => import("./Components/About"));
 const Languages = lazy(() => import("./Components/Languages"));
@@ -24,48 +25,75 @@ const App = () => {
   const [isPending, startTransition] = useTransition();
   const timeoutRef = useRef(null);
 
+  const { scrollY } = useScroll();
+  
+  const [vh, setVh] = useState(0);
+
+  useEffect(() => {
+    setVh(window.innerHeight);
+    const handleResize = () => setVh(window.innerHeight);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const backgroundColor = useTransform(
+    scrollY,
+    [vh * 0.3, vh * 0.7],
+    ["#ffffff", "#040407"]
+  );
+
+  const textColor = useTransform(
+    scrollY,
+    [vh * 0.3, vh * 0.7],
+    ["#000000", "#ffffff"]
+  );
+
   const handleLoaderComplete = useCallback(() => {
     startTransition(() => setShowContent(true));
   }, []);
 
   return (
-    <div className="relative transition-colors duration-1000">
+    <div className="relative transition-colors duration-1000 min-h-screen">
       {!showContent && <Loader onComplete={handleLoaderComplete} aria-hidden="true" role="status" />}
 
-      <div
-        className={`transition-opacity transform duration-1000 ${showContent ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
-          }`}
+      <motion.div 
+        style={{ backgroundColor, color: textColor }}
+        className={`fixed top-0 left-0 w-full h-screen z-0 transition-opacity duration-1000 ${showContent ? "opacity-100" : "opacity-0"}`}
       >
-        <div className="fixed top-0 left-0 w-full z-50">
+        <div className="absolute top-0 left-0 w-full z-50">
           <Navbar />
         </div>
-
-        <div className="pt-[4rem] overflow-auto">
+        <div className="pt-[4rem] h-full overflow-hidden">
           <Body />
         </div>
+      </motion.div>
 
-        <div className="bg-[#040407] min-h-[300px]" role="region" aria-labelledby="about-section">
+      <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ${showContent ? "opacity-100" : "opacity-0"}`}>
+        <div className="h-screen" />
+
+        <div className="bg-[#040407] min-h-[300px] pointer-events-auto" role="region" aria-labelledby="about-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <About />
           </Suspense>
         </div>
 
-        <div className="overflow-auto bg-[#040407] min-h-[300px]" role="region" aria-labelledby="languages-section">
+        <div className="overflow-auto bg-[#040407] min-h-[300px] pointer-events-auto" role="region" aria-labelledby="languages-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Languages />
           </Suspense>
         </div>
 
-        <div className="bg-[#040407] transition-colors duration-1000 min-h-[300px]" role="region" aria-labelledby="project-section">
+        <div className="bg-[#040407] transition-colors duration-1000 min-h-[300px] pointer-events-auto" role="region" aria-labelledby="project-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Project />
           </Suspense>
         </div>
-      </div>
-      <div className="bg-[#040407] min-h-[800px]">
-        <Suspense fallback={<MiniLoader aria-hidden="true" />}>
-          <Comments />
-        </Suspense>
+
+        <div className="bg-[#040407] min-h-[800px] pointer-events-auto">
+          <Suspense fallback={<MiniLoader aria-hidden="true" />}>
+            <Comments />
+          </Suspense>
+        </div>
       </div>
     </div>
   );

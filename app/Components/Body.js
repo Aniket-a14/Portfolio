@@ -19,14 +19,10 @@ const UnderlineLink = ({ href, children }) => (
   </Link>
 );
 
-
-
-// ... existing imports ...
-
 export default function Page() {
   return (
     <>
-      <div className="flex justify-between items-center bg-white min-h-[95vh]  lg:flex-row flex-col">
+      <div className="flex justify-between items-center bg-transparent min-h-[95vh]  lg:flex-row flex-col">
         <main className="flex flex-col p-10 justify-center md:justify-center xl:justify-start lg:justify-start min-h-[75vh]  max-w-[100%] md:max-w-[100%] lg:max-w-[70%] xl:max-w-[75%] ">
           <h1 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-roboto font-medium`}>{heroData.title}</h1>
           <p className={`text-3xl sm:text-5xl md:text-6xl xl:text-7xl mt-2 mb-3 font-playfair `}>

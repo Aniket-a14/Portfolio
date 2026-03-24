@@ -20,7 +20,7 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <div id="home" className="flex bg-white justify-between sm:items-center items-start mx-auto px-8 py-4">
+    <div id="home" className="flex bg-transparent justify-between sm:items-center items-start mx-auto px-8 py-4">
       <div className="text-xl font-bold tracking-tight items-center cursor-pointer">
         <Link href="/" onClick={() => setIsOpen(false)}>
           <Avatar>
@@ -31,7 +31,7 @@ const Navbar = () => {
       </div>
 
       <div className="sm:hidden">
-        <button onClick={() => setIsOpen(!isOpen)} className="z-50 p-2 text-black" aria-label="Toggle menu">
+        <button onClick={() => setIsOpen(!isOpen)} className="z-50 p-2 text-inherit" aria-label="Toggle menu">
           <motion.div
             initial={{ rotate: 0 }}
             animate={{ rotate: isOpen ? 90 : 0 }}
@@ -80,7 +80,7 @@ const Navbar = () => {
         </motion.div>
       )}
 
-      <div className="bg-white sm:block hidden">
+      <div className="bg-transparent sm:block hidden">
         <NavigationMenu>
           <NavigationMenuList className="flex gap-8 text-lg font-semibold">
             <NavigationMenuItem>
