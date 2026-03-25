@@ -6,42 +6,65 @@ import Marquee from "@/components/ui/Marquee";
 import { projects as initialProjects } from "../lib/data";
 
 const ProjectCard = ({ project }) => (
-  // Use w-full and max-w-sm to ensure it shrinks on small screens but doesn't grow too large
-  <div className="transition-all duration-300 ease-in-out w-full max-w-[350px] h-[520px] text-left flex flex-col items-center border border-white/25 rounded-2xl bg-white/0 shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] backdrop-blur-[18px] hover:translate-y-[-10px] hover:translate-x-[2px] hover:shadow-[0_16px_64px_0_rgba(255,255,255,0.15)] p-4">
-    <Image
-      height={300}
-      width={300}
-      src={project.image}
-      alt={project.title}
-      priority={true}
-      className="w-full h-[350px] object-cover object-top rounded-lg" // Fixed height for uniformity, full width for centering
-    />
-    <div className="repo-content w-full flex flex-col flex-grow mt-2">
-      <h6 className="flex items-center justify-between mt-3">
+  <div className="group relative transition-all duration-500 ease-in-out w-full max-w-[360px] h-[480px] text-left flex flex-col border border-white/20 rounded-xl shadow-[0_0_1px_rgba(255,255,255,0.2),0_10px_40px_rgba(0,0,0,0.8)] hover:translate-y-[-12px] hover:shadow-[0_20px_80px_0_rgba(0,0,0,0.9)] overflow-hidden">
+
+    <div className="absolute inset-0 w-full h-full transition-all duration-700">
+      <Image
+        fill
+        src={project.image}
+        alt={project.title}
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+      />
+    </div>
+
+    <div className="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-black via-black/80 to-transparent transition-all duration-500" />
+
+    <div className="relative z-10 w-full mt-auto p-8 flex flex-col gap-3">
+      <div className="flex items-center justify-between">
+        <span
+          className="text-white font-bold text-2xl truncate max-w-[80%] font-playfair"
+        >
+          {project.title}
+        </span>
+        <span className="flex items-center text-yellow-500 bg-white/5 backdrop-blur-xl px-3 py-1 rounded-full text-xs font-bold shadow-sm shrink-0 border border-white/10">
+          <FaStar className="mr-1" />
+          {project.stars}
+        </span>
+      </div>
+
+      <div className="repo-stats flex flex-wrap gap-2">
+        {project.languages.map((lang, index) => (
+          <span key={index} className="text-[10px] uppercase tracking-widest font-bold text-white/60 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md backdrop-blur-md">
+            {lang}
+          </span>
+        ))}
+      </div>
+
+      <p className="mt-1 text-white/80 font-medium line-clamp-2 text-sm leading-relaxed" title={project.description}>
+        {project.description}
+      </p>
+
+      <div className="mt-2 h-0 opacity-0 group-hover:h-6 group-hover:opacity-100 transition-all duration-500 overflow-hidden flex items-center gap-5">
         <Link
           href={project.repoLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-500 font-semibold hover:underline hover:underline-offset-2 ml-2 truncate max-w-[80%]"
+          className="text-[10px] font-bold uppercase tracking-widest text-blue-400 flex items-center gap-1.5 group/btn cursor-pointer transition-colors hover:text-blue-300"
         >
-          {project.title}
+          Source Code <span className="text-base group-hover/btn:translate-x-1 transition-transform">→</span>
         </Link>
-        <span className="flex items-center text-yellow-500 mr-2 shrink-0">
-          <FaStar />
-          <span className="ml-1">{project.stars}</span>
-        </span>
-      </h6>
-      <div className="repo-stats text-sm text-gray-300 mt-2 ml-2 truncate">
-        {project.languages.map((lang, index) => (
-          <span key={index} className="language-item text-xs md:text-sm">
-            {lang}
-            {index < project.languages.length - 1 && ", "}
-          </span>
-        ))}
+
+        {project.liveLink && (
+          <Link
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] font-bold uppercase tracking-widest text-emerald-400 flex items-center gap-1.5 group/live cursor-pointer transition-colors hover:text-emerald-300"
+          >
+            Live Demo <span className="text-base group-hover/live:translate-x-0.5 group-hover/live:translate-y-[-0.5px] transition-transform">↗</span>
+          </Link>
+        )}
       </div>
-      <p className="mt-2 text-gray-400 ml-2 mb-2 line-clamp-3 text-sm flex-grow" title={project.description}>
-        {project.description}
-      </p>
     </div>
   </div>
 );

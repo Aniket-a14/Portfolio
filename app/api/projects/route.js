@@ -26,11 +26,13 @@ export async function GET() {
         
         let stars = project.stars;
         let description = project.description;
+        let liveLink = project.liveLink || null;
         
         if (repoRes.ok) {
           const repoData = await repoRes.json();
           stars = repoData.stargazers_count !== undefined ? repoData.stargazers_count : stars;
           description = repoData.description || description;
+          liveLink = repoData.homepage || liveLink;
         }
 
         // Fetch languages
@@ -56,7 +58,8 @@ export async function GET() {
           ...project,
           stars,
           description,
-          languages
+          languages,
+          liveLink
         };
       })
     );
