@@ -164,3 +164,94 @@ export const projects = [
         stars: 0,  
     },
 ];
+
+export const profileData = {
+    aboutPortfolio: {
+        title: "About This Portfolio",
+        description: `
+This site takes me back to my second year. It’s what first got me into development, inspired by the designs I saw on Awwwards and Dribbble. I wanted to move away from AI templates and reimagine how students tell their own stories. It might not be an award winner, but it’s where everything started for me.
+        `,
+    },
+
+    aboutMe: {
+        title: "About Me",
+        description: `
+I build systems, not just applications. I’m an AI developer focused on full stack engineering and intelligent workflows. I work end-to-end, from design to AI integration, making sure AI is actually useful in the products I build. I love creating scalable systems where data and interfaces come together to make a real impact.
+        `,
+    },
+
+    experience: [
+        {
+            role: "AI Trainer",
+            company: "Outlier AI",
+            period: "Sep’ 24 — Jan’ 25",
+            type: "Remote",
+            description: "",
+            bullets: [
+                "Trained and evaluated AI models across 300+ task types by refining prompts and boosting response accuracy.",
+                "Reviewed and debugged over 1000 AI-generated responses to ensure clarity and strict guideline compliance.",
+                "Performed 200+ peer evaluations to maintain consistency, improve quality, and reduce error rates across submissions."
+            ]
+        },
+    ],
+
+    skills: {
+        core: [
+            "C",
+            "C++",
+            "Python",
+            "Java",
+            "JavaScript",
+            "TypeScript"
+        ],
+        frameworks: [
+            "React",
+            "Next.js",
+            "Node.js",
+            "FastAPI",
+            "Express.js"
+        ],
+        aiAndData: [
+            "Pandas",
+            "NumPy",
+            "Matplotlib",
+            "LLM Integration",
+            "Scikit-learn",
+            "TensorFlow",
+            "PyTorch"
+        ],
+        tools: [
+            "MongoDB",
+            "PostgreSQL",
+            "Git",
+            "GitHub",
+            "TailwindCSS",
+            "Framer Motion",
+            "jQuery",
+            "React Router",
+            "Redux"
+        ],
+    },
+
+    education: [
+        {
+            degree: "B.Tech in Computer Science and Engineering",
+            institution: "Lovely Professional University",
+            period: "2023 — Present",
+            description: `4-year programme in systems thinking, spatial design, technical drawing, and design process at multiple scales.`,
+        },
+        {
+            degree: "Higher Secondary School",
+            institution: "Indira Gandhi Memorial High School",
+            period: "2021 — 2023",
+            description: `High School Diploma in Science Stream with proficiency in Physics, Chemistry, and Mathematics.`,
+        },
+    ],
+
+    contact: {
+        email: "aniketsahaworkspace@gmail.com",
+        linkedin: "https://www.linkedin.com/in/aniketsaha2005",
+        github: "https://github.com/Aniket-a14",
+        twitter: "https://x.com/AniketSaha41043",
+    },
+};

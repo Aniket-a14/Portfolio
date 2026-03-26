@@ -4,13 +4,19 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaGithub } from "react-icons/fa";
 import { Menu, X } from "lucide-react";
+import ProfileSheet from "./ProfileSheet";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "auto";
-  }, [isOpen]);
+    if (isOpen && !isSheetOpen) {
+      document.body.style.overflow = "hidden";
+    } else if (!isOpen && !isSheetOpen) {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen, isSheetOpen]);
 
   const navLinks = [
     { name: "Github", href: "https://www.github.com/Aniket-a14", icon: <FaGithub className="size-4" /> },
@@ -22,15 +28,19 @@ const Navbar = () => {
     <nav className="absolute top-0 left-0 right-0 z-50 py-8 bg-transparent transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center w-full">
         <div className="z-50">
-          <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3 group">
-            <Avatar className="h-10 w-10 border border-white/10 transition-transform duration-300 group-hover:scale-105">
+          <button
+            onClick={() => setIsSheetOpen(true)}
+            className="flex items-center gap-3 group"
+            aria-label="Open profile"
+          >
+            <Avatar className="h-10 w-10 border border-white/10 transition-all duration-400">
               <AvatarImage src="logo.jpeg" loading="eager" alt="Aniket Saha" />
               <AvatarFallback>AS</AvatarFallback>
             </Avatar>
             <span className="text-white font-medium tracking-tight text-lg opacity-100 transition-opacity hidden sm:block drop-shadow-sm">
               Aniket Saha
             </span>
-          </Link>
+          </button>
         </div>
 
         <div className="hidden md:flex items-center gap-10">
@@ -91,6 +101,8 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <ProfileSheet isOpen={isSheetOpen} onClose={() => setIsSheetOpen(false)} />
     </nav>
   );
 };
