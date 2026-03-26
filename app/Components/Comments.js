@@ -90,22 +90,34 @@ const ReviewCard = ({ img, name, username, body, alt }) => {
 export function Comments() {
   return (
     <>
-    <div className="relative flex w-full flex-col items-center justify-center overflow-hidden  pb-12" id="testimonials">
-        <h5 className={`${roboto.className} text-white text-2xl sm:text-3xl md:text-4xl xl:text-5xl text-center mb-12`}>WHAT PEOPLE SAY</h5>
-      <Marquee pauseOnHover className="[--duration:20s]">
-        {firstRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
-        ))}
-      </Marquee>
-      <Marquee reverse pauseOnHover className="[--duration:20s]">
-        {secondRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
-        ))}
-      </Marquee>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 "></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 "></div>
-    </div>
-    <Footer />
+      <section className="bg-[#040407] py-16 px-6 md:px-12 lg:px-20" id="testimonials">
+        <div className="max-w-6xl mx-auto">
+          <div className="border-t border-white/10 pt-10 mb-10">
+            <p className="text-white/40 font-roboto text-sm tracking-[0.2em] uppercase mb-4">
+              Testimonials
+            </p>
+            <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white/90 leading-tight">
+              What people say <br className="hidden md:block" /> about my work
+            </h2>
+          </div>
+        </div>
+
+        <div className="relative flex w-full flex-col items-center justify-center overflow-hidden pb-12">
+          <Marquee pauseOnHover className="[--duration:20s]">
+            {firstRow.map((review) => (
+              <ReviewCard key={review.username} {...review} />
+            ))}
+          </Marquee>
+          <Marquee reverse pauseOnHover className="[--duration:20s]">
+            {secondRow.map((review) => (
+              <ReviewCard key={review.username} {...review} />
+            ))}
+          </Marquee>
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#040407]"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[#040407]"></div>
+        </div>
+      </section>
+      <Footer />
     </>
   );
 }

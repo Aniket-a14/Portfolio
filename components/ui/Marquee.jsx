@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 
-const Marquee = ({ text = "RECENT WORK", speed = 50 }) => {
+const Marquee = ({ text = "RECENT WORK", speed = 50, className = "" }) => {
   const containerRef = useRef(null);
   const textRef = useRef(null);
   const [textWidth, setTextWidth] = useState(0);
@@ -22,9 +22,9 @@ const Marquee = ({ text = "RECENT WORK", speed = 50 }) => {
   const duration = textWidth ? textWidth / speed : 10; // Adjust speed dynamically
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden w-full p-4">
+    <div ref={containerRef} className="relative overflow-hidden w-full py-4">
       <motion.div
-        className={`flex whitespace-nowrap text-white font-roboto text-6xl font-bold`}
+        className={`flex whitespace-nowrap text-white font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light ${className}`}
         initial={{ x: 0 }}
         animate={{ x: -textWidth }}
         transition={{

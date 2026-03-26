@@ -4,25 +4,21 @@ import IconCloudDemo from "./Icon";
 
 const Languages = () => {
   return (
-    <div>
-      <div className="container md:min-h-[80vh] xl:min-h-[110vh] mx-auto pb-44 md:pb-10 xl:pb-44">
-        <div className="flex flex-col justify-center items-center relative z-10 w-full">
-          <h2
-            className={`text-lg text-white/50 flex justify-center items-center pt-24 font-roboto font-light tracking-[0.2em]`}
-          >
-            EXPLORE MY
+    <section className="bg-[#040407] py-16 px-6 md:px-12 lg:px-20" id="languages">
+      <div className="max-w-6xl mx-auto">
+        <div className="border-t border-white/10 pt-10 mb-8">
+          <p className="text-white/40 font-roboto text-sm tracking-[0.2em] uppercase mb-4">
+            Technical Stack
+          </p>
+          <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white/90 leading-tight">
+            Languages and tools <br className="hidden md:block" /> proficiency
           </h2>
-          <h3
-            className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl text-white flex relative text-center justify-center pt-3  items-center font-bold font-roboto `}
-          >
-            LANGUAGES AND TOOLS PROFICIENCY
-          </h3>
         </div>
-        <div className="flex flex-col pt-20 xl:flex-row justify-center items-center relative z-10 w-full mb-12">
+        <div className="flex flex-col xl:flex-row justify-center items-center relative z-10 w-full pb-16">
           <IconCloudDemo />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

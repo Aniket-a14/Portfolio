@@ -19,13 +19,13 @@ const Navbar = () => {
   }, [isOpen, isSheetOpen]);
 
   const navLinks = [
-    { name: "Github", href: "https://www.github.com/Aniket-a14", icon: <FaGithub className="size-4" /> },
-    { name: "Testimonials", href: "#testimonials" },
     { name: "Projects", href: "#projects" },
+    { name: "Testimonials", href: "#testimonials" },
+    { name: "Github", href: "https://www.github.com/Aniket-a14", icon: <FaGithub className="size-4" /> },
   ];
 
   return (
-    <nav className="absolute top-0 left-0 right-0 z-50 py-8 bg-transparent transition-all duration-300">
+    <nav className="absolute top-0 left-0 right-0 z-50 py-8 bg-gradient-to-b from-black/40 to-transparent transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center w-full">
         <div className="z-50">
           <button
@@ -34,7 +34,7 @@ const Navbar = () => {
             aria-label="Open profile"
           >
             <Avatar className="h-10 w-10 border border-white/10 transition-all duration-400">
-              <AvatarImage src="logo.jpeg" loading="eager" alt="Aniket Saha" />
+              <AvatarImage src="/logo.jpeg" loading="eager" alt="Aniket Saha" />
               <AvatarFallback>AS</AvatarFallback>
             </Avatar>
             <span className="text-white font-medium tracking-tight text-lg opacity-100 transition-opacity hidden sm:block drop-shadow-sm">
