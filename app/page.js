@@ -80,13 +80,13 @@ const App = () => {
       <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ease-in-out ${showContent ? "opacity-100" : "opacity-0"}`}>
         <div className="h-[100vh]" />
 
-        <div className="bg-black py-24 pointer-events-auto border-t border-white/5" role="region" id="about-section">
+        <div className="bg-black py-24 pointer-events-auto" role="region" id="about-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <About />
           </Suspense>
         </div>
 
-        <div className="bg-black pointer-events-auto border-t border-white/5" role="region" id="languages-section">
+        <div className="bg-black pointer-events-auto" role="region" id="languages-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Languages />
           </Suspense>
