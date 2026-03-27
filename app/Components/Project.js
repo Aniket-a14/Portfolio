@@ -10,8 +10,8 @@ const ProjectCard = ({ project }) => {
   const slug = project.title.toLowerCase().replace(/\s+/g, '-');
 
   return (
-    <Link href={`/project/${slug}`} className="block">
-      <div className="group relative transition-all duration-500 ease-in-out w-full max-w-[360px] h-[480px] text-left flex flex-col border border-white/20 rounded-xl shadow-[0_0_1px_rgba(255,255,255,0.2),0_10px_40px_rgba(0,0,0,0.8)] hover:translate-y-[-12px] hover:shadow-[0_20px_80px_0_rgba(0,0,0,0.9)] overflow-hidden">
+    <Link href={`/project/${slug}`} className="block w-full max-w-[360px] sm:w-[360px] h-[480px] shrink-0">
+      <div className="group relative transition-all duration-500 ease-in-out w-full h-full text-left flex flex-col border border-white/20 rounded-xl shadow-[0_0_1px_rgba(255,255,255,0.2),0_10px_40px_rgba(0,0,0,0.8)] hover:translate-y-[-12px] hover:shadow-[0_20px_80px_0_rgba(0,0,0,0.9)] overflow-hidden">
 
         <div className="absolute inset-0 w-full h-full transition-all duration-700">
           <Image
