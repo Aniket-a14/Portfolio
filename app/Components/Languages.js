@@ -193,10 +193,9 @@ const Languages = () => {
                   </AnimatePresence>
                 </div>
                 
-                {/* Subtle depth mask for mobile list */}
                 <div className="absolute bottom-10 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent pointer-events-none z-10 opacity-60 md:hidden" />
 
-              <div className="mt-4 md:mt-8 pt-4 md:pt-6 flex items-center justify-between border-t border-white/5">
+              <div className="mt-4 md:mt-8 pt-4 md:pt-6 flex items-center justify-between ">
                 <div className="flex gap-1.5">
                   {[...Array(3)].map((_, i) => (
                     <div key={i} className="size-1 rounded-full bg-white/10" />
