@@ -50,7 +50,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="relative transition-colors duration-1000 min-h-[100dvh] overflow-x-hidden w-full max-w-[100vw] bg-[#e8e6e1]">
+    <div className={`relative transition-colors duration-1000 min-h-[100dvh] overflow-x-hidden w-full max-w-[100vw] ${showContent ? 'bg-black' : 'bg-[#e8e6e1]'}`}>
       {!showContent && <Loader onComplete={handleLoaderComplete} aria-hidden="true" role="status" />}
 
       <motion.div
