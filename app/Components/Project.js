@@ -100,9 +100,9 @@ const Project = () => {
         </div>
       </div>
       <div className="w-screen -mx-6 md:-mx-12 lg:-mx-20 overflow-hidden mb-8">
-        <h4 className={`text-md sm:text-lg md:text-xl xl:text-2xl font-bold font-roboto`}>
+        <h2 className={`text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold font-roboto`}>
           <Marquee texts={["RECENT", "WORKS"]} speed={40} />
-        </h4>
+        </h2>
       </div>
       <div className="flex flex-wrap max-w-[1200px] justify-center gap-10 pt-16 pb-16 mx-auto px-4">
         {projectsData.map((project) => (

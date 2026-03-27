@@ -25,37 +25,14 @@ const playfair = Playfair_Display({
   weight: ["400"],
 });
 
+import { getMetadata } from "./lib/seo";
+
 export const viewport = {
   width: "device-width",
   initialScale: 1.0,
 };
 
-export const metadata = {
-  metadataBase: new URL("https://www.aniketdesign.in/"),
-  title: "Aniket Saha - Portfolio",
-  description: "Explore Aniket Saha's portfolio – a Full Stack Developer, Designer, and Machine Learning Enthusiast. Showcasing projects, skills, and experience.",
-  keywords: ["Aniket Saha", "Full Stack Developer", "Portfolio", "Projects", "Skills"],
-  authors: [{ name: "Aniket Saha" }],
-  robots: {
-    index: true,
-    follow: true,
-  },
-  openGraph: {
-    title: "Aniket Saha - Portfolio",
-    description: "Explore my projects, skills, and experience in development and machine learning.",
-    url: "https://www.aniketdesign.in/",
-    siteName: "Aniket Saha's Portfolio",
-    images: [
-      {
-        url: "/logo.jpeg",
-        width: 1200,
-        height: 630,
-        alt: "Preview of Aniket Saha's Portfolio Website",
-      },
-    ],
-    type: "website",
-  },
-};
+export const metadata = getMetadata();
 
 import CustomCursor from "./Components/CustomCursor";
 
@@ -66,6 +43,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${playfair.variable} antialiased overflow-x-hidden w-full bg-black`}
       >
         <CustomCursor />
+        {/* Person Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -78,7 +56,25 @@ export default function RootLayout({ children }) {
               sameAs: [
                 "https://github.com/Aniket-a14",
                 "https://www.linkedin.com/in/aniketsaha2005/",
+                "https://x.com/AniketSaha41043",
               ],
+            }),
+          }}
+        />
+        {/* WebSite Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Aniket Saha Portfolio",
+              url: "https://www.aniketdesign.in/",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://www.aniketdesign.in/#projects",
+                "query-input": "required name=search_term_string",
+              },
             }),
           }}
         />
