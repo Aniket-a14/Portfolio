@@ -36,7 +36,7 @@ const Footer = () => {
             className="group flex items-center gap-4 w-fit"
           >
             <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white/90 group-hover:text-white transition-colors duration-300">
-              Let's work together
+              Let&apos;s work together
             </h2>
             <ArrowUpRight
               size={40}
