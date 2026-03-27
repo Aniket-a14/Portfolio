@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { ArrowUpRight } from "lucide-react";
 import { profileData } from "../lib/data";
 import ProfileSheet from "./ProfileSheet";
 
@@ -94,16 +95,22 @@ const Navbar = () => {
         <div className="z-[60]">
           <button
             onClick={() => setIsSheetOpen(true)}
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-3.5 group relative p-0 md:px-4 md:py-2 rounded-full bg-transparent md:bg-white/10 hover:bg-white/5 md:hover:bg-white/20 border-none md:border border-white/5 hover:border-white/10 transition-all duration-500 md:backdrop-blur-md shadow-none md:shadow-sm"
             aria-label="Open profile"
           >
-            <Avatar className="h-10 w-10 transition-all duration-400 group-hover:scale-110">
+            <Avatar className="h-8 w-8 transition-transform duration-500 group-hover:scale-105 border border-white/10 shadow-lg">
               <AvatarImage src="/logo.jpeg" loading="eager" alt="Aniket Saha" />
-              <AvatarFallback>AS</AvatarFallback>
+              <AvatarFallback className="bg-white/5 text-[9px]">AS</AvatarFallback>
             </Avatar>
-            <span className="text-white font-medium tracking-tight text-lg opacity-100 transition-opacity hidden sm:block font-roboto drop-shadow-sm">
-              Aniket Saha
-            </span>
+            
+            <div className="hidden md:flex items-center gap-2.5 overflow-hidden">
+              <span className="text-white font-medium tracking-tight text-[16px] font-roboto drop-shadow-sm group-hover:text-white/90 transition-all duration-500">
+                Aniket Saha
+              </span>
+              <div className="flex items-center justify-center w-0 transition-all duration-500 group-hover:w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 overflow-hidden">
+                <ArrowUpRight className="size-4 text-white/50" strokeWidth={1.5} />
+              </div>
+            </div>
           </button>
         </div>
 

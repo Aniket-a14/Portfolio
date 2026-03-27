@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
@@ -85,7 +86,7 @@ const ProfileSheet = ({ isOpen, onClose }) => {
     };
   }, [isOpen, handleEscape]);
 
-  return (
+  const content = (
     <AnimatePresence mode="wait">
       {isOpen && (
         <div className="fixed inset-0 z-[100]">
@@ -95,7 +96,7 @@ const ProfileSheet = ({ isOpen, onClose }) => {
             animate="visible"
             exit="exit"
             onClick={onClose}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/80"
           />
 
           <motion.aside
@@ -249,6 +250,50 @@ const ProfileSheet = ({ isOpen, onClose }) => {
                 </div>
               </motion.div>
 
+                            <motion.div variants={fadeUp} className="mb-10 group/heatmap">
+                <div className="flex items-center justify-between mb-5">
+                  <h3 className="font-roboto text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f]">
+                    GitHub Contributions
+                  </h3>
+                  <a 
+                    href={profileData.contact.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 font-roboto text-[12px] font-medium tracking-wide opacity-0 -translate-y-1 group-hover/heatmap:opacity-100 group-hover/heatmap:translate-y-0 text-[#a39788] hover:text-[#1a1a1a] transition-all duration-300"
+                  >
+                    <span>View Profile</span>
+                    <FaGithub className="text-[13px]" />
+                  </a>
+                </div>
+                
+                <div className="relative w-full bg-[rgb(234,229,225)]">
+                  <div className="absolute left-0 top-0 bottom-0 w-[30px] bg-[rgb(234,229,225)] z-10 overflow-hidden pointer-events-none">
+                    <div className="w-[722px] h-[112px] flex items-center">
+                      <img 
+                        src={`https://ghchart.rshah.org/2ea043/${profileData.githubUsername}`} 
+                        alt="" 
+                        className="w-[722px] min-w-[722px] h-auto mix-blend-multiply contrast-[1.05]"
+                        style={{ WebkitUserDrag: 'none' }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="absolute left-[28px] top-0 bottom-0 w-3 bg-gradient-to-r from-[rgb(234,229,225)] to-transparent z-10 pointer-events-none"></div>
+
+                  <div className="w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                    <div className="w-[722px] h-[112px] flex items-center">
+                      <img 
+                        src={`https://ghchart.rshah.org/2ea043/${profileData.githubUsername}`} 
+                        alt="GitHub Contributions Heatmap" 
+                        className="w-[722px] min-w-[722px] h-auto mix-blend-multiply contrast-[1.05]"
+                        loading="lazy"
+                        style={{ WebkitUserDrag: 'none' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
               <motion.div variants={fadeUp} className="mb-10">
                 <h3 className="font-roboto text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f] mb-3">
                   Education
@@ -313,6 +358,9 @@ const ProfileSheet = ({ isOpen, onClose }) => {
       )}
     </AnimatePresence>
   );
+
+  if (typeof document === "undefined") return null;
+  return createPortal(content, document.body);
 };
 
 export default ProfileSheet;

@@ -254,4 +254,5 @@ I build systems, not just applications. I’m an AI developer focused on full st
         github: "https://github.com/Aniket-a14",
         twitter: "https://x.com/AniketSaha41043",
     },
+    githubUsername: "Aniket-a14",
 };
