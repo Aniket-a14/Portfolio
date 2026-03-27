@@ -15,7 +15,7 @@ export const TextReveal = ({ text, className }) => {
   return (
     <div ref={targetRef} className={cn("relative z-0 h-[100vh]", className)}>
       <div className="sticky top-0 flex justify-center items-start bg-transparent px-4 pt-20">
-        <p className="flex flex-wrap p-5 text-2xl font-bold leading-loose text-white/10 md:p-8 md:text-3xl lg:p-10 lg:text-4xl xl:text-5xl">
+        <p className="flex flex-wrap p-5 text-2xl font-bold leading-loose text-white/10 md:p-8 md:text-3xl lg:p-10 lg:text-4xl xl:text-5xl font-playfair">
           {words.map((word, i) => {
             const start = i / words.length;
             const end = start + 1 / words.length;
