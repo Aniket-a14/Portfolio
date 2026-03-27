@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { ShinyButton } from "@/components/magicui/shiny-button";
 import { ReactTyped } from "react-typed";
-import TiltedCard from "@/components/TiltedCard/TiltedCard";
 import { heroData } from "../lib/data";
 
 const UnderlineLink = ({ href, children }) => (

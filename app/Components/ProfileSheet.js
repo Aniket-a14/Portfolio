@@ -14,18 +14,53 @@ const overlayVariants = {
 };
 
 const sheetVariants = {
-  hidden: { x: "-100%", opacity: 0.5 },
-  visible: { x: 0, opacity: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-  exit: { x: "-100%", opacity: 0, transition: { duration: 0.35, ease: [0.55, 0, 1, 0.45] } },
+  initial: { opacity: 0, x: "-100%" },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 1.0,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: "-100%",
+    transition: {
+      duration: 1.0,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
 };
 
 const stagger = {
-  visible: { transition: { staggerChildren: 0.04, delayChildren: 0.15 } },
+  animate: {
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.2,
+    },
+  },
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
+  initial: { opacity: 0, x: -25 },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 18,
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: -15,
+    transition: {
+      duration: 0.3,
+      ease: [0.76, 0, 0.24, 1],
+    },
+  },
 };
 
 const skillCategories = [
@@ -44,11 +79,9 @@ const ProfileSheet = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       document.addEventListener("keydown", handleEscape);
-      document.body.style.overflow = "hidden";
     }
     return () => {
       document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "auto";
     };
   }, [isOpen, handleEscape]);
 
@@ -67,13 +100,13 @@ const ProfileSheet = ({ isOpen, onClose }) => {
 
           <motion.aside
             variants={sheetVariants}
-            initial="hidden"
-            animate="visible"
+            initial="initial"
+            animate="animate"
             exit="exit"
             role="dialog"
             aria-modal="true"
             aria-label="Profile Information"
-            className="absolute left-0 top-0 h-full w-full sm:w-[620px] flex flex-col"
+            className="absolute left-0 top-0 h-full w-full sm:w-[520px] md:w-[620px] flex flex-col"
             style={{ background: "rgb(234, 229, 225)" }}
             data-light-cursor
           >
@@ -108,8 +141,9 @@ const ProfileSheet = ({ isOpen, onClose }) => {
 
             <motion.div
               variants={stagger}
-              initial="hidden"
-              animate="visible"
+              initial="initial"
+              animate="animate"
+              exit="exit"
               className="profile-sheet-light flex-1 overflow-y-auto px-10 sm:px-14 py-10"
             >
               <motion.div variants={fadeUp} className="mb-10">

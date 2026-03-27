@@ -4,8 +4,8 @@
     "description": "Portfolio of Aniket Saha - Full Stack Developer",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#040407",
-    "theme_color": "#040407",
+    "background_color": "black",
+    "theme_color": "black",
     "icons": [
         {
             "src": "/logo.jpeg",

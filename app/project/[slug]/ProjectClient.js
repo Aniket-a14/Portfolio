@@ -294,7 +294,7 @@ const ProjectClient = ({ slug }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#040407] flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-8 h-8 border-2 border-white/20 border-t-white/80 rounded-full animate-spin" />
           <span className="text-white/40 font-roboto text-sm tracking-widest uppercase">
@@ -307,7 +307,7 @@ const ProjectClient = ({ slug }) => {
 
   if (error || !data) {
     return (
-      <div className="min-h-screen bg-[#040407] flex flex-col items-center justify-center gap-6">
+      <div className="min-h-screen bg-black flex flex-col items-center justify-center gap-6">
         <p className="text-white/50 font-roboto text-lg">Project not found</p>
         <button
           onClick={() => router.push("/#projects")}
@@ -322,7 +322,7 @@ const ProjectClient = ({ slug }) => {
   const { project, repoMeta, languages } = data;
 
   return (
-    <div className="min-h-screen bg-[#040407] text-white" suppressHydrationWarning>
+    <div className="min-h-screen bg-black text-white" suppressHydrationWarning>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

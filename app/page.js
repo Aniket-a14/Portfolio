@@ -57,7 +57,7 @@ const App = () => {
         style={{ color: textColor }}
         className={`fixed inset-0 z-0 transition-opacity duration-1000 ease-in-out ${showContent ? "opacity-100" : "opacity-0"}`}
       >
-        <motion.div className="absolute inset-0 z-[-1] bg-[#040407]">
+        <motion.div className="absolute inset-0 z-[-1] bg-black">
           <Image
             src="/bg_logo.png"
             alt="Hero Background"
@@ -80,25 +80,25 @@ const App = () => {
       <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ease-in-out ${showContent ? "opacity-100" : "opacity-0"}`}>
         <div className="h-[100vh]" />
 
-        <div className="bg-[#040407] min-h-fit pointer-events-auto" role="region" aria-labelledby="about-section">
+        <div className="bg-black min-h-fit pointer-events-auto" role="region" aria-labelledby="about-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <About />
           </Suspense>
         </div>
 
-        <div className="overflow-auto bg-[#040407] min-h-fit pointer-events-auto" role="region" aria-labelledby="languages-section">
+        <div className="overflow-auto bg-black min-h-fit pointer-events-auto" role="region" aria-labelledby="languages-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Languages />
           </Suspense>
         </div>
 
-        <div className="bg-[#040407] transition-colors duration-1000 min-h-fit pointer-events-auto" role="region" aria-labelledby="project-section">
+        <div className="bg-black transition-colors duration-1000 min-h-fit pointer-events-auto" role="region" aria-labelledby="project-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Project />
           </Suspense>
         </div>
 
-        <div className="bg-[#040407] min-h-fit pointer-events-auto">
+        <div className="bg-black min-h-fit pointer-events-auto">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Comments />
           </Suspense>
