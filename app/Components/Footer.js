@@ -71,7 +71,7 @@ const Footer = () => {
           </div>
         </div>
 
-          <div>
+        <div>
           <span className="text-white/60 text-[12px] font-roboto font-medium tracking-[0.2em] uppercase block mb-5">
             Socials
           </span>

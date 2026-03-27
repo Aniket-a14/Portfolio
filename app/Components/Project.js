@@ -5,6 +5,7 @@ import Link from "next/link";
 import Marquee from "@/components/ui/Marquee";
 import { projects as initialProjects } from "../lib/data";
 
+
 const ProjectCard = ({ project }) => {
   const slug = project.title.toLowerCase().replace(/\s+/g, '-');
 

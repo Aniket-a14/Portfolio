@@ -5,6 +5,7 @@ import { Marquee } from "@/components/magicui/marquee";
 import { Roboto } from "next/font/google";
 import Footer from "./Footer";
 
+
 const roboto = Roboto({
   weight: ["700"],
   subsets: ["latin"],
@@ -66,26 +67,26 @@ const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
 
 const ReviewCard = ({ img, name, username, body, alt }) => {
-    return (
-      <figure
-        className={cn(
-          "relative h-full w-64 justify-center items-center cursor-pointer overflow-hidden rounded-xl border p-4",
-          "border-gray-100/[.1] bg-gray-100/[.07] hover:bg-gray-100/[.15]",
-        )}
-      >
-        <div className="flex flex-row items-center gap-2">
-          <img className="rounded-full" width="50" height="50" alt={alt} src={img} />
-          <div className="flex flex-col">
-            <figcaption className="text-sm font-medium text-white">{name}</figcaption>
-            <p className="text-xs font-medium text-white/60">{username}</p>
-          </div>
+  return (
+    <figure
+      className={cn(
+        "relative h-full w-64 justify-center items-center cursor-pointer overflow-hidden rounded-xl border p-4",
+        "border-gray-100/[.1] bg-gray-100/[.07] hover:bg-gray-100/[.15]",
+      )}
+    >
+      <div className="flex flex-row items-center gap-2">
+        <img className="rounded-full" width="50" height="50" alt={alt} src={img} />
+        <div className="flex flex-col">
+          <figcaption className="text-sm font-medium text-white">{name}</figcaption>
+          <p className="text-xs font-medium text-white/60">{username}</p>
         </div>
-        <blockquote className="mt-2 text-sm text-white">{body}</blockquote>
-      </figure>
-    );
-  };
-  
-  
+      </div>
+      <blockquote className="mt-2 text-sm text-white">{body}</blockquote>
+    </figure>
+  );
+};
+
+
 
 export function Comments() {
   return (
