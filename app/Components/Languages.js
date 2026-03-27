@@ -60,7 +60,8 @@ const SkillItem = ({ skill, index }) => {
           {skill}
         </span>
         <div
-          className="absolute -bottom-1 left-0 h-[1px] bg-white/40 w-0 group-hover:w-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          className="absolute -bottom-1 left-0 h-[1px] bg-white/40 w-0 group-hover:w-full transition-all duration-500"
+          style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
         />
       </div>
     </motion.div>
