@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${playfair.variable} antialiased overflow-x-hidden w-full bg-black`}
+        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${playfair.variable} antialiased w-full bg-black`}
       >
         <CustomCursor />
         {/* Person Schema */}

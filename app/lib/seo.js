@@ -30,6 +30,13 @@ export function getMetadata({ title, description, path = "", image = "/logo.jpeg
     description: description || SEO_CONFIG.defaultDescription,
     keywords: SEO_CONFIG.keywords,
     authors: [{ name: SEO_CONFIG.name }],
+    icons: {
+      icon: "/logo_new.png",
+      apple: [
+        { url: "/apple-touch-icon.png" },
+        { url: "/apple-touch-icon-precomposed.png" },
+      ],
+    },
     alternates: {
       canonical: url,
     },

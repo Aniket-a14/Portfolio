@@ -49,7 +49,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6 pb-16 border-b border-white/[0.06]">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-6 pb-16 border-b border-white/[0.06]">
         <div>
           <span className="text-white/50 text-[11px] font-roboto font-medium tracking-[0.2em] uppercase block mb-5">
             Navigation

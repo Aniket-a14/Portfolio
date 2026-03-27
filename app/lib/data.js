@@ -214,13 +214,11 @@ I build systems, not just applications. I’m an AI developer focused on full st
         aiAndData: [
             "Pandas",
             "NumPy",
-            "Matplotlib",
-            "LLM Integration",
             "Scikit-learn",
             "TensorFlow",
             "PyTorch"
         ],
-        tools: [
+        databaseAndTools: [
             "MongoDB",
             "PostgreSQL",
             "Git",

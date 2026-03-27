@@ -50,7 +50,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className={`relative transition-colors duration-1000 min-h-[100dvh] overflow-x-hidden w-full max-w-[100vw] ${showContent ? 'bg-black' : 'bg-[#e8e6e1]'}`}>
+    <div className={`relative transition-colors duration-1000 min-h-[100dvh] w-full max-w-[100vw] ${showContent ? 'bg-black' : 'bg-[#e8e6e1]'}`}>
       {!showContent && <Loader onComplete={handleLoaderComplete} aria-hidden="true" role="status" />}
 
       <motion.div
@@ -80,13 +80,13 @@ const App = () => {
       <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ease-in-out ${showContent ? "opacity-100" : "opacity-0"}`}>
         <div className="h-[100vh]" />
 
-        <div className="bg-black min-h-fit pointer-events-auto" role="region" aria-labelledby="about-section">
+        <div className="bg-black py-24 pointer-events-auto border-t border-white/5" role="region" id="about-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <About />
           </Suspense>
         </div>
 
-        <div className="overflow-auto bg-black min-h-fit pointer-events-auto" role="region" aria-labelledby="languages-section">
+        <div className="bg-black pointer-events-auto border-t border-white/5" role="region" id="languages-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Languages />
           </Suspense>

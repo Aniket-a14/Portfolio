@@ -68,7 +68,7 @@ const skillCategories = [
   { key: "core", label: "Core" },
   { key: "frameworks", label: "Frameworks" },
   { key: "aiAndData", label: "AI & Data" },
-  { key: "tools", label: "Tools" },
+  { key: "databaseAndTools", label: "Database and Tools" },
 ];
 
 const ProfileSheet = ({ isOpen, onClose }) => {
