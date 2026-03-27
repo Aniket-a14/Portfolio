@@ -25,7 +25,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="text-white pt-12 pb-8 px-6 md:px-12 lg:px-20">
+    <footer className="text-white pt-12 pb-8 px-6 md:px-12 lg:px-20 bg-black">
       <div className="max-w-6xl mx-auto mb-10">
         <div className="border-t border-white/10 pt-10">
           <p className="text-white/40 font-roboto text-sm tracking-[0.2em] uppercase mb-4">

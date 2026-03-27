@@ -90,7 +90,7 @@ const ReviewCard = ({ img, name, username, body, alt }) => {
 export function Comments() {
   return (
     <>
-      <section className="bg-[#040407] py-16 px-6 md:px-12 lg:px-20" id="testimonials">
+      <section className="bg-black py-16 px-6 md:px-12 lg:px-20" id="testimonials">
         <div className="max-w-6xl mx-auto">
           <div className="border-t border-white/10 pt-10 mb-10">
             <p className="text-white/40 font-roboto text-sm tracking-[0.2em] uppercase mb-4">
@@ -113,8 +113,8 @@ export function Comments() {
               <ReviewCard key={review.username} {...review} />
             ))}
           </Marquee>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#040407]"></div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[#040407]"></div>
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black"></div>
         </div>
       </section>
       <Footer />

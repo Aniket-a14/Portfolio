@@ -4,7 +4,7 @@ import { aboutText } from "../lib/data";
 
 const About = () => {
   return (
-    <div className="z-10 flex min-h-64  items-start justify-start">
+    <div className="z-10 flex min-h-64  items-start justify-start bg-black">
       <TextReveal
         text={aboutText}
       />

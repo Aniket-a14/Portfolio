@@ -91,7 +91,7 @@ const Project = () => {
   }, []);
 
   return (
-    <div className="w-full text-white mt-0 bg-[#040407] py-16 px-6 md:px-12 lg:px-20" id="projects">
+    <div className="w-full text-white mt-0 bg-black py-16 px-6 md:px-12 lg:px-20" id="projects">
       <div className="max-w-6xl mx-auto">
         <div className="border-t border-white/10 pt-10 mb-4">
           <p className="text-white/40 font-roboto text-sm tracking-[0.2em] uppercase">

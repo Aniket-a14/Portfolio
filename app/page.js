@@ -27,7 +27,7 @@ const App = () => {
   const timeoutRef = useRef(null);
 
   const { scrollY } = useScroll();
-  
+
   const [vh, setVh] = useState(0);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const App = () => {
   const textColor = useTransform(
     scrollY,
     [vh * 0.2, vh * 0.5],
-    ["#ffffff", "#ffffff"] 
+    ["#ffffff", "#ffffff"]
   );
 
 
@@ -50,12 +50,12 @@ const App = () => {
   }, []);
 
   return (
-    <div className="relative transition-colors duration-1000 min-h-[100dvh] overflow-x-hidden w-full max-w-[100vw]">
+    <div className="relative transition-colors duration-1000 min-h-[100dvh] overflow-x-hidden w-full max-w-[100vw] bg-[#e8e6e1]">
       {!showContent && <Loader onComplete={handleLoaderComplete} aria-hidden="true" role="status" />}
 
-      <motion.div 
+      <motion.div
         style={{ color: textColor }}
-        className={`fixed inset-0 z-0 transition-opacity duration-1000 ${showContent ? "opacity-100" : "opacity-0"}`}
+        className={`fixed inset-0 z-0 transition-opacity duration-1000 ease-in-out ${showContent ? "opacity-100" : "opacity-0"}`}
       >
         <motion.div className="absolute inset-0 z-[-1] bg-[#040407]">
           <Image
@@ -66,10 +66,9 @@ const App = () => {
             unoptimized
             className="object-cover"
           />
-          {/* Subtle cinematic dark gradient to make white text pop */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent w-full md:w-[65%]" />
         </motion.div>
-        
+
         <div className="absolute top-0 left-0 w-full z-50">
           <Navbar />
         </div>
@@ -78,7 +77,7 @@ const App = () => {
         </div>
       </motion.div>
 
-      <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ${showContent ? "opacity-100" : "opacity-0"}`}>
+      <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ease-in-out ${showContent ? "opacity-100" : "opacity-0"}`}>
         <div className="h-[100vh]" />
 
         <div className="bg-[#040407] min-h-fit pointer-events-auto" role="region" aria-labelledby="about-section">
