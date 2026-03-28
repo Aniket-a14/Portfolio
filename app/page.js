@@ -79,11 +79,14 @@ const App = () => {
   );
 
   const handleLoaderComplete = useCallback(() => {
-    startTransition(() => setShowContent(true));
+    startTransition(() => {
+      setShowContent(true);
+    });
   }, []);
 
   return (
-    <div className={`relative transition-colors duration-1000 min-h-[100dvh] w-full max-w-[100vw] ${showContent ? 'bg-black' : 'bg-black'}`}>
+    <div className="relative min-h-screen w-full bg-black">
+
       <AnimatePresence mode="wait">
         {!showContent && (
           <Loader 
