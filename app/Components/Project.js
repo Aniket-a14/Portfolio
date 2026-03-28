@@ -122,7 +122,7 @@ const Project = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full text-white mt-0 bg-transparent pt-16 pb-12 md:pb-16 px-6 md:px-12 lg:px-20 relative"
+      className="w-full text-white mt-0 bg-transparent pt-16 pb-20 md:pb-32 px-6 md:px-12 lg:px-20 relative"
       id="projects"
     >
       <div className="max-w-6xl mx-auto">

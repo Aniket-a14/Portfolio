@@ -91,7 +91,7 @@ const ReviewCard = ({ img, name, username, body, alt }) => {
 export function Comments() {
   return (
     <>
-      <section className="bg-black py-16 px-6 md:px-12 lg:px-20" id="testimonials">
+      <section className="bg-black pb-10 px-6 md:px-12 lg:px-20" id="testimonials">
         <div className="max-w-6xl mx-auto">
           <div className="border-t border-white/10 pt-10 mb-10">
             <p className="text-white/40 font-roboto text-sm tracking-[0.2em] uppercase mb-4">
