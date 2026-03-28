@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { RiCopyrightLine } from "react-icons/ri";
 import { ArrowUpRight } from "lucide-react";
+import { useLenis } from "lenis/react";
 
 const Footer = () => {
   const [time, setTime] = useState(null);
@@ -15,6 +16,26 @@ const Footer = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  const lenis = useLenis();
+
+  const handleScroll = (id) => {
+    const sectionId = id.startsWith('#') ? id.substring(1) : id;
+    
+    if (sectionId === 'home') {
+      lenis?.scrollTo(0, {
+        duration: 1.2,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+      });
+    } else {
+      lenis?.scrollTo(`#${sectionId}`, {
+        offset: -80,
+        duration: 1.2,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+      });
+    }
+  };
+
 
   const formatIST = (date) => {
     if (!date) return "--:--:--";
@@ -57,7 +78,6 @@ const Footer = () => {
 
       <div className="max-w-6xl mx-auto border-t border-white/[0.08] pt-10 pb-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 md:gap-12">
-          {/* Navigation Section */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-y-4 gap-x-10">
             <span className="text-white/20 text-[9px] font-roboto tracking-[0.3em] uppercase shrink-0">
               Navigation
@@ -68,18 +88,17 @@ const Footer = () => {
                 { name: "Projects", href: "#projects" },
                 { name: "Testimonials", href: "#testimonials" },
               ].map((link) => (
-                <Link
+                <button
                   key={link.name}
-                  href={link.href}
-                  className="text-white/50 hover:text-white transition-colors text-[14px] font-roboto font-normal relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+                  onClick={() => handleScroll(link.href)}
+                  className="text-white/50 hover:text-white transition-colors text-[14px] font-roboto font-normal relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all after:duration-300 hover:after:w-full select-none"
                 >
                   {link.name}
-                </Link>
+                </button>
               ))}
             </div>
           </div>
 
-          {/* Status & Time Section */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-y-6 gap-x-12 md:justify-end">
             <div className="flex items-center gap-3 group">
               <span className="relative flex h-2 w-2">

@@ -65,20 +65,22 @@ const Navbar = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const handleScroll = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
+    const sectionId = id.startsWith('#') ? id.substring(1) : id;
+    
+    if (sectionId === 'home') {
+      lenis?.scrollTo(0, {
+        duration: 1.2,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+      });
+    } else {
+      lenis?.scrollTo(`#${sectionId}`, {
+        offset: -80,
+        duration: 1.2,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
       });
     }
   };
+
 
   const buttonRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
