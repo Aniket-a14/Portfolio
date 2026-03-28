@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLenis } from "lenis/react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
@@ -94,17 +95,19 @@ const Navbar = () => {
     setPosition({ x: 0, y: 0 });
   };
 
+  const lenis = useLenis();
+
   useEffect(() => {
     if (isOpen || isSheetOpen) {
-      document.body.style.overflow = "hidden";
+      lenis?.stop();
     } else {
-      document.body.style.overflow = "auto";
+      lenis?.start();
     }
 
     return () => {
-      document.body.style.overflow = "auto";
+      lenis?.start();
     };
-  }, [isOpen, isSheetOpen]);
+  }, [isOpen, isSheetOpen, lenis]);
 
   return (
     <nav className="absolute top-0 left-0 right-0 z-50 py-8 bg-transparent transition-all duration-300 max-w-full overflow-x-hidden">
@@ -200,6 +203,7 @@ const Navbar = () => {
             animate="animate"
             exit="exit"
             className="fixed inset-0 bg-white z-50 flex flex-col origin-top overflow-y-auto overflow-x-hidden"
+            data-lenis-prevent
           >
             <div className="flex-1 flex flex-col justify-center px-10 pt-20">
               <div className="flex flex-col gap-6">

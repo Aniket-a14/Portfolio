@@ -3,6 +3,7 @@
 import React, { useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { X, ArrowUpRight } from "lucide-react";
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -77,14 +78,20 @@ const ProfileSheet = ({ isOpen, onClose }) => {
     [onClose]
   );
 
+  const lenis = useLenis();
+
   useEffect(() => {
     if (isOpen) {
       document.addEventListener("keydown", handleEscape);
+      lenis?.stop();
+    } else {
+      lenis?.start();
     }
     return () => {
       document.removeEventListener("keydown", handleEscape);
+      lenis?.start();
     };
-  }, [isOpen, handleEscape]);
+  }, [isOpen, handleEscape, lenis]);
 
   const content = (
     <AnimatePresence mode="wait">
@@ -146,6 +153,7 @@ const ProfileSheet = ({ isOpen, onClose }) => {
               animate="animate"
               exit="exit"
               className="profile-sheet-light flex-1 overflow-y-auto px-10 sm:px-14 py-10"
+              data-lenis-prevent
             >
               <motion.div variants={fadeUp} className="mb-10">
                 <h3 className="font-roboto text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f] mb-3">
