@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/magicui/marquee";
 import { Roboto } from "next/font/google";
-import Footer from "./Footer";
+import Footer from "@/components/layout/Footer";
 
 
 const roboto = Roboto({

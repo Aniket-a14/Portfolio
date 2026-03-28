@@ -4,8 +4,8 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { ArrowUpRight } from "lucide-react";
-import { profileData } from "../lib/data";
-import ProfileSheet from "./ProfileSheet";
+import { profileData } from "@/lib/data";
+import ProfileSheet from "@/components/layout/ProfileSheet";
 
 const navLinks = [
   { name: "Projects", href: "projects" },

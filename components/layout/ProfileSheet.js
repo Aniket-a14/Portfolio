@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight } from "lucide-react";
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { profileData, codingProfiles } from "../lib/data";
+import { profileData, codingProfiles } from "@/lib/data";
 
 const overlayVariants = {
   hidden: { opacity: 0 },

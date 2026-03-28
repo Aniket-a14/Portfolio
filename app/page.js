@@ -10,16 +10,16 @@ import React, {
   useRef,
 } from "react";
 import Loader from "./Loader";
-import Navbar from "./Components/Navbar";
-import Body from "./Components/Body";
-import MiniLoader from "../components/ui/Miniloader";
-import Comments from "./Components/Comments";
+import Navbar from "@/components/layout/Navbar";
+import Hero from "@/components/sections/Hero";
+import MiniLoader from "@/components/ui/Miniloader";
+import Comments from "@/components/sections/Comments";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
-const About = lazy(() => import("./Components/About"));
-const Languages = lazy(() => import("./Components/Languages"));
-const Project = lazy(() => import("./Components/Project"));
+const About = lazy(() => import("@/components/sections/About"));
+const Languages = lazy(() => import("@/components/sections/Languages"));
+const Project = lazy(() => import("@/components/sections/Projects"));
 
 const App = () => {
   const [showContent, setShowContent] = useState(false);
@@ -73,7 +73,7 @@ const App = () => {
           <Navbar />
         </div>
         <div className="pt-[4rem] h-full overflow-hidden relative z-10">
-          <Body />
+          <Hero />
         </div>
       </motion.div>
 

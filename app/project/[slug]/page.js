@@ -1,5 +1,5 @@
-import { getMetadata } from "../../lib/seo";
-import { projects } from "../../lib/data";
+import { getMetadata } from "@/lib/seo";
+import { projects } from "@/lib/data";
 import ProjectClient from "./ProjectClient";
 
 export async function generateMetadata({ params }) {

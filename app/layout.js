@@ -25,7 +25,7 @@ const playfair = Playfair_Display({
   weight: ["400"],
 });
 
-import { getMetadata } from "./lib/seo";
+import { getMetadata } from "@/lib/seo";
 
 export const viewport = {
   width: "device-width",
@@ -34,7 +34,7 @@ export const viewport = {
 
 export const metadata = getMetadata();
 
-import CustomCursor from "./Components/CustomCursor";
+import CustomCursor from "@/components/layout/CustomCursor";
 
 export default function RootLayout({ children }) {
   return (

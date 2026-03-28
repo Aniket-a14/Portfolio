@@ -5,12 +5,12 @@ import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowLeft, Star, GitFork, Eye, ExternalLink, Github } from "lucide-react";
 import dynamic from "next/dynamic";
-import Navbar from "../../Components/Navbar";
-import CustomCursor from "../../Components/CustomCursor";
-import { SEO_CONFIG } from "../../lib/seo";
+import Navbar from "@/components/layout/Navbar";
+import CustomCursor from "@/components/layout/CustomCursor";
+import { SEO_CONFIG } from "@/lib/seo";
 
 const MermaidRenderer = dynamic(
-  () => import("../../Components/MermaidRenderer"),
+  () => import("@/components/ui/MermaidRenderer"),
   { ssr: false }
 );
 

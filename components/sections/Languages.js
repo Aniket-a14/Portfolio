@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useSpring, useMotionValue, useScroll } from "framer-motion";
-import { profileData } from "../lib/data";
+import { profileData } from "@/lib/data";
 
 const ICON_MAPPING = {
   "C": "c",

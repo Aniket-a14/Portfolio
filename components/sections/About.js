@@ -1,6 +1,6 @@
 import React from "react";
 import { TextReveal } from "@/components/magicui/text-reveal";
-import { aboutText } from "../lib/data";
+import { aboutText } from "@/lib/data";
 
 const About = () => {
   return (
