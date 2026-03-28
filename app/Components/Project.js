@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { projects as initialProjects } from "../lib/data";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 const ProjectRow = ({ project, index, isActive }) => {
   const slug = project.title.toLowerCase().replace(/\s+/g, "-");
@@ -19,12 +20,18 @@ const ProjectRow = ({ project, index, isActive }) => {
         <div className={`absolute inset-0 bg-white/[0.03] transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
 
         <div className="relative z-20 flex items-center justify-between py-8 md:py-10 lg:py-12 px-2">
-          <h3
-            className={`text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] xl:text-5xl transition-colors duration-500 ease-out leading-[1.1] tracking-tighter select-none uppercase ${isActive ? 'text-white' : 'text-white/[0.25]'}`}
-            style={{ fontFamily: '"Times New Roman", Times, serif' }}
-          >
-            {project.title}
-          </h3>
+          <div className="flex items-center gap-4">
+            <h3
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] xl:text-5xl transition-colors duration-500 ease-out leading-[1.1] tracking-tighter select-none uppercase ${isActive ? 'text-white' : 'text-white/[0.25]'}`}
+              style={{ fontFamily: '"Times New Roman", Times, serif' }}
+            >
+              {project.title}
+            </h3>
+            <ArrowUpRight 
+              className={`size-6 sm:size-8 md:size-10 lg:size-12 transition-all duration-500 ease-out ${isActive ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-4'}`} 
+              strokeWidth={1}
+            />
+          </div>
 
           <div className="hidden md:flex flex-col items-end gap-1.5 shrink-0 ml-8">
             <span className={`text-[13px] transition-colors duration-500 font-roboto tracking-[0.08em] ${isActive ? 'text-white/50' : 'text-white/25'}`}>
