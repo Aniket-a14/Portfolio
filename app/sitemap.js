@@ -1,4 +1,4 @@
-import { projects } from './lib/data';
+import { projects } from '@/lib/data';
 
 export default function sitemap() {
     const baseUrl = 'https://www.aniketdesign.in';

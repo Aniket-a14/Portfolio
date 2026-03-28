@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { codingProfiles } from '@/app/lib/data';
+import { codingProfiles } from '@/lib/data';
 
 export async function GET() {
   try {
