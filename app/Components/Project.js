@@ -191,6 +191,7 @@ const Project = () => {
                     src={project.image}
                     alt={project.title}
                     fill
+                    unoptimized
                     className="object-cover"
                     sizes="360px"
                     priority={activeProjectId === project.id}
