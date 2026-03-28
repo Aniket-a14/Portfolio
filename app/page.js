@@ -15,7 +15,7 @@ import Hero from "@/components/sections/Hero";
 import MiniLoader from "@/components/ui/Miniloader";
 import Comments from "@/components/sections/Comments";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, animate, AnimatePresence } from "framer-motion";
 
 const About = lazy(() => import("@/components/sections/About"));
 const Languages = lazy(() => import("@/components/sections/Languages"));
@@ -57,21 +57,51 @@ const App = () => {
   );
 
 
+  const entranceOpacity = useMotionValue(0);
+
+  useEffect(() => {
+    if (showContent) {
+      animate(entranceOpacity, 1, { 
+        duration: 1.8, 
+        ease: [0.22, 1, 0.36, 1] 
+      });
+    }
+  }, [showContent, entranceOpacity]);
+
+  const combinedHeroOpacity = useTransform(
+    [heroOpacity, entranceOpacity],
+    ([s, e]) => s * e
+  );
+
+  const combinedHeroScale = useTransform(
+    [heroScale, entranceOpacity],
+    ([s, e]) => s + (1 - e) * 0.05
+  );
+
   const handleLoaderComplete = useCallback(() => {
     startTransition(() => setShowContent(true));
   }, []);
 
   return (
-    <div className={`relative transition-colors duration-1000 min-h-[100dvh] w-full max-w-[100vw] ${showContent ? 'bg-black' : 'bg-[#e8e6e1]'}`}>
-      {!showContent && <Loader onComplete={handleLoaderComplete} aria-hidden="true" role="status" />}
+    <div className={`relative transition-colors duration-1000 min-h-[100dvh] w-full max-w-[100vw] ${showContent ? 'bg-black' : 'bg-black'}`}>
+      <AnimatePresence mode="wait">
+        {!showContent && (
+          <Loader 
+            key="loader"
+            onComplete={handleLoaderComplete} 
+            aria-hidden="true" 
+            role="status" 
+          />
+        )}
+      </AnimatePresence>
 
       <motion.div
         style={{ 
-          opacity: showContent ? heroOpacity : 0, 
-          scale: heroScale,
+          opacity: combinedHeroOpacity, 
+          scale: combinedHeroScale,
           color: textColor 
         }}
-        className={`fixed inset-0 z-0 transition-opacity duration-1000 ease-in-out`}
+        className={`fixed inset-0 z-0`}
       >
         <motion.div className="absolute inset-0 z-[-1] bg-black">
           <Image
@@ -85,12 +115,18 @@ const App = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent w-full md:w-[65%]" />
         </motion.div>
 
-        <div className="absolute top-0 left-0 w-full z-50">
+        <motion.div 
+          style={{ opacity: entranceOpacity }}
+          className="absolute top-0 left-0 w-full z-50"
+        >
           <Navbar />
-        </div>
-        <div className="pt-[4rem] h-full overflow-hidden relative z-10">
+        </motion.div>
+        <motion.div 
+          style={{ opacity: entranceOpacity }}
+          className="pt-[4rem] h-full overflow-hidden relative z-10"
+        >
           <Hero />
-        </div>
+        </motion.div>
       </motion.div>
 
       <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ease-in-out ${showContent ? "opacity-100" : "opacity-0"}`}>

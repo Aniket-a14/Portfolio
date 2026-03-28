@@ -30,6 +30,7 @@ import { getMetadata } from "@/lib/seo";
 export const viewport = {
   width: "device-width",
   initialScale: 1.0,
+  themeColor: "#000000",
 };
 
 export const metadata = getMetadata();
@@ -38,7 +39,10 @@ import CustomCursor from "@/components/layout/CustomCursor";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ backgroundColor: '#000' }}>
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: `html, body { background-color: #000 !important; }` }} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${playfair.variable} antialiased w-full bg-black`}
       >
