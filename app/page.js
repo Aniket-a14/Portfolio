@@ -38,6 +38,18 @@ const App = () => {
   }, []);
 
 
+  const heroOpacity = useTransform(
+    scrollY,
+    [0, vh || 1000],
+    [1, 0]
+  );
+
+  const heroScale = useTransform(
+    scrollY,
+    [0, vh || 1000],
+    [1, 1.1]
+  );
+
   const textColor = useTransform(
     scrollY,
     [vh * 0.2, vh * 0.5],
@@ -54,8 +66,12 @@ const App = () => {
       {!showContent && <Loader onComplete={handleLoaderComplete} aria-hidden="true" role="status" />}
 
       <motion.div
-        style={{ color: textColor }}
-        className={`fixed inset-0 z-0 transition-opacity duration-1000 ease-in-out ${showContent ? "opacity-100" : "opacity-0"}`}
+        style={{ 
+          opacity: showContent ? heroOpacity : 0, 
+          scale: heroScale,
+          color: textColor 
+        }}
+        className={`fixed inset-0 z-0 transition-opacity duration-1000 ease-in-out`}
       >
         <motion.div className="absolute inset-0 z-[-1] bg-black">
           <Image
@@ -78,7 +94,7 @@ const App = () => {
       </motion.div>
 
       <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ease-in-out ${showContent ? "opacity-100" : "opacity-0"}`}>
-        <div className="h-[100vh]" />
+        <div className="h-[100dvh]" />
 
         <div className="bg-black py-24 pointer-events-auto" role="region" id="about-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
@@ -98,7 +114,7 @@ const App = () => {
           </Suspense>
         </div>
 
-        <div className="bg-black min-h-fit pointer-events-auto relative">
+        <div className="bg-black pointer-events-auto relative">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Comments />
           </Suspense>
