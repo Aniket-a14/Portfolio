@@ -151,9 +151,11 @@ const Navbar = () => {
             href="https://www.github.com/Aniket-a14"
             target="_blank"
             className="text-white/80 hover:text-white transition-all text-sm font-medium tracking-wide flex items-center gap-2 group p-2 rounded-full drop-shadow-sm"
+            aria-label="Visit my GitHub profile"
           >
             <FaGithub className="size-5" />
           </Link>
+
         </div>
 
         <div className="md:hidden z-[60]">
@@ -227,7 +229,7 @@ const Navbar = () => {
                             setIsOpen(false);
                             setTimeout(() => handleScroll(link.href), 800);
                           }}
-                          className="text-[12vw] xs:text-5xl font-light text-black leading-none font-playfair hover:italic transition-all duration-300 block break-words text-left w-full"
+                          className="text-[12vw] xs:text-5xl font-light text-black leading-none font-playfair transition-all duration-300 block break-words text-left w-full"
                         >
                           {link.name}
                         </button>
@@ -253,9 +255,9 @@ const Navbar = () => {
                   </span>
                   <div className="flex gap-6">
                     {[
-                      { icon: FaLinkedin, href: profileData.contact.linkedin },
-                      { icon: FaGithub, href: profileData.contact.github },
-                      { icon: FaTwitter, href: profileData.contact.twitter },
+                      { icon: FaLinkedin, href: profileData.contact.linkedin, label: "LinkedIn" },
+                      { icon: FaGithub, href: profileData.contact.github, label: "GitHub" },
+                      { icon: FaTwitter, href: profileData.contact.twitter, label: "Twitter" },
                     ].map((social, idx) => (
                       <motion.a
                         key={idx}
@@ -264,11 +266,13 @@ const Navbar = () => {
                         rel="noopener noreferrer"
                         whileHover={{ y: -5, color: "#000" }}
                         className="text-black/50 text-2xl transition-colors"
+                        aria-label={`Visit my ${social.label} profile`}
                       >
                         <social.icon />
                       </motion.a>
                     ))}
                   </div>
+
                 </div>
 
                 <div className="flex flex-col gap-4">

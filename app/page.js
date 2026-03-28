@@ -61,9 +61,9 @@ const App = () => {
 
   useEffect(() => {
     if (showContent) {
-      animate(entranceOpacity, 1, { 
-        duration: 1.8, 
-        ease: [0.22, 1, 0.36, 1] 
+      animate(entranceOpacity, 1, {
+        duration: 1.8,
+        ease: [0.22, 1, 0.36, 1]
       });
     }
   }, [showContent, entranceOpacity]);
@@ -89,20 +89,20 @@ const App = () => {
 
       <AnimatePresence mode="wait">
         {!showContent && (
-          <Loader 
+          <Loader
             key="loader"
-            onComplete={handleLoaderComplete} 
-            aria-hidden="true" 
-            role="status" 
+            onComplete={handleLoaderComplete}
+            aria-hidden="true"
+            role="status"
           />
         )}
       </AnimatePresence>
 
       <motion.div
-        style={{ 
-          opacity: combinedHeroOpacity, 
+        style={{
+          opacity: combinedHeroOpacity,
           scale: combinedHeroScale,
-          color: textColor 
+          color: textColor
         }}
         className={`fixed inset-0 z-0`}
       >
@@ -118,13 +118,13 @@ const App = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent w-full md:w-[65%]" />
         </motion.div>
 
-        <motion.div 
+        <motion.div
           style={{ opacity: entranceOpacity }}
           className="absolute top-0 left-0 w-full z-50"
         >
           <Navbar />
         </motion.div>
-        <motion.div 
+        <motion.div
           style={{ opacity: entranceOpacity }}
           className="pt-[4rem] h-full overflow-hidden relative z-10"
         >

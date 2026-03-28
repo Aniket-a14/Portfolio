@@ -123,9 +123,14 @@ const Footer = () => {
       </div>
 
       <div className="w-full mt-6 md:mt-8 overflow-hidden relative border-t border-white/[0.03] pt-10 md:pt-12 pb-6 px-4">
-        <h1 className="font-playfair font-black text-[21vw] md:text-[22vw] leading-none text-white/[0.10] md:text-white/[0.12] text-center tracking-tighter sm:tracking-tightest select-none pointer-events-none uppercase">
+        <p 
+          aria-hidden="true"
+          role="presentation"
+          className="font-playfair font-black text-[21vw] md:text-[22vw] leading-none text-white/[0.10] md:text-white/[0.12] text-center tracking-tighter sm:tracking-tightest select-none pointer-events-none uppercase"
+        >
           WIZARD
-        </h1>
+        </p>
+
         
         <div className="mt-4 flex flex-row justify-between items-end gap-4 px-2">
           <div className="flex flex-col gap-0.5">
