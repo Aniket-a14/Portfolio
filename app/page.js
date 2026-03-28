@@ -86,19 +86,19 @@ const App = () => {
           </Suspense>
         </div>
 
-        <div className="bg-black pointer-events-auto" role="region" id="languages-section">
+        <div className="bg-black pointer-events-auto relative" role="region" id="languages-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Languages />
           </Suspense>
         </div>
 
-        <div className="bg-black transition-colors duration-1000 min-h-fit pointer-events-auto" role="region" aria-labelledby="project-section">
+        <div className="bg-black transition-colors duration-1000 min-h-fit pointer-events-auto relative" role="region" aria-labelledby="project-section">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Project />
           </Suspense>
         </div>
 
-        <div className="bg-black min-h-fit pointer-events-auto">
+        <div className="bg-black min-h-fit pointer-events-auto relative">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Comments />
           </Suspense>

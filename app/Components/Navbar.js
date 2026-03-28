@@ -8,8 +8,9 @@ import { profileData } from "../lib/data";
 import ProfileSheet from "./ProfileSheet";
 
 const navLinks = [
-  { name: "Projects", href: "#projects" },
-  { name: "Testimonials", href: "#testimonials" },
+  { name: "Projects", href: "projects" },
+  { name: "Testimonials", href: "testimonials" },
+  { name: "Contact", href: "contact" },
 ];
 
 const menuVariants = {
@@ -61,6 +62,22 @@ const linkVariants = {
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const buttonRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -116,14 +133,14 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
-            <Link
+            <button
               key={link.name}
-              href={link.href}
+              onClick={() => handleScroll(link.href)}
               className="text-white/80 hover:text-white transition-all text-sm font-medium tracking-wide flex items-center gap-2 group relative py-1 font-roboto drop-shadow-sm"
             >
               {link.name}
               <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full" />
-            </Link>
+            </button>
           ))}
           <Link
             href="https://www.github.com/Aniket-a14"
@@ -199,13 +216,15 @@ const Navbar = () => {
                         animate="enter"
                         exit="exit"
                       >
-                        <Link
-                          href={link.href}
-                          onClick={() => setIsOpen(false)}
-                          className="text-[12vw] xs:text-5xl font-light text-black leading-none font-playfair hover:italic transition-all duration-300 block break-words"
+                        <button
+                          onClick={() => {
+                            setIsOpen(false);
+                            setTimeout(() => handleScroll(link.href), 800);
+                          }}
+                          className="text-[12vw] xs:text-5xl font-light text-black leading-none font-playfair hover:italic transition-all duration-300 block break-words text-left w-full"
                         >
                           {link.name}
-                        </Link>
+                        </button>
                       </motion.div>
                     </div>
                   ))}

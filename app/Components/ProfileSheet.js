@@ -3,10 +3,10 @@
 import React, { useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, ArrowUpRight } from "lucide-react";
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { profileData } from "../lib/data";
+import { profileData, codingProfiles } from "../lib/data";
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -291,6 +291,44 @@ const ProfileSheet = ({ isOpen, onClose }) => {
                       />
                     </div>
                   </div>
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeUp} className="mb-10">
+                <h3 className="font-roboto text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f] mb-5">
+                  Coding Profiles
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-6 mt-2">
+                  {[
+                    { name: "LeetCode", slug: "leetcode", stats: "650+ Problems Solved", url: "https://leetcode.com/u/Wizard_a14/", index: "01" },
+                    { name: "GeeksforGeeks", slug: "geeksforgeeks", stats: "150+ Problems Solved", url: "https://www.geeksforgeeks.org/user/aniketsaha5353/", index: "02" },
+                    { name: "HackerRank", slug: "hackerrank", stats: "5 Star Proficiency", url: "https://www.hackerrank.com/aniket_saha", index: "03" },
+                  ].map((profile) => (
+                    <motion.a 
+                      key={profile.name} 
+                      href={profile.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="group flex flex-col gap-1.5 transition-all duration-300"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                          <img 
+                            src={`https://cdn.simpleicons.org/${profile.slug}`} 
+                            alt={profile.name} 
+                            className="w-4 h-4 transition-all duration-300 group-hover:scale-110"
+                          />
+                        </div>
+                        <h4 className="font-playfair text-[17px] md:text-[19px] text-[#1a1a1a] font-normal leading-none transition-all duration-300">
+                          {profile.name}
+                        </h4>
+                        <ArrowUpRight className="size-3 text-[#ccc] group-hover:text-black transition-all" strokeWidth={1.5} />
+                      </div>
+                      <span className="font-roboto text-[12px] font-light text-[#888] pl-8">
+                        {profile.stats}
+                      </span>
+                    </motion.a>
+                  ))}
                 </div>
               </motion.div>
 

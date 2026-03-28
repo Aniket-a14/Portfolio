@@ -27,12 +27,13 @@ const ICON_MAPPING = {
   "Framer Motion": "framer",
   "jQuery": "jquery",
   "React Router": "reactrouter",
-  "Redux": "redux"
+  "Redux": "redux",
+  "Java": "openjdk"
 };
 
 const SkillItem = ({ skill, index }) => {
   const slug = ICON_MAPPING[skill] || skill.toLowerCase().replace(".", "dot").replace(" ", "");
-  const needsFilter = ["nextdotjs", "express", "github", "git"].includes(slug);
+  const needsFilter = ["nextdotjs", "express", "github", "git", "openjdk"].includes(slug);
 
   return (
     <motion.div
@@ -40,27 +41,32 @@ const SkillItem = ({ skill, index }) => {
         hidden: { opacity: 0, y: 15 },
         visible: { opacity: 1, y: 0 }
       }}
-      className="group flex items-center gap-3 md:gap-4 py-2 md:py-3 px-3 md:px-4 cursor-pointer relative"
+      className="group flex items-center gap-3 md:gap-5 py-3 md:py-4 px-4 cursor-pointer relative transition-all duration-300 rounded-lg hover:bg-white/[0.03]"
     >
-      <div className="relative size-6 md:size-9 flex-shrink-0 transition-all duration-500 group-hover:scale-110">
+      <div className="relative size-7 md:size-9 flex-shrink-0 transition-all duration-700 group-hover:scale-110">
         <img
           src={`https://cdn.simpleicons.org/${slug}`}
           alt={skill}
-          className="size-full object-contain transition-all duration-500"
+          className="size-full object-contain transition-all duration-700"
           style={needsFilter ? { filter: 'brightness(0) invert(1)' } : {}}
           onError={(e) => {
             e.target.src = "https://cdn.simpleicons.org/blueprint/ffffff";
           }}
         />
-        <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-5 blur-xl transition-opacity rounded-full" />
+        {/* Refined Glow */}
+        <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-700 rounded-full" />
       </div>
 
       <div className="relative flex flex-col">
-        <span className="text-white/60 font-roboto text-[13px] sm:text-base lg:text-lg group-hover:text-white transition-colors duration-500 tracking-tight font-light">
+        <motion.span 
+          whileHover={{ x: 4 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="text-white/40 font-roboto text-[14px] sm:text-[15px] lg:text-[16px] group-hover:text-white transition-colors duration-500 tracking-wider font-light uppercase"
+        >
           {skill}
-        </span>
+        </motion.span>
         <div
-          className="absolute -bottom-1 left-0 h-[1px] bg-white/40 w-0 group-hover:w-full transition-all duration-500"
+          className="absolute -bottom-1 left-0 h-[1px] bg-white/20 w-0 group-hover:w-full transition-all duration-500"
           style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
         />
       </div>
@@ -74,16 +80,18 @@ const CategoryButton = ({ name, index, isActive, onClick }) => (
     className={`text-left transition-all duration-700 relative py-1 md:py-2 group ${isActive ? "text-white" : "text-white/20 hover:text-white/40"
       }`}
   >
-    <div className="flex items-baseline gap-3 md:gap-4">
-      <span className="font-roboto text-[9px] md:text-[10px] opacity-30 group-hover:opacity-60 transition-opacity tracking-[0.2em]">
-        0{index + 1}
-      </span>
-      <span
-        className={`text-xl sm:text-3xl md:text-4xl lg:text-5xl ${isActive ? "italic" : "font-normal"}`}
-        style={{ fontFamily: '"Times New Roman", Times, serif' }}
-      >
-        {name}
-      </span>
+    <div className="flex items-center gap-4 md:gap-6">
+      <div className={`h-[1px] bg-white transition-all duration-700 ${isActive ? "w-8 opacity-100" : "w-0 opacity-0 group-hover:w-4 group-hover:opacity-30"}`} />
+      <div className="flex items-baseline gap-3 md:gap-4 transition-transform duration-500 group-hover:translate-x-1">
+        <span className="font-roboto text-[9px] md:text-[10px] opacity-30 tracking-[0.3em]">
+          0{index + 1}
+        </span>
+        <span
+          className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-playfair ${isActive ? "italic font-black" : "font-normal"}`}
+        >
+          {name}
+        </span>
+      </div>
     </div>
   </button>
 );
@@ -107,8 +115,10 @@ const Languages = () => {
     const handleMouseMove = (e) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      mouseX.set(e.clientX - rect.left);
-      mouseY.set(e.clientY - rect.top);
+      if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+        mouseX.set(e.clientX - rect.left);
+        mouseY.set(e.clientY - rect.top);
+      }
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
@@ -118,16 +128,17 @@ const Languages = () => {
     { name: "Core", skills: profileData.skills.core },
     { name: "Frameworks", skills: profileData.skills.frameworks },
     { name: "AI & Data", skills: profileData.skills.aiAndData },
-    { name: "Database and Tools", skills: profileData.skills.databaseAndTools },
+    { name: "Stack Hub", skills: profileData.skills.databaseAndTools },
   ];
 
   useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
       if (latest < 0.25) setActiveCategory("Core");
       else if (latest < 0.5) setActiveCategory("Frameworks");
       else if (latest < 0.75) setActiveCategory("AI & Data");
-      else setActiveCategory("Database and Tools");
+      else setActiveCategory("Stack Hub");
     });
+    return () => unsubscribe();
   }, [scrollYProgress]);
 
   const activeSkills = categories.find(c => c.name === activeCategory)?.skills || [];
@@ -135,21 +146,22 @@ const Languages = () => {
   return (
     <div
       ref={scrollRef}
-      className="relative w-full h-[350vh] bg-black scroll-mt-20"
+      className="relative w-full h-[400vh] bg-black scroll-mt-20"
       id="languages"
     >
       <div className="sticky top-0 left-0 h-screen w-full flex flex-col items-center overflow-hidden z-20">
         <div
           ref={containerRef}
-          className="w-full max-w-6xl px-6 md:px-12 lg:px-0 relative pt-8 flex flex-col"
+          className="w-full max-w-7xl px-6 md:px-12 relative h-full flex flex-col pt-16 md:pt-20 pb-12"
         >
+          {/* Subtle Cursor Follow */}
           <motion.div
             style={{ left: springX, top: springY }}
-            className="absolute pointer-events-none w-[600px] h-[600px] bg-white/[0.01] rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 z-0"
+            className="absolute pointer-events-none w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 z-0 hidden md:block"
           />
 
-          <header className="border-t border-white/10 pt-10 mb-10 w-full">
-            <p className="text-white/40 font-roboto text-sm tracking-[0.2em] uppercase mb-4">
+          <header className="border-t border-white/10 pt-10 mb-8 w-full shrink-0 relative z-10">
+            <p className="text-white/40 font-roboto text-[10px] md:text-xs tracking-[0.4em] uppercase mb-4">
               Technical Stack
             </p>
             <h2

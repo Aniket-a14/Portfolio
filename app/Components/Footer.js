@@ -1,135 +1,133 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { socialLinks, codingProfiles as initialCodingProfiles } from "../lib/data";
 import { RiCopyrightLine } from "react-icons/ri";
-import { SpinningText } from "@/components/magicui/spinning-text";
 import { ArrowUpRight } from "lucide-react";
 
 const Footer = () => {
-  const [codingProfilesData, setCodingProfilesData] = useState(initialCodingProfiles);
+  const [time, setTime] = useState(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const fetchProfiles = async () => {
-      try {
-        const response = await fetch("/api/coding-profiles");
-        if (response.ok) {
-          const data = await response.json();
-          setCodingProfilesData(data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch coding profiles data:", error);
-      }
-    };
-
-    fetchProfiles();
+    setMounted(true);
+    setTime(new Date());
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
   }, []);
 
+  const formatIST = (date) => {
+    if (!date) return "--:--:--";
+    return date.toLocaleTimeString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    });
+  };
+
   return (
-    <footer className="text-white pt-12 pb-8 px-6 md:px-12 lg:px-20 bg-black">
-      <div className="max-w-6xl mx-auto mb-10">
-        <div className="border-t border-white/10 pt-10">
-          <p className="text-white/40 font-roboto text-sm tracking-[0.2em] uppercase mb-4">
+    <footer 
+      id="contact"
+      className="text-white pt-20 pb-12 px-6 md:px-12 lg:px-20 bg-black relative z-10 overflow-hidden border-t border-white/[0.03]"
+    >
+      <div className="max-w-6xl mx-auto mb-16 md:mb-20">
+        <div className="border-t border-white/10 pt-12 md:pt-16">
+          <p className="text-white/40 font-roboto text-[10px] md:text-sm tracking-[0.3em] uppercase mb-6 md:mb-8">
             Got a project in mind?
           </p>
           <a
             href="mailto:aniketsahaworkspace@gmail.com"
-            className="group flex items-center gap-4 w-fit"
+            className="group flex flex-wrap items-center gap-4 md:gap-6 w-fit"
           >
-            <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white/90 group-hover:text-white transition-colors duration-300">
+            <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white/90 group-hover:text-white transition-colors duration-300 leading-tight font-normal">
               Let&apos;s work together
             </h2>
             <ArrowUpRight
-              size={40}
-              className="text-white/30 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 shrink-0"
+              size={56}
+              className="text-white/30 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 shrink-0 hidden sm:block"
             />
           </a>
-          <p className="font-roboto text-white/30 text-base mt-4 font-light">
+          <p className="font-roboto text-white/30 text-base md:text-lg mt-6 md:mt-8 font-light italic">
             aniketsahaworkspace@gmail.com
           </p>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-6 pb-16 border-b border-white/[0.06]">
-        <div>
-          <span className="text-white/50 text-[11px] font-roboto font-medium tracking-[0.2em] uppercase block mb-5">
-            Navigation
-          </span>
-          <div className="flex flex-col gap-3">
-            {[
-              { name: "Home", href: "#home" },
-              { name: "Projects", href: "#projects" },
-              { name: "Testimonials", href: "#testimonials" },
-            ].map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-white/90 hover:text-white transition-colors text-[16px] font-roboto font-normal w-fit relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all after:duration-300 after:ease-in-out hover:after:w-full"
-              >
-                {link.name}
-              </Link>
-            ))}
+      <div className="max-w-6xl mx-auto border-t border-white/[0.08] pt-10 pb-10">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 md:gap-12">
+          {/* Navigation Section */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-y-4 gap-x-10">
+            <span className="text-white/20 text-[9px] font-roboto tracking-[0.3em] uppercase shrink-0">
+              Navigation
+            </span>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+              {[
+                { name: "Home", href: "#home" },
+                { name: "Projects", href: "#projects" },
+                { name: "Testimonials", href: "#testimonials" },
+              ].map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-white/50 hover:text-white transition-colors text-[14px] font-roboto font-normal relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Status & Time Section */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-y-6 gap-x-12 md:justify-end">
+            <div className="flex items-center gap-3 group">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span className="text-white/40 text-[13px] font-roboto font-normal tracking-wide group-hover:text-white transition-colors">
+                Available for New Projects
+              </span>
+            </div>
+
+            <div className="flex flex-col items-start md:items-end min-w-[124px]">
+              <span className="text-white/20 text-[9px] font-roboto tracking-[0.3em] uppercase mb-1">
+                Local Time (IST)
+              </span>
+              <span className="text-white/80 text-lg md:text-xl font-roboto font-light tabular-nums">
+                {mounted ? formatIST(time) : "--:--:--"}
+              </span>
+            </div>
           </div>
         </div>
-
-        <div>
-          <span className="text-white/60 text-[12px] font-roboto font-medium tracking-[0.2em] uppercase block mb-5">
-            Socials
-          </span>
-          <div className="flex flex-col gap-3">
-            {socialLinks.map((social) => (
-              <Link
-                key={social.name}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-2 text-white/90 hover:text-white transition-colors text-[16px] font-roboto font-normal w-fit"
-              >
-                <social.icon className={`text-sm opacity-50 group-hover:opacity-100 transition-all ${social.colorClass}`} />
-                <span className="relative w-fit after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all after:duration-300 after:ease-in-out group-hover:after:w-full">
-                  {social.name}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <span className="text-white/60 text-[12px] font-roboto font-medium tracking-[0.2em] uppercase block mb-5">
-            Profiles
-          </span>
-          <div className="flex flex-col gap-3">
-            {codingProfilesData.map((profile) => (
-              <Link
-                key={profile.name}
-                href={profile.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col text-[16px] font-roboto font-normal w-fit"
-              >
-                <span className="text-white/90 group-hover:text-white transition-colors relative w-fit after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all after:duration-300 after:ease-in-out group-hover:after:w-full">
-                  {profile.name}
-                </span>
-                <span className="text-white/50 text-[14px] mt-0.5 font-light">
-                  {profile.stats?.replace("- ", "")}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-        <div className="hidden md:flex items-center justify-end">
-          <SpinningText>adapt • innovate • change •</SpinningText>
-        </div>
-
       </div>
 
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center pt-6 pb-2 border-t border-white/[0.06] gap-4">
-        <span className="flex items-center gap-1.5 text-white/25 text-[13px] font-roboto">
-          <RiCopyrightLine className="text-sm" />
-          2025 Aniket Saha. All rights reserved.
-        </span>
-        <span className="text-white/15 text-[12px] font-roboto tracking-wider uppercase">
-          Portfolio v2
-        </span>
+      <div className="w-full mt-6 md:mt-8 overflow-hidden relative border-t border-white/[0.03] pt-10 md:pt-12 pb-6 px-4">
+        <h1 className="font-playfair font-black text-[21vw] md:text-[22vw] leading-none text-white/[0.10] md:text-white/[0.12] text-center tracking-tighter sm:tracking-tightest select-none pointer-events-none uppercase">
+          WIZARD
+        </h1>
+        
+        <div className="mt-4 flex flex-row justify-between items-end gap-4 px-2">
+          <div className="flex flex-col gap-0.5">
+            <span className="flex items-center gap-1.5 text-white/80 text-[9px] font-roboto tracking-widest uppercase truncate max-w-[140px]">
+              <RiCopyrightLine className="text-[10px]" />
+              2025 Aniket Saha
+            </span>
+            <span className="text-white/70 text-[8px] font-roboto tracking-widest uppercase">
+              Dev & Design
+            </span> 
+          </div>
+
+          <div className="flex flex-col items-end gap-0.5">
+            <span className="text-white/80 text-[9px] font-roboto tracking-[0.2em] uppercase">
+              Portfolio v2
+            </span>
+            <span className="text-white/70 text-[8px] font-roboto tracking-[0.2em] uppercase underline underline-offset-4 decoration-white/5">
+              Next.js
+            </span>
+          </div>
+        </div>
       </div>
     </footer>
   );
