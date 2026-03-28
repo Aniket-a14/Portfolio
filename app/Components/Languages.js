@@ -78,7 +78,10 @@ const CategoryButton = ({ name, index, isActive, onClick }) => (
       <span className="font-roboto text-[9px] md:text-[10px] opacity-30 group-hover:opacity-60 transition-opacity tracking-[0.2em]">
         0{index + 1}
       </span>
-      <span className={`font-playfair text-xl sm:text-3xl md:text-4xl lg:text-5xl ${isActive ? "italic" : "font-normal"}`}>
+      <span
+        className={`text-xl sm:text-3xl md:text-4xl lg:text-5xl ${isActive ? "italic" : "font-normal"}`}
+        style={{ fontFamily: '"Times New Roman", Times, serif' }}
+      >
         {name}
       </span>
     </div>
@@ -138,7 +141,7 @@ const Languages = () => {
       <div className="sticky top-0 left-0 h-screen w-full flex flex-col items-center overflow-hidden z-20">
         <div
           ref={containerRef}
-          className="w-full max-w-6xl px-6 md:px-12 lg:px-0 relative pt-8 flex flex-col" 
+          className="w-full max-w-6xl px-6 md:px-12 lg:px-0 relative pt-8 flex flex-col"
         >
           <motion.div
             style={{ left: springX, top: springY }}
@@ -149,7 +152,10 @@ const Languages = () => {
             <p className="text-white/40 font-roboto text-sm tracking-[0.2em] uppercase mb-4">
               Technical Stack
             </p>
-            <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white/90 leading-tight">
+            <h2
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white/90 leading-tight"
+              style={{ fontFamily: '"Times New Roman", Times, serif' }}
+            >
               Languages and tools proficiency
             </h2>
           </header>
@@ -175,26 +181,26 @@ const Languages = () => {
             </div>
 
             <div className="lg:col-span-8 pb-10 relative">
-                <div className="min-h-[280px] md:min-h-[320px]">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={activeCategory}
-                      initial="hidden"
-                      animate="visible"
-                      exit="hidden"
-                      variants={{
-                        visible: { transition: { staggerChildren: 0.05 } }
-                      }}
-                      className="grid grid-cols-2 sm:grid-cols-3 gap-x-2 gap-y-0.5"
-                    >
-                      {activeSkills.map((skill, i) => (
-                        <SkillItem key={skill} skill={skill} index={i} />
-                      ))}
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-                
-                <div className="absolute bottom-10 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent pointer-events-none z-10 opacity-60 md:hidden" />
+              <div className="min-h-[280px] md:min-h-[320px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeCategory}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    variants={{
+                      visible: { transition: { staggerChildren: 0.05 } }
+                    }}
+                    className="grid grid-cols-2 sm:grid-cols-3 gap-x-2 gap-y-0.5"
+                  >
+                    {activeSkills.map((skill, i) => (
+                      <SkillItem key={skill} skill={skill} index={i} />
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              <div className="absolute bottom-10 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent pointer-events-none z-10 opacity-60 md:hidden" />
 
               <div className="mt-4 md:mt-8 pt-4 md:pt-6 flex items-center justify-between ">
                 <div className="flex gap-1.5">
