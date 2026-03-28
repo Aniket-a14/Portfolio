@@ -6,8 +6,8 @@ const Loader = ({ onComplete }) => {
   const [greetingIndex, setGreetingIndex] = useState(0);
 
   const greetings = [
-    "Hi", "Hola",
-    "Bonjour", "Hallo", "Ciao", "Olá", "Привет","Zdravstvuyte", "Hej", "Sawasdee", "Merhaba", "Aloha", "Xin chào", "Salaam", "হ্যালো", "Namaste"
+    "• Hi", "• Hola",
+    "• Bonjour", "• Hallo", "• Ciao", "• Olá", "• Привет", "• Zdravstvuyte", "• Hej", "• Sawasdee", "• Merhaba", "• Aloha", "• Xin chào", "• Salaam", "• হ্যালো", "• Namaste"
   ];
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Loader = ({ onComplete }) => {
 
     const startGreetings = setTimeout(() => {
       let index = 0;
-      
+
       greetingInterval = setInterval(() => {
         index++;
         if (index < greetings.length) {
@@ -26,7 +26,7 @@ const Loader = ({ onComplete }) => {
           setTimeout(() => setMoveUp(true), 100);
           setTimeout(() => {
             onComplete?.();
-          }, 200); 
+          }, 200);
         }
       }, 150);
     }, delayBeforeGreetings);
@@ -39,31 +39,31 @@ const Loader = ({ onComplete }) => {
 
   return (
     <>
-      <motion.div 
+      <motion.div
         exit={{ opacity: 0, transition: { duration: 0.8 } }}
-        className="fixed inset-0 bg-black z-40" 
+        className="fixed inset-0 bg-black z-40"
       />
       <motion.div
         initial={{ y: 0, scale: 1 }}
-        exit={{ 
-          y: "-100%", 
+        exit={{
+          y: "-100%",
           scale: 1.05,
-          transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+          transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
         }}
         className="fixed top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center bg-black z-50 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
         role="status"
         aria-live="polite"
-        style={{ 
+        style={{
           backfaceVisibility: 'hidden',
           WebkitBackfaceVisibility: 'hidden',
           willChange: 'transform, opacity'
         }}
       >
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-white text-5xl font-bold mb-4"
+          className="text-white text-5xl mb-4 font-medium"
         >
           {greetings[greetingIndex]}
         </motion.div>
