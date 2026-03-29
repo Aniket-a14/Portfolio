@@ -4,31 +4,33 @@ import { motion, AnimatePresence, useSpring, useMotionValue, useScroll } from "f
 import { profileData } from "@/lib/data";
 
 const ICON_MAPPING = {
-  "C": "c",
-  "C++": "cplusplus",
+  "C/C++": "cplusplus",
   "Python": "python",
   "JavaScript": "javascript",
   "TypeScript": "typescript",
   "React": "react",
   "Next.js": "nextdotjs",
   "Node.js": "nodedotjs",
-  "FastAPI": "fastapi",
+  "Fast API": "fastapi",
   "Express.js": "express",
-  "Pandas": "pandas",
-  "NumPy": "numpy",
-  "Scikit-learn": "scikitlearn",
-  "TensorFlow": "tensorflow",
-  "PyTorch": "pytorch",
   "MongoDB": "mongodb",
-  "PostgreSQL": "postgresql",
+  "Postgres SQL": "postgresql",
+  "MySQL": "mysql",
   "Git": "git",
   "GitHub": "github",
-  "TailwindCSS": "tailwindcss",
-  "Framer Motion": "framer",
-  "jQuery": "jquery",
-  "React Router": "reactrouter",
-  "Redux": "redux",
-  "Java": "openjdk"
+  "Tailwind CSS": "tailwindcss",
+  "Terraform": "terraform",
+  "Vercel": "vercel",
+  "GitHub Actions": "githubactions",
+  "Postman": "postman",
+  "Linux": "linux",
+  "Docker": "docker",
+  "Data Structures & Algorithm": "blueprint",
+  "OOP": "blueprint",
+  "System Design": "blueprint",
+  "API Development": "blueprint",
+  "Computer Networks": "blueprint",
+  "CI/CD Pipelines": "blueprint"
 };
 
 const SkillItem = ({ skill, index }) => {
@@ -53,7 +55,6 @@ const SkillItem = ({ skill, index }) => {
             e.target.src = "https://cdn.simpleicons.org/blueprint/ffffff";
           }}
         />
-        {/* Refined Glow */}
         <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-700 rounded-full" />
       </div>
 
@@ -87,7 +88,7 @@ const CategoryButton = ({ name, index, isActive, onClick }) => (
           0{index + 1}
         </span>
         <span
-          className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-playfair ${isActive ? "italic font-black" : "font-normal"}`}
+          className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-playfair ${isActive ? "italic font-black" : "font-normal"}`}
         >
           {name}
         </span>
@@ -97,7 +98,7 @@ const CategoryButton = ({ name, index, isActive, onClick }) => (
 );
 
 const Languages = () => {
-  const [activeCategory, setActiveCategory] = useState("Core");
+  const [activeCategory, setActiveCategory] = useState("Languages");
   const containerRef = useRef(null);
   const scrollRef = useRef(null);
 
@@ -125,36 +126,36 @@ const Languages = () => {
   }, []);
 
   const categories = [
+    { name: "Languages", skills: profileData.skills.languages },
     { name: "Core", skills: profileData.skills.core },
-    { name: "Frameworks", skills: profileData.skills.frameworks },
-    { name: "AI & Data", skills: profileData.skills.aiAndData },
-    { name: "Stack Hub", skills: profileData.skills.databaseAndTools },
+    { name: "Development", skills: profileData.skills.development },
+    { name: "Databases", skills: profileData.skills.databases },
+    { name: "Cloud & DevOps", skills: profileData.skills.cloudAndDevops },
+    { name: "Tools", skills: profileData.skills.tools },
   ];
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (latest) => {
-      if (latest < 0.25) setActiveCategory("Core");
-      else if (latest < 0.5) setActiveCategory("Frameworks");
-      else if (latest < 0.75) setActiveCategory("AI & Data");
-      else setActiveCategory("Stack Hub");
+      const step = 1 / categories.length;
+      const index = Math.min(Math.floor(latest / step), categories.length - 1);
+      setActiveCategory(categories[index].name);
     });
     return () => unsubscribe();
-  }, [scrollYProgress]);
+  }, [scrollYProgress, categories]);
 
   const activeSkills = categories.find(c => c.name === activeCategory)?.skills || [];
 
   return (
     <div
       ref={scrollRef}
-      className="relative w-full h-[400vh] bg-black scroll-mt-20"
+      className="relative w-full h-[600vh] bg-black scroll-mt-20"
       id="languages"
     >
       <div className="sticky top-0 left-0 h-screen w-full flex flex-col items-center overflow-hidden z-20">
         <div
           ref={containerRef}
-          className="w-full max-w-7xl px-6 md:px-12 relative h-full flex flex-col pt-16 md:pt-20 pb-12"
+          className="w-full max-w-7xl px-6 md:px-12 relative h-full flex flex-col pt-10 md:pt-12 pb-16"
         >
-          {/* Subtle Cursor Follow */}
           <motion.div
             style={{ left: springX, top: springY }}
             className="absolute pointer-events-none w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 z-0 hidden md:block"
