@@ -11,18 +11,21 @@ const Loader = ({ onComplete }) => {
   ];
 
   useEffect(() => {
+    const hasVisited = sessionStorage.getItem("hasVisited");
     const delayBeforeGreetings = 500;
     let greetingInterval;
 
     const startGreetings = setTimeout(() => {
       let index = 0;
+      const maxGreetings = hasVisited ? 1 : greetings.length;
 
       greetingInterval = setInterval(() => {
         index++;
-        if (index < greetings.length) {
+        if (index < maxGreetings) {
           setGreetingIndex(index);
         } else {
           clearInterval(greetingInterval);
+          if (!hasVisited) sessionStorage.setItem("hasVisited", "true");
           setTimeout(() => setMoveUp(true), 100);
           setTimeout(() => {
             onComplete?.();

@@ -129,9 +129,10 @@ const Project = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full text-white mt-0 bg-transparent pt-16 pb-20 md:pb-32 px-6 md:px-12 lg:px-20 relative"
+      className="w-full text-white mt-0 bg-transparent relative"
       id="projects"
     >
+      <div className="pt-16 pb-20 md:pb-32 px-6 md:px-12 lg:px-20">
       <div className="max-w-6xl mx-auto">
         <div className="border-t border-white/10 pt-10 mb-16">
           <div className="flex items-baseline justify-between mb-4">
@@ -158,23 +159,31 @@ const Project = () => {
           />
         ))}
       </div>
+      </div>
 
       <motion.div
-        className="absolute top-0 left-0 pointer-events-none z-0 hidden md:block"
+        className="absolute top-0 left-0 pointer-events-none z-50 hidden md:block"
+        animate={{
+          opacity: activeProject ? 1 : 0,
+          scale: activeProject ? 1 : 0,
+        }}
         style={{
           x: imgX,
           y: imgY,
-          opacity: activeProject ? 1 : 0,
-          scale: activeProject ? 1 : 0.6,
         }}
         transition={{
-          opacity: { duration: 0.3 },
-          scale: { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
+          opacity: { duration: 0.4 },
+          scale: { 
+            type: "spring", 
+            stiffness: 150, 
+            damping: 15, 
+            mass: 1.2 
+          }
         }}
       >
         <div
           className="relative"
-          style={{ translateX: "-50%", translateY: "1.5rem" }}
+          style={{ transform: "translate(-50%, -50%)" }}
         >
           <div className="relative w-[300px] h-[190px] lg:w-[360px] lg:h-[225px] rounded-sm overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.5)] bg-black/5">
             <motion.div
@@ -220,8 +229,10 @@ const Project = () => {
               opacity: activeProject ? 1 : 0,
             }}
             transition={{
-              duration: 0.35,
-              ease: [0.22, 1, 0.36, 1],
+              type: "spring",
+              stiffness: 200,
+              damping: 25,
+              delay: 0.15,
             }}
           >
             <span className="text-white text-[12px] font-medium font-roboto tracking-wide">
