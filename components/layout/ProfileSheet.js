@@ -66,10 +66,12 @@ const fadeUp = {
 };
 
 const skillCategories = [
+  { key: "languages", label: "Languages" },
   { key: "core", label: "Core" },
-  { key: "frameworks", label: "Frameworks" },
-  { key: "aiAndData", label: "AI & Data" },
-  { key: "databaseAndTools", label: "Database and Tools" },
+  { key: "development", label: "Development" },
+  { key: "databases", label: "Databases" },
+  { key: "cloudAndDevops", label: "Cloud & DevOps" },
+  { key: "tools", label: "Tools" },
 ];
 
 const ProfileSheet = ({ isOpen, onClose }) => {
