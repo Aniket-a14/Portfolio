@@ -1,78 +1,73 @@
-# Personal Portfolio
+<h1 align="center">Aniket Saha &mdash; Portfolio</h1>
+<p align="center">
+  A premium, high-performance cinematic experience built with <b>Next.js 15</b> and <b>Framer Motion</b>.
+  <br />
+  Inspired by the craft of <i>Awwwards</i> and <i>Dribbble</i>.
+</p>
 
-This repository contains the source code for my personal portfolio website, built with Next.js and Tailwind CSS. The website showcases my skills, projects, and experiences, providing visitors with an overview of my professional background.
-
-## Features
-
-- **SEO Best Practices:** Ensure that the website follows SEO guidelines for better visibility.
-- **Accessibility Considerations:** Implement ARIA roles and attributes to enhance accessibility for all users.
-
-
-- **Responsive Design:** Ensures optimal viewing across various devices, including desktops, tablets, and mobile phones.
-
-- **Modern UI:** Incorporates a clean and contemporary user interface to enhance user experience.
-
-- **Project Showcase:** Highlights selected projects with descriptions, technologies used, and links to live demos or repositories.
-
-- **Contact Form:** Allows visitors to get in touch directly through the website.
-
-## Technologies Used
-
-- **Next.js:** A React-based framework for server-side rendering and generating static websites.
-
-- **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
-
-- **JavaScript:** The primary programming language used for functionality.
-
-## Project Structure
-
-- **`app/`**: Contains the Next.js App Router pages and layouts.
-- **`components/`**: Reusable UI components used throughout the application.
-- **`public/`**: Static assets like images and fonts.
-- **`lib/`**: Utility functions and shared logic.
-
-## Getting Started
-
-To run this project locally, follow these steps:
-
-1. **Clone the Repository:**
-
-   ```bash
-   git clone https://github.com/Aniket-a14/Portfolio.git
-   ```
-
-2. **Navigate to the Project Directory:**
-
-   ```bash
-   cd Portfolio
-   ```
-
-3. **Install Dependencies:**
-
-   ```bash
-   npm install
-   ```
-
-4. **Start the Development Server:**
-
-   ```bash
-   npm run dev
-   ```
-
-   After running the development server, open [http://localhost:3000](http://localhost:3000) in your browser to view the portfolio.
-
-## Deployment
-
-The portfolio is deployed and accessible online at [www.aniketdesign.in](https://www.aniketdesign.in/). The deployment is managed through Vercel, offering seamless integration with Next.js applications.
-
-## Contributing
-
-Contributions are welcome! If you have suggestions or improvements, please fork the repository and submit a pull request. For major changes, it's advisable to open an issue first to discuss the proposed modifications.
-
-## License
-
-This project is licensed under the MIT License. You are free to use, modify, and distribute this software in accordance with the license terms.
+<p align="center">
+  <a href="https://www.aniketdesign.in/">Live Experience</a> &bull;
+  <a href="#the-philosophy">Design Philosophy</a> &bull;
+  <a href="#the-craft">The Craft</a> &bull;
+  <a href="#tech-stack">Technical Layer</a>
+</p>
 
 ---
 
-Thank you for visiting my portfolio repository. Feel free to explore the code, and don't hesitate to reach out if you have any questions or feedback.
+## The Philosophy
+
+This site takes me back to my roots. Inspired by high-end design showcases, I wanted to move away from rigid, generic templates and reimagine how we tell our own stories through digital interfaces. It’s a study in **Brutalism-meets-Minimalism**, where every pixel and every transition is designed to create a meaningful, professional narrative.
+
+## Visual Language
+
+The visual identity is defined by a careful balance of classical elegance and modern technical depth.
+
+| Element | Specification |
+| :--- | :--- |
+| **Typography** | *Playfair Display* for titles &bull; *Roboto* for content |
+| **Color Space** | `#E8E6E1` (Paper) $\rightarrow$ `#000000` (Obsidian) |
+| **Grid** | Custom 12-column liquid grid with 7xl max-width |
+| **Aesthetics** | Glassmorphism &bull; High-density typography &bull; Minimalist contrast |
+
+## The Craft
+
+### 🎞️ Cinematic Motion
+Built on the **Lenis** smooth-scrolling engine, the portfolio features a scrollex-based architecture. Using **Framer Motion**, I’ve implemented:
+- **Sticky Scroll-telling:** Technical proficiency is revealed module-by-module, giving each language its own stage.
+- **Micro-interactions:** Subtle cursor follows and hover-triggered glows that make the interface feel alive.
+- **Reveal Sequences:** Custom-orchestrated entrance animations for a premium first-impression.
+
+### 🧩 Interaction Patterns
+- **The Profile Sheet:** A portal-based, sliding drawer that isolates content via React Portals to maintain background blur integrity.
+- **Dynamic Heatmaps:** Real-time GitHub contribution visualizers embedded within the profile architecture.
+- **Text Reveal Logic:** Precise scroll-linked text opacity transitions for narrative engagement.
+
+---
+
+## Technical Layer
+
+### Core
+- **Framework:** Next.js 15 (App Router)
+- **Runtime:** React 19
+- **Motion:** Framer Motion, GSAP
+- **Interactions:** Lenis, MagicUI
+
+### Project Structure
+- `app/` &mdash; The technical backbone and routing.
+- `components/` &mdash; Atomic design system modules.
+- `lib/` &mdash; Unified data and SEO source of truth.
+
+## Getting Started
+
+```bash
+git clone https://github.com/Aniket-a14/Portfolio.git
+npm install
+npm run dev
+```
+
+---
+
+<p align="center">
+  Built by <a href="https://github.com/Aniket-a14">Aniket Saha</a><br />
+  <i>Designing systems, not just applications.</i>
+</p>
