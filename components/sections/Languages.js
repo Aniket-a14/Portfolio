@@ -35,7 +35,7 @@ const ICON_MAPPING = {
 
 const SkillItem = ({ skill, index }) => {
   const slug = ICON_MAPPING[skill] || skill.toLowerCase().replace(".", "dot").replace(" ", "");
-  const needsFilter = ["nextdotjs", "express", "github", "git", "openjdk"].includes(slug);
+  const needsFilter = ["nextdotjs", "express", "github", "git", "openjdk", "vercel"].includes(slug);
 
   return (
     <motion.div
