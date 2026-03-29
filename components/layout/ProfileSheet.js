@@ -5,7 +5,8 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLenis } from "lenis/react";
 import { X, ArrowUpRight } from "lucide-react";
-import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { profileData, codingProfiles } from "@/lib/data";
 
@@ -380,7 +381,7 @@ const ProfileSheet = ({ isOpen, onClose }) => {
                   {[
                     { icon: FaLinkedin, label: "LinkedIn", href: profileData.contact.linkedin },
                     { icon: FaGithub, label: "GitHub", href: profileData.contact.github },
-                    { icon: FaTwitter, label: "Twitter", href: profileData.contact.twitter },
+                    { icon: FaXTwitter, label: "X (Formerly Twitter)", href: profileData.contact.x },
                   ].map((social) => (
                     <a
                       key={social.label}

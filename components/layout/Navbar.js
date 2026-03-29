@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLenis } from "lenis/react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { ArrowUpRight } from "lucide-react";
 import { profileData } from "@/lib/data";
 import ProfileSheet from "@/components/layout/ProfileSheet";
@@ -257,7 +258,7 @@ const Navbar = () => {
                     {[
                       { icon: FaLinkedin, href: profileData.contact.linkedin, label: "LinkedIn" },
                       { icon: FaGithub, href: profileData.contact.github, label: "GitHub" },
-                      { icon: FaTwitter, href: profileData.contact.twitter, label: "Twitter" },
+                      { icon: FaXTwitter, href: profileData.contact.x, label: "X (Formerly Twitter)" },
                     ].map((social, idx) => (
                       <motion.a
                         key={idx}
