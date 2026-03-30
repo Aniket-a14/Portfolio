@@ -8,6 +8,8 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
 import CustomCursor from "@/components/layout/CustomCursor";
 import { SEO_CONFIG } from "@/lib/seo";
+import { useTransitionContext } from "@/components/providers/TransitionProvider";
+import { fetchProjectData } from "@/lib/projectCache";
 
 const MermaidRenderer = dynamic(
   () => import("@/components/ui/MermaidRenderer"),
@@ -262,6 +264,7 @@ const MarkdownBody = dynamic(
 
 const ProjectClient = ({ slug }) => {
   const router = useRouter();
+  const { navigate } = useTransitionContext();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -269,9 +272,7 @@ const ProjectClient = ({ slug }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`/api/projects/${slug}/readme`);
-        if (!res.ok) throw new Error("Project not found");
-        const json = await res.json();
+        const json = await fetchProjectData(slug);
         setData(json);
       } catch (err) {
         setError(err.message);
@@ -294,14 +295,7 @@ const ProjectClient = ({ slug }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-8 h-8 border-2 border-white/20 border-t-white/80 rounded-full animate-spin" />
-          <span className="text-white/40 font-roboto text-sm tracking-widest uppercase">
-            Loading project...
-          </span>
-        </div>
-      </div>
+      <div className="min-h-screen bg-black" />
     );
   }
 
@@ -310,10 +304,10 @@ const ProjectClient = ({ slug }) => {
       <div className="min-h-screen bg-black flex flex-col items-center justify-center gap-6">
         <p className="text-white/50 font-roboto text-lg">Project not found</p>
         <button
-          onClick={() => router.push("/#projects")}
+          onClick={() => navigate("/#projects", "• Portfolio", "up")}
           className="text-white/40 hover:text-white/70 transition-colors font-roboto text-sm flex items-center gap-2"
         >
-          <ArrowLeft size={16} /> Back to home
+          <ArrowLeft size={16} /> Back to projects
         </button>
       </div>
     );
@@ -362,7 +356,7 @@ const ProjectClient = ({ slug }) => {
           variants={fadeIn}
           initial="hidden"
           animate="visible"
-          onClick={() => router.push("/#projects")}
+          onClick={() => navigate("/#projects", "• Portfolio", "up")}
           className="flex items-center gap-2 text-white/40 hover:text-white/70 transition-colors font-roboto text-sm mb-10 group"
         >
           <ArrowLeft

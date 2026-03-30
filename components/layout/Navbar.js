@@ -8,6 +8,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { ArrowUpRight } from "lucide-react";
 import { profileData } from "@/lib/data";
 import ProfileSheet from "@/components/layout/ProfileSheet";
+import { useTransitionContext } from "@/components/providers/TransitionProvider";
 
 const navLinks = [
   { name: "Projects", href: "projects" },
@@ -62,6 +63,7 @@ const linkVariants = {
 };
 
 const Navbar = () => {
+  const { navigate } = useTransitionContext();
   const [isOpen, setIsOpen] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
@@ -141,7 +143,13 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <button
               key={link.name}
-              onClick={() => handleScroll(link.href)}
+              onClick={() => {
+                if (link.name === "Contact") {
+                  navigate('/contact', '• Contact', 'down');
+                } else {
+                  handleScroll(link.href);
+                }
+              }}
               className="text-white/80 hover:text-white transition-all text-sm font-medium tracking-wide flex items-center gap-2 group relative py-1 font-roboto drop-shadow-sm"
             >
               {link.name}
@@ -228,7 +236,11 @@ const Navbar = () => {
                         <button
                           onClick={() => {
                             setIsOpen(false);
-                            setTimeout(() => handleScroll(link.href), 800);
+                            if (link.name === "Contact") {
+                              setTimeout(() => navigate('/contact', '• Contact', 'down'), 300);
+                            } else {
+                              setTimeout(() => handleScroll(link.href), 800);
+                            }
                           }}
                           className="text-[12vw] xs:text-5xl font-light text-black leading-none font-playfair transition-all duration-300 block break-words text-left w-full"
                         >

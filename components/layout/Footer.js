@@ -3,8 +3,10 @@ import Link from "next/link";
 import { RiCopyrightLine } from "react-icons/ri";
 import { ArrowUpRight } from "lucide-react";
 import { useLenis } from "lenis/react";
+import { useTransitionContext } from "@/components/providers/TransitionProvider";
 
 const Footer = () => {
+  const { navigate } = useTransitionContext();
   const [time, setTime] = useState(null);
   const [mounted, setMounted] = useState(false);
 
@@ -21,7 +23,7 @@ const Footer = () => {
 
   const handleScroll = (id) => {
     const sectionId = id.startsWith('#') ? id.substring(1) : id;
-    
+
     if (sectionId === 'home') {
       lenis?.scrollTo(0, {
         duration: 1.2,
@@ -49,7 +51,7 @@ const Footer = () => {
   };
 
   return (
-    <footer 
+    <footer
       id="contact"
       className="text-white pt-20 pb-12 px-6 md:px-12 lg:px-20 bg-black relative z-10 overflow-hidden border-t border-white/[0.03]"
     >
@@ -58,18 +60,22 @@ const Footer = () => {
           <p className="text-white/40 font-roboto text-[10px] md:text-sm tracking-[0.3em] uppercase mb-6 md:mb-8">
             Got a project in mind?
           </p>
-          <a
-            href="mailto:aniketsahaworkspace@gmail.com"
-            className="group flex flex-wrap items-center gap-4 md:gap-6 w-fit"
+          <button
+            onClick={() => navigate('/contact', '• Contact', 'down')}
+            className="group flex flex-wrap items-center gap-4 md:gap-[1.5vw] w-fit sm:cursor-pointer text-left focus:outline-none"
           >
             <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white/90 group-hover:text-white transition-colors duration-300 leading-tight font-normal">
               Let&apos;s work together
             </h2>
-            <ArrowUpRight
-              size={56}
-              className="text-white/30 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 shrink-0 hidden sm:block"
-            />
-          </a>
+            <div className="w-16 h-16 md:w-[5.5rem] md:h-[5.5rem] rounded-full bg-white text-black flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-[1.05] group-active:scale-95 relative overflow-hidden hidden sm:flex">
+              <span className="absolute inset-0 border border-black/10 rounded-full animate-ping opacity-0 group-hover:opacity-20 transition-opacity"></span>
+              <ArrowUpRight
+                size={38}
+                strokeWidth={1.5}
+                className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+              />
+            </div>
+          </button>
           <p className="font-roboto text-white/30 text-base md:text-lg mt-6 md:mt-8 font-light italic">
             aniketsahaworkspace@gmail.com
           </p>
@@ -123,7 +129,7 @@ const Footer = () => {
       </div>
 
       <div className="w-full mt-6 md:mt-8 overflow-hidden relative border-t border-white/[0.03] pt-10 md:pt-12 pb-6 px-4">
-        <p 
+        <p
           aria-hidden="true"
           role="presentation"
           className="font-playfair font-black text-[21vw] md:text-[22vw] leading-none text-white/[0.10] md:text-white/[0.12] text-center tracking-tighter sm:tracking-tightest select-none pointer-events-none uppercase"
@@ -131,7 +137,7 @@ const Footer = () => {
           WIZARD
         </p>
 
-        
+
         <div className="mt-4 flex flex-row justify-between items-end gap-4 px-2">
           <div className="flex flex-col gap-0.5">
             <span className="flex items-center gap-1.5 text-white/80 text-[9px] font-roboto tracking-widest uppercase truncate max-w-[140px]">
@@ -140,7 +146,7 @@ const Footer = () => {
             </span>
             <span className="text-white/70 text-[8px] font-roboto tracking-widest uppercase">
               Dev & Design
-            </span> 
+            </span>
           </div>
 
           <div className="flex flex-col items-end gap-0.5">

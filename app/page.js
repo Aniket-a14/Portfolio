@@ -6,10 +6,9 @@ import React, {
   useMemo,
   lazy,
   Suspense,
-  useTransition,
   useRef,
 } from "react";
-import Loader from "./Loader";
+import { useTransitionContext } from "@/components/providers/TransitionProvider";
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
 import MiniLoader from "@/components/ui/Miniloader";
@@ -22,8 +21,7 @@ const Languages = lazy(() => import("@/components/sections/Languages"));
 const Project = lazy(() => import("@/components/sections/Projects"));
 
 const App = () => {
-  const [showContent, setShowContent] = useState(false);
-  const [isPending, startTransition] = useTransition();
+  const { isInitialLoadComplete } = useTransitionContext();
   const timeoutRef = useRef(null);
 
   const { scrollY } = useScroll();
@@ -60,13 +58,13 @@ const App = () => {
   const entranceOpacity = useMotionValue(0);
 
   useEffect(() => {
-    if (showContent) {
+    if (isInitialLoadComplete) {
       animate(entranceOpacity, 1, {
         duration: 1.8,
         ease: [0.22, 1, 0.36, 1]
       });
     }
-  }, [showContent, entranceOpacity]);
+  }, [isInitialLoadComplete, entranceOpacity]);
 
   const combinedHeroOpacity = useTransform(
     [heroOpacity, entranceOpacity],
@@ -78,25 +76,8 @@ const App = () => {
     ([s, e]) => s + (1 - e) * 0.05
   );
 
-  const handleLoaderComplete = useCallback(() => {
-    startTransition(() => {
-      setShowContent(true);
-    });
-  }, []);
-
   return (
     <div className="relative min-h-screen w-full bg-black">
-
-      <AnimatePresence mode="wait">
-        {!showContent && (
-          <Loader
-            key="loader"
-            onComplete={handleLoaderComplete}
-            aria-hidden="true"
-            role="status"
-          />
-        )}
-      </AnimatePresence>
 
       <motion.div
         style={{
@@ -132,7 +113,7 @@ const App = () => {
         </motion.div>
       </motion.div>
 
-      <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ease-in-out ${showContent ? "opacity-100" : "opacity-0"}`}>
+      <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ease-in-out ${isInitialLoadComplete ? "opacity-100" : "opacity-0"}`}>
         <div className="h-[100dvh]" />
 
         <div className="bg-black pb-24 pointer-events-auto" role="region" id="about">

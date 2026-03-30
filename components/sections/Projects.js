@@ -4,15 +4,21 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { projects as initialProjects } from "@/lib/data";
+import { preloadProjects } from "@/lib/projectCache";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useTransitionContext } from "@/components/providers/TransitionProvider";
 
 const ProjectRow = ({ project, index, isActive }) => {
+  const { navigate } = useTransitionContext();
   const slug = project.title.toLowerCase().replace(/\s+/g, "-");
   const category = project.languages.slice(0, 2).join(" & ");
 
   return (
-    <Link href={`/project/${slug}`} className="block relative z-10">
+    <button 
+      onClick={() => navigate(`/project/${slug}`, `• ${project.title}`, 'down', 'project')} 
+      className="block relative z-10 w-full text-left focus:outline-none"
+    >
       <div
         className={`group relative ${index > 0 ? 'border-t border-white/[0.1]' : ''}`}
         data-project-id={project.id}
@@ -55,7 +61,7 @@ const ProjectRow = ({ project, index, isActive }) => {
           </span>
         </div>
       </div>
-    </Link>
+    </button>
   );
 };
 
@@ -122,6 +128,15 @@ const Project = () => {
     };
     fetchProjects();
   }, []);
+
+  useEffect(() => {
+    if (projectsData && projectsData.length > 0) {
+      const timeoutId = setTimeout(() => {
+        preloadProjects(projectsData);
+      }, 2500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [projectsData]);
 
   const activeProject = projectsData.find(p => p.id === activeProjectId);
   const activeIndex = projectsData.findIndex(p => p.id === activeProjectId);

@@ -37,6 +37,7 @@ export const metadata = getMetadata();
 
 import CustomCursor from "@/components/layout/CustomCursor";
 import LenisProvider from "@/components/providers/LenisProvider";
+import { TransitionProvider } from "@/components/providers/TransitionProvider";
 
 export default function RootLayout({ children }) {
   return (
@@ -47,45 +48,47 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${playfair.variable} antialiased w-full bg-black`}
       >
-        <LenisProvider>
-          <CustomCursor />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Person",
-                name: "Aniket Saha",
-                url: "https://www.aniketdesign.in/",
-                jobTitle: "Full Stack Developer & Coding Enthusiast",
-                sameAs: [
-                  "https://github.com/Aniket-a14",
-                  "https://www.linkedin.com/in/aniketsaha2005/",
-                  "https://x.com/AniketSaha41043",
-                ],
-              }),
-            }}
-          />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                name: "Aniket Saha Portfolio",
-                url: "https://www.aniketdesign.in/",
-                potentialAction: {
-                  "@type": "SearchAction",
-                  target: "https://www.aniketdesign.in/#projects",
-                  "query-input": "required name=search_term_string",
-                },
-              }),
-            }}
-          />
-          {children}
-          <Analytics />
-          <SpeedInsights />
-        </LenisProvider>
+        <TransitionProvider>
+          <LenisProvider>
+            <CustomCursor />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "Person",
+                  name: "Aniket Saha",
+                  url: "https://www.aniketdesign.in/",
+                  jobTitle: "Full Stack Developer & Coding Enthusiast",
+                  sameAs: [
+                    "https://github.com/Aniket-a14",
+                    "https://www.linkedin.com/in/aniketsaha2005/",
+                    "https://x.com/AniketSaha41043",
+                  ],
+                }),
+              }}
+            />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "WebSite",
+                  name: "Aniket Saha Portfolio",
+                  url: "https://www.aniketdesign.in/",
+                  potentialAction: {
+                    "@type": "SearchAction",
+                    target: "https://www.aniketdesign.in/#projects",
+                    "query-input": "required name=search_term_string",
+                  },
+                }),
+              }}
+            />
+            {children}
+            <Analytics />
+            <SpeedInsights />
+          </LenisProvider>
+        </TransitionProvider>
       </body>
     </html>
   );
