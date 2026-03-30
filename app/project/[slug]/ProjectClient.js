@@ -10,6 +10,7 @@ import CustomCursor from "@/components/CustomCursor";
 import { SEO_CONFIG } from "@/lib/seo";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 import { fetchProjectData } from "@/lib/projectCache";
+import ProjectCarousel from "@/components/ProjectCarousel";
 
 const MermaidRenderer = dynamic(
   () => import("@/components/ui/MermaidRenderer"),
@@ -475,6 +476,8 @@ const ProjectClient = ({ slug }) => {
             <MarkdownBody content={processedReadme} />
           </motion.div>
         )}
+
+        <ProjectCarousel currentSlug={slug} />
       </div>
     </div>
   );
