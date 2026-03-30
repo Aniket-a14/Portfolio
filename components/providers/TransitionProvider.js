@@ -15,6 +15,15 @@ export const TransitionProvider = ({ children }) => {
   const [transitionType, setTransitionType] = useState("default");
   const [isInitialLoadComplete, setIsInitialLoadComplete] = useState(false);
 
+  React.useEffect(() => {
+    if (isTransitioning) {
+      const timer = setTimeout(() => {
+        setIsTransitioning(false);
+      }, 600); 
+      return () => clearTimeout(timer);
+    }
+  }, [pathname]); 
+
   const navigate = (href, text, dir, type = "default") => {
     const isInternal = !href.startsWith('/') || href.startsWith('#');
 
@@ -29,13 +38,10 @@ export const TransitionProvider = ({ children }) => {
       if (isInternal) {
         const target = href.replace('#', '');
         window.dispatchEvent(new CustomEvent('nav-scroll', { detail: { target } }));
+        setTimeout(() => setIsTransitioning(false), 500);
       } else {
         router.push(href);
       }
-      
-      setTimeout(() => {
-         setIsTransitioning(false);
-      }, 500); 
     }, 800);
   };
 

@@ -155,10 +155,7 @@ export default function ContactHub() {
                            </div>
                         </div>
 
-                        {/* Project Conditional Fields */}
-                        <div className={`flex flex-col gap-12 lg:gap-16 overflow-hidden transition-all duration-[1000ms] cubic-bezier(0.16, 1, 0.3, 1) ${formType === 'project' ? 'max-h-[800px] opacity-100 mt-2' : 'max-h-0 opacity-0 pointer-events-none !mt-0 !mb-0'}`}>
-                           
-                           {/* Custom Budget Selector */}
+                        <div className={`flex flex-col gap-12 lg:gap-16 overflow-hidden transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) ${formType === 'project' ? 'max-h-[800px] opacity-100 mt-2' : 'max-h-0 opacity-0 pointer-events-none !mt-0 !mb-0'}`}>
                            <div>
                               <label className="block text-white/30 text-[10px] md:text-xs font-roboto uppercase tracking-[0.3em] mb-6">
                                 What is your estimated budget?
@@ -178,7 +175,6 @@ export default function ContactHub() {
                               </div>
                            </div>
 
-                           {/* Custom Timeline Selector */}
                            <div>
                               <label className="block text-white/30 text-[10px] md:text-xs font-roboto uppercase tracking-[0.3em] mb-6">
                                 Expected formulation timeline?
@@ -199,7 +195,6 @@ export default function ContactHub() {
                            </div>
                         </div>
 
-                        {/* Message Box */}
                         <div className="relative group flex flex-col-reverse mt-2">
                            <textarea 
                              name="message" id="message" required rows="3"

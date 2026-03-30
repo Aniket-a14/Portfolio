@@ -18,8 +18,12 @@ import Image from "next/image";
 import { motion, useScroll, useTransform, useMotionValue, animate, AnimatePresence } from "framer-motion";
 
 const About = lazy(() => import("@/components/About"));
-const Languages = lazy(() => import("@/components/Languages"));
 const Project = lazy(() => import("@/components/Projects"));
+const initialProjects = [
+  { title: "SRA" },
+  { title: "Wizard-w1" },
+  { title: "AI Friend" }
+];
 
 const App = () => {
   const lenis = useLenis();
@@ -64,6 +68,12 @@ const App = () => {
       animate(entranceOpacity, 1, {
         duration: 1.8,
         ease: [0.22, 1, 0.36, 1]
+      });
+
+      // BACKEND WARMING: Proactively trigger Next.js to compile project pages
+      initialProjects.forEach(p => {
+        const slug = p.title.toLowerCase().replace(/ /g, "-");
+        fetch(`/project/${slug}`, { priority: 'low' }).catch(() => {});
       });
     }
   }, [isInitialLoadComplete, entranceOpacity]);
@@ -142,12 +152,6 @@ const App = () => {
         <div className="bg-black pb-24 pointer-events-auto" role="region" id="about">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <About />
-          </Suspense>
-        </div>
-
-        <div className="bg-black pointer-events-auto relative" role="region" id="languages-section">
-          <Suspense fallback={<MiniLoader aria-hidden="true" />}>
-            <Languages />
           </Suspense>
         </div>
 
