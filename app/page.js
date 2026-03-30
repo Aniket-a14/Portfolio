@@ -135,7 +135,7 @@ const App = () => {
       <div className={`relative z-10 w-full pointer-events-none transition-opacity duration-1000 ease-in-out ${showContent ? "opacity-100" : "opacity-0"}`}>
         <div className="h-[100dvh]" />
 
-        <div className="bg-black py-24 pointer-events-auto" role="region" id="about">
+        <div className="bg-black pb-24 pointer-events-auto" role="region" id="about">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <About />
           </Suspense>
