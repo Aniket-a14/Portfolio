@@ -5,8 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowLeft, Star, GitFork, Eye, ExternalLink, Github } from "lucide-react";
 import dynamic from "next/dynamic";
-import Navbar from "@/components/layout/Navbar";
-import CustomCursor from "@/components/layout/CustomCursor";
+import Navbar from "@/components/Navbar";
+import CustomCursor from "@/components/CustomCursor";
 import { SEO_CONFIG } from "@/lib/seo";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 import { fetchProjectData } from "@/lib/projectCache";
@@ -304,10 +304,10 @@ const ProjectClient = ({ slug }) => {
       <div className="min-h-screen bg-black flex flex-col items-center justify-center gap-6">
         <p className="text-white/50 font-roboto text-lg">Project not found</p>
         <button
-          onClick={() => navigate("/#projects", "• Portfolio", "up")}
+          onClick={() => navigate("/", "• Home", "up")}
           className="text-white/40 hover:text-white/70 transition-colors font-roboto text-sm flex items-center gap-2"
         >
-          <ArrowLeft size={16} /> Back to projects
+          <ArrowLeft size={16} /> Back to home
         </button>
       </div>
     );
@@ -356,14 +356,14 @@ const ProjectClient = ({ slug }) => {
           variants={fadeIn}
           initial="hidden"
           animate="visible"
-          onClick={() => navigate("/#projects", "• Portfolio", "up")}
+          onClick={() => navigate("/", "• Home", "up")}
           className="flex items-center gap-2 text-white/40 hover:text-white/70 transition-colors font-roboto text-sm mb-10 group"
         >
           <ArrowLeft
             size={16}
             className="group-hover:-translate-x-1 transition-transform"
           />
-          Back to projects
+          Back to home
         </motion.button>
 
         <motion.div custom={1} variants={fadeIn} initial="hidden" animate="visible">

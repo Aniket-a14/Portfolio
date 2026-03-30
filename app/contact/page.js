@@ -44,11 +44,11 @@ export default function ContactHub() {
          
          <div className="mb-8">
            <button 
-             onClick={() => navigate('/', '• Portfolio', 'up')}
+             onClick={() => navigate('/', '• Home', 'up')}
              className="text-white/40 hover:text-white transition-colors font-roboto text-sm uppercase tracking-widest flex items-center gap-2 w-fit focus:outline-none"
            >
              <ArrowUpRight size={16} className="-rotate-90" />
-             Back to Portfolio
+             Back to Home
            </button>
          </div>
 

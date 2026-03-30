@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { RiCopyrightLine } from "react-icons/ri";
 import { ArrowUpRight } from "lucide-react";
-import { useLenis } from "lenis/react";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 
 const Footer = () => {
@@ -18,25 +17,6 @@ const Footer = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
-
-  const lenis = useLenis();
-
-  const handleScroll = (id) => {
-    const sectionId = id.startsWith('#') ? id.substring(1) : id;
-
-    if (sectionId === 'home') {
-      lenis?.scrollTo(0, {
-        duration: 1.2,
-        easing: (t) => 1 - Math.pow(1 - t, 4),
-      });
-    } else {
-      lenis?.scrollTo(`#${sectionId}`, {
-        offset: -80,
-        duration: 1.2,
-        easing: (t) => 1 - Math.pow(1 - t, 4),
-      });
-    }
-  };
 
 
   const formatIST = (date) => {
@@ -62,19 +42,21 @@ const Footer = () => {
           </p>
           <button
             onClick={() => navigate('/contact', '• Contact', 'down')}
-            className="group flex flex-wrap items-center gap-4 md:gap-[1.5vw] w-fit sm:cursor-pointer text-left focus:outline-none"
+            className="group w-fit sm:cursor-pointer text-left focus:outline-none"
           >
             <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white/90 group-hover:text-white transition-colors duration-300 leading-tight font-normal">
-              Let&apos;s work together
+              Let&apos;s work{" "}
+              <span className="inline-flex items-center gap-2 sm:gap-4 md:gap-6 whitespace-nowrap">
+                together
+                <span className="w-9 h-9 sm:w-16 sm:h-16 md:w-[5.5rem] md:h-[5.5rem] rounded-full bg-white text-black flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-[1.05] group-active:scale-95 relative overflow-hidden translate-y-[1px] sm:translate-y-0">
+                  <span className="absolute inset-0 border border-black/10 rounded-full animate-ping opacity-0 group-hover:opacity-20 transition-opacity"></span>
+                  <ArrowUpRight
+                    strokeWidth={1.5}
+                    className="size-4 sm:size-8 md:size-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+                  />
+                </span>
+              </span>
             </h2>
-            <div className="w-16 h-16 md:w-[5.5rem] md:h-[5.5rem] rounded-full bg-white text-black flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-[1.05] group-active:scale-95 relative overflow-hidden hidden sm:flex">
-              <span className="absolute inset-0 border border-black/10 rounded-full animate-ping opacity-0 group-hover:opacity-20 transition-opacity"></span>
-              <ArrowUpRight
-                size={38}
-                strokeWidth={1.5}
-                className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
-              />
-            </div>
           </button>
           <p className="font-roboto text-white/30 text-base md:text-lg mt-6 md:mt-8 font-light italic">
             aniketsahaworkspace@gmail.com
@@ -90,13 +72,16 @@ const Footer = () => {
             </span>
             <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
               {[
-                { name: "Home", href: "#home" },
-                { name: "Projects", href: "#projects" },
-                { name: "Testimonials", href: "#testimonials" },
+                { name: "Home", href: "home" },
+                { name: "Projects", href: "projects" },
+                { name: "Testimonials", href: "testimonials" },
               ].map((link) => (
                 <button
                   key={link.name}
-                  onClick={() => handleScroll(link.href)}
+                  onClick={() => {
+                    const text = `• ${link.name.toUpperCase()}`;
+                    navigate(link.href, text, 'down');
+                  }}
                   className="text-white/50 hover:text-white transition-colors text-[14px] font-roboto font-normal relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[1px] after:bg-white after:transition-all after:duration-300 hover:after:w-full select-none"
                 >
                   {link.name}

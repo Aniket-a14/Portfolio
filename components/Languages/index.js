@@ -152,7 +152,10 @@ const Languages = () => {
     const unsubscribe = scrollYProgress.on("change", (latest) => {
       const step = 1 / categories.length;
       const index = Math.min(Math.floor(latest / step), categories.length - 1);
-      setActiveCategory(categories[index].name);
+      const newCategory = categories[index].name;
+      
+      // ONLY update state if the category has actually changed
+      setActiveCategory(prev => (prev !== newCategory ? newCategory : prev));
     });
     return () => unsubscribe();
   }, [scrollYProgress, categories, isMobile]);
@@ -169,7 +172,7 @@ const Languages = () => {
       <div className={`${isMobile ? "relative" : "sticky top-0 left-0 h-screen"} w-full flex flex-col items-center overflow-hidden z-20`}>
         <div
           ref={containerRef}
-          className="w-full max-w-7xl px-6 md:px-12 relative h-full flex flex-col pt-10 md:pt-12 md:pb-12"
+          className="w-full max-w-7xl px-6 md:px-12 relative h-full flex flex-col pt-8"
         >
           <motion.div
             style={{ left: springX, top: springY }}
@@ -259,17 +262,29 @@ const Languages = () => {
             </div>
 
             <div className="lg:col-span-8 pb-10 relative">
-              <div className="min-h-[280px] md:min-h-[320px]">
-                <AnimatePresence mode="wait">
+              {/* Fixed height container to prevent layout jumping */}
+              <div className="min-h-[380px] sm:min-h-[340px] md:min-h-[360px] relative">
+                <AnimatePresence mode="popLayout">
                   <motion.div
                     key={activeCategory}
                     initial="hidden"
                     animate="visible"
                     exit="hidden"
                     variants={{
-                      visible: { transition: { staggerChildren: 0.05 } }
+                      visible: { 
+                        transition: { 
+                          staggerChildren: 0.035, // Faster stagger
+                          delayChildren: 0.05 
+                        } 
+                      },
+                      hidden: {
+                        transition: {
+                          staggerChildren: 0.02,
+                          staggerDirection: -1
+                        }
+                      }
                     }}
-                    className="grid grid-cols-2 sm:grid-cols-3 gap-x-2 gap-y-0.5"
+                    className="grid grid-cols-2 sm:grid-cols-3 gap-x-2 gap-y-0.5 w-full"
                   >
                     {activeSkills.map((skill, i) => (
                       <SkillItem key={skill} skill={skill} index={i} />

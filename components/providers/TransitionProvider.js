@@ -16,21 +16,26 @@ export const TransitionProvider = ({ children }) => {
   const [isInitialLoadComplete, setIsInitialLoadComplete] = useState(false);
 
   const navigate = (href, text, dir, type = "default") => {
-    if (pathname === href) return;
+    const isInternal = !href.startsWith('/') || href.startsWith('#');
+
+    if (!isInternal && pathname === href) return;
     
     setIsTransitioning(true);
     setTransitionText(text);
     setDirection(dir);
     setTransitionType(type);
 
-    // Wait exactly the length of the curtain drop (800ms) before navigating
     setTimeout(() => {
-      router.push(href);
+      if (isInternal) {
+        const target = href.replace('#', '');
+        window.dispatchEvent(new CustomEvent('nav-scroll', { detail: { target } }));
+      } else {
+        router.push(href);
+      }
       
-      // Wait a tiny bit for the new route to fully render before revealing
       setTimeout(() => {
          setIsTransitioning(false);
-      }, 300); 
+      }, 500); 
     }, 800);
   };
 

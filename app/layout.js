@@ -35,9 +35,10 @@ export const viewport = {
 
 export const metadata = getMetadata();
 
-import CustomCursor from "@/components/layout/CustomCursor";
+import CustomCursor from "@/components/CustomCursor";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { TransitionProvider } from "@/components/providers/TransitionProvider";
+import MobileToast from "@/components/MobileToast";
 
 export default function RootLayout({ children }) {
   return (
@@ -51,6 +52,7 @@ export default function RootLayout({ children }) {
         <TransitionProvider>
           <LenisProvider>
             <CustomCursor />
+            <MobileToast />
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{

@@ -46,19 +46,31 @@ const ProjectRow = ({ project, index, isActive }) => {
           </div>
         </div>
 
-        <div className="md:hidden relative z-10 px-2 pb-6 -mt-2 flex items-center gap-4">
-          <div className="relative w-[72px] h-[48px] rounded overflow-hidden shrink-0 border border-white/[0.06]">
+        <div className="md:hidden flex flex-col gap-6 px-2 pb-12">
+          <div className="relative w-full aspect-[1.4] bg-white/[0.03] overflow-hidden rounded-sm border border-white/5 shadow-2xl">
             <Image
               src={project.image}
               alt={project.title}
               fill
               className="object-cover"
-              sizes="72px"
+              sizes="(max-width: 768px) 100vw"
             />
           </div>
-          <span className="text-[11px] text-white/30 font-roboto tracking-[0.1em] uppercase">
-            {category}
-          </span>
+          
+          <div className="flex flex-col gap-4">
+            <h3 className="text-[2.5rem] font-medium tracking-tight leading-[0.95] text-white/90 font-roboto uppercase">
+              {project.title}
+            </h3>
+            
+            <div className="pt-4 border-t border-white/10 flex justify-between items-center group-hover:border-white/20 transition-colors">
+              <span className="text-[12px] text-white/40 font-roboto tracking-widest uppercase">
+                {category}
+              </span>
+              <div className="size-8 rounded-full border border-white/10 flex items-center justify-center">
+                 <ArrowUpRight strokeWidth={1.5} className="size-4 text-white/40" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </button>
@@ -68,8 +80,16 @@ const ProjectRow = ({ project, index, isActive }) => {
 const Project = () => {
   const [projectsData, setProjectsData] = useState(initialProjects);
   const [activeProjectId, setActiveProjectId] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef(null);
   const mousePos = useRef({ x: -1000, y: -1000 });
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -147,7 +167,7 @@ const Project = () => {
       className="w-full text-white mt-0 bg-transparent relative"
       id="projects"
     >
-      <div className="pt-16 pb-20 md:pb-32 px-6 md:px-12 lg:px-20">
+      <div className="pb-20 md:pb-32 px-6 md:px-12 lg:px-20">
       <div className="max-w-6xl mx-auto">
         <div className="border-t border-white/10 pt-10 mb-16">
           <div className="flex items-baseline justify-between mb-4">
@@ -165,7 +185,7 @@ const Project = () => {
       </div>
 
       <div className="max-w-6xl mx-auto">
-        {projectsData.map((project, index) => (
+        {(isMobile ? projectsData.slice(0, 2) : projectsData).map((project, index) => (
           <ProjectRow
             key={project.id}
             project={project}

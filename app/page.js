@@ -9,18 +9,20 @@ import React, {
   useRef,
 } from "react";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
-import Navbar from "@/components/layout/Navbar";
-import Hero from "@/components/sections/Hero";
-import MiniLoader from "@/components/ui/Miniloader";
-import Comments from "@/components/sections/Comments";
+import { useLenis } from "lenis/react";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import MiniLoader from "@/components/Miniloader";
+import Comments from "@/components/Comments";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useMotionValue, animate, AnimatePresence } from "framer-motion";
 
-const About = lazy(() => import("@/components/sections/About"));
-const Languages = lazy(() => import("@/components/sections/Languages"));
-const Project = lazy(() => import("@/components/sections/Projects"));
+const About = lazy(() => import("@/components/About"));
+const Languages = lazy(() => import("@/components/Languages"));
+const Project = lazy(() => import("@/components/Projects"));
 
 const App = () => {
+  const lenis = useLenis();
   const { isInitialLoadComplete } = useTransitionContext();
   const timeoutRef = useRef(null);
 
@@ -65,6 +67,27 @@ const App = () => {
       });
     }
   }, [isInitialLoadComplete, entranceOpacity]);
+
+  useEffect(() => {
+    const handleNav = (e) => {
+      const target = e.detail.target;
+      if (target === 'home') {
+        lenis?.scrollTo(0, { duration: 0 });
+        return;
+      }
+
+      const element = document.getElementById(target) || document.querySelector(`[data-section="${target}"]`);
+      if (element) {
+        lenis?.scrollTo(element, { 
+          duration: 0,
+          offset: -80 
+        });
+      }
+    };
+
+    window.addEventListener('nav-scroll', handleNav);
+    return () => window.removeEventListener('nav-scroll', handleNav);
+  }, [lenis]);
 
   const combinedHeroOpacity = useTransform(
     [heroOpacity, entranceOpacity],
@@ -135,7 +158,7 @@ const App = () => {
           </Suspense>
         </div>
 
-        <div className="bg-black pointer-events-auto relative">
+        <div className="bg-black pointer-events-auto relative" data-section="testimonials">
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Comments />
           </Suspense>
