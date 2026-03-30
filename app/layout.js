@@ -42,10 +42,8 @@ import MobileToast from "@/components/MobileToast";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" style={{ backgroundColor: '#000' }}>
-      <head>
-        <style dangerouslySetInnerHTML={{ __html: `html, body { background-color: #000 !important; }` }} />
-      </head>
+    <html lang="en" suppressHydrationWarning className="bg-black">
+      <head />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${playfair.variable} antialiased w-full bg-black`}
       >

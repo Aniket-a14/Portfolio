@@ -184,7 +184,7 @@ const Project = () => {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto min-h-[400px] md:min-h-[600px]">
         {(isMobile ? projectsData.slice(0, 2) : projectsData).map((project, index) => (
           <ProjectRow
             key={project.id}
