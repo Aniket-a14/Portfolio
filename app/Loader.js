@@ -7,7 +7,7 @@ const Loader = ({ onComplete }) => {
 
   const greetings = [
     "• Hi", "• Hola",
-    "• Bonjour", "• Hallo", "• Ciao", "• Olá", "• Привет", "• Zdravstvuyte", "• Hej", "• Sawasdee", "• Merhaba", "• Aloha", "• Xin chào", "• Salaam", "• হ্যালো", "• Namaste"
+    "• Bonjour", "• Hallo", "• Ciao", "• Sawasdee", "• Aloha", "• Salaam", "• হ্যালো", "• Namaste"
   ];
 
   useEffect(() => {

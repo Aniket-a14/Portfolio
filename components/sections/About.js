@@ -8,7 +8,7 @@ const About = () => {
       <h2 className="sr-only">About Me</h2>
       <TextReveal
         text={aboutText}
-        className="h-fit pb-10 md:pb-20"
+        className="h-fit"
       />
     </div> 
   );

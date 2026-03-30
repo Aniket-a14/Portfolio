@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useSpring, useMotionValue, useScroll } from "framer-motion";
+import { useLenis } from "lenis/react";
 import { profileData } from "@/lib/data";
 
 const ICON_MAPPING = {
@@ -99,8 +100,19 @@ const CategoryButton = ({ name, index, isActive, onClick }) => (
 
 const Languages = () => {
   const [activeCategory, setActiveCategory] = useState("Languages");
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef(null);
   const scrollRef = useRef(null);
+  const lenis = useLenis();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: scrollRef,
@@ -135,26 +147,29 @@ const Languages = () => {
   ];
 
   useEffect(() => {
+    if (isMobile) return; 
+
     const unsubscribe = scrollYProgress.on("change", (latest) => {
       const step = 1 / categories.length;
       const index = Math.min(Math.floor(latest / step), categories.length - 1);
       setActiveCategory(categories[index].name);
     });
     return () => unsubscribe();
-  }, [scrollYProgress, categories]);
+  }, [scrollYProgress, categories, isMobile]);
 
   const activeSkills = categories.find(c => c.name === activeCategory)?.skills || [];
+  const activeCategoryIndex = categories.findIndex(c => c.name === activeCategory);
 
   return (
     <div
       ref={scrollRef}
-      className="relative w-full h-[600vh] bg-black scroll-mt-20"
+      className={`relative w-full ${isMobile ? "h-auto" : "h-[600vh]"} bg-black scroll-mt-20`}
       id="languages"
     >
-      <div className="sticky top-0 left-0 h-screen w-full flex flex-col items-center overflow-hidden z-20">
+      <div className={`${isMobile ? "relative" : "sticky top-0 left-0 h-screen"} w-full flex flex-col items-center overflow-hidden z-20`}>
         <div
           ref={containerRef}
-          className="w-full max-w-7xl px-6 md:px-12 relative h-full flex flex-col pt-10 md:pt-12 pb-16"
+          className="w-full max-w-7xl px-6 md:px-12 relative h-full flex flex-col pt-10 md:pt-12 md:pb-12"
         >
           <motion.div
             style={{ left: springX, top: springY }}
@@ -182,15 +197,65 @@ const Languages = () => {
                   index={idx}
                   isActive={activeCategory === cat.name}
                   onClick={() => {
-                    const section = scrollRef.current;
-                    if (section) {
+                    if (isMobile) {
+                      setActiveCategory(cat.name);
+                    } else if (lenis && scrollRef.current) {
+                      const section = scrollRef.current;
                       const targetProgress = (idx / categories.length) + 0.05;
                       const scrollPos = section.offsetTop + (targetProgress * section.offsetHeight);
-                      window.scrollTo({ top: scrollPos, behavior: 'smooth' });
+                      
+                      lenis.scrollTo(scrollPos, {
+                        duration: 1.2,
+                        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                      });
                     }
                   }}
                 />
               ))}
+
+              {/* Mobile Arrow Carousel */}
+              {isMobile && (
+                <div className="flex lg:hidden items-center justify-between w-full mt-6 pt-6 border-t border-white/10">
+                  <button
+                    onClick={() => {
+                      if (activeCategoryIndex > 0) {
+                        setActiveCategory(categories[activeCategoryIndex - 1].name);
+                      }
+                    }}
+                    disabled={activeCategoryIndex === 0}
+                    className={`size-11 flex items-center justify-center rounded-full bg-white/5 backdrop-blur-sm transition-all duration-300 border border-white/5 active:scale-95 ${
+                      activeCategoryIndex === 0 ? "opacity-30 cursor-not-allowed" : "hover:bg-white/10 active:bg-white/20"
+                    }`}
+                    aria-label="Previous Category"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter"><path d="M15 19L8 12L15 5"/></svg>
+                  </button>
+
+                  <div className="flex flex-col items-center">
+                    <span className="font-roboto text-[9px] tracking-[0.3em] text-white/30 uppercase mb-1">
+                      0{activeCategoryIndex + 1} / 0{categories.length}
+                    </span>
+                    <span className="text-white font-playfair italic font-black text-lg md:text-xl">
+                      {activeCategory}
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      if (activeCategoryIndex < categories.length - 1) {
+                        setActiveCategory(categories[activeCategoryIndex + 1].name);
+                      }
+                    }}
+                    disabled={activeCategoryIndex === categories.length - 1}
+                    className={`size-11 flex items-center justify-center rounded-full bg-white/5 backdrop-blur-sm transition-all duration-300 border border-white/5 active:scale-95 ${
+                      activeCategoryIndex === categories.length - 1 ? "opacity-30 cursor-not-allowed" : "hover:bg-white/10 active:bg-white/20"
+                    }`}
+                    aria-label="Next Category"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter"><path d="M9 19L16 12L9 5"/></svg>
+                  </button>
+                </div>
+              )}
             </div>
 
             <div className="lg:col-span-8 pb-10 relative">
