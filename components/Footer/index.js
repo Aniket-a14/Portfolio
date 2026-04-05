@@ -127,7 +127,7 @@ const Footer = () => {
           <div className="flex flex-col gap-0.5">
             <span className="flex items-center gap-1.5 text-white/80 text-[9px] font-roboto tracking-widest uppercase truncate max-w-[140px]">
               <RiCopyrightLine className="text-[10px]" />
-              2025 Aniket Saha
+              2026 Aniket Saha
             </span>
             <span className="text-white/70 text-[8px] font-roboto tracking-widest uppercase">
               Dev & Design
