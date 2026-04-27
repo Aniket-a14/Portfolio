@@ -19,7 +19,7 @@ export default function NotFound() {
 
   return (
     <div className="flex flex-col bg-black  items-center justify-center h-screen">
-      <Terminal>
+      <Terminal className="bg-black">
         <TypingAnimation>&gt; npm found page@latest init</TypingAnimation>
 
         <AnimatedSpan delay={1500} className="text-green-500">
