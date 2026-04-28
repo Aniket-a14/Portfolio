@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.aniketdesign.in/">Live Experience</a> &bull;
+  <a href="https://aniketdesign.in/">Live Experience</a> &bull;
   <a href="#the-philosophy">Design Philosophy</a> &bull;
   <a href="#the-craft">The Craft</a> &bull;
   <a href="#tech-stack">Technical Layer</a>

@@ -1,7 +1,7 @@
 import { projects } from '@/lib/data';
 
 export default function sitemap() {
-    const baseUrl = 'https://www.aniketdesign.in';
+    const baseUrl = 'https://aniketdesign.in';
 
     const projectUrls = projects.map((project) => ({
         url: `${baseUrl}/project/${project.title.toLowerCase().replace(/\s+/g, '-')}`,
