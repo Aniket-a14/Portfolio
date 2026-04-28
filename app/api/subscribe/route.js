@@ -56,6 +56,10 @@ export async function POST(req) {
           <div style="margin-top: 50px;">
             <a href="https://aniketdesign.in" style="color: #ffffff; text-decoration: none; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; border-bottom: 1px solid #333333; padding-bottom: 4px;">Visit Portfolio</a>
           </div>
+          
+          <div style="margin-top: 40px; opacity: 0.3;">
+            <a href="https://aniketdesign.in/api/unsubscribe?email=${email}" style="color: #ffffff; text-decoration: none; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;">Unsubscribe</a>
+          </div>
         </div>
       `,
     });
