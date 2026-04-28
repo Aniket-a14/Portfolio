@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Calendar, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useTransitionContext } from "@/components/providers/TransitionProvider";
 
 const BlogCard = ({ blog, index }) => {
   return (
@@ -73,6 +74,7 @@ const BlogCard = ({ blog, index }) => {
 };
 
 const Blogs = () => {
+  const { navigate } = useTransitionContext();
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -140,15 +142,13 @@ const Blogs = () => {
         </div>
 
         <div className="mt-16 flex justify-center">
-          <a 
-            href={`https://medium.com/@aniketsahaworkspace`} 
-            target="_blank" 
-            rel="noopener noreferrer"
+          <button
+            onClick={() => navigate('/blogs', '• Blogs', 'down')}
             className="group flex items-center gap-3 text-white/40 hover:text-white transition-all duration-500 font-roboto text-xs uppercase tracking-[0.3em] py-4 px-8 border border-white/10 rounded-full hover:bg-white/5 hover:border-white/20"
           >
             View All Articles
             <ArrowUpRight className="size-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-500" strokeWidth={1.5} />
-          </a>
+          </button>
         </div>
       </div>
     </section>

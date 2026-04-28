@@ -164,6 +164,7 @@ const Footer = () => {
               {[
                 { name: "Home", href: "home" },
                 { name: "Projects", href: "projects" },
+                { name: "Blogs", href: "/blogs" },
                 { name: "Testimonials", href: "testimonials" },
               ].map((link) => (
                 <button
@@ -226,7 +227,7 @@ const Footer = () => {
 
           <div className="flex flex-col items-end gap-0.5">
             <span className="text-white/80 text-[9px] font-roboto tracking-[0.2em] uppercase">
-              Portfolio v2
+              Portfolio
             </span>
             <span className="text-white/70 text-[8px] font-roboto tracking-[0.2em] uppercase underline underline-offset-4 decoration-white/5">
               Next.js
