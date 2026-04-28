@@ -58,6 +58,9 @@ async function notify() {
 
     // 4. Send Emails individually to provide personal unsub links
     for (const recipientEmail of emails) {
+      // Small delay to respect Resend's rate limit (2 requests/sec)
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
       const { error } = await resend.emails.send({
         from: "Aniket Saha <newsletter@aniketdesign.in>",
         to: recipientEmail,
