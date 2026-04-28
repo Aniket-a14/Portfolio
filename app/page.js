@@ -19,6 +19,7 @@ import { motion, useScroll, useTransform, useMotionValue, animate, AnimatePresen
 
 const About = lazy(() => import("@/components/About"));
 const Project = lazy(() => import("@/components/Projects"));
+const Blogs = lazy(() => import("@/components/Blogs"));
 const initialProjects = [
   { title: "SRA" },
   { title: "Wizard-w1" },
@@ -159,6 +160,12 @@ const App = () => {
 
           <Suspense fallback={<MiniLoader aria-hidden="true" />}>
             <Project />
+          </Suspense>
+        </div>
+
+        <div id="blogs" className="bg-black pointer-events-auto relative">
+          <Suspense fallback={<MiniLoader aria-hidden="true" />}>
+            <Blogs />
           </Suspense>
         </div>
 
