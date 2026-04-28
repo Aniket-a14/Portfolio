@@ -2,12 +2,46 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { RiCopyrightLine } from "react-icons/ri";
 import { ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 
 const Footer = () => {
   const { navigate } = useTransitionContext();
   const [time, setTime] = useState(null);
   const [mounted, setMounted] = useState(false);
+  
+  // Newsletter States
+  const [email, setEmail] = useState("");
+  const [subscribeStatus, setSubscribeStatus] = useState("idle");
+  const [subscribeMessage, setSubscribeMessage] = useState("");
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setSubscribeStatus("loading");
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubscribeStatus("success");
+        setEmail("");
+        setTimeout(() => setSubscribeStatus("idle"), 5000);
+      } else {
+        setSubscribeStatus("error");
+        setSubscribeMessage(data.error || "Failed to subscribe.");
+      }
+    } catch (err) {
+      setSubscribeStatus("error");
+      setSubscribeMessage("Service unavailable.");
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -61,6 +95,62 @@ const Footer = () => {
           <p className="font-roboto text-white/30 text-base md:text-lg mt-6 md:mt-8 font-light italic">
             aniketsahaworkspace@gmail.com
           </p>
+
+          <div className="mt-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-20">
+            <div className="max-w-xl">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                <h3 className="text-white/90 text-[10px] font-roboto tracking-[0.3em] uppercase">
+                  Newsletter
+                </h3>
+              </div>
+              
+              <h4 className="font-playfair text-3xl md:text-5xl text-white/90 mb-6 leading-[1.1]">
+                Stay updated with my <br />
+                <span className="italic text-white/50">latest explorations.</span>
+              </h4>
+              
+              <p className="text-white/30 text-sm md:text-base font-roboto font-light leading-relaxed">
+                Monthly deep-dives into technical architecture, design systems, and creative experiments.
+              </p>
+            </div>
+
+            <div className="w-full lg:w-96 shrink-0 pb-2">
+              <form onSubmit={handleSubscribe} className="relative group/news">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="YOUR@EMAIL.COM"
+                  disabled={subscribeStatus === "loading" || subscribeStatus === "success"}
+                  className="w-full bg-transparent border-b border-white/20 pb-4 text-sm text-white focus:outline-none focus:border-white transition-all placeholder:text-white/40 disabled:opacity-50 font-roboto font-light uppercase tracking-[0.2em]"
+                />
+                <button 
+                  type="submit"
+                  disabled={subscribeStatus === "loading" || subscribeStatus === "success"}
+                  className="absolute right-0 top-0 text-white/40 hover:text-white transition-all p-1"
+                >
+                  {subscribeStatus === "loading" ? (
+                    <div className="size-4 border border-white/10 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    <ArrowUpRight className="size-8 transition-transform group-hover/news:translate-x-1 group-hover/news:-translate-y-1" strokeWidth={0.5} />
+                  )}
+                </button>
+                
+                <AnimatePresence>
+                  {subscribeStatus === "success" && (
+                    <motion.p 
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className="absolute top-full mt-4 left-0 text-[10px] text-green-400 font-roboto tracking-[0.2em] uppercase"
+                    >
+                      Successfully joined.
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
 
