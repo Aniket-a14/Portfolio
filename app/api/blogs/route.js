@@ -3,10 +3,10 @@ import { profileData } from '@/lib/data';
 
 export async function GET() {
   try {
-    const username = profileData.mediumUsername || 'aniketsaha2005';
+    const username = profileData.mediumUsername;
     const rssUrl = `https://medium.com/feed/@${username}`;
     
-    const response = await fetch(rssUrl);
+    const response = await fetch(rssUrl, { next: { revalidate: 3600 } });
     if (!response.ok) {
       throw new Error('Failed to fetch Medium RSS feed');
     }
