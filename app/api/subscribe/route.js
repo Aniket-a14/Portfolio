@@ -14,25 +14,41 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
     }
 
-    // 1. Add to Resend Audience (Contact List)
+    // 1. Check if contact already exists
     if (process.env.RESEND_AUDIENCE_ID) {
-      const { error: contactError } = await resend.contacts.create({
-        email: email,
-        unsubscribed: false,
-        audienceId: process.env.RESEND_AUDIENCE_ID,
-      });
+      try {
+        const { data: contacts, error: listError } = await resend.contacts.list({
+          audienceId: process.env.RESEND_AUDIENCE_ID,
+        });
 
-      if (contactError) {
-        // Handle "contact already exists" error (often code 409 or specific message)
-        if (contactError.message && (contactError.message.toLowerCase().includes('already exists') || contactError.name === '409' || contactError.name === 'conflict')) {
-          return NextResponse.json({ 
-            success: true, 
-            message: 'already_subscribed',
-            note: 'Email already in audience, skipping welcome email.' 
-          });
+        if (!listError) {
+          const existingContact = contacts?.data?.find(
+            (c) => c.email.toLowerCase() === email.toLowerCase()
+          );
+
+          if (existingContact) {
+            return NextResponse.json({ 
+              success: true, 
+              message: 'already_subscribed'
+            });
+          }
         }
-        // Log other errors but proceed to try sending the email if it was just an audience sync issue
-        console.error('Resend contact creation error:', contactError);
+
+        // If not found in the list check, try to create (double check)
+        const { data: contactData, error: contactError } = await resend.contacts.create({
+          email: email,
+          unsubscribed: false,
+          audienceId: process.env.RESEND_AUDIENCE_ID,
+        });
+
+        if (contactError) {
+          const errorMsg = (contactError.message || "").toLowerCase();
+          if (errorMsg.includes('already exists') || contactError.status === 422) {
+            return NextResponse.json({ success: true, message: 'already_subscribed' });
+          }
+        }
+      } catch (err) {
+        // Silently fail contact sync but proceed to send email if audience list fails
       }
     }
 
