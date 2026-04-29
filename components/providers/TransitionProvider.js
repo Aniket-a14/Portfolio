@@ -19,26 +19,31 @@ export const TransitionProvider = ({ children }) => {
     if (isTransitioning) {
       const timer = setTimeout(() => {
         setIsTransitioning(false);
-      }, 600); 
+      }, 600);
       return () => clearTimeout(timer);
     }
-  }, [pathname]); 
+  }, [pathname]);
 
   const navigate = (href, text, dir, type = "default") => {
-    const isInternal = !href.startsWith('/') || href.startsWith('#');
+    const isSection = !href.startsWith('/');
+    const isHome = pathname === "/";
 
-    if (!isInternal && pathname === href) return;
-    
+    if (!isSection && pathname === href) return;
+
     setIsTransitioning(true);
     setTransitionText(text);
     setDirection(dir);
     setTransitionType(type);
 
     setTimeout(() => {
-      if (isInternal) {
-        const target = href.replace('#', '');
-        window.dispatchEvent(new CustomEvent('nav-scroll', { detail: { target } }));
-        setTimeout(() => setIsTransitioning(false), 500);
+      if (isSection) {
+        if (isHome) {
+          const target = href.replace('#', '');
+          window.dispatchEvent(new CustomEvent('nav-scroll', { detail: { target } }));
+          setTimeout(() => setIsTransitioning(false), 500);
+        } else {
+          router.push(`/#${href}`);
+        }
       } else {
         router.push(href);
       }
@@ -46,14 +51,14 @@ export const TransitionProvider = ({ children }) => {
   };
 
   return (
-    <TransitionContext.Provider value={{ 
-       navigate, 
-       isTransitioning, 
-       transitionText, 
-       direction,
-       transitionType,
-       isInitialLoadComplete, 
-       setIsInitialLoadComplete
+    <TransitionContext.Provider value={{
+      navigate,
+      isTransitioning,
+      transitionText,
+      direction,
+      transitionType,
+      isInitialLoadComplete,
+      setIsInitialLoadComplete
     }}>
       {children}
       <GlobalTransition />

@@ -16,11 +16,24 @@ export async function POST(req) {
 
     // 1. Add to Resend Audience (Contact List)
     if (process.env.RESEND_AUDIENCE_ID) {
-      await resend.contacts.create({
+      const { error: contactError } = await resend.contacts.create({
         email: email,
         unsubscribed: false,
         audienceId: process.env.RESEND_AUDIENCE_ID,
       });
+
+      if (contactError) {
+        // Handle "contact already exists" error (often code 409 or specific message)
+        if (contactError.message && (contactError.message.toLowerCase().includes('already exists') || contactError.name === '409' || contactError.name === 'conflict')) {
+          return NextResponse.json({ 
+            success: true, 
+            message: 'already_subscribed',
+            note: 'Email already in audience, skipping welcome email.' 
+          });
+        }
+        // Log other errors but proceed to try sending the email if it was just an audience sync issue
+        console.error('Resend contact creation error:', contactError);
+      }
     }
 
     // 2. Send the Welcome Email

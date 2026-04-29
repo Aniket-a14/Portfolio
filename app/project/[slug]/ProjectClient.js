@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Star, GitFork, Eye, ExternalLink, Github } from "lucide-react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
-import CustomCursor from "@/components/CustomCursor";
 import { SEO_CONFIG } from "@/lib/seo";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 import { fetchProjectData } from "@/lib/projectCache";

@@ -24,7 +24,13 @@ const Newsletter = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setStatus("success");
+        if (data.message === 'already_subscribed') {
+          setStatus("success");
+          setMessage("You are already in the circle!");
+        } else {
+          setStatus("success");
+          setMessage("Welcome to the circle!");
+        }
         setEmail("");
       } else {
         setStatus("error");
@@ -118,7 +124,7 @@ const Newsletter = () => {
                   className="absolute -bottom-12 left-0 right-0 flex items-center justify-center gap-2 text-green-400 text-xs font-roboto tracking-wide"
                 >
                   <CheckCircle2 className="size-3" />
-                  <span>Welcome to the circle! Check your inbox.</span>
+                  <span>{message}</span>
                 </motion.div>
               )}
 

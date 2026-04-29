@@ -31,8 +31,16 @@ const Footer = () => {
 
       if (response.ok) {
         setSubscribeStatus("success");
+        if (data.message === 'already_subscribed') {
+          setSubscribeMessage("Already subscribed!");
+        } else {
+          setSubscribeMessage("Successfully joined.");
+        }
         setEmail("");
-        setTimeout(() => setSubscribeStatus("idle"), 5000);
+        setTimeout(() => {
+          setSubscribeStatus("idle");
+          setSubscribeMessage("");
+        }, 5000);
       } else {
         setSubscribeStatus("error");
         setSubscribeMessage(data.error || "Failed to subscribe.");
@@ -144,7 +152,7 @@ const Footer = () => {
                       animate={{ opacity: 1, x: 0 }}
                       className="absolute top-full mt-4 left-0 text-[10px] text-green-400 font-roboto tracking-[0.2em] uppercase"
                     >
-                      Successfully joined.
+                      {subscribeMessage}
                     </motion.p>
                   )}
                 </AnimatePresence>
@@ -166,6 +174,7 @@ const Footer = () => {
                 { name: "Projects", href: "projects" },
                 { name: "Blogs", href: "/blogs" },
                 { name: "Testimonials", href: "testimonials" },
+                { name: "Contact", href: "/contact" },
               ].map((link) => (
                 <button
                   key={link.name}

@@ -15,10 +15,11 @@ const BlogEntry = ({ blog, index, isActive }) => {
       className="block relative z-10"
       data-blog-index={index}
     >
-      <div className="group relative border-b border-white/10">
+      <div className="group relative">
         <div className={`absolute inset-0 bg-white/[0.025] transition-opacity duration-500 ${isActive ? "opacity-100" : "opacity-0"}`} />
 
-        <div className="relative z-20 py-7 md:py-8 lg:py-10 px-2">
+        {/* Desktop Layout (hidden on mobile) */}
+        <div className="hidden md:block relative z-20 py-7 md:py-8 lg:py-10 px-2 border-b border-white/10">
           <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-8 max-w-6xl mx-auto">
             <div className="flex items-center gap-3 lg:gap-5 lg:w-44 shrink-0">
               <span className="font-roboto text-xs tabular-nums tracking-wider transition-colors duration-500 text-white/40">
@@ -34,10 +35,9 @@ const BlogEntry = ({ blog, index, isActive }) => {
               </span>
             </div>
 
-            {/* Title + Snippet */}
             <div className="flex-1 min-w-0">
               <h2
-                className={`text-2xl sm:text-3xl md:text-[2.25rem] lg:text-[2.5rem] leading-[1.15] tracking-tight transition-colors duration-500 mb-2 text-white/90`}
+                className="text-2xl sm:text-3xl md:text-[2.25rem] lg:text-[2.5rem] leading-[1.15] tracking-tight transition-colors duration-500 mb-2 text-white/90"
                 style={{ fontFamily: '"Times New Roman", Times, serif' }}
               >
                 {blog.title}
@@ -52,6 +52,47 @@ const BlogEntry = ({ blog, index, isActive }) => {
                 className={`size-5 transition-all duration-500 ease-out ${isActive ? "text-white opacity-100 translate-x-0" : "text-white/20 opacity-0 -translate-x-4"}`}
                 strokeWidth={1}
               />
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Layout (card style) */}
+        <div className="md:hidden flex flex-col gap-6 px-2 pb-12 pt-6">
+          <div className="relative w-full aspect-[1.4] bg-white/[0.03] overflow-hidden rounded-sm border border-white/5 shadow-2xl">
+            {blog.thumbnail ? (
+              <Image
+                src={blog.thumbnail}
+                alt={blog.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw"
+                unoptimized
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-white/[0.01]">
+                <span className="text-white/5 font-playfair text-4xl uppercase tracking-widest">Medium</span>
+              </div>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <h3 className="text-[2.5rem] font-medium tracking-tight leading-[0.95] text-white/90 font-roboto uppercase">
+              {blog.title}
+            </h3>
+
+            <div className="pt-4 border-t border-white/10 flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <span className="text-[12px] text-white/40 font-roboto tracking-widest uppercase">
+                  {new Date(blog.pubDate).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </span>
+              </div>
+              <div className="size-8 rounded-full border border-white/10 flex items-center justify-center">
+                <ArrowUpRight strokeWidth={1.5} className="size-4 text-white/40" />
+              </div>
             </div>
           </div>
         </div>
@@ -259,11 +300,11 @@ export default function BlogsClient() {
                     y:
                       activeIndex !== null && activeIndex >= 0
                         ? -1 *
-                          activeIndex *
-                          (typeof window !== "undefined" &&
+                        activeIndex *
+                        (typeof window !== "undefined" &&
                           window.innerWidth >= 1024
-                            ? 200
-                            : 175)
+                          ? 200
+                          : 175)
                         : 0,
                   }}
                   transition={{

@@ -12,9 +12,9 @@ import { useTransitionContext } from "@/components/providers/TransitionProvider"
 
 const navLinks = [
   { name: "Projects", href: "projects" },
-  { name: "Blogs", href: "blogs" },
+  { name: "Blogs", href: "/blogs" },
   { name: "Testimonials", href: "testimonials" },
-  { name: "Contact", href: "contact" },
+  { name: "Contact", href: "/contact" },
 ];
 
 const menuVariants = {
