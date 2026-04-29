@@ -1,6 +1,8 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 export async function POST(req) {
   try {
     if (!process.env.RESEND_API_KEY) {
@@ -34,6 +36,9 @@ export async function POST(req) {
           }
         }
 
+        // Delay to respect rate limit (2 req/sec)
+        await sleep(500);
+
         // If not found in the list check, try to create (double check)
         const { data: contactData, error: contactError } = await resend.contacts.create({
           email: email,
@@ -51,6 +56,9 @@ export async function POST(req) {
         // Silently fail contact sync but proceed to send email if audience list fails
       }
     }
+
+    // Delay to respect rate limit (2 req/sec)
+    await sleep(500);
 
     // 2. Send the Welcome Email
     const { data, error } = await resend.emails.send({
