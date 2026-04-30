@@ -15,7 +15,7 @@ const MermaidRenderer = ({ chart }) => {
 
   useEffect(() => {
     if (!mounted || !chart) return;
-    
+
     const renderChart = async () => {
       try {
         const mermaid = (await import("mermaid")).default;

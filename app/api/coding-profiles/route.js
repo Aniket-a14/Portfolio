@@ -35,7 +35,7 @@ export async function GET() {
               if (data?.data?.matchedUser?.submitStats?.acSubmissionNum) {
                 const allDiff = data.data.matchedUser.submitStats.acSubmissionNum.find(d => d.difficulty === 'All');
                 if (allDiff && allDiff.count !== undefined) {
-                  return { ...profile, stats: `- ${allDiff.count}+ Problems Solved` };
+                  return { ...profile, stats: `${allDiff.count}+ Problems Solved` };
                 }
               }
             }
@@ -43,7 +43,7 @@ export async function GET() {
             console.error("LeetCode fetch error:", e);
           }
         }
-        
+
         // For GeeksforGeeks and HackerRank, return the static ones since APIs are blocked by CSR/Auth without full scraping setup
         return profile;
       })

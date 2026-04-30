@@ -8,7 +8,8 @@ import { X, ArrowUpRight } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { profileData, codingProfiles } from "@/lib/data";
+import { profileData, codingProfiles as staticCodingProfiles } from "@/lib/data";
+import { useState } from "react";
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -76,12 +77,32 @@ const skillCategories = [
 ];
 
 const ProfileSheet = ({ isOpen, onClose }) => {
+  const [profiles, setProfiles] = useState(staticCodingProfiles);
+  
   const handleEscape = useCallback(
     (e) => { if (e.key === "Escape") onClose(); },
     [onClose]
   );
 
   const lenis = useLenis();
+
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      try {
+        const res = await fetch('/api/coding-profiles');
+        if (res.ok) {
+          const data = await res.json();
+          setProfiles(data);
+        }
+      } catch (err) {
+        // Fallback to static data already in state
+      }
+    };
+    
+    if (isOpen) {
+      fetchProfiles();
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -129,15 +150,17 @@ const ProfileSheet = ({ isOpen, onClose }) => {
             >
               <div className="flex items-center gap-5">
                 <Avatar className="h-12 w-12 border border-black/10">
-                  <AvatarImage src="logo.jpeg" alt="Aniket Saha" />
-                  <AvatarFallback style={{ background: "#e8e6e1", color: "#777" }} className="font-playfair">AS</AvatarFallback>
+                  <AvatarImage src={profileData.avatar} alt={profileData.name} />
+                  <AvatarFallback style={{ background: "#e8e6e1", color: "#777" }} className="font-playfair">
+                    {profileData.name.split(' ').map(n => n[0]).join('')}
+                  </AvatarFallback>
                 </Avatar>
                 <div>
                   <h2 className="font-playfair text-[30px] text-[#1a1a1a] leading-tight font-normal">
-                    Aniket Saha
+                    {profileData.name}
                   </h2>
                   <p className="font-roboto text-[14px] text-[#8a8070] font-light mt-0.5">
-                    Full Stack Developer · ML Enthusiast · AI Engineer
+                    {profileData.roles.join(' · ')}
                   </p>
                 </div>
               </div>
@@ -310,11 +333,7 @@ const ProfileSheet = ({ isOpen, onClose }) => {
                   Coding Profiles
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-6 mt-2">
-                  {[
-                    { name: "LeetCode", slug: "leetcode", stats: "650+ Problems Solved", url: "https://leetcode.com/u/Wizard_a14/", index: "01" },
-                    { name: "GeeksforGeeks", slug: "geeksforgeeks", stats: "150+ Problems Solved", url: "https://www.geeksforgeeks.org/user/aniketsaha5353/", index: "02" },
-                    { name: "HackerRank", slug: "hackerrank", stats: "5 Star Proficiency", url: "https://www.hackerrank.com/aniket_saha", index: "03" },
-                  ].map((profile) => (
+                  {profiles.map((profile) => (
                     <motion.a 
                       key={profile.name} 
                       href={profile.url} 

@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/magicui/marquee";
 import { Roboto } from "next/font/google";
 import Footer from "@/components/Footer";
+import { reviews } from "@/lib/data";
 
 
 const roboto = Roboto({
@@ -11,57 +12,6 @@ const roboto = Roboto({
   subsets: ["latin"],
 });
 
-const reviews = [
-  {
-    name: "Snehasis",
-    username: "@snehasis.18",
-    body: "Very nice website. I like it. Very animating website. Looking like a wow",
-    img: "/snehasis.jpg",
-    alt: "Snehasis",
-  },
-  {
-    name: "Ankit Kumar",
-    username: "@Ankit_03",
-    body: "Nice Website, Really appreciable.",
-    img: "/ankit.jpg",
-    alt: "Ankit Kumar",
-  },
-  {
-    name: "Koushik",
-    username: "@koushik.04",
-    body: "Its Simple, Elegant and Classic. Just Fantastic...",
-    img: "/koushik.jpg",
-    alt: "Koushik",
-  },
-  {
-    name: "Himanshu",
-    username: "@himanshu720",
-    body: "This is seriously impressive, and I’m loving it.",
-    img: "/himanshu.jpg",
-    alt: "Himanshu",
-  },
-  {
-    name: "Arghya Dutta",
-    username: "@Arghya.007",
-    body: "Could be better, but still good.",
-    img: "/arghya.jpg",
-    alt: "Arghya Dutta",
-  },
-  {
-    name: "Sachin",
-    username: "@sachin.69",
-    body: " I can’t even describe how I feel. Just wow.",
-    img: "/sachin.jpg",
-    alt: "Sachin",
-  },
-  {
-    name: "Abhipsa",
-    username: "@.abhipsaghosh.",
-    body: "I love this website. It's so beautiful and I'm so happy to see it.",
-    img: "/abhipsa.jpg",
-    alt: "Abhipsa",
-  }
-];
 
 const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);

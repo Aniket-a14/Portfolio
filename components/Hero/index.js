@@ -36,30 +36,25 @@ export default function Page() {
           </p>
 
           <p className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-1 font-roboto font-light`}>
-            I build dynamic web apps with{" "}
-            <UnderlineLink href={heroData.links.react}>React</UnderlineLink> and{" "}
-            <UnderlineLink href={heroData.links.nextjs}>Next.js</UnderlineLink>{" "}
-            while exploring machine learning and data analysis. My projects span
-            full-stack platforms to AI-driven solutions, aiming for efficiency
-            and impact.
+            {heroData.description.split(/(React|Next\.js)/).map((part, i) => {
+              if (part === "React") return <UnderlineLink key={i} href={heroData.links.react}>React</UnderlineLink>;
+              if (part === "Next.js") return <UnderlineLink key={i} href={heroData.links.nextjs}>Next.js</UnderlineLink>;
+              return part;
+            })}
           </p>
 
           <p className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-14 font-roboto font-light`}>
-            Many know me from{" "}
-            <UnderlineLink href={heroData.links.linkedin}>
-              LinkedIn
-            </UnderlineLink>{" "}
-            and{" "}
-            <UnderlineLink href={heroData.links.github}>
-              GitHub
-            </UnderlineLink>
-            , where I share projects and learnings.
+            {heroData.socialDescription.split(/(LinkedIn|GitHub)/).map((part, i) => {
+              if (part === "LinkedIn") return <UnderlineLink key={i} href={heroData.links.linkedin}>LinkedIn</UnderlineLink>;
+              if (part === "GitHub") return <UnderlineLink key={i} href={heroData.links.github}>GitHub</UnderlineLink>;
+              return part;
+            })}
           </p>
 
           <p
             className={`text-lg sm:text-lg md:text-xl xl:text-2xl mt-1 flex items-center font-roboto font-medium`}
           >
-            Let’s build something amazing together!
+            {heroData.ctaText}
             <span className="ml-6">
               <a href={heroData.links.resume} target="_blank" rel="noopener noreferrer" aria-label="Download Resume">
                 <ShinyButton className="bg-[rgba(255,255,255,.55)] ">
