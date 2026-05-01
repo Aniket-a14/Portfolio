@@ -19,47 +19,61 @@ const LATEST_POST_FILE = path.join(__dirname, '../data/latest-post.json');
 async function notify() {
   try {
     // 1. Fetch Medium Feed
+    console.log(`Fetching RSS feed from: ${RSS_URL}`);
     const feed = await parser.parseURL(RSS_URL);
     if (!feed.items || feed.items.length === 0) {
+      console.log('No posts found in feed.');
       return;
     }
 
     const latestPost = feed.items[0];
     const latestId = latestPost.guid || latestPost.link;
+    console.log('Latest post in feed:', latestPost.title);
 
     // 2. Check against last notified
     let lastNotifiedId = '';
     if (fs.existsSync(LATEST_POST_FILE)) {
       const data = JSON.parse(fs.readFileSync(LATEST_POST_FILE, 'utf8'));
       lastNotifiedId = data.id;
+      console.log('Last notified ID:', lastNotifiedId);
     }
 
     if (latestId === lastNotifiedId) {
+      console.log('No new posts to notify.');
       return;
     }
 
-    console.log('New post detected:', latestPost.title);
+    console.log('New post detected! Preparing notifications for:', latestPost.title);
 
     // 3. Fetch Subscribers from Resend
     if (!AUDIENCE_ID) {
-      console.error('RESEND_AUDIENCE_ID is not configured.');
+      console.error('CRITICAL: RESEND_AUDIENCE_ID is not configured in environment.');
       return;
     }
 
+    console.log('Fetching subscribers from Resend audience:', AUDIENCE_ID);
     const { data: contacts, error: contactError } = await resend.contacts.list({
       audienceId: AUDIENCE_ID,
     });
 
-    if (contactError || !contacts || contacts.data.length === 0) {
+    if (contactError) {
+      console.error('Error fetching contacts from Resend:', contactError);
+      return;
+    }
+
+    if (!contacts || !contacts.data || contacts.data.length === 0) {
+      console.log('No subscribers found in audience.');
       return;
     }
 
     const emails = contacts.data.map(c => c.email);
+    console.log(`Found ${emails.length} subscribers. Sending emails...`);
 
     // 4. Send Emails individually to provide personal unsub links
+    let successCount = 0;
     for (const recipientEmail of emails) {
       // Small delay to respect Resend's rate limit (2 requests/sec)
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 550));
       
       const { error } = await resend.emails.send({
         from: "Aniket Saha <newsletter@aniketdesign.in>",
@@ -93,15 +107,23 @@ async function notify() {
           </div>
         `,
       });
+
       if (error) {
-        console.error(`Error sending email to ${recipientEmail}:`, error);
+        console.error(`Failed to send to ${recipientEmail}:`, error);
+      } else {
+        successCount++;
       }
     }
 
+    console.log(`Successfully sent ${successCount}/${emails.length} notifications.`);
+
     // 5. Update state
+    console.log('Updating latest-post.json state...');
     fs.writeFileSync(LATEST_POST_FILE, JSON.stringify({ id: latestId, title: latestPost.title }));
+    console.log('Process complete.');
 
   } catch (err) {
+    console.error('An unexpected error occurred during the notification process:', err);
   }
 }
 
