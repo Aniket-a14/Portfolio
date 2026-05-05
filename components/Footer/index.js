@@ -12,6 +12,7 @@ const Footer = () => {
   
   // Newsletter States
   const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [subscribeStatus, setSubscribeStatus] = useState("idle");
   const [subscribeMessage, setSubscribeMessage] = useState("");
 
@@ -19,12 +20,21 @@ const Footer = () => {
     e.preventDefault();
     if (!email) return;
 
+    if (honeypot) {
+      console.warn("Honeypot filled. Bot detected.");
+      setSubscribeStatus("success");
+      setSubscribeMessage("Successfully joined.");
+      setEmail("");
+      setHoneypot("");
+      return;
+    }
+
     setSubscribeStatus("loading");
     try {
       const response = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, honeypot }),
       });
 
       const data = await response.json();
@@ -37,6 +47,7 @@ const Footer = () => {
           setSubscribeMessage("Successfully joined.");
         }
         setEmail("");
+        setHoneypot("");
         setTimeout(() => {
           setSubscribeStatus("idle");
           setSubscribeMessage("");
@@ -125,6 +136,17 @@ const Footer = () => {
 
             <div className="w-full lg:w-96 shrink-0 pb-2">
               <form onSubmit={handleSubscribe} className="relative group/news">
+                {/* Honeypot field - Hidden from users */}
+                <input
+                  type="text"
+                  name="b_phone"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  style={{ display: 'none' }}
+                  tabIndex="-1"
+                  autoComplete="off"
+                />
+
                 <input
                   type="email"
                   value={email}

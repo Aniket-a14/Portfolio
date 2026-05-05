@@ -10,10 +10,25 @@ export async function POST(req) {
     }
 
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const { email } = await req.json();
+    const { email, honeypot } = await req.json();
 
-    if (!email || !email.includes('@')) {
+    // 1. Honeypot check (Bot protection)
+    if (honeypot) {
+      console.warn("Honeypot trigger detected.");
+      return NextResponse.json({ success: true, message: 'already_subscribed' }); 
+    }
+
+    // 2. Strict Email Validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email) || email.length > 100) {
       return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
+    }
+
+    // 3. Origin Check (Prevent unauthorized API calls from other domains)
+    const origin = req.headers.get('origin');
+    const allowedOrigins = ['https://aniketdesign.in', 'http://localhost:3000']; 
+    if (process.env.NODE_ENV === 'production' && (!origin || !allowedOrigins.includes(origin))) {
+      return NextResponse.json({ error: 'Unauthorized origin' }, { status: 403 });
     }
 
     // 1. Check if contact already exists

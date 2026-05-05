@@ -8,6 +8,7 @@ export default function ContactHub() {
   const { navigate } = useTransitionContext();
   const [formType, setFormType] = useState("general");
   const [formStatus, setFormStatus] = useState("idle");
+  const [honeypot, setHoneypot] = useState("");
   const [budget, setBudget] = useState("");
   const [timeline, setTimeline] = useState("");
 
@@ -16,6 +17,13 @@ export default function ContactHub() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    if (honeypot) {
+      console.warn("Honeypot filled. Bot detected.");
+      setFormStatus("success");
+      return;
+    }
+
     setFormStatus("loading");
     
     const formData = new FormData(e.target);
@@ -131,6 +139,17 @@ export default function ContactHub() {
                      </div>
                   ) : (
                      <div className="flex flex-col gap-12 lg:gap-16">
+                        {/* Honeypot field - Hidden from users */}
+                        <input
+                           type="text"
+                           name="b_phone"
+                           value={honeypot}
+                           onChange={(e) => setHoneypot(e.target.value)}
+                           style={{ display: 'none' }}
+                           tabIndex="-1"
+                           autoComplete="off"
+                        />
+
                         {/* Shared Fields */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
                            <div className="relative group flex flex-col-reverse">

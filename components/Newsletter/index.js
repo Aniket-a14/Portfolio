@@ -6,6 +6,7 @@ import { Send, CheckCircle2, AlertCircle, ArrowRight } from "lucide-react";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState(""); // Bot trap
   const [status, setStatus] = useState("idle"); // idle, loading, success, error
   const [message, setMessage] = useState("");
 
@@ -13,12 +14,23 @@ const Newsletter = () => {
     e.preventDefault();
     if (!email) return;
 
+    // If honeypot is filled, it's likely a bot. 
+    // We still show success to the bot to prevent them from trying other methods.
+    if (honeypot) {
+      console.warn("Honeypot filled. Bot detected.");
+      setStatus("success");
+      setMessage("Welcome to the circle!");
+      setEmail("");
+      setHoneypot("");
+      return;
+    }
+
     setStatus("loading");
     try {
       const response = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, honeypot }), // Send honeypot to server as well
       });
 
       const data = await response.json();
@@ -32,6 +44,7 @@ const Newsletter = () => {
           setMessage("Welcome to the circle!");
         }
         setEmail("");
+        setHoneypot("");
       } else {
         setStatus("error");
         setMessage(data.error || "Something went wrong. Please try again.");
@@ -89,6 +102,17 @@ const Newsletter = () => {
 
           <form onSubmit={handleSubmit} className="max-w-md mx-auto relative">
             <div className="relative group">
+              {/* Honeypot field - Hidden from users */}
+              <input
+                type="text"
+                name="b_phone"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                style={{ display: 'none' }}
+                tabIndex="-1"
+                autoComplete="off"
+              />
+
               <input
                 type="email"
                 value={email}
