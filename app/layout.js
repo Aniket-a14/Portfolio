@@ -46,6 +46,7 @@ export default function RootLayout({ children }) {
       <head />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${playfair.variable} antialiased w-full bg-black`}
+        suppressHydrationWarning
       >
         <TransitionProvider>
           <LenisProvider>
