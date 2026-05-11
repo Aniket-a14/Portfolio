@@ -286,10 +286,11 @@ const ProjectClient = ({ slug }) => {
   const processedReadme = useMemo(() => {
     if (!data?.readme || !data?.repoPath) return "";
     const repoPath = data.repoPath;
+    const branch = data.repoMeta?.defaultBranch || "main";
     return data.readme.replace(
       /!\[([^\]]*)\]\((?!https?:\/\/)([^)]+)\)/g,
       (match, alt, path) =>
-        `![${alt}](https://raw.githubusercontent.com/${repoPath}/main/${path})`
+        `![${alt}](https://raw.githubusercontent.com/${repoPath}/${branch}/${path})`
     );
   }, [data]);
 

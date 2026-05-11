@@ -71,6 +71,7 @@ export async function GET(request, { params }) {
         updated_at: repoData.updated_at,
         language: repoData.language,
         open_issues: repoData.open_issues_count,
+        defaultBranch: repoData.default_branch,
       };
     }
 
