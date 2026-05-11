@@ -44,5 +44,5 @@ jobs:
             echo "No new post state to commit."
           else
             git commit -m "Update latest notified blog post [skip ci]"
-            git push origin main
+            git push origin master
           fi
