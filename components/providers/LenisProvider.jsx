@@ -1,28 +1,14 @@
 "use client";
 
-import { useLenis, ReactLenis } from "lenis/react";
-import { useEffect, useRef } from "react";
+import { ReactLenis } from "lenis/react";
 
 export default function LenisProvider({ children }) {
-  const lenisRef = useRef();
-
-  useEffect(() => {
-    function update(time) {
-      lenisRef.current?.lenis?.raf(time * 1000);
-    }
-
-    // Optional: Sync with GSAP if needed later
-    // gsap.ticker.add(update);
-
-    return () => {
-      // gsap.ticker.remove(update);
-    };
-  }, []);
-
+  // Lenis drives its own rAF loop via ReactLenis. The effect that used to live
+  // here declared an `update` function that was never registered with any
+  // ticker, so it did nothing but keep a ref alive.
   return (
     <ReactLenis
       root
-      ref={lenisRef}
       options={{
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

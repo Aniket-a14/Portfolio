@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 
-const BlogEntry = ({ blog, index, isActive }) => {
+const BlogEntry = ({ blog, index, onFocusRow, onBlurRow, isActive }) => {
   return (
     <a
       href={blog.link}
@@ -14,6 +14,10 @@ const BlogEntry = ({ blog, index, isActive }) => {
       rel="noopener noreferrer"
       className="block relative z-10"
       data-blog-index={index}
+      // Pointer hover is resolved from geometry in the parent so that scrolling
+      // updates it too; focus/blur stay here for keyboard users.
+      onFocus={onFocusRow}
+      onBlur={onBlurRow}
     >
       <div className="group relative">
         <div className={`absolute inset-0 bg-white/[0.025] transition-opacity duration-500 ${isActive ? "opacity-100" : "opacity-0"}`} />
@@ -131,6 +135,8 @@ export default function BlogsClient() {
   const [activeIndex, setActiveIndex] = useState(null);
   const containerRef = useRef(null);
   const mousePos = useRef({ x: -1000, y: -1000 });
+  const frameRef = useRef(0);
+  const rowsRef = useRef([]);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -138,41 +144,114 @@ export default function BlogsClient() {
   const imgX = useSpring(x, springConfig);
   const imgY = useSpring(y, springConfig);
 
-  const updateActiveState = useCallback(() => {
-    if (!containerRef.current) return;
+  /**
+   * Pointer tracking and hover resolution — see the matching comment in
+   * `components/Projects`. Moving the pointer and scrolling underneath a
+   * stationary pointer both change which row is hovered, so both resolve it
+   * from cached row bands rather than from `document.elementFromPoint()` on
+   * every event. One layout read per frame, whatever the event rate.
+   */
+  const measureRows = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
-    const containerRect = containerRef.current.getBoundingClientRect();
-    x.set(mousePos.current.x - containerRect.left);
-    y.set(mousePos.current.y - containerRect.top);
+    const base = container.getBoundingClientRect().top;
+    rowsRef.current = Array.from(
+      container.querySelectorAll("[data-blog-index]")
+    ).map((el) => {
+      const rect = el.getBoundingClientRect();
+      return {
+        index: Number(el.dataset.blogIndex),
+        top: rect.top - base,
+        bottom: rect.bottom - base,
+      };
+    });
+  }, []);
 
-    const element = document.elementFromPoint(mousePos.current.x, mousePos.current.y);
-    const row = element?.closest("[data-blog-index]");
+  const update = useCallback(() => {
+    frameRef.current = 0;
 
-    if (row && containerRef.current.contains(row)) {
-      setActiveIndex(parseInt(row.getAttribute("data-blog-index")));
-    } else {
-      setActiveIndex(null);
+    const container = containerRef.current;
+    if (!container) return;
+
+    const point = mousePos.current;
+    // The preview is `fixed`, so viewport coordinates go straight through.
+    x.set(point.x);
+    y.set(point.y);
+
+    const rect = container.getBoundingClientRect();
+    const withinX = point.x >= rect.left && point.x <= rect.right;
+    const relativeY = point.y - rect.top;
+
+    let next = null;
+    if (withinX) {
+      for (const row of rowsRef.current) {
+        if (relativeY >= row.top && relativeY < row.bottom) {
+          next = row.index;
+          break;
+        }
+      }
     }
+
+    setActiveIndex((current) => (current === next ? current : next));
   }, [x, y]);
 
   useEffect(() => {
+    const schedule = () => {
+      if (frameRef.current) return;
+      frameRef.current = requestAnimationFrame(update);
+    };
+
     const handleMouseMove = (e) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
-      updateActiveState();
+      schedule();
     };
 
-    const handleScroll = () => {
-      updateActiveState();
+    const handleScroll = () => schedule();
+
+    const handleResize = () => {
+      measureRows();
+      schedule();
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    // Pointer leaving the window while still over a row would otherwise strand
+    // the preview on screen.
+    const handleWindowLeave = () => {
+      mousePos.current = { x: -1000, y: -1000 };
+      setActiveIndex(null);
+    };
+
+    measureRows();
+
+    const observer =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(measureRows)
+        : null;
+    if (observer && containerRef.current) observer.observe(containerRef.current);
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
+    document.documentElement.addEventListener("mouseleave", handleWindowLeave);
+    window.addEventListener("blur", handleWindowLeave);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+      document.documentElement.removeEventListener("mouseleave", handleWindowLeave);
+      window.removeEventListener("blur", handleWindowLeave);
+      observer?.disconnect();
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+      frameRef.current = 0;
     };
-  }, [updateActiveState]);
+  }, [update, measureRows]);
+
+  // Rows arrive asynchronously from the feed, so their bands must be measured
+  // once they exist, not only on mount.
+  useEffect(() => {
+    measureRows();
+  }, [blogs, measureRows]);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -265,12 +344,14 @@ export default function BlogsClient() {
                 blog={blog}
                 index={index}
                 isActive={activeIndex === index}
+                onFocusRow={() => setActiveIndex(index)}
+                onBlurRow={() => setActiveIndex(null)}
               />
             </motion.div>
           ))}
 
           <motion.div
-            className="absolute top-0 left-0 pointer-events-none z-50 hidden md:block"
+            className="fixed top-0 left-0 pointer-events-none z-50 hidden md:block"
             animate={{
               opacity: activePost ? 1 : 0,
               scale: activePost ? 1 : 0,

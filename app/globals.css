@@ -145,18 +145,6 @@
 
 @layer base {
   * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-
-
-@layer base {
-  * {
     @apply border-border outline-ring/50;
   }
 
@@ -199,9 +187,6 @@ html.lenis, html.lenis body {
 
 body {
   background-color: #000;
-}
-
-* {
   -ms-overflow-style: none;
 }
 
@@ -251,6 +236,84 @@ body {
   background: rgba(0, 0, 0, 0.15);
 }
 
-* {
-  cursor: none !important;
+/*
+ * Case-study section numbering.
+ *
+ * A CSS counter rather than markup, because the MDX author shouldn't have to
+ * renumber sections by hand when one is inserted. The numeral sits in the left
+ * margin on wide screens and stacks above the heading when there is no margin
+ * to sit in.
+ */
+.case-study {
+  counter-reset: case-section;
+}
+
+.case-study>h2 {
+  counter-increment: case-section;
+  position: relative;
+}
+
+.case-study>h2::before {
+  content: counter(case-section, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.65rem;
+  font-family: var(--font-roboto), sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: rgb(198 168 120 / 0.85);
+}
+
+@media (min-width: 1280px) {
+  .case-study>h2::before {
+    position: absolute;
+    left: -4.5rem;
+    top: 0.55rem;
+    margin-bottom: 0;
+  }
+}
+
+/* Hairline rule opening each section. */
+.case-study>h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2.25rem;
+  height: 1px;
+  background: rgb(255 255 255 / 0.08);
+}
+
+.case-study>h2:first-child::after {
+  display: none;
+}
+
+/*
+ * The custom cursor replaces the system one, but only where a real pointer
+ * exists. Applying `cursor: none` to every element unconditionally hid the
+ * caret on touch devices and inside text inputs, and matched a universal
+ * selector on every style recalculation. Scoped to fine pointers, and text
+ * fields keep their caret.
+ */
+@media (hover: hover) and (pointer: fine) {
+
+  html,
+  body,
+  a,
+  button,
+  [role="button"] {
+    cursor: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

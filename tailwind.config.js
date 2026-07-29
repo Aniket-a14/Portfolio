@@ -21,6 +21,12 @@ export default {
 				playfair: ['var(--font-playfair)'],
 			},
 			colors: {
+				// Warm off-white for long-form reading. Pure white on pure black
+				// is what made the case studies read as flat and cold.
+				paper: 'rgb(234 230 222 / <alpha-value>)',
+				// The single accent, used only for section numbers, the active
+				// contents entry, the reading progress bar and link hovers.
+				sand: 'rgb(198 168 120 / <alpha-value>)',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {

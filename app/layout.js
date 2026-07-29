@@ -1,28 +1,24 @@
-import { Geist, Geist_Mono, Roboto, Playfair_Display } from "next/font/google";
+import { Roboto, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
+// Geist and Geist Mono were loaded here but never applied: neither
+// `--font-geist-sans` nor `--font-geist-mono` is referenced by any stylesheet
+// or Tailwind mapping, and `font-mono` resolves to the system stack. Dropping
+// them removes two font families from every page load.
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
   weight: ["300", "400", "500", "700"],
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   weight: ["400"],
+  display: "swap",
 });
 
 import { getMetadata } from "@/lib/seo";
@@ -45,7 +41,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning className="bg-black">
       <head />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${playfair.variable} antialiased w-full bg-black`}
+        className={`${roboto.variable} ${playfair.variable} antialiased w-full bg-black`}
         suppressHydrationWarning
       >
         <TransitionProvider>

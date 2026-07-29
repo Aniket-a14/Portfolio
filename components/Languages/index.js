@@ -125,17 +125,36 @@ const Languages = () => {
   const springY = useSpring(mouseY, { stiffness: 100, damping: 30 });
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!containerRef.current) return;
+    // This ran `getBoundingClientRect()` on every single mousemove — a forced
+    // layout per event. The read is now batched into one rAF, and the listener
+    // is attached to the container itself so it does not fire for pointer
+    // movement anywhere else on the page.
+    const container = containerRef.current;
+    if (!container) return;
+
+    let frame = 0;
+    let point = null;
+
+    const flush = () => {
+      frame = 0;
+      if (!point || !containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
-        mouseX.set(e.clientX - rect.left);
-        mouseY.set(e.clientY - rect.top);
-      }
+      mouseX.set(point.x - rect.left);
+      mouseY.set(point.y - rect.top);
     };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+
+    const handleMouseMove = (e) => {
+      point = { x: e.clientX, y: e.clientY };
+      if (frame) return;
+      frame = requestAnimationFrame(flush);
+    };
+
+    container.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      container.removeEventListener("mousemove", handleMouseMove);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [mouseX, mouseY]);
 
   const categories = [
     { name: "Languages", skills: profileData.skills.languages },

@@ -1,0 +1,123 @@
+---
+id: 4
+order: 4
+slug: ai-resume-analyser
+title: AI Resume Analyser
+fullTitle: Resume Tuner — ATS Scoring & Resume Feedback
+tagline: Smart feedback for your dream job. Upload a PDF, name the role you're chasing, and get a concrete ATS score with the specific reasons behind it — no backend of my own, and no résumés on my servers.
+description: An AI-powered resume analyser built on React Router v7 and Puter.js that parses PDFs in the browser, scores them against a job description, and tracks improvement over time.
+image: /ai_resume_analyser.png
+repo: https://github.com/Aniket-a14/ai-resume-analyser
+live: https://ai-resume-analyser-sand.vercel.app
+year: 2025
+timeline: Oct — Nov 2025
+role: Full build — architecture, UI, PDF pipeline
+status: Shipped
+license: MIT
+languages: [React Router v7, React 19, Puter.js, PDF.js]
+stack:
+  - React Router v7
+  - React 19
+  - Tailwind CSS v4
+  - Puter.js
+  - PDF.js
+  - Zustand
+  - Vite 7
+  - Docker
+---
+
+Applying for jobs involves a step nobody enjoys: rewriting the same résumé six different ways because six different job descriptions want six different things emphasised. And you never find out whether the rewrite helped, because the applicant tracking system that reads it first doesn't send feedback.
+
+Resume Tuner is a small, focused answer to that. Upload your résumé, paste the job title and description you're targeting, and get back an ATS score out of 100 with the specific reasons behind it.
+
+<StatRow>
+  <Stat value="0–100" label="ATS score against the target role" />
+  <Stat value="0" label="Servers I run" />
+  <Stat value="5" label="Routes in the whole app" />
+</StatRow>
+
+## The decision that shaped everything
+
+I had no backend, and I decided not to build one.
+
+Every project before this one had a Node server, a database and a deployment story for both. For an app whose entire job is *"take a PDF, ask a model about it, show the result"*, that felt like an enormous amount of infrastructure to own — especially infrastructure that would be holding other people's résumés.
+
+So the whole thing runs on **Puter.js**, which supplies the file system, a key-value store and the AI calls from the client side. There is no server of mine in the path. Authentication is a Puter account, your files live in your Puter storage, and I never hold your résumé at all.
+
+<Callout type="insight">
+Not owning the storage turned a privacy problem into a non-problem. I can't leak data I never receive. This is the cheapest security posture I've ever had, and I got it by deleting a component rather than adding one.
+</Callout>
+
+The trade-off is real and worth naming: users need a Puter account, and the app's capabilities are bounded by what that platform offers. For a focused tool, that was a trade I'd make again.
+
+## Parsing PDFs in the browser
+
+The unglamorous engineering here is the PDF pipeline, and it has more decisions in it than the AI does.
+
+Résumés arrive as PDFs. The model wants text; the UI wants a preview image. **PDF.js** does both, client-side, in `app/lib/pdf2img.ts` — and three details in that file are load-bearing:
+
+**The library is loaded lazily and exactly once.** `pdfjs-dist` is large, and most sessions start on the history page rather than the upload page. So the import is deferred behind a module-level promise: the first caller triggers the dynamic import, every subsequent caller awaits the same promise. No double-load, and nothing is paid for by users who never upload anything.
+
+**The worker is served locally.** `GlobalWorkerOptions.workerSrc` points at `/pdf.worker.min.mjs` in the app's own `public/` directory rather than at a CDN. A parse that silently depends on a third-party host being up is a parse that fails on a bad day, and there is nothing useful to show a user when it does.
+
+**The preview renders the first page at 4× scale** onto a canvas with high-quality image smoothing, then converts to a PNG blob carrying the original filename. Rendering at 1× and upscaling in CSS looked exactly as cheap as it was; 4× costs a few hundred milliseconds once and produces a thumbnail that holds up on a retina display.
+
+The result of all this is that the file never makes a round trip just to be read — faster, and consistent with the no-server principle.
+
+## Five scores, not one
+
+A single number isn't feedback. The analysis returns a structured result: an **overall score**, and five sub-scores each with its own list of tips.
+
+<TechGrid
+  groups={[
+    { label: "Scored dimensions", items: ["ATS compatibility", "Tone & style", "Content", "Structure", "Skills"] },
+    { label: "Surfaced as", items: ["ScoreGauge — headline", "ScoreCircle — per dimension", "ScoreBadge — status", "Accordion — tips", "Summary — narrative"] },
+  ]}
+/>
+
+That split is the difference between "your résumé scores 62" and "your résumé scores 62 because its structure is fine, its ATS compatibility is poor, and here are four specific reasons why." Only the second one tells you what to edit.
+
+The components mirror the schema deliberately — a gauge for the headline, a circle per dimension, a badge for at-a-glance status, an accordion of detail beneath. When the shape of the UI matches the shape of the data, adding a sixth dimension later is a schema change rather than a redesign.
+
+## The app itself
+
+Five routes, and the structure is deliberately flat:
+
+<TechGrid
+  groups={[
+    { label: "Routes", items: ["/ — history", "/auth — Puter sign-in", "/upload — analyse", "/resume/:id — report", "/wipe — delete everything"] },
+    { label: "Platform", items: ["React Router v7", "React 19", "Tailwind v4", "Zustand", "Vite 7"] },
+    { label: "Upload path", items: ["react-dropzone", "PDF.js parse", "Puter FS write", "Puter KV index"] },
+  ]}
+/>
+
+The `/wipe` route is not a debug leftover — it is a feature. If the app is going to hold analyses of your career history in your own storage, there should be one obvious button that removes all of it. Building the delete path at the same time as the write path, rather than "later", is a habit I picked up here and have kept.
+
+State is **Zustand** rather than context, because the analysis flow is one shared store touched from several routes and Zustand does that with less ceremony than provider nesting. It's a small app; the state layer should be small too.
+
+## What "ATS score" actually means here
+
+Worth being precise, because the phrase gets used loosely. The score is the model's evaluation of how well the résumé matches **the specific job description you supplied** — not a universal résumé grade and not a simulation of any particular vendor's ATS. Change the target role and the score changes, which is the entire point. A résumé is not good or bad in isolation; it is aimed or unaimed.
+
+Analyses are saved automatically, so you can rewrite, re-run and watch the number move. That history is the feature I use most.
+
+## Deployment
+
+It builds to a Node server via `react-router-serve`, and there's a Dockerfile so it can go anywhere that runs a container:
+
+```bash
+docker build -t resume-tuner .
+docker run -p 3000:3000 resume-tuner
+```
+
+In practice it's on Vercel. The build is a Vite 7 pipeline with Tailwind v4 through the Vite plugin rather than PostCSS, which is noticeably quicker.
+
+## What I'd change
+
+Two things, honestly.
+
+All five sub-scores come out of a single model call. That keeps latency and cost down, but it means the dimensions aren't independent — a response that decides your résumé is weak tends to mark everything down together, and a generous one lifts everything. Splitting it into separate passes for ATS/keyword coverage, structure, and tone would cost more calls and produce sub-scores that actually disagree with each other, which is the entire point of having five of them.
+
+And the app can't compare two versions side by side. History exists, but reading two reports in sequence is not the same as seeing what changed between them. A diff view — same résumé, two revisions, the deltas highlighted — is the obvious next feature and the one I'd build first.
+
+This is the smallest project on this page and one of the more instructive ones. Not every problem needs a backend, a database and an ORM. Sometimes the right architecture is the one where most of the boxes aren't yours.

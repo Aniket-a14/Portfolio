@@ -1,10 +1,10 @@
-import { projects } from '@/lib/data';
+import { getAllProjects } from '@/lib/projects';
 
 export default function sitemap() {
     const baseUrl = 'https://aniketdesign.in';
 
-    const projectUrls = projects.map((project) => ({
-        url: `${baseUrl}/project/${project.title.toLowerCase().replace(/\s+/g, '-')}`,
+    const projectUrls = getAllProjects().map((project) => ({
+        url: `${baseUrl}/project/${project.slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,
