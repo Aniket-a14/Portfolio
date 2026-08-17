@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
+import { socialLinks } from "@/lib/data";
+import Link from "next/link";
 
 export default function ContactHub() {
   const { navigate } = useTransitionContext();
@@ -81,18 +83,18 @@ export default function ContactHub() {
                <div>
                  <h3 className="text-white/30 text-xs tracking-[0.3em] uppercase mb-4">Digital Presence</h3>
                  <div className="flex flex-col gap-4 text-lg md:text-xl font-light">
-                   <a href="#" className="flex items-center gap-3 w-fit group">
+                   <Link href="https://x.com/AniketSaha41043" className="flex items-center gap-3 w-fit group">
                       <span className="group-hover:text-white/70 transition-colors">X (Twitter)</span>
                       <ArrowUpRight size={16} className="text-white/20 group-hover:text-white/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                   </a>
-                   <a href="#" className="flex items-center gap-3 w-fit group">
+                   </Link>
+                   <Link href="https://www.linkedin.com/in/aniketsaha2005" className="flex items-center gap-3 w-fit group">
                       <span className="group-hover:text-white/70 transition-colors">LinkedIn</span>
                       <ArrowUpRight size={16} className="text-white/20 group-hover:text-white/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                   </a>
-                   <a href="#" className="flex items-center gap-3 w-fit group">
+                   </Link>
+                   <Link href="https://github.com/Aniket-a14" className="flex items-center gap-3 w-fit group">
                       <span className="group-hover:text-white/70 transition-colors">GitHub</span>
                       <ArrowUpRight size={16} className="text-white/20 group-hover:text-white/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                   </a>
+                   </Link>
                  </div>
                </div>
 
