@@ -4,6 +4,7 @@ import { RiCopyrightLine } from "react-icons/ri";
 import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
+import { profileData } from "@/lib/data";
 
 const Footer = () => {
   const { navigate } = useTransitionContext();
@@ -111,9 +112,12 @@ const Footer = () => {
               </span>
             </h2>
           </button>
-          <p className="font-roboto text-white/30 text-base md:text-lg mt-6 md:mt-8 font-light italic">
-            aniketsahaworkspace@gmail.com
-          </p>
+          <a
+            href={`mailto:${profileData.contact.email}`}
+            className="font-roboto text-white/30 text-base md:text-lg mt-6 md:mt-8 font-light italic hover:text-white/70 transition-colors block w-fit"
+          >
+            {profileData.contact.email}
+          </a>
 
           <div className="mt-24 flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-20">
             <div className="max-w-xl">

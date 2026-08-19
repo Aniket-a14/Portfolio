@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
-import { socialLinks } from "@/lib/data";
+import { socialLinks, profileData } from "@/lib/data";
 import Link from "next/link";
 
 export default function ContactHub() {
@@ -75,26 +75,26 @@ export default function ContactHub() {
             <div className="w-full lg:w-1/3 flex flex-col gap-14 font-roboto shrink-0">
                <div>
                  <h3 className="text-white/30 text-xs tracking-[0.3em] uppercase mb-4">Direct Contact</h3>
-                 <a href="mailto:aniketsahaworkspace@gmail.com" className="text-lg md:text-xl font-light hover:text-white transition-colors">
-                   aniketsahaworkspace@gmail.com
+                 <a href={`mailto:${profileData.contact.email}`} className="text-lg md:text-xl font-light hover:text-white transition-colors">
+                   {profileData.contact.email}
                  </a>
                </div>
 
                <div>
                  <h3 className="text-white/30 text-xs tracking-[0.3em] uppercase mb-4">Digital Presence</h3>
                  <div className="flex flex-col gap-4 text-lg md:text-xl font-light">
-                   <Link href="https://x.com/AniketSaha41043" className="flex items-center gap-3 w-fit group">
-                      <span className="group-hover:text-white/70 transition-colors">X (Twitter)</span>
-                      <ArrowUpRight size={16} className="text-white/20 group-hover:text-white/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                   </Link>
-                   <Link href="https://www.linkedin.com/in/aniketsaha2005" className="flex items-center gap-3 w-fit group">
-                      <span className="group-hover:text-white/70 transition-colors">LinkedIn</span>
-                      <ArrowUpRight size={16} className="text-white/20 group-hover:text-white/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                   </Link>
-                   <Link href="https://github.com/Aniket-a14" className="flex items-center gap-3 w-fit group">
-                      <span className="group-hover:text-white/70 transition-colors">GitHub</span>
-                      <ArrowUpRight size={16} className="text-white/20 group-hover:text-white/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                   </Link>
+                   {socialLinks.map((social) => (
+                     <Link
+                       key={social.name}
+                       href={social.url}
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       className="flex items-center gap-3 w-fit group"
+                     >
+                       <span className="group-hover:text-white/70 transition-colors">{social.name}</span>
+                       <ArrowUpRight size={16} className="text-white/20 group-hover:text-white/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                     </Link>
+                   ))}
                  </div>
                </div>
 
