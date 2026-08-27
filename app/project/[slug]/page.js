@@ -185,14 +185,15 @@ export default async function ProjectDetailPage({ params }) {
 
       {/* ---------------- Cover plate ---------------- */}
       <figure className={SHELL}>
-        <div className="relative aspect-[16/9] w-full overflow-hidden border border-white/[0.08] bg-white/[0.02] sm:aspect-[21/9]">
+        <div className="relative w-full overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.02]">
           <Image
             src={frontmatter.image}
             alt={`${frontmatter.title} interface`}
-            fill
+            width={3360}
+            height={2280}
             priority
             sizes="(max-width: 1240px) 100vw, 1240px"
-            className="object-cover"
+            className="h-auto w-full object-contain"
           />
         </div>
       </figure>
