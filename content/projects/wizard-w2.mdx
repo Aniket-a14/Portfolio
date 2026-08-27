@@ -1,18 +1,18 @@
 ---
 id: 2
 order: 2
-slug: wizard-w1
-title: Wizard-w1
-fullTitle: Wizard w1 — Local-First Autonomous Data Agent
+slug: wizard-w2
+title: Wizard-w2
+fullTitle: Wizard w2 — Local-First Autonomous Data Agent
 tagline: Ask a real question about your data. It investigates, runs the code, checks its own arithmetic, and tells you what it assumed — entirely on your machine, with no API key.
 description: A Python-based autonomous data analysis agent that plans from real execution output, sandboxes generated code, verifies its own results, and runs fully offline on local models.
-image: /wizard_w1_branded.png
-repo: https://github.com/Aniket-a14/Wizard-w1
+image: /wizard_w2.png
+repo: https://github.com/Wizard-AIA/Wizard-w2
 year: 2025
 timeline: Feb 2025 — ongoing
 role: Architecture, agent design, backend, frontend
-status: Active · v3.1.0
-license: BSD-3-Clause
+status: Active · v4.0.0
+license: Apache-2.0
 languages: [Python, Next.js, Ollama]
 stack:
   - Python
@@ -29,7 +29,7 @@ Most "AI data analyst" tools do the same thing: you ask a question, a model writ
 
 Real analytical questions do not survive contact with the data. You find out the join key is dirty, or that "active customer" means three different things in three tables, only *after* you have looked.
 
-Wizard w1 is built around that observation. It is a local-first autonomous data agent: you upload a file, ask a question in plain language, and it investigates — looking, computing, revising its approach when the data disagrees with it — then verifies the result and explains it, streaming its reasoning as it goes.
+Wizard w2 is built around that observation. It is a local-first autonomous data agent: you upload a file, ask a question in plain language, and it investigates — looking, computing, revising its approach when the data disagrees with it — then verifies the result and explains it, streaming its reasoning as it goes.
 
 <Callout type="note">
 It runs entirely on your machine. Your data never leaves it, and no API key is required. Two small Ollama models are enough to be useful.
@@ -128,5 +128,3 @@ That principle is also why the sandbox ships in tiers — `core`, `standard`, `f
 The analytical surface is wider than pandas: DuckDB for SQL over dataframes, statsmodels and scipy for inference, scikit-learn/XGBoost/LightGBM for modelling, lifelines for survival analysis, networkx for graphs, geopandas for spatial. Data comes in as CSV, TSV, Excel, JSON, NDJSON, Parquet or Feather. Reference documents — data dictionaries, metric definitions, business rules — can be attached as Markdown, text, PDF or `.docx`, and the agent consults them mid-analysis when a question turns on what a column *means*.
 
 The test suite is 600+ tests organised as `unit/`, `integration/`, `regression/` and `negative/`, and none of them need Docker, a model, a network or a subprocess to run. The regression suite pins previously-fixed defects and each test explains what broke, which has saved me more than once when refactoring the session layer.
-
-What I'd change: the manager/worker split is the right idea, but I bolted the depth tiers on afterwards rather than designing for them, and the tier logic is now threaded through more of the loop than I'd like. Next time that's a first-class concept from day one.
