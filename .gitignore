@@ -45,3 +45,6 @@ next-env.d.ts
 
 # Local Claude Code plugin/skill enablement (per-machine, not shared)
 .claude/
+
+# npx skills lock file (local skill install state, not shared)
+skills-lock.json
