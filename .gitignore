@@ -42,3 +42,6 @@ next-env.d.ts
 
 # public
 .env*.local
+
+# Local Claude Code plugin/skill enablement (per-machine, not shared)
+.claude/
