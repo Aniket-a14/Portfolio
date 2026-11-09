@@ -48,3 +48,6 @@ next-env.d.ts
 
 # npx skills lock file (local skill install state, not shared)
 skills-lock.json
+
+# Local design exploration lab (not part of the site)
+design-lab/
