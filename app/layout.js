@@ -39,6 +39,7 @@ export const viewport = {
 export const metadata = getMetadata();
 
 import CustomCursor from "@/components/CustomCursor";
+import MusicPlayer from "@/components/MusicPlayer";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { TransitionProvider } from "@/components/providers/TransitionProvider";
 
@@ -87,6 +88,7 @@ export default function RootLayout({ children }) {
               }}
             />
             {children}
+            <MusicPlayer />
             <Analytics />
             <SpeedInsights />
           </LenisProvider>

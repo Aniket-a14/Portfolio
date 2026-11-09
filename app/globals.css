@@ -370,3 +370,12 @@ body {
 
 /* Annotated essay: the opening sentence of each chapter, marked like a highlighter underline. */
 .case-study mark.key-sentence{background:linear-gradient(transparent 58%,rgb(var(--vermilion) / .22) 58%);color:inherit;padding:0}
+
+/* Music player sliders (components/MusicPlayer). */
+.mp-range { -webkit-appearance: none; appearance: none; background: transparent; height: 22px; cursor: pointer; }
+.mp-range:disabled { cursor: default; opacity: 0.4; }
+.mp-range::-webkit-slider-runnable-track { height: 2px; background: rgb(var(--ink) / 0.25); }
+.mp-range::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; margin-top: -5px; border-radius: 50%; border: 0; background: rgb(var(--vermilion)); }
+.mp-range::-moz-range-track { height: 2px; background: rgb(var(--ink) / 0.25); }
+.mp-range::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; border: 0; background: rgb(var(--vermilion)); }
+.mp-range:focus-visible { outline: 2px solid rgb(var(--vermilion)); outline-offset: 3px; }
