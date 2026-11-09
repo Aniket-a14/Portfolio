@@ -39,6 +39,23 @@ export default async function Experience() {
           <Row key={e.company} when={e.period} title={<>{e.role}, <i className="text-vermilion">{e.company}</i></>} sub={e.type} items={e.bullets} />
         ))}
 
+        <p className="folio mb-1 mt-[6vh] border-b border-ink pb-2 font-medium [&+*]:border-t-0">Research &amp; open source</p>
+        {profileData.achievements.map((a) => (
+          <Row
+            key={a.title}
+            when={a.period}
+            title={a.url ? <a href={a.url} target="_blank" rel="noopener noreferrer" className="hover:text-vermilion">{a.title}</a> : a.title}
+            sub={a.links ? (
+              <span className="flex flex-wrap gap-x-5 gap-y-1">
+                {a.links.map((l) => (
+                  <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer" className="border-b border-ink/40 text-ink hover:border-vermilion hover:text-vermilion">{l.label} ↗</a>
+                ))}
+              </span>
+            ) : a.sub}
+            items={a.bullets}
+          />
+        ))}
+
         <p className="folio mb-1 mt-[6vh] border-b border-ink pb-2 font-medium [&+*]:border-t-0">Education</p>
         {profileData.education.map((e) => (
           <Row key={e.degree} when={e.period} title={e.degree} sub={e.institution} items={[e.description.trim()]} />

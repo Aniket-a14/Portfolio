@@ -5,18 +5,18 @@ import { Reveal, WordsInView } from "@/components/ui/Reveal";
 
 // Server component: the About copy is static, so none of it ships as client JS
 // except the two tiny reveal wrappers.
-const paragraphs = aboutText.match(/[^.]+\.\s?/g).map((s) => s.trim());
+const paragraphs = aboutText.split(/\n\s*\n/).map((s) => s.trim());
 
 export default function About() {
   const [first, ...rest] = paragraphs;
   const mine = profileData.aboutMe.description.trim().replace("I build systems, not just applications. ", "");
   return (
-    <section id="about" aria-labelledby="about-title" className="bg-ground px-[3vw] pb-[10vh] pt-[6vh]">
+    <section id="about" aria-labelledby="about-title" className="bg-ground px-[3vw] pb-[8vh] pt-[6vh]">
       <div className="mx-auto max-w-[1500px]">
-        <div className="mb-[8vh] grid gap-x-[3vw] border-t border-ink pt-4 md:grid-cols-[2fr_8fr]">
+        <div className="mb-[5vh] grid gap-x-[3vw] border-t border-ink pt-4 md:grid-cols-[2fr_8fr]">
           <p className="folio text-vermilion">№ 02 — About</p>
-          <h2 id="about-title" className="display max-w-[14em] text-[clamp(2.4rem,6.4vw,6.4rem)] font-light leading-[0.98]">
-            <WordsInView text="A tech enthusiast who likes hard problems." />
+          <h2 id="about-title" className="display max-w-[14em] text-[clamp(2.2rem,5vw,4.8rem)] font-light leading-[1]">
+            <WordsInView text="It started with a website I wanted to build." />
           </h2>
         </div>
 
@@ -26,11 +26,11 @@ export default function About() {
             {profileData.aboutPortfolio.description.trim()}
           </aside>
 
-          <article className="grid max-w-[44em] gap-6 font-display text-[clamp(1.05rem,1.35vw,1.28rem)] leading-[1.7]">
-            <Reveal><p className="first-letter:float-left first-letter:pr-[.1em] first-letter:pt-[.06em] first-letter:text-[5.6em] first-letter:font-light first-letter:leading-[.78] first-letter:text-vermilion-bright">{first}</p></Reveal>
+          <article className="grid max-w-[44em] gap-4 font-display text-[clamp(1rem,1.15vw,1.12rem)] leading-[1.6]">
+            <Reveal><p className="first-letter:float-left first-letter:pr-[.1em] first-letter:pt-[.06em] first-letter:text-[4.6em] first-letter:font-light first-letter:leading-[.78] first-letter:text-vermilion-bright">{first}</p></Reveal>
             {rest.map((p, i) => <Reveal key={i} delay={(i + 1) * 80}><p>{p}</p></Reveal>)}
             <Reveal>
-              <blockquote className="display my-4 border-y border-ink py-6 text-[clamp(1.8rem,3.2vw,3.2rem)] font-light italic leading-[1.1] tracking-[-0.02em]">
+              <blockquote className="display my-1 border-y border-ink py-4 text-[clamp(1.5rem,2.3vw,2.2rem)] font-light italic leading-[1.15] tracking-[-0.02em]">
                 “I build systems, not just applications.”
               </blockquote>
             </Reveal>
