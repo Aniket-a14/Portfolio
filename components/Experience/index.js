@@ -1,6 +1,7 @@
 import React from "react";
 import { profileData, codingProfiles, heroData } from "@/lib/data";
 import { Reveal, WordsInView } from "@/components/ui/Reveal";
+import ScrollEnd from "./ScrollEnd";
 import GithubHeatmap, { Legend, getContributions, summarise } from "./GithubHeatmap";
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -81,11 +82,13 @@ export default async function Experience() {
                 @{profileData.githubUsername} ↗
               </a>
             </figcaption>
-            <div className="min-w-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" tabIndex={0} role="group" aria-label="GitHub contribution heatmap, scrollable">
-              <div className="min-w-[700px] max-w-[980px]">
-                <GithubHeatmap days={days} />
-                <Legend />
-              </div>
+            <div className="min-w-0">
+              <ScrollEnd className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" tabIndex={0} role="group" aria-label="GitHub contribution heatmap, scrollable">
+                <div className="min-w-[700px] max-w-[980px]">
+                  <GithubHeatmap days={days} />
+                </div>
+              </ScrollEnd>
+              <div className="max-w-[980px]"><Legend /></div>
             </div>
           </figure>
         )}

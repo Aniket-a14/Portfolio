@@ -82,10 +82,21 @@ const Navbar = () => {
 
   const isActive = (link) => (link.href.startsWith("/") ? pathname === link.href : pathname === "/" && spy === link.href);
 
+  const indexButton = (cls) => (
+    <button
+      onClick={() => setIsOpen((o) => !o)}
+      aria-expanded={isOpen}
+      aria-controls="mobile-index"
+      className={`folio border border-ink px-3 py-1.5 ${cls}`}
+    >
+      {isOpen ? "Close" : "Index"}
+    </button>
+  );
+
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-ink bg-ground">
       <div
-        className={`folio grid grid-cols-1 items-center overflow-hidden border-b border-ink/15 px-[3vw] transition-all duration-500 ease-[cubic-bezier(.76,0,.24,1)] md:grid-cols-[1fr_auto_1fr] ${slim ? "max-h-0 border-transparent py-0 opacity-0" : "max-h-16 py-2 opacity-100"}`}
+        className={`folio flex items-center justify-between overflow-hidden px-[3vw] transition-all duration-500 ease-[cubic-bezier(.76,0,.24,1)] md:grid md:grid-cols-[1fr_auto_1fr] md:border-b md:border-ink/15 ${slim ? "max-h-0 border-transparent py-0 opacity-0" : "max-h-16 py-2.5 opacity-100 md:py-2"}`}
         aria-hidden={slim}
       >
         <span className="hidden text-ink/70 md:block">{date || " "}</span>
@@ -101,9 +112,10 @@ const Navbar = () => {
           <span className="display text-[clamp(1.4rem,3vw,2.2rem)] font-normal normal-case leading-none tracking-[-0.02em]">Aniket Saha</span>
         </button>
         <span className="hidden text-right text-ink/70 md:block">Portfolio · Vol. 2026</span>
+        {indexButton("md:hidden")}
       </div>
 
-      <nav aria-label="Primary" className="relative flex items-center justify-center px-[3vw] py-2.5 md:gap-[clamp(1rem,3.4vw,3.4rem)]">
+      <nav aria-label="Primary" className={`relative min-h-[3.4rem] items-center justify-center px-[3vw] py-2.5 md:min-h-0 md:flex md:gap-[clamp(1rem,3.4vw,3.4rem)] ${slim ? "flex" : "hidden"}`}>
         <button
           onClick={() => setIsSheetOpen(true)}
           className={`absolute left-[3vw] items-center gap-2 md:hidden ${slim ? "flex" : "hidden"}`}
@@ -128,14 +140,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        <button
-          onClick={() => setIsOpen((o) => !o)}
-          aria-expanded={isOpen}
-          aria-controls="mobile-index"
-          className="folio absolute right-[3vw] border border-ink px-3 py-1.5 md:hidden"
-        >
-          {isOpen ? "Close" : "Index"}
-        </button>
+        {indexButton("absolute right-[3vw] md:hidden")}
       </nav>
 
       <motion.div style={{ scaleX: progress }} className="absolute inset-x-0 -bottom-px h-[2px] origin-left bg-vermilion-bright" aria-hidden="true" />

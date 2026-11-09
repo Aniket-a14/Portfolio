@@ -26,7 +26,7 @@ export default function Hero() {
   const on = isInitialLoadComplete;
 
   return (
-    <section id="hero" className={`relative flex min-h-[100svh] flex-col overflow-hidden pt-[6.5rem] md:pt-[8.5rem] ${on ? "hero-on" : ""}`}>
+    <section id="hero" className={`relative flex min-h-[100svh] flex-col overflow-hidden pt-[5.25rem] md:pt-[8.5rem] ${on ? "hero-on" : ""}`}>
       <div className="mx-auto grid w-full max-w-[1500px] flex-1 grid-cols-1 items-end gap-y-8 px-[4vw] pb-10 md:grid-cols-[7fr_5fr] md:gap-x-[3vw] md:pb-14">
         <div className="relative z-10 order-2 md:order-1">
           <p className="folio mb-5 flex gap-4 text-ink/70"><span className="text-vermilion">№ 01</span> The engineer</p>
@@ -34,7 +34,7 @@ export default function Hero() {
             <span className="block"><Words text="Aniket" on={on} base={100} step={110} /></span>
             <span className="block pl-[0.7em] italic text-vermilion"><Words text="Saha" on={on} base={260} step={110} /></span>
           </h1>
-          <p className="display mt-6 text-[clamp(1.1rem,2.1vw,1.9rem)] italic leading-tight">
+          <p className="display mt-6 text-[clamp(1.1rem,2.1vw,1.9rem)] italic leading-tight tracking-[-0.005em] [font-variation-settings:'opsz'_48,'SOFT'_30]">
             <Words text={profileData.roles.join(" · ")} on={on} base={700} step={50} />
           </p>
           <p className="mt-5 max-w-[52ch] text-[clamp(.98rem,1.2vw,1.15rem)] leading-[1.6] text-ink/70">
@@ -58,7 +58,7 @@ export default function Hero() {
           <p className="mt-6 text-[.95rem] font-medium text-ink/70">{heroData.ctaText}</p>
         </div>
 
-        <figure className="relative order-1 w-[70%] justify-self-end md:order-2 md:w-full md:max-w-[460px]">
+        <figure className="relative order-1 w-[74%] justify-self-center md:order-2 md:justify-self-end md:w-full md:max-w-[460px]">
           <div className="absolute -right-[3vw] bottom-9 top-8 w-[62%] origin-bottom scale-y-0 bg-vermilion-bright transition-transform duration-[1300ms] ease-[cubic-bezier(.76,0,.24,1)] [.hero-on_&]:scale-y-100" style={{ transitionDelay: ".5s" }} aria-hidden="true" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-t-full bg-ink/10 [clip-path:inset(100%_0_0_0)] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(.76,0,.24,1)] [.hero-on_&]:[clip-path:inset(0_0_0_0)]" style={{ transitionDelay: ".35s" }}>
             <Image src="/portrait-hero-bw.jpg" alt="Aniket Saha" fill priority sizes="(max-width: 768px) 70vw, 460px" className="object-cover" />

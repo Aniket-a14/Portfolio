@@ -201,6 +201,8 @@ body {
   font-family: var(--font-display), Georgia, serif;
   font-variation-settings: "opsz" 144, "SOFT" 30;
   letter-spacing: -0.035em;
+  /* Fraunces at opsz 144 closes word gaps; a little extra keeps headings readable on phones. */
+  word-spacing: 0.08em;
 }
 .folio {
   font-family: var(--font-mono), ui-monospace, monospace;
