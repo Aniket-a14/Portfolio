@@ -138,35 +138,35 @@ const ProfileSheet = ({ isOpen, onClose }) => {
             role="dialog"
             aria-modal="true"
             aria-label="Profile Information"
-            className="absolute left-0 top-0 h-full w-full sm:w-[520px] md:w-[620px] flex flex-col"
-            style={{ background: "rgb(234, 229, 225)" }}
-            data-light-cursor
+            className="absolute left-0 top-0 h-full w-full sm:w-[520px] md:w-[620px] flex flex-col bg-ground text-ink"
+            
+            
           >
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
-              className="sticky top-0 z-10 flex items-center justify-between px-10 sm:px-14 py-6 border-b border-black/[0.06]"
-              style={{ background: "rgb(234, 229, 225)" }}
+              className="sticky top-0 z-10 flex items-center justify-between px-10 sm:px-14 py-6 border-b border-ink/10 bg-ground"
+              
             >
               <div className="flex items-center gap-5">
-                <Avatar className="h-12 w-12 border border-black/10">
+                <Avatar className="h-12 w-12 border border-ink/15">
                   <AvatarImage src={profileData.avatar} alt={profileData.name} />
-                  <AvatarFallback style={{ background: "#e8e6e1", color: "#777" }} className="font-display">
+                  <AvatarFallback className="bg-ink/10 font-display text-ink/70">
                     {profileData.name.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <h2 className="font-display text-[30px] text-[#1a1a1a] leading-tight font-normal">
+                  <h2 className="font-display text-[30px] text-ink leading-tight font-normal">
                     {profileData.name}
                   </h2>
-                  <p className="font-body text-[14px] text-[#8a8070] font-light mt-0.5">
+                  <p className="font-body text-[14px] text-ink/70 font-light mt-0.5">
                     {profileData.roles.join(' · ')}
                   </p>
                 </div>
               </div>
               <button
                 onClick={onClose}
-                className="text-[#aaa] hover:text-[#444] transition-colors duration-200 p-1"
+                className="text-ink/70 hover:text-ink/85 transition-colors duration-200 p-1"
                 aria-label="Close"
               >
                 <X size={20} strokeWidth={1.5} />
@@ -182,19 +182,19 @@ const ProfileSheet = ({ isOpen, onClose }) => {
               data-lenis-prevent
             >
               <motion.div variants={fadeUp} className="mb-10">
-                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f] mb-3">
+                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-ink/70 mb-3">
                   {profileData.aboutPortfolio.title}
                 </h3>
-                <p className="font-body text-[16px] text-[#333] font-light leading-[1.6] whitespace-pre-line">
+                <p className="font-body text-[16px] text-ink/85 font-light leading-[1.6] whitespace-pre-line">
                   {profileData.aboutPortfolio.description.trim()}
                 </p>
               </motion.div>
 
               <motion.div variants={fadeUp} className="mb-10">
-                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f] mb-3">
+                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-ink/70 mb-3">
                   {profileData.aboutMe.title}
                 </h3>
-                <div className="font-body text-[16px] text-[#333] font-light leading-[1.6] space-y-4">
+                <div className="font-body text-[16px] text-ink/85 font-light leading-[1.6] space-y-4">
                   {profileData.aboutMe.description.trim().split('\n\n').map((paragraph, pIdx) => {
                     const lines = paragraph.split('\n');
                     const isList = lines.every(line => line.trim().startsWith('•'));
@@ -204,7 +204,7 @@ const ProfileSheet = ({ isOpen, onClose }) => {
                         <ul key={pIdx} className="space-y-1 mt-1">
                           {lines.map((line, lIdx) => (
                             <li key={lIdx} className="flex gap-2">
-                              <span className="text-[#9a8e7f] mt-1.5">•</span>
+                              <span className="text-ink/70 mt-1.5">•</span>
                               <span>{line.replace('•', '').trim()}</span>
                             </li>
                           ))}
@@ -222,33 +222,33 @@ const ProfileSheet = ({ isOpen, onClose }) => {
               </motion.div>
 
               <motion.div variants={fadeUp} className="mb-10">
-                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f] mb-3">
+                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-ink/70 mb-3">
                   Experience
                 </h3>
                 <div className="space-y-8">
                   {profileData.experience.map((exp, idx) => (
                     <div key={idx}>
                       <div className="flex items-baseline justify-between gap-4">
-                        <span className="font-body text-[17px] font-medium text-[#1a1a1a]">
-                          {exp.role} {exp.company && <span className="font-light text-[#aaa] mx-1">|</span>} {exp.company}
+                        <span className="font-body text-[17px] font-medium text-ink">
+                          {exp.role} {exp.company && <span className="font-light text-ink/70 mx-1">|</span>} {exp.company}
                         </span>
-                        <span className="font-body text-[13px] font-light text-[#aaa] whitespace-nowrap">
+                        <span className="font-body text-[13px] font-light text-ink/70 whitespace-nowrap">
                           {exp.period}
                         </span>
                       </div>
-                      <span className="font-body text-[14px] font-light text-[#888] block mt-0.5">
+                      <span className="font-body text-[14px] font-light text-ink/70 block mt-0.5">
                         {exp.type}
                       </span>
                       {exp.description && (
-                        <p className="font-body text-[15px] font-light text-[#555] leading-[1.5] mt-2.5 whitespace-pre-line">
+                        <p className="font-body text-[15px] font-light text-ink/85 leading-[1.5] mt-2.5 whitespace-pre-line">
                           {exp.description.trim()}
                         </p>
                       )}
                       {exp.bullets && (
                         <ul className="mt-2 space-y-1">
                           {exp.bullets.map((bullet, i) => (
-                            <li key={i} className="flex gap-2 font-body text-[14px] font-light text-[#555] leading-[1.4]">
-                              <span className="text-[#9a8e7f] mt-1.5">•</span>
+                            <li key={i} className="flex gap-2 font-body text-[14px] font-light text-ink/85 leading-[1.4]">
+                              <span className="text-ink/70 mt-1.5">•</span>
                               <span>{bullet}</span>
                             </li>
                           ))}
@@ -260,20 +260,20 @@ const ProfileSheet = ({ isOpen, onClose }) => {
               </motion.div>
 
               <motion.div variants={fadeUp} className="mb-10">
-                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f] mb-3">
+                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-ink/70 mb-3">
                   Skills
                 </h3>
                 <div className="space-y-4">
                   {skillCategories.map(({ key, label }) => (
                     <div key={key}>
-                      <span className="font-body text-[11px] font-medium tracking-[0.15em] uppercase text-[#b0a89e] block mb-2">
+                      <span className="font-body text-[11px] font-medium tracking-[0.15em] uppercase text-ink/70 block mb-2">
                         {label}
                       </span>
                       <div className="flex flex-wrap gap-2">
                         {profileData.skills[key].map((skill) => (
                           <span
                             key={skill}
-                            className="font-body text-[13px] font-light text-[#555] px-4 py-2 rounded-full border border-[#d5d0c8] hover:border-[#999] hover:text-[#1a1a1a] transition-colors duration-200"
+                            className="font-body text-[13px] font-light text-ink/85 px-4 py-2 rounded-full border border-ink/20 hover:border-ink/50 hover:text-ink transition-colors duration-200"
                           >
                             {skill}
                           </span>
@@ -286,40 +286,40 @@ const ProfileSheet = ({ isOpen, onClose }) => {
 
                             <motion.div variants={fadeUp} className="mb-10 group/heatmap">
                 <div className="flex items-center justify-between mb-5">
-                  <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f]">
+                  <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-ink/70">
                     GitHub Contributions
                   </h3>
                   <a 
                     href={profileData.contact.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 font-body text-[12px] font-medium tracking-wide opacity-0 -translate-y-1 group-hover/heatmap:opacity-100 group-hover/heatmap:translate-y-0 text-[#a39788] hover:text-[#1a1a1a] transition-all duration-300"
+                    className="flex items-center gap-1.5 font-body text-[12px] font-medium tracking-wide opacity-0 -translate-y-1 group-hover/heatmap:opacity-100 group-hover/heatmap:translate-y-0 text-ink/70 hover:text-ink transition-all duration-300"
                   >
                     <span>View Profile</span>
                     <FaGithub className="text-[13px]" />
                   </a>
                 </div>
                 
-                <div className="relative w-full bg-[rgb(234,229,225)]">
-                  <div className="absolute left-0 top-0 bottom-0 w-[30px] bg-[rgb(234,229,225)] z-10 overflow-hidden pointer-events-none">
+                <div className="relative w-full bg-ground">
+                  <div className="absolute left-0 top-0 bottom-0 w-[30px] bg-ground z-10 overflow-hidden pointer-events-none">
                     <div className="w-[722px] h-[112px] flex items-center">
                       <img 
                         src={`https://ghchart.rshah.org/2ea043/${profileData.githubUsername}`} 
                         alt="" 
-                        className="w-[722px] min-w-[722px] h-auto mix-blend-multiply contrast-[1.05]"
+                        className="w-[722px] min-w-[722px] h-auto mix-blend-multiply contrast-[1.05] dark:mix-blend-screen dark:invert dark:hue-rotate-180"
                         style={{ WebkitUserDrag: 'none' }}
                       />
                     </div>
                   </div>
 
-                  <div className="absolute left-[28px] top-0 bottom-0 w-3 bg-gradient-to-r from-[rgb(234,229,225)] to-transparent z-10 pointer-events-none"></div>
+                  <div className="absolute left-[28px] top-0 bottom-0 w-3 bg-gradient-to-r from-ground to-transparent z-10 pointer-events-none"></div>
 
                   <div className="w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                     <div className="w-[722px] h-[112px] flex items-center">
                       <img 
                         src={`https://ghchart.rshah.org/2ea043/${profileData.githubUsername}`} 
                         alt="GitHub Contributions Heatmap" 
-                        className="w-[722px] min-w-[722px] h-auto mix-blend-multiply contrast-[1.05]"
+                        className="w-[722px] min-w-[722px] h-auto mix-blend-multiply contrast-[1.05] dark:mix-blend-screen dark:invert dark:hue-rotate-180"
                         loading="lazy"
                         style={{ WebkitUserDrag: 'none' }}
                       />
@@ -329,7 +329,7 @@ const ProfileSheet = ({ isOpen, onClose }) => {
               </motion.div>
 
               <motion.div variants={fadeUp} className="mb-10">
-                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f] mb-5">
+                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-ink/70 mb-5">
                   Coding Profiles
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-6 mt-2">
@@ -349,12 +349,12 @@ const ProfileSheet = ({ isOpen, onClose }) => {
                             className="w-4 h-4 transition-all duration-300 group-hover:scale-110"
                           />
                         </div>
-                        <h4 className="font-display text-[17px] md:text-[19px] text-[#1a1a1a] font-normal leading-none transition-all duration-300">
+                        <h4 className="font-display text-[17px] md:text-[19px] text-ink font-normal leading-none transition-all duration-300">
                           {profile.name}
                         </h4>
-                        <ArrowUpRight className="size-3 text-[#ccc] group-hover:text-black transition-all" strokeWidth={1.5} />
+                        <ArrowUpRight className="size-3 text-ink/40 group-hover:text-ink transition-all" strokeWidth={1.5} />
                       </div>
-                      <span className="font-body text-[12px] font-light text-[#888] pl-8">
+                      <span className="font-body text-[12px] font-light text-ink/70 pl-8">
                         {profile.stats}
                       </span>
                     </motion.a>
@@ -363,22 +363,22 @@ const ProfileSheet = ({ isOpen, onClose }) => {
               </motion.div>
 
               <motion.div variants={fadeUp} className="mb-10">
-                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f] mb-3">
+                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-ink/70 mb-3">
                   Education
                 </h3>
                 <div className="space-y-6">
                   {profileData.education.map((edu, idx) => (
                     <div key={idx}>
                       <div className="flex items-baseline justify-between gap-4">
-                        <span className="font-body text-[17px] font-medium text-[#1a1a1a]">{edu.degree}</span>
-                        <span className="font-body text-[13px] font-light text-[#aaa] whitespace-nowrap">
+                        <span className="font-body text-[17px] font-medium text-ink">{edu.degree}</span>
+                        <span className="font-body text-[13px] font-light text-ink/70 whitespace-nowrap">
                           {edu.period}
                         </span>
                       </div>
-                      <span className="font-body text-[14px] font-light text-[#888] block mt-0.5">
+                      <span className="font-body text-[14px] font-light text-ink/70 block mt-0.5">
                         {edu.institution}
                       </span>
-                      <p className="font-body text-[15px] font-light text-[#555] leading-[1.5] mt-2.5">
+                      <p className="font-body text-[15px] font-light text-ink/85 leading-[1.5] mt-2.5">
                         {edu.description}
                       </p>
                     </div>
@@ -387,12 +387,12 @@ const ProfileSheet = ({ isOpen, onClose }) => {
               </motion.div>
 
               <motion.div variants={fadeUp}>
-                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-[#9a8e7f] mb-3">
+                <h3 className="font-body text-[14px] font-medium tracking-[0.2em] uppercase text-ink/70 mb-3">
                   Contact
                 </h3>
                 <a
                   href={`mailto:${profileData.contact.email}`}
-                  className="font-body text-[15px] font-light text-[#444] hover:text-[#111] transition-colors block mb-5"
+                  className="font-body text-[15px] font-light text-ink/85 hover:text-ink transition-colors block mb-5"
                 >
                   {profileData.contact.email}
                 </a>
@@ -410,8 +410,8 @@ const ProfileSheet = ({ isOpen, onClose }) => {
                       className="group flex items-center gap-2"
                       aria-label={social.label}
                     >
-                      <social.icon className="text-[16px] text-[#999] group-hover:text-[#444] transition-colors duration-200" />
-                      <span className="font-body text-[13px] font-light text-[#888] group-hover:text-[#444] transition-colors duration-200">
+                      <social.icon className="text-[16px] text-ink/70 group-hover:text-ink/85 transition-colors duration-200" />
+                      <span className="font-body text-[13px] font-light text-ink/70 group-hover:text-ink/85 transition-colors duration-200">
                         {social.label}
                       </span>
                     </a>

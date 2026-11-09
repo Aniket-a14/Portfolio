@@ -33,20 +33,30 @@ import { getMetadata } from "@/lib/seo";
 export const viewport = {
   width: "device-width",
   initialScale: 1.0,
-  themeColor: "#ebe7dd",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ebe7dd" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a1410" },
+  ],
 };
 
 export const metadata = getMetadata();
 
 import CustomCursor from "@/components/CustomCursor";
 import MusicPlayer from "@/components/MusicPlayer";
+import ThemeSync from "@/components/ThemeToggle/ThemeSync";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { TransitionProvider } from "@/components/providers/TransitionProvider";
+
+// Runs before first paint: the saved choice wins, otherwise the system setting. No flash, no hydration mismatch
+// (<html> has suppressHydrationWarning). Storage can be blocked, so each read is guarded on its own.
+const THEME_SCRIPT = `(function(){var r=document.documentElement,t=null,d=false;try{t=localStorage.getItem("theme")}catch(e){}try{d=t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches}catch(e){}r.setAttribute("data-theme",d?"dark":"light");r.classList.toggle("dark",d)})();`;
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning className="bg-ground">
-      <head />
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body
         className={`${display.variable} ${body.variable} ${mono.variable} font-body antialiased w-full bg-ground text-ink`}
         suppressHydrationWarning
@@ -89,6 +99,7 @@ export default function RootLayout({ children }) {
             />
             {children}
             <MusicPlayer />
+            <ThemeSync />
             <Analytics />
             <SpeedInsights />
           </LenisProvider>

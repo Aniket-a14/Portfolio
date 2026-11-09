@@ -243,7 +243,7 @@ export default async function ProjectDetailPage({ params }) {
 
             {frontmatter.stack?.length > 0 && (
               <section className="mt-24 border-t border-ink/10 pt-10">
-                <h2 className="mb-7 font-body text-[9.5px] font-medium uppercase tracking-[0.3em] text-vermilion/70">
+                <h2 className="mb-7 font-body text-[9.5px] font-medium uppercase tracking-[0.3em] text-vermilion">
                   Colophon
                 </h2>
                 <ul className="grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3">
@@ -288,7 +288,7 @@ export default async function ProjectDetailPage({ params }) {
                     <li key={c.id}>
                       <a
                         href={`#${c.id}`}
-                        className="folio flex gap-2 text-[10.5px] normal-case leading-snug tracking-[0.03em] text-ink/70 hover:text-vermilion"
+                        className="folio flex min-h-6 items-center gap-2 py-0.5 text-[10.5px] normal-case leading-snug tracking-[0.03em] text-ink/70 hover:text-vermilion"
                       >
                         <span className="text-vermilion">{String(c.number).padStart(2, "0")}</span>
                         {c.title}

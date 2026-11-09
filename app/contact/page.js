@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 import { socialLinks, profileData } from "@/lib/data";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const TOPICS = ["a role", "a project", "your work", "something else"];
 
@@ -61,13 +62,16 @@ export default function ContactHub() {
   return (
     <div className="min-h-screen bg-ground text-ink selection:bg-vermilion-bright selection:text-ground">
       <main className="mx-auto max-w-[1180px] px-6 pb-16 pt-10 md:px-12">
-        <button
-          onClick={() => navigate("/", "• Home", "up")}
-          className="folio mb-10 flex w-fit items-center gap-2 text-ink/70 hover:text-vermilion focus:outline-none focus-visible:text-vermilion"
-        >
-          <ArrowUpRight size={14} className="-rotate-90" />
-          Back to home
-        </button>
+        <div className="mb-10 flex items-center justify-between">
+          <button
+            onClick={() => navigate("/", "• Home", "up")}
+            className="folio flex w-fit items-center gap-2 text-ink/70 hover:text-vermilion focus:outline-none focus-visible:text-vermilion"
+          >
+            <ArrowUpRight size={14} className="-rotate-90" />
+            Back to home
+          </button>
+          <ThemeToggle />
+        </div>
 
         <div className="mx-auto max-w-[48rem]">
           <p className="folio border-t border-ink pt-4 text-vermilion">№ 05 — Letter to the author</p>
@@ -186,8 +190,7 @@ export default function ContactHub() {
             <ul className="grid gap-1">
               {socialLinks.map((s) => (
                 <li key={s.name}>
-                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 border-b border-ink/40 hover:text-vermilion">
-                    {s.name} <ArrowUpRight size={11} />
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 py-1 hover:text-vermilion"><span className="border-b border-ink/40">{s.name}</span> <ArrowUpRight size={11} />
                   </a>
                 </li>
               ))}

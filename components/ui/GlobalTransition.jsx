@@ -97,9 +97,9 @@ const GlobalTransition = () => {
             initial={{ y: direction === "down" ? "104%" : "-104%", borderTopLeftRadius: "50% 8vh", borderTopRightRadius: "50% 8vh" }}
             animate={{ y: "0%", borderTopLeftRadius: "0% 0vh", borderTopRightRadius: "0% 0vh", transition: { duration: 0.8, ease: EASE } }}
             exit={{ y: direction === "down" ? "-104%" : "104%", borderBottomLeftRadius: "50% 8vh", borderBottomRightRadius: "50% 8vh", transition: { duration: 0.8, ease: EASE } }}
-            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-4 bg-ink text-ground"
+            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-4 bg-ink text-ground dark:bg-[#2c221b] dark:text-ink"
           >
-            <span className="folio text-ground/60">Folio</span>
+            <span className="folio text-ground/60 dark:text-ink/60">Folio</span>
             <motion.span
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}

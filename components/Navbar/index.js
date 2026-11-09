@@ -7,6 +7,7 @@ import { useLenis } from "lenis/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { profileData } from "@/lib/data";
 import ProfileSheet from "@/components/ProfileSheet";
+import ThemeToggle from "@/components/ThemeToggle";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 
 // `href` without a leading slash is a section on the home page; with one it is a route.
@@ -111,8 +112,14 @@ const Navbar = () => {
           </Avatar>
           <span className="display text-[clamp(1.4rem,3vw,2.2rem)] font-normal normal-case leading-none tracking-[-0.02em]">Aniket Saha</span>
         </button>
-        <span className="hidden text-right text-ink/70 md:block">Portfolio · Vol. 2026</span>
-        {indexButton("md:hidden")}
+        <div className="hidden items-center justify-end gap-5 md:flex">
+          <span className="text-ink/70">Portfolio · Vol. 2026</span>
+          <ThemeToggle />
+        </div>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          {indexButton("")}
+        </div>
       </div>
 
       <nav aria-label="Primary" className={`relative min-h-[3.4rem] items-center justify-center px-[3vw] py-2.5 md:min-h-0 md:flex md:gap-[clamp(1rem,3.4vw,3.4rem)] ${slim ? "flex" : "hidden"}`}>
@@ -140,7 +147,15 @@ const Navbar = () => {
           ))}
         </div>
 
-        {indexButton("absolute right-[3vw] md:hidden")}
+        <div className="absolute right-[3vw] flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          {indexButton("")}
+        </div>
+        {slim && (
+          <div className="absolute right-[3vw] hidden md:block">
+            <ThemeToggle />
+          </div>
+        )}
       </nav>
 
       <motion.div style={{ scaleX: progress }} className="absolute inset-x-0 -bottom-px h-[2px] origin-left bg-vermilion-bright" aria-hidden="true" />

@@ -169,8 +169,8 @@ const Footer = () => {
             </nav>
             <p className="flex items-center gap-2">
               <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-700 opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-700" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-700 opacity-60 dark:bg-green-500" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-700 dark:bg-green-500" />
               </span>
               Available for new projects
             </p>

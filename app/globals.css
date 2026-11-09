@@ -91,6 +91,8 @@
     --ink: 21 20 15;
     --vermilion: 184 50 26;
     --vermilion-bright: 207 59 27;
+    --vermilion-fill: 207 59 27; /* large fills only (hero block); text uses --vermilion / --vermilion-bright */
+    --hard-shadow: 21 20 15;
     --background: 0 0% 0%;
     --foreground: 0 0% 98%;
     --card: 0 0% 100%;
@@ -379,3 +381,37 @@ body {
 .mp-range::-moz-range-track { height: 2px; background: rgb(var(--ink) / 0.25); }
 .mp-range::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; border: 0; background: rgb(var(--vermilion)); }
 .mp-range:focus-visible { outline: 2px solid rgb(var(--vermilion)); outline-offset: 3px; }
+
+
+/* ---------- Dark mode: "Espresso" ----------
+   Same semantic tokens, new values. Contrast on --ground (#1a1410): text 14.73:1, body (ink/70) 7.66:1,
+   accent #f0693a 5.89:1. The accent is lifted for text; --vermilion-fill keeps the deeper red for large blocks.
+   Chosen theme lives on <html data-theme>, set before first paint by the inline script in app/layout.js.
+   The media query below is the no-JavaScript fallback (system preference only). */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: 26 20 16;
+  --ink: 239 230 214;
+  --vermilion: 240 105 58;
+  --vermilion-bright: 240 105 58;
+  --vermilion-fill: 207 59 27;
+  --hard-shadow: 0 0 0;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --ground: 26 20 16;
+    --ink: 239 230 214;
+    --vermilion: 240 105 58;
+    --vermilion-bright: 240 105 58;
+    --vermilion-fill: 207 59 27;
+    --hard-shadow: 0 0 0;
+  }
+}
+/* Photos and the light project screenshots would glare on the dark ground. */
+:root[data-theme="dark"] :where(img) { filter: brightness(0.9) contrast(1.03); }
+
+/* Theme switch: a diagonal sweep (components/ThemeToggle). JS animates the new snapshot's clip-path. */
+:root[data-vt="theme"]::view-transition-group(root) { animation: none; }
+:root[data-vt="theme"]::view-transition-old(root),
+:root[data-vt="theme"]::view-transition-new(root) { animation: none; mix-blend-mode: normal; }

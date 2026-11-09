@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 import { WordsInView } from "@/components/ui/Reveal";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const pad = (n) => String(n).padStart(2, "0");
 const fmt = (d) =>
@@ -70,13 +71,16 @@ export default function BlogsClient() {
   return (
     <div className="min-h-screen bg-ground text-ink selection:bg-vermilion-bright selection:text-ground">
       <main className="mx-auto max-w-[1180px] px-6 pb-24 pt-10 md:px-12">
-        <button
-          onClick={() => navigate("/", "• Home", "up")}
-          className="folio mb-10 flex w-fit items-center gap-2 text-ink/70 hover:text-vermilion focus:outline-none focus-visible:text-vermilion"
-        >
-          <ArrowUpRight size={14} className="-rotate-90" />
-          Back to home
-        </button>
+        <div className="mb-10 flex items-center justify-between">
+          <button
+            onClick={() => navigate("/", "• Home", "up")}
+            className="folio flex w-fit items-center gap-2 text-ink/70 hover:text-vermilion focus:outline-none focus-visible:text-vermilion"
+          >
+            <ArrowUpRight size={14} className="-rotate-90" />
+            Back to home
+          </button>
+          <ThemeToggle />
+        </div>
 
         <header className="mb-8 border-t border-ink pt-4">
           <p className="folio text-vermilion">№ 06 — Articles ({pad(blogs.length)})</p>

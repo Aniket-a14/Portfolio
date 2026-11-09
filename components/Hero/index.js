@@ -59,7 +59,7 @@ export default function Hero() {
         </div>
 
         <figure className="relative order-1 w-[74%] justify-self-center md:order-2 md:justify-self-end md:w-full md:max-w-[460px]">
-          <div className="absolute -right-[3vw] bottom-9 top-8 w-[62%] origin-bottom scale-y-0 bg-vermilion-bright transition-transform duration-[1300ms] ease-[cubic-bezier(.76,0,.24,1)] [.hero-on_&]:scale-y-100" style={{ transitionDelay: ".5s" }} aria-hidden="true" />
+          <div className="absolute -right-[3vw] bottom-9 top-8 w-[62%] origin-bottom scale-y-0 bg-vermilion-fill transition-transform duration-[1300ms] ease-[cubic-bezier(.76,0,.24,1)] [.hero-on_&]:scale-y-100" style={{ transitionDelay: ".5s" }} aria-hidden="true" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-t-full bg-ink/10 [clip-path:inset(100%_0_0_0)] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(.76,0,.24,1)] [.hero-on_&]:[clip-path:inset(0_0_0_0)]" style={{ transitionDelay: ".35s" }}>
             <Image src="/portrait-hero-bw.jpg" alt="Aniket Saha" fill priority sizes="(max-width: 768px) 70vw, 460px" className="object-cover" />
           </div>

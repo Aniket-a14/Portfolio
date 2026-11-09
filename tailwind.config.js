@@ -31,6 +31,7 @@ export default {
 				// Deep vermilion for text/rules (4.85:1 on paper); bright for large fills only.
 				vermilion: 'rgb(var(--vermilion) / <alpha-value>)',
 				'vermilion-bright': 'rgb(var(--vermilion-bright) / <alpha-value>)',
+				'vermilion-fill': 'rgb(var(--vermilion-fill) / <alpha-value>)',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {

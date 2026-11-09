@@ -10,7 +10,7 @@ const Mermaid = dynamic(() => import("./Mermaid"));
 
 const CALLOUT_STYLES = {
   note: { label: "Note", tone: "text-ink/70", rule: "bg-ink/15" },
-  insight: { label: "What I learned", tone: "text-vermilion/80", rule: "bg-vermilion/50" },
+  insight: { label: "What I learned", tone: "text-vermilion", rule: "bg-vermilion/50" },
   warning: { label: "Caveat", tone: "text-ink/70", rule: "bg-ink/30" },
 };
 
@@ -69,7 +69,7 @@ export function TechGrid({ groups = [], items = [] }) {
         <div key={group.label || index}>
           {group.label && (
             <>
-              <p className="font-body text-[9.5px] font-medium uppercase tracking-[0.3em] text-vermilion/70">
+              <p className="font-body text-[9.5px] font-medium uppercase tracking-[0.3em] text-vermilion">
                 {group.label}
               </p>
               <span
@@ -193,7 +193,7 @@ export const mdxComponents = {
   ),
 
   ol: ({ children }) => (
-    <ol className="mb-7 ml-5 list-decimal space-y-3 marker:font-body marker:text-[12px] marker:text-vermilion/60">
+    <ol className="mb-7 ml-5 list-decimal space-y-3 marker:font-body marker:text-[12px] marker:text-vermilion">
       {children}
     </ol>
   ),
@@ -228,11 +228,11 @@ export const mdxComponents = {
     return (
       <div className="group relative my-9 -mx-1 sm:mx-0">
         {lang && (
-          <span className="absolute right-4 top-3.5 font-body text-[9px] uppercase tracking-[0.26em] text-vermilion/40">
+          <span className="absolute right-4 top-3.5 font-body text-[9px] uppercase tracking-[0.26em] text-vermilion">
             {lang}
           </span>
         )}
-        <pre className="overflow-x-auto border-l border-ink/[0.12] bg-ink/[0.022] py-5 pl-5 pr-5 pt-10 font-mono text-[12.5px] leading-[1.75] text-ink/70">
+        <pre tabIndex={0} className="overflow-x-auto border-l border-ink/[0.12] bg-ink/[0.022] py-5 pl-5 pr-5 pt-10 font-mono text-[12.5px] leading-[1.75] text-ink/70">
           {children}
         </pre>
       </div>
@@ -243,7 +243,7 @@ export const mdxComponents = {
     // Inside a <pre> the wrapper above already handled presentation.
     if (className) return <code className={className}>{children}</code>;
     return (
-      <code className="bg-ink/[0.06] px-1.5 py-0.5 font-mono text-[13px] text-vermilion/90">
+      <code className="bg-ink/[0.03] px-1.5 py-0.5 font-mono text-[13px] text-vermilion">
         {children}
       </code>
     );
@@ -260,7 +260,7 @@ export const mdxComponents = {
   ),
 
   th: ({ children }) => (
-    <th className="whitespace-nowrap px-4 py-3.5 font-body text-[9.5px] font-medium uppercase tracking-[0.2em] text-vermilion/70 first:pl-0">
+    <th className="whitespace-nowrap px-4 py-3.5 font-body text-[9.5px] font-medium uppercase tracking-[0.2em] text-vermilion first:pl-0">
       {children}
     </th>
   ),

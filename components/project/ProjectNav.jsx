@@ -39,7 +39,7 @@ export function NextProject({ previous, next }) {
           onClick={() => go(next)}
           className="group relative block w-full overflow-hidden border-y border-ink/10 py-12 text-left transition-colors duration-500 hover:border-ink/20"
         >
-          <span className="mb-4 flex items-center gap-2.5 font-body text-[9px] uppercase tracking-[0.3em] text-vermilion/70">
+          <span className="mb-4 flex items-center gap-2.5 font-body text-[9px] uppercase tracking-[0.3em] text-vermilion">
             Next case study
             <ArrowRight
               size={11}
