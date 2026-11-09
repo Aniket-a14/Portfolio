@@ -26,7 +26,7 @@ export async function POST(req) {
 
     // 3. Origin Check (Prevent unauthorized API calls from other domains)
     const origin = req.headers.get('origin');
-    const allowedOrigins = ['https://aniketdesign.in', 'http://localhost:3000']; 
+    const allowedOrigins = ['https://www.aniketdesign.in', 'https://aniketdesign.in', 'http://localhost:3000']; 
     if (process.env.NODE_ENV === 'production' && (!origin || !allowedOrigins.includes(origin))) {
       return NextResponse.json({ error: 'Unauthorized origin' }, { status: 403 });
     }

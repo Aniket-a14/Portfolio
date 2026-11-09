@@ -1,7 +1,7 @@
 import { getAllProjects } from '@/lib/projects';
 
 export default function sitemap() {
-    const baseUrl = 'https://aniketdesign.in';
+    const baseUrl = 'https://www.aniketdesign.in';
 
     const projectUrls = getAllProjects().map((project) => ({
         url: `${baseUrl}/project/${project.slug}`,

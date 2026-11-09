@@ -4,6 +4,6 @@ export default function robots() {
             userAgent: '*',
             allow: '/',
         },
-        sitemap: 'https://aniketdesign.in/sitemap.xml',
+        sitemap: 'https://www.aniketdesign.in/sitemap.xml',
     }
 }

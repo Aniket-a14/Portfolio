@@ -60,7 +60,7 @@ export default function RootLayout({ children }) {
                   "@context": "https://schema.org",
                   "@type": "Person",
                   name: "Aniket Saha",
-                  url: "https://aniketdesign.in",
+                  url: "https://www.aniketdesign.in",
                   jobTitle: "Full Stack Developer & Coding Enthusiast",
                   sameAs: [
                     "https://github.com/Aniket-a14",
@@ -77,10 +77,10 @@ export default function RootLayout({ children }) {
                   "@context": "https://schema.org",
                   "@type": "WebSite",
                   name: "Aniket Saha Portfolio",
-                  url: "https://aniketdesign.in",
+                  url: "https://www.aniketdesign.in",
                   potentialAction: {
                     "@type": "SearchAction",
-                    target: "https://aniketdesign.in/#projects",
+                    target: "https://www.aniketdesign.in/#projects",
                     "query-input": "required name=search_term_string",
                   },
                 }),
