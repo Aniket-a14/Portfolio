@@ -1,21 +1,21 @@
 {
     "name": "Aniket Saha - Portfolio",
-    "short_name": "Aniket Dev",
-    "description": "Portfolio of Aniket Saha - Full Stack Developer",
+    "short_name": "Aniket Saha",
+    "description": "Portfolio of Aniket Saha - Full Stack Developer, AI Engineer and ML enthusiast",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "black",
-    "theme_color": "black",
+    "background_color": "#ebe7dd",
+    "theme_color": "#b8321a",
     "icons": [
         {
-            "src": "/logo.jpeg",
+            "src": "/icon-192.png",
             "sizes": "192x192",
-            "type": "image/jpeg"
+            "type": "image/png"
         },
         {
-            "src": "/logo.jpeg",
+            "src": "/icon-512.png",
             "sizes": "512x512",
-            "type": "image/jpeg"
+            "type": "image/png"
         }
     ]
 }
