@@ -24,6 +24,27 @@ stack:
   - LiveKit / WebRTC
   - ONNX Runtime
   - Next.js
+summary:
+  problem: "A chatbot with a voice bolted on can be linguistically right and behaviourally wrong: the timing is off, or the emotional context of the last two minutes is forgotten."
+  built: "A cognitive voice system: a mesh of eight autonomous agents on a typed signal bus, with emotion modelled as a differential equation and memory that persists across restarts."
+  result: "Active (v6.5.0). Measured: 5.44 ms cognitive gating latency, 87.5% memory Recall@5, 1,266 MB idle footprint. The benchmark table also says which numbers are not measurements."
+takeaways:
+  - heading: "The premise"
+    text: "The right words at the wrong time is still a failure. The whole architecture serves that idea."
+  - heading: "The mesh"
+    text: "No agent calls another directly; everything travels over a typed message bus."
+  - heading: "Why parts of it are written in Rust"
+    text: "The audio path outgrew Python, so the signal mesh moved into native Rust crates."
+  - heading: "Interruption, in three stages"
+    text: "Interruption is arbitrated in three stages, starting with a reflex that ducks volume within 10 ms."
+  - heading: "The cognitive models"
+    text: "Emotion drifts continuously; memory is ranked by ACT-R activation, not similarity alone."
+  - heading: "The part that matters most: saying what isn't true yet"
+    text: "Some benchmark figures are measured; the table says plainly which ones are not."
+  - heading: "Where it runs"
+    text: "Three hardware tiers, and the Vision Agent has to run on the host, which I verified empirically."
+  - heading: "What I learned"
+    text: "Strict message contracts made eight agents tractable; honest caveats keep the docs true."
 ---
 
 This is the most ambitious thing I have built and the one I am most careful about describing, for a reason I'll get to at the end.

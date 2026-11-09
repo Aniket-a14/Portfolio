@@ -1,296 +1,183 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useLenis } from "lenis/react";
-import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { ArrowUpRight } from "lucide-react";
 import { profileData } from "@/lib/data";
 import ProfileSheet from "@/components/ProfileSheet";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 
+// `href` without a leading slash is a section on the home page; with one it is a route.
 const navLinks = [
+  { name: "About", href: "about" },
   { name: "Projects", href: "projects" },
+  { name: "Experience", href: "experience" },
   { name: "Blogs", href: "/blogs" },
-  { name: "Testimonials", href: "testimonials" },
   { name: "Contact", href: "/contact" },
 ];
+const SPY_IDS = ["hero", "about", "skills", "projects", "experience", "blogs", "testimonials", "contact"];
+const SPY_TO_NAV = { hero: null, about: "about", skills: "about", projects: "projects", experience: "experience", blogs: "blogs", testimonials: null, contact: null };
 
-const menuVariants = {
-  initial: {
-    scaleY: 0,
-  },
-  animate: {
-    scaleY: 1,
-    transition: {
-      duration: 0.8,
-      ease: [0.76, 0, 0.24, 1],
-    },
-  },
-  exit: {
-    scaleY: 0,
-    transition: {
-      duration: 0.8,
-      delay: 0.5,
-      ease: [0.76, 0, 0.24, 1],
-    },
-  },
-};
-
-const linkVariants = {
-  initial: {
-    y: 80,
-    opacity: 0,
-  },
-  enter: (i) => ({
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      ease: [0.76, 0, 0.24, 1],
-      delay: 0.3 + i * 0.1,
-    },
-  }),
-  exit: (i) => ({
-    y: 80,
-    opacity: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.76, 0, 0.24, 1],
-      delay: i * 0.05,
-    },
-  }),
-};
+const pad = (n) => String(n).padStart(2, "0");
+const realHref = (href) => (href.startsWith("/") ? href : `/#${href}`);
 
 const Navbar = () => {
   const { navigate } = useTransitionContext();
+  const pathname = usePathname();
+  const lenis = useLenis();
   const [isOpen, setIsOpen] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const lenis = useLenis();
+  const [slim, setSlim] = useState(false);
+  const [spy, setSpy] = useState(null);
+  const [date, setDate] = useState("");
 
-  const buttonRef = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
-    const { left, top, width, height } = buttonRef.current.getBoundingClientRect();
-    const x = clientX - (left + width / 2);
-    const y = clientY - (top + height / 2);
-    setPosition({ x: x * 0.4, y: y * 0.4 });
-  };
-
-  const resetPosition = () => {
-    setPosition({ x: 0, y: 0 });
-  };
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.4 });
 
   useEffect(() => {
-    if (isOpen || isSheetOpen) {
-      lenis?.stop();
-    } else {
-      lenis?.start();
-    }
+    setDate(new Date().toLocaleDateString("en-GB", { weekday: "short", day: "2-digit", month: "short", year: "numeric" }));
+  }, []);
 
-    return () => {
-      lenis?.start();
-    };
+  useEffect(() => {
+    const on = () => setSlim(window.scrollY > 80);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+
+  // Scroll-spy: only meaningful on the home page where the sections exist.
+  useEffect(() => {
+    if (pathname !== "/") { setSpy(null); return; }
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setSpy(SPY_TO_NAV[e.target.id] ?? null)),
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    SPY_IDS.forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+    return () => io.disconnect();
+  }, [pathname]);
+
+  useEffect(() => {
+    if (isOpen || isSheetOpen) lenis?.stop(); else lenis?.start();
+    return () => lenis?.start();
   }, [isOpen, isSheetOpen, lenis]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e) => e.key === "Escape" && setIsOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
+
+  // Real anchors keep middle-click / open-in-new-tab / crawlability; a plain left
+  // click is intercepted so the page-turn transition still runs.
+  const onNav = (e, link, afterClose) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    const text = `• ${link.name.toUpperCase()}`;
+    if (afterClose) { setIsOpen(false); setTimeout(() => navigate(link.href, text, "down"), 350); }
+    else navigate(link.href, text, "down");
+  };
+
+  const isActive = (link) => (link.href.startsWith("/") ? pathname === link.href : pathname === "/" && spy === link.href);
+
   return (
-    <nav className="absolute top-0 left-0 right-0 z-50 py-8 bg-transparent transition-all duration-300 max-w-full overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center w-full relative">
-        <div className="z-[60]">
-          <button
-            onClick={() => setIsSheetOpen(true)}
-            className="flex items-center gap-3.5 group relative p-0 md:px-4 md:py-2 rounded-full bg-transparent md:bg-white/10 hover:bg-white/5 md:hover:bg-white/20 border-none md:border border-white/5 hover:border-white/10 transition-all duration-500 md:backdrop-blur-md shadow-none md:shadow-sm"
-            aria-label="Open profile"
-          >
-            <Avatar className="h-8 w-8 transition-transform duration-500 group-hover:scale-105 border border-white/10 shadow-lg">
-              <AvatarImage src="/logo.jpeg" loading="eager" alt="Aniket Saha" />
-              <AvatarFallback className="bg-white/5 text-[9px]">AS</AvatarFallback>
-            </Avatar>
-            
-            <div className="hidden md:flex items-center gap-2.5 overflow-hidden">
-              <span className="text-white font-medium tracking-tight text-[16px] font-roboto drop-shadow-sm group-hover:text-white/90 transition-all duration-500">
-                Aniket Saha
-              </span>
-              <div className="flex items-center justify-center w-0 transition-all duration-500 group-hover:w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 overflow-hidden">
-                <ArrowUpRight className="size-4 text-white/50" strokeWidth={1.5} />
-              </div>
-            </div>
-          </button>
-        </div>
-
-        <div className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <button
-              key={link.name}
-              onClick={() => {
-                const text = `• ${link.name.toUpperCase()}`;
-                navigate(link.href, text, 'down');
-              }}
-              className="text-white/80 hover:text-white transition-all text-sm font-medium tracking-wide flex items-center gap-2 group relative py-1 font-roboto drop-shadow-sm"
-            >
-              {link.name}
-              <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full" />
-            </button>
-          ))}
-          <Link
-            href="https://www.github.com/Aniket-a14"
-            target="_blank"
-            className="text-white/80 hover:text-white transition-all text-sm font-medium tracking-wide flex items-center gap-2 group p-2 rounded-full drop-shadow-sm"
-            aria-label="Visit my GitHub profile"
-          >
-            <FaGithub className="size-5" />
-          </Link>
-
-        </div>
-
-        <div className="md:hidden z-[60]">
-          <motion.button
-            ref={buttonRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={resetPosition}
-            onClick={() => setIsOpen(!isOpen)}
-            animate={{ x: position.x, y: position.y }}
-            transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-            className={`relative size-12 flex items-center justify-center rounded-full transition-colors duration-500 overflow-hidden ${isOpen ? "" : ""
-              }`}
-            aria-label="Toggle menu"
-          >
-            <div className="flex flex-col gap-[6px] z-10">
-              <motion.span
-                animate={{
-                  rotate: isOpen ? 45 : 0,
-                  y: isOpen ? 8 : 0,
-                  backgroundColor: isOpen ? "#000" : "rgb(234, 229, 225)",
-                }}
-                className="w-6 h-[2px] rounded-full"
-              />
-              <motion.span
-                animate={{
-                  opacity: isOpen ? 0 : 1,
-                  backgroundColor: isOpen ? "#000" : "rgb(234, 229, 225)",
-                }}
-                className="w-6 h-[2px] rounded-full"
-              />
-              <motion.span
-                animate={{
-                  rotate: isOpen ? -45 : 0,
-                  y: isOpen ? -8 : 0,
-                  backgroundColor: isOpen ? "#000" : "rgb(234, 229, 225)",
-                }}
-                className="w-6 h-[2px] rounded-full"
-              />
-            </div>
-          </motion.button>
-        </div>
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-ink bg-ground">
+      <div
+        className={`folio grid grid-cols-1 items-center overflow-hidden border-b border-ink/15 px-[3vw] transition-all duration-500 ease-[cubic-bezier(.76,0,.24,1)] md:grid-cols-[1fr_auto_1fr] ${slim ? "max-h-0 border-transparent py-0 opacity-0" : "max-h-16 py-2 opacity-100"}`}
+        aria-hidden={slim}
+      >
+        <span className="hidden text-ink/60 md:block">{date || " "}</span>
+        <button
+          onClick={() => setIsSheetOpen(true)}
+          className="group flex items-center gap-3 justify-self-start md:justify-self-center"
+          aria-label="Open profile"
+        >
+          <Avatar className="h-7 w-7 border border-ink/20">
+            <AvatarImage src="/logo.jpeg" loading="eager" alt="" />
+            <AvatarFallback className="bg-ink/5 text-[9px]">AS</AvatarFallback>
+          </Avatar>
+          <span className="display text-[clamp(1.4rem,3vw,2.2rem)] font-normal normal-case leading-none tracking-[-0.02em]">Aniket Saha</span>
+        </button>
+        <span className="hidden text-right text-ink/60 md:block">Portfolio · Vol. 2026</span>
       </div>
+
+      <nav aria-label="Primary" className="relative flex items-center justify-center px-[3vw] py-2.5 md:gap-[clamp(1rem,3.4vw,3.4rem)]">
+        <button
+          onClick={() => setIsSheetOpen(true)}
+          className={`absolute left-[3vw] items-center gap-2 md:hidden ${slim ? "flex" : "hidden"}`}
+          aria-label="Open profile"
+        >
+          <span className="display text-xl leading-none tracking-[-0.02em]">Aniket Saha</span>
+        </button>
+
+        <div className="hidden items-center gap-[clamp(1rem,3.4vw,3.4rem)] md:flex">
+          {navLinks.map((link, i) => (
+            <a
+              key={link.name}
+              href={realHref(link.href)}
+              onClick={(e) => onNav(e, link)}
+              aria-current={isActive(link) ? "page" : undefined}
+              className="group relative py-1 text-[0.85rem] font-medium"
+            >
+              <em className="folio mr-2 align-super text-[10px] not-italic text-vermilion">{pad(i + 1)}</em>
+              {link.name}
+              <span className={`absolute inset-x-0 bottom-0 h-px origin-left bg-ink transition-transform duration-500 ease-[cubic-bezier(.76,0,.24,1)] ${isActive(link) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
+            </a>
+          ))}
+        </div>
+
+        <button
+          onClick={() => setIsOpen((o) => !o)}
+          aria-expanded={isOpen}
+          aria-controls="mobile-index"
+          className="folio absolute right-[3vw] border border-ink px-3 py-1.5 md:hidden"
+        >
+          {isOpen ? "Close" : "Index"}
+        </button>
+      </nav>
+
+      <motion.div style={{ scaleX: progress }} className="absolute inset-x-0 -bottom-px h-[2px] origin-left bg-vermilion-bright" aria-hidden="true" />
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            variants={menuVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="fixed inset-0 bg-white z-50 flex flex-col origin-top overflow-y-auto overflow-x-hidden"
+            id="mobile-index"
+            key="mobile-index"
+            initial={{ height: 0 }}
+            animate={{ height: "auto" }}
+            exit={{ height: 0 }}
+            transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
+            className="absolute left-0 right-0 top-full max-h-[calc(100dvh-100%)] overflow-y-auto border-b border-ink bg-ground md:hidden"
             data-lenis-prevent
           >
-            <div className="flex-1 flex flex-col justify-center px-10 pt-20">
-              <div className="flex flex-col gap-6">
-                <span className="text-[11px] font-medium tracking-[0.3em] uppercase text-black/30 font-roboto">
-                  Navigation
-                </span>
-                <div className="space-y-4">
-                  {navLinks.map((link, i) => (
-                    <div key={link.name} className="overflow-hidden">
-                      <motion.div
-                        custom={i}
-                        variants={linkVariants}
-                        initial="initial"
-                        animate="enter"
-                        exit="exit"
-                      >
-                        <button
-                          onClick={() => {
-                            setIsOpen(false);
-                            const text = `• ${link.name.toUpperCase()}`;
-                            setTimeout(() => navigate(link.href, text, 'down'), 300);
-                          }}
-                          className="text-[12vw] xs:text-5xl font-light text-black leading-none font-playfair transition-all duration-300 block break-words text-left w-full"
-                        >
-                          {link.name}
-                        </button>
-                      </motion.div>
-                    </div>
-                  ))}
-                </div>
+            <div className="px-[4vw] pb-8 pt-3">
+              <p className="folio my-3 text-ink/60">Contents</p>
+              {navLinks.map((link, i) => (
+                <a
+                  key={link.name}
+                  href={realHref(link.href)}
+                  onClick={(e) => onNav(e, link, true)}
+                  className="flex items-baseline justify-between border-t border-ink/15 py-3.5"
+                >
+                  <span className="display text-[2.6rem] font-light leading-none">{link.name}</span>
+                  <i className="folio not-italic text-vermilion">{pad(i + 1)}</i>
+                </a>
+              ))}
+              <div className="folio mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-ink pt-4 text-ink/70">
+                {[["LinkedIn", profileData.contact.linkedin], ["GitHub", profileData.contact.github], ["X", profileData.contact.x]].map(([n, u]) => (
+                  <a key={n} href={u} target="_blank" rel="noopener noreferrer" className="hover:text-vermilion">{n} ↗</a>
+                ))}
               </div>
-
-                <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  transition: { delay: 0.7, duration: 0.5 },
-                }}
-                exit={{ opacity: 0, y: 20 }}
-                className="mt-16 pt-10 border-t border-black/5 flex flex-col gap-10"
-              >
-                <div className="flex flex-col gap-4">
-                  <span className="text-[11px] font-medium tracking-[0.3em] uppercase text-black/30 font-roboto">
-                    Socials
-                  </span>
-                  <div className="flex gap-6">
-                    {[
-                      { icon: FaLinkedin, href: profileData.contact.linkedin, label: "LinkedIn" },
-                      { icon: FaGithub, href: profileData.contact.github, label: "GitHub" },
-                      { icon: FaXTwitter, href: profileData.contact.x, label: "X (Formerly Twitter)" },
-                    ].map((social, idx) => (
-                      <motion.a
-                        key={idx}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ y: -5, color: "#000" }}
-                        className="text-black/50 text-2xl transition-colors"
-                        aria-label={`Visit my ${social.label} profile`}
-                      >
-                        <social.icon />
-                      </motion.a>
-                    ))}
-                  </div>
-
-                </div>
-
-                <div className="flex flex-col gap-4">
-                  <span className="text-[11px] font-medium tracking-[0.3em] uppercase text-black/30 font-roboto">
-                    Get in Touch
-                  </span>
-                  <a
-                    href={`mailto:${profileData.contact.email}`}
-                    className="text-xl font-light text-black hover:text-black/70 transition-colors font-roboto underline underline-offset-8 decoration-black/20"
-                  >
-                    {profileData.contact.email}
-                  </a>
-                </div>
-              </motion.div>
-            </div>
-            
-            <div className="absolute -bottom-10 -right-10 pointer-events-none opacity-[0.05] select-none text-black">
-              <span className="text-[30vw] font-bold font-playfair leading-none">
-                AS
-              </span>
+              <a href={`mailto:${profileData.contact.email}`} className="mt-4 block break-all font-body text-base underline underline-offset-4">{profileData.contact.email}</a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       <ProfileSheet isOpen={isSheetOpen} onClose={() => setIsSheetOpen(false)} />
-    </nav>
+    </header>
   );
 };
 

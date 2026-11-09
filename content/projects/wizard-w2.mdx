@@ -23,6 +23,23 @@ stack:
   - TypeScript
   - DuckDB
   - Plotly
+summary:
+  problem: "Most AI data analyst tools hand you code nobody ran and a plan that was fixed before anyone looked at the data."
+  built: "A local-first autonomous data agent: a manager decides, a worker writes Python, the code runs in a sandbox, and the manager picks the next move from what actually happened."
+  result: "Active (v4.0.0). Runs entirely on your machine with no API key, backed by 600+ tests that need no Docker or network."
+takeaways:
+  - heading: "The loop that makes it different"
+    text: "The manager re-plans from what the code actually produced, instead of following a fixed plan."
+  - heading: "Trusting the answer"
+    text: "Headline numbers are recomputed by a different route, and any disagreement is reported."
+  - heading: "Sizing itself to the machine"
+    text: "Small models get a shorter deterministic loop: three model calls instead of nine."
+  - heading: "Running untrusted code"
+    text: "Generated code is treated as untrusted, with three layers of defence."
+  - heading: "Degrading honestly"
+    text: "Nothing silently pretends: every fallback is named in the interface."
+  - heading: "Where it stands"
+    text: "A wide analytical toolkit and seven supported data formats."
 ---
 
 Most "AI data analyst" tools do the same thing: you ask a question, a model writes some pandas, and you are handed code and told it is the answer. Two things are wrong with that. Nobody ran the code, so nobody knows if it works. And the plan was fixed before anything was looked at, which is not how analysis works.

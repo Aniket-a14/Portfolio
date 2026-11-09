@@ -48,16 +48,28 @@ const Mermaid = ({ chart }) => {
           startOnLoad: false,
           theme: "base",
           themeVariables: {
-            background: "transparent",
-            primaryColor: "rgba(255,255,255,0.035)",
-            primaryTextColor: "#eae6de",
-            primaryBorderColor: "rgba(198,168,120,0.35)",
-            secondaryColor: "rgba(255,255,255,0.05)",
-            tertiaryColor: "rgba(255,255,255,0.02)",
-            lineColor: "rgba(198,168,120,0.45)",
-            textColor: "#b9b4aa",
-            fontFamily: "var(--font-roboto), sans-serif",
-            fontSize: "13px",
+            // Press Edition: ink on paper. (The previous palette was pale-on-dark and
+            // rendered as near-invisible boxes on the light ground.)
+            background: "#ebe7dd",
+            primaryColor: "#f4f1e8",
+            primaryTextColor: "#15140f",
+            primaryBorderColor: "#15140f",
+            secondaryColor: "#e2ddd0",
+            tertiaryColor: "#ebe7dd",
+            lineColor: "#15140f",
+            textColor: "#15140f",
+            edgeLabelBackground: "#ebe7dd",
+            clusterBkg: "#e2ddd0",
+            clusterBorder: "#8a8676",
+            noteBkgColor: "#f4f1e8",
+            noteTextColor: "#15140f",
+            actorBkg: "#f4f1e8",
+            actorBorder: "#15140f",
+            actorTextColor: "#15140f",
+            signalColor: "#15140f",
+            signalTextColor: "#15140f",
+            fontFamily: "var(--font-body), sans-serif",
+            fontSize: "14px",
           },
           flowchart: { curve: "basis", padding: 16 },
           sequence: { actorMargin: 40 },
@@ -78,7 +90,7 @@ const Mermaid = ({ chart }) => {
   return (
     <figure
       ref={containerRef}
-      className="my-12 -mx-2 overflow-x-auto border-y border-white/10 bg-white/[0.012] px-2 py-8 sm:mx-0 sm:px-6 [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full"
+      className="my-12 -mx-2 overflow-x-auto border-y border-ink/10 bg-ink/[0.012] px-2 py-8 sm:mx-0 sm:px-6 [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full"
       // A diagram with no accessible fallback is noise for a screen reader.
       role="img"
       aria-label="Architecture diagram"
@@ -86,7 +98,7 @@ const Mermaid = ({ chart }) => {
       {svg ? (
         <div dangerouslySetInnerHTML={{ __html: svg }} />
       ) : (
-        <div className="h-40 animate-pulse rounded-sm bg-white/[0.02]" />
+        <div className="h-40 animate-pulse rounded-sm bg-ink/[0.02]" />
       )}
     </figure>
   );

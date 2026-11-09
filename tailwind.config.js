@@ -17,16 +17,20 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				roboto: ['var(--font-roboto)'],
-				playfair: ['var(--font-playfair)'],
+				// Press Edition type system: Fraunces display, Inter Tight text, IBM Plex Mono for
+				// folios/captions. Loaded through next/font in app/layout.js.
+				display: ['var(--font-display)', 'Georgia', 'serif'],
+				body: ['var(--font-body)', 'system-ui', 'sans-serif'],
+				mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
 			},
 			colors: {
-				// Warm off-white for long-form reading. Pure white on pure black
-				// is what made the case studies read as flat and cold.
-				paper: 'rgb(234 230 222 / <alpha-value>)',
-				// The single accent, used only for section numbers, the active
-				// contents entry, the reading progress bar and link hovers.
-				sand: 'rgb(198 168 120 / <alpha-value>)',
+				// Press Edition palette. Defined once as CSS variables (globals.css) so a future
+				// theme swap is a variable change, not a class rewrite.
+				ground: 'rgb(var(--ground) / <alpha-value>)',
+				ink: 'rgb(var(--ink) / <alpha-value>)',
+				// Deep vermilion for text/rules (4.85:1 on paper); bright for large fills only.
+				vermilion: 'rgb(var(--vermilion) / <alpha-value>)',
+				'vermilion-bright': 'rgb(var(--vermilion-bright) / <alpha-value>)',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {

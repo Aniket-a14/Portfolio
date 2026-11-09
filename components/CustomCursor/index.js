@@ -23,7 +23,6 @@ const CustomCursor = () => {
   const frameRef = useRef(0);
   const [enabled, setEnabled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [isOnLight, setIsOnLight] = useState(false);
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)");
@@ -57,7 +56,6 @@ const CustomCursor = () => {
       const target = event.target;
       if (!(target instanceof Element)) return;
       setIsHovered(Boolean(target.closest(HOVERABLE)));
-      setIsOnLight(Boolean(target.closest("[data-light-cursor]")));
     };
 
     const onLeave = () => {
@@ -80,29 +78,27 @@ const CustomCursor = () => {
 
   if (!enabled) return null;
 
-  const color = isOnLight
-    ? isHovered
-      ? "rgba(0, 0, 0, 0.4)"
-      : "rgba(0, 0, 0, 0.9)"
-    : isHovered
-      ? "rgba(255, 255, 255, 0.4)"
-      : "rgba(255, 255, 255, 0.9)";
-
+  // Pinhole: a small ink dot; over anything interactive it becomes an asterisk.
+  // The system cursor is hidden only for fine pointers (globals.css), and keyboard
+  // focus rings are untouched.
   return (
     <div
       ref={dotRef}
       aria-hidden="true"
       className="fixed left-0 top-0 z-[9999] hidden opacity-0 pointer-events-none will-change-transform sm:block"
     >
-      <div
-        className="h-5 w-5 rounded-full border bg-transparent shadow-sm mix-blend-difference"
-        style={{
-          borderColor: color,
-          transform: `scale(${isHovered ? 2.5 : 1})`,
-          transition:
-            "transform 260ms cubic-bezier(0.22, 1, 0.36, 1), border-color 260ms ease",
-        }}
-      />
+      <div className="relative grid size-5 place-items-center">
+        <span
+          className="absolute rounded-full bg-ink transition-all duration-200 ease-[cubic-bezier(.22,1,.36,1)]"
+          style={{ width: isHovered ? 0 : 8, height: isHovered ? 0 : 8, opacity: isHovered ? 0 : 1 }}
+        />
+        <span
+          className="absolute text-[26px] leading-none text-vermilion-bright transition-all duration-200 ease-[cubic-bezier(.22,1,.36,1)]"
+          style={{ opacity: isHovered ? 1 : 0, transform: `scale(${isHovered ? 1 : 0.4}) rotate(${isHovered ? 0 : -90}deg)` }}
+        >
+          ✶
+        </span>
+      </div>
     </div>
   );
 };

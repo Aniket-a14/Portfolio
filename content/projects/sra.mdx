@@ -25,6 +25,27 @@ stack:
   - Redis
   - Terraform
   - Docker
+summary:
+  problem: "Poor requirements are a leading cause of failed software projects, and almost nobody is taught to write a good specification."
+  built: "A five-layer multi-agent pipeline that turns a paragraph of intent into an IEEE 830, ISO 29148, Volere or Agile spec, scored, versioned, and traced back to code by a CLI."
+  result: "Deployed and in use: four standards, five pipeline layers, seven specialised agents, four LLM providers."
+takeaways:
+  - heading: "What it actually does"
+    text: "A paragraph in, a standards-compliant specification out, with a quality score and version history."
+  - heading: "The five-layer pipeline"
+    text: "A fixed five-layer sequence, with a reviewer that can reject a draft and send it back."
+  - heading: "The part that took the longest: making it survive"
+    text: "Per-stage checkpoints let a long job resume instead of restart."
+  - heading: "Bring your own key, and what that forced"
+    text: "No platform-funded fallback: every generation call runs on the user's own key."
+  - heading: "Diagrams that fix themselves"
+    text: "Broken diagram syntax is repaired before the user ever sees it."
+  - heading: "The CLI, and closing the loop"
+    text: "Specs stop going stale: `sra check --deep` catches requirement links that rotted."
+  - heading: "Hardening, because it's deployed"
+    text: "PII redaction, Redis-backed rate limits, encrypted and verified backups."
+  - heading: "What I'd do differently"
+    text: "Two regrets: a shared embedding space, and scope discipline."
 ---
 
 Somewhere in every computer science degree there is a week where you are told to write a Software Requirements Specification. You are handed the IEEE 830 template, told which sections it wants, and left to fill them in. Nobody ever tells you how to write a *good* one — how to notice that "the system should be fast" is not a requirement, or that section 3.2 quietly contradicts section 2.4.

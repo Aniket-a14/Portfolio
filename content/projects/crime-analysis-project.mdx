@@ -24,6 +24,21 @@ stack:
   - matplotlib / seaborn
   - Next.js 16
   - Recharts
+summary:
+  problem: "Can nine months of crime records tell you anything useful, and what is a model actually claiming when it says it can?"
+  built: "A six-stage Python pipeline that compares seven models and builds a composite risk index, served through a Next.js dashboard that renders precomputed JSON."
+  result: "Complete and live. Its main finding is a caution: a model that predicts policing is not a model that predicts crime."
+takeaways:
+  - heading: "The pipeline"
+    text: "Six numbered scripts, run in order, with no orchestration framework."
+  - heading: "The weighting is a judgement call, not a result"
+    text: "The 40/40/20 risk weights are a choice I made, not something derived from data."
+  - heading: "Nine points is not a time series"
+    text: "Nine monthly observations cannot support real forecasting, so the forecast is a labelled projection."
+  - heading: "The dashboard"
+    text: "Python owns all the modelling; the web side only renders precomputed JSON."
+  - heading: "What I'd do differently"
+    text: "More data, proper cross-validation, and weights that are derived rather than chosen."
 ---
 
 This started as a coursework-shaped question — *can you find something useful in nine months of crime records?* — and turned into the project that taught me the most about what a model is actually claiming.

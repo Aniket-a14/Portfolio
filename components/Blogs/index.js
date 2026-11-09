@@ -1,78 +1,20 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { ArrowUpRight, Calendar, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
+import { Reveal, WordsInView } from "@/components/ui/Reveal";
 
-const BlogCard = ({ blog, index }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative h-full"
-    >
-      <a 
-        href={blog.link} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="flex flex-col h-full bg-white/[0.02] border border-white/[0.08] rounded-sm overflow-hidden transition-all duration-500 hover:bg-white/[0.04] hover:border-white/[0.12]"
-      >
-        {/* Image Container */}
-        <div className="relative aspect-[16/9] overflow-hidden bg-white/[0.02] border-b border-white/[0.05]">
-          {blog.thumbnail ? (
-            <Image
-              src={blog.thumbnail}
-              alt={blog.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              unoptimized
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-white/[0.01]">
-               <span className="text-white/5 font-playfair text-4xl uppercase tracking-widest">Medium</span>
-            </div>
-          )}
-          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          
-          <div className="absolute top-4 right-4 p-2 bg-black/60 backdrop-blur-md rounded-full border border-white/10 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-            <ArrowUpRight className="size-4 text-white" strokeWidth={1.5} />
-          </div>
-        </div>
+const fmt = (d) => new Date(d).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
 
-        {/* Content */}
-        <div className="flex flex-col flex-1 p-6 lg:p-7">
-          <div className="flex items-center gap-2 mb-4">
-            <Calendar className="size-3 text-white/20" strokeWidth={1} />
-            <span className="text-[10px] font-roboto tracking-[0.2em] uppercase text-white/30">
-              {new Date(blog.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-            </span>
-          </div>
-
-          <h3 className="text-xl font-medium text-white/90 leading-tight mb-4 group-hover:text-white transition-colors duration-500 line-clamp-2 uppercase font-roboto tracking-tight">
-            {blog.title}
-          </h3>
-          
-          <p className="text-[14px] text-white/40 leading-relaxed line-clamp-2 mb-6 font-light font-roboto">
-            {blog.snippet}
-          </p>
-
-          <div className="mt-auto flex items-center gap-2 text-white/20 group-hover:text-white/60 transition-all duration-500">
-            <span className="text-[10px] font-roboto tracking-[0.3em] uppercase">
-              Read More
-            </span>
-            <ChevronRight className="size-3 transition-transform duration-500 group-hover:translate-x-1" strokeWidth={1} />
-          </div>
-        </div>
-      </a>
-    </motion.div>
+const Thumb = ({ blog, className }) =>
+  blog.thumbnail ? (
+    <Image src={blog.thumbnail} alt="" fill className={className} sizes="(max-width: 768px) 100vw, 58vw" unoptimized />
+  ) : (
+    <div className="absolute inset-0 grid place-items-center bg-ink/5"><span className="display text-4xl italic text-ink/30">Medium</span></div>
   );
-};
 
+/** Magazine spread: the newest post leads, the next two sit beside it. Data still comes from /api/blogs. */
 const Blogs = () => {
   const { navigate } = useTransitionContext();
   const [blogs, setBlogs] = useState([]);
@@ -80,75 +22,70 @@ const Blogs = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchBlogs = async () => {
+    (async () => {
       try {
         const response = await fetch("/api/blogs");
         if (!response.ok) throw new Error("Failed to fetch");
         const data = await response.json();
-        setBlogs(data.slice(0, 3)); 
+        setBlogs(data.slice(0, 3));
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
-    };
-
-    fetchBlogs();
+    })();
   }, []);
 
   if (loading) {
     return (
-      <section className="bg-black pt-0 pb-20 px-6 md:px-12 lg:px-20 border-t border-white/[0.05]">
-        <div className="max-w-6xl mx-auto">
-          <div className="animate-pulse">
-            <div className="h-4 w-32 bg-white/5 rounded-full mb-6" />
-            <div className="h-16 w-96 bg-white/5 rounded-sm mb-16" />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="aspect-[3/4] bg-white/[0.02] rounded-sm border border-white/[0.08]" />
-              ))}
-            </div>
-          </div>
+      <section className="bg-ground px-[3vw] pb-20 pt-[8vh]" aria-busy="true" aria-label="Loading articles">
+        <div className="mx-auto max-w-[1500px] animate-pulse border-t border-ink pt-6">
+          <div className="mb-8 h-14 w-80 bg-ink/10" />
+          <div className="grid gap-[4vw] md:grid-cols-[7fr_5fr]"><div className="aspect-[16/10] bg-ink/5" /><div className="space-y-6">{[1, 2].map((i) => <div key={i} className="h-28 bg-ink/5" />)}</div></div>
         </div>
       </section>
     );
   }
+  if (error || blogs.length === 0) return null;
 
-  if (error || blogs.length === 0) {
-    return null;
-  }
-
+  const [lead, ...rest] = blogs;
   return (
-    <section className="bg-black pt-0 pb-24 px-6 md:px-12 lg:px-20 relative" id="blogs">
-      <div className="max-w-6xl mx-auto">
-        <header className="border-t border-white/10 pt-10 mb-16">
-          <div className="flex items-baseline justify-between mb-4">
-            <p className="text-white/40 font-roboto text-sm tracking-[0.2em] uppercase">
-              Recent Writings
-            </p>
-            <span className="text-white/20 font-roboto text-sm tracking-wider">
-              ({String(blogs.length).padStart(2, "0")})
-            </span>
-          </div>
-          <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white/90 leading-tight">
-            Latest from Medium
-          </h2>
+    <section id="blogs" aria-labelledby="blogs-title" className="bg-ground px-[3vw] pb-[10vh] pt-[8vh]">
+      <div className="mx-auto max-w-[1500px]">
+        <header className="mb-[6vh] grid gap-x-[3vw] border-t border-ink pt-4 md:grid-cols-[2fr_8fr]">
+          <p className="folio text-vermilion">№ 06 — Articles <span className="text-ink/60">({String(blogs.length).padStart(2, "0")})</span></p>
+          <h2 id="blogs-title" className="display text-[clamp(2.6rem,6vw,6rem)] font-light leading-none"><WordsInView text="My articles" /></h2>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs.map((blog, index) => (
-            <BlogCard key={index} blog={blog} index={index} />
-          ))}
-        </div>
+        <div className="grid gap-[4vw] md:grid-cols-[7fr_5fr]">
+          <Reveal as="a" href={lead.link} target="_blank" rel="noopener noreferrer" className="group grid content-start gap-4">
+            <div className="overflow-hidden border border-ink bg-ink/5 p-2">
+              <div className="relative aspect-[16/10] overflow-hidden"><Thumb blog={lead} className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.035]" /></div>
+            </div>
+            <time dateTime={lead.pubDate} className="folio text-[10.5px] text-ink/60">{fmt(lead.pubDate)} — Lead</time>
+            <h3 className="display text-[clamp(1.8rem,3.4vw,3.2rem)] font-normal leading-[1.05] tracking-[-0.02em] group-hover:text-vermilion">{lead.title}</h3>
+            <p className="display max-w-[52ch] text-[1.1rem] italic leading-[1.5] text-ink/70">{lead.snippet}</p>
+            <span className="w-max border-b border-ink text-[.9rem] font-medium">Continue reading →</span>
+          </Reveal>
 
-        <div className="mt-16 flex justify-center">
-          <button
-            onClick={() => navigate('/blogs', '• Blogs', 'down')}
-            className="group flex items-center gap-3 text-white/40 hover:text-white transition-all duration-500 font-roboto text-xs uppercase tracking-[0.3em] py-4 px-8 border border-white/10 rounded-full hover:bg-white/5 hover:border-white/20"
-          >
-            View All Articles
-            <ArrowUpRight className="size-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-500" strokeWidth={1.5} />
-          </button>
+          <div className="grid content-start gap-6">
+            {rest.map((b, i) => (
+              <Reveal as="a" key={b.link} delay={i * 90} href={b.link} target="_blank" rel="noopener noreferrer" className="group grid grid-cols-[7.4rem_1fr] gap-5 border-b border-ink/20 pb-6">
+                <div className="relative aspect-square overflow-hidden bg-ink/5"><Thumb blog={b} className="object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0" /></div>
+                <div>
+                  <time dateTime={b.pubDate} className="folio text-[10.5px] text-ink/60">{fmt(b.pubDate)}</time>
+                  <h4 className="display my-1.5 text-[1.35rem] leading-[1.15] group-hover:text-vermilion">{b.title}</h4>
+                  <p className="line-clamp-2 text-[.85rem] leading-[1.5] text-ink/70">{b.snippet}</p>
+                </div>
+              </Reveal>
+            ))}
+            <button
+              onClick={() => navigate("/blogs", "• Blogs", "down")}
+              className="folio group flex w-max items-center gap-3 border border-ink px-5 py-3 transition-colors duration-300 hover:bg-ink hover:text-ground"
+            >
+              View all articles <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>

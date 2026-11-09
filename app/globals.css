@@ -87,6 +87,10 @@
 
 @layer base {
   :root {
+    --ground: 235 231 221;
+    --ink: 21 20 15;
+    --vermilion: 184 50 26;
+    --vermilion-bright: 207 59 27;
     --background: 0 0% 0%;
     --foreground: 0 0% 98%;
     --card: 0 0% 100%;
@@ -161,7 +165,7 @@
 
 html {
   scrollbar-width: none;
-  background-color: #000;
+  background-color: rgb(var(--ground));
 }
 
 html.lenis, html.lenis body {
@@ -186,9 +190,25 @@ html.lenis, html.lenis body {
 
 
 body {
-  background-color: #000;
+  background-color: rgb(var(--ground));
+  color: rgb(var(--ink));
+  font-family: var(--font-body), system-ui, sans-serif;
   -ms-overflow-style: none;
 }
+
+/* Fraunces display setting used by every headline: high optical size, a little softness. */
+.display {
+  font-family: var(--font-display), Georgia, serif;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  letter-spacing: -0.035em;
+}
+.folio {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+::selection { background: rgb(var(--vermilion-bright)); color: rgb(var(--ground)); }
 
 .profile-sheet {
   scrollbar-width: thin;
@@ -257,11 +277,11 @@ body {
   content: counter(case-section, decimal-leading-zero);
   display: block;
   margin-bottom: 0.65rem;
-  font-family: var(--font-roboto), sans-serif;
+  font-family: var(--font-mono), monospace;
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.3em;
-  color: rgb(198 168 120 / 0.85);
+  color: rgb(var(--vermilion));
 }
 
 @media (min-width: 1280px) {
@@ -281,7 +301,7 @@ body {
   right: 0;
   top: -2.25rem;
   height: 1px;
-  background: rgb(255 255 255 / 0.08);
+  background: rgb(var(--ink) / 0.14);
 }
 
 .case-study>h2:first-child::after {
@@ -317,3 +337,34 @@ body {
     scroll-behavior: auto !important;
   }
 }
+@keyframes folioIn {
+  from { opacity: 0; transform: translateY(24%); }
+}
+
+/*
+ * Press Edition reveals. CSS-driven so they are cheap (no per-frame JS) and so the
+ * global reduced-motion rule above collapses them to their final state.
+ */
+.rv { opacity: 0; transform: translateY(var(--y, 28px)); transition: opacity .9s cubic-bezier(.22,1,.36,1) var(--d, 0ms), transform 1.1s cubic-bezier(.22,1,.36,1) var(--d, 0ms); }
+.rv.in { opacity: 1; transform: none; }
+.words .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+.words .wi { display: inline-block; transform: translateY(112%); transition: transform 1s cubic-bezier(.22,1,.36,1) calc(var(--b, 0ms) + var(--i) * var(--st, 40ms)); }
+.words.in .wi { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1; transform: none; }
+  .words .wi { transform: none; }
+}
+
+/* Article opener: the first paragraph of every case study starts with a drop cap. */
+.case-study > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 5.6em;
+  font-weight: 300;
+  line-height: 0.78;
+  padding: 0.06em 0.1em 0 0;
+  color: rgb(var(--vermilion-bright));
+}
+
+/* Annotated essay: the opening sentence of each chapter, marked like a highlighter underline. */
+.case-study mark.key-sentence{background:linear-gradient(transparent 58%,rgb(var(--vermilion) / .22) 58%);color:inherit;padding:0}

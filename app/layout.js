@@ -1,23 +1,30 @@
-import { Roboto, Playfair_Display } from "next/font/google";
+import { Fraunces, Inter_Tight, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-// Geist and Geist Mono were loaded here but never applied: neither
-// `--font-geist-sans` nor `--font-geist-mono` is referenced by any stylesheet
-// or Tailwind mapping, and `font-mono` resolves to the system stack. Dropping
-// them removes two font families from every page load.
-const roboto = Roboto({
-  variable: "--font-roboto",
+// Press Edition type system. Fraunces is a variable font with an optical-size axis
+// and a true italic (the previous Playfair setup loaded one weight and no italic,
+// so every italic in the site was browser-synthesised). `display: swap` keeps text
+// visible while fonts load; the loader also waits on document.fonts.ready.
+const display = Fraunces({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  axes: ["opsz", "SOFT"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const body = Inter_Tight({
+  variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400"],
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -26,7 +33,7 @@ import { getMetadata } from "@/lib/seo";
 export const viewport = {
   width: "device-width",
   initialScale: 1.0,
-  themeColor: "#000000",
+  themeColor: "#ebe7dd",
 };
 
 export const metadata = getMetadata();
@@ -34,20 +41,18 @@ export const metadata = getMetadata();
 import CustomCursor from "@/components/CustomCursor";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { TransitionProvider } from "@/components/providers/TransitionProvider";
-import MobileToast from "@/components/MobileToast";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning className="bg-black">
+    <html lang="en" suppressHydrationWarning className="bg-ground">
       <head />
       <body
-        className={`${roboto.variable} ${playfair.variable} antialiased w-full bg-black`}
+        className={`${display.variable} ${body.variable} ${mono.variable} font-body antialiased w-full bg-ground text-ink`}
         suppressHydrationWarning
       >
         <TransitionProvider>
           <LenisProvider>
             <CustomCursor />
-            <MobileToast />
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{

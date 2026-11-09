@@ -10,7 +10,7 @@ export function BackToWork() {
   return (
     <button
       onClick={() => navigate("/", "• Home", "up")}
-      className="group flex items-center gap-2.5 font-roboto text-[10px] uppercase tracking-[0.24em] text-white/30 transition-colors hover:text-sand/80"
+      className="group flex items-center gap-2.5 font-body text-[10px] uppercase tracking-[0.24em] text-ink/60 transition-colors hover:text-vermilion/80"
     >
       <ArrowLeft
         size={14}
@@ -37,9 +37,9 @@ export function NextProject({ previous, next }) {
       {next && (
         <button
           onClick={() => go(next)}
-          className="group relative block w-full overflow-hidden border-y border-white/10 py-12 text-left transition-colors duration-500 hover:border-white/20"
+          className="group relative block w-full overflow-hidden border-y border-ink/10 py-12 text-left transition-colors duration-500 hover:border-ink/20"
         >
-          <span className="mb-4 flex items-center gap-2.5 font-roboto text-[9px] uppercase tracking-[0.3em] text-sand/70">
+          <span className="mb-4 flex items-center gap-2.5 font-body text-[9px] uppercase tracking-[0.3em] text-vermilion/70">
             Next case study
             <ArrowRight
               size={11}
@@ -48,12 +48,12 @@ export function NextProject({ previous, next }) {
             />
           </span>
 
-          <span className="block font-playfair text-[42px] leading-[0.95] text-paper/45 transition-colors duration-500 group-hover:text-paper/95 sm:text-[58px]">
+          <span className="block font-display text-[42px] leading-[0.95] text-ink/60 transition-colors duration-500 group-hover:text-ink/95 sm:text-[58px]">
             {next.title}
           </span>
 
           {next.tagline && (
-            <span className="mt-5 block max-w-[540px] font-roboto text-[13.5px] font-light leading-relaxed text-white/25 transition-colors duration-500 group-hover:text-white/45">
+            <span className="mt-5 block max-w-[540px] font-body text-[13.5px] font-light leading-relaxed text-ink/60 transition-colors duration-500 group-hover:text-ink/60">
               {next.tagline}
             </span>
           )}
@@ -63,7 +63,7 @@ export function NextProject({ previous, next }) {
       {previous && (
         <button
           onClick={() => go(previous)}
-          className="group mt-8 flex items-center gap-2.5 font-roboto text-[11px] tracking-[0.06em] text-white/25 transition-colors duration-300 hover:text-white/60"
+          className="group mt-8 flex items-center gap-2.5 font-body text-[11px] tracking-[0.06em] text-ink/60 transition-colors duration-300 hover:text-ink/60"
         >
           <ArrowLeft
             size={12}
@@ -85,7 +85,7 @@ export function ExternalLink({ href, label, icon }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group inline-flex items-center gap-2 border-b border-white/15 pb-1.5 font-roboto text-[12.5px] tracking-[0.04em] text-paper/60 transition-colors duration-300 hover:border-sand/60 hover:text-sand"
+      className="group inline-flex items-center gap-2 border-b border-ink/15 pb-1.5 font-body text-[12.5px] tracking-[0.04em] text-ink/60 transition-colors duration-300 hover:border-vermilion/60 hover:text-vermilion"
     >
       {icon}
       {label}

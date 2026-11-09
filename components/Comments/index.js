@@ -1,71 +1,38 @@
-"use client";
-
-import { cn } from "@/lib/utils";
-import { Marquee } from "@/components/magicui/marquee";
-import { Roboto } from "next/font/google";
+import Image from "next/image";
 import Footer from "@/components/Footer";
 import { reviews } from "@/lib/data";
+import { Reveal, WordsInView } from "@/components/ui/Reveal";
 
-
-const roboto = Roboto({
-  weight: ["700"],
-  subsets: ["latin"],
-});
-
-
-const firstRow = reviews.slice(0, reviews.length / 2);
-const secondRow = reviews.slice(reviews.length / 2);
-
-const ReviewCard = ({ img, name, username, body, alt }) => {
-  return (
-    <figure
-      className={cn(
-        "relative h-full w-64 justify-center items-center cursor-pointer overflow-hidden rounded-xl border p-4",
-        "border-gray-100/[.1] bg-gray-100/[.07] hover:bg-gray-100/[.15]",
-      )}
-    >
-      <div className="flex flex-row items-center gap-2">
-        <img className="rounded-full" width="50" height="50" alt={alt} src={img} />
-        <div className="flex flex-col">
-          <figcaption className="text-sm font-medium text-white">{name}</figcaption>
-          <p className="text-xs font-medium text-white/60">{username}</p>
-        </div>
-      </div>
-      <blockquote className="mt-2 text-sm text-white">{body}</blockquote>
-    </figure>
-  );
-};
-
-
-
+// Letters to the editor. Replaces the auto-scrolling marquee: moving text cannot be
+// paused or reliably read (WCAG 2.2.2), and these comments are short enough to read as typography.
 export function Comments() {
   return (
     <>
-      <section className="bg-black pb-10 px-6 md:px-12 lg:px-20" id="testimonials">
-        <div className="max-w-6xl mx-auto">
-          <div className="border-t border-white/10 pt-10 mb-10">
-            <p className="text-white/40 font-roboto text-sm tracking-[0.2em] uppercase mb-4">
-              Testimonials
-            </p>
-            <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white/90 leading-tight">
-              What people say <br className="hidden md:block" /> about my work
-            </h2>
-          </div>
-        </div>
+      <section id="testimonials" aria-labelledby="letters-title" className="bg-ground px-[3vw] pb-[10vh] pt-[8vh]">
+        <div className="mx-auto max-w-[1500px]">
+          <header className="mb-[6vh] grid gap-x-[3vw] border-t border-ink pt-4 md:grid-cols-[2fr_8fr]">
+            <p className="folio text-vermilion">№ 07 — Letters</p>
+            <h2 id="letters-title" className="display text-[clamp(2.4rem,5.4vw,5.4rem)] font-light leading-none"><WordsInView text="From the readers" /></h2>
+          </header>
 
-        <div className="relative flex w-full flex-col items-center justify-center overflow-hidden pb-12">
-          <Marquee pauseOnHover className="[--duration:20s]">
-            {firstRow.map((review) => (
-              <ReviewCard key={review.username} {...review} />
-            ))}
-          </Marquee>
-          <Marquee reverse pauseOnHover className="[--duration:20s]">
-            {secondRow.map((review) => (
-              <ReviewCard key={review.username} {...review} />
-            ))}
-          </Marquee>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black"></div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black"></div>
+          <div className="columns-1 gap-[3vw] sm:columns-2 lg:columns-3">
+            {reviews.map((r, i) => {
+              const short = r.body.trim().length < 60;
+              return (
+                <Reveal as="figure" key={r.username} delay={(i % 3) * 80} className="mb-[3vh] break-inside-avoid border-t border-ink pt-5">
+                  <blockquote className={`display ${short ? "text-[2.6rem] italic leading-[1.05]" : "text-[1.45rem] leading-[1.25]"}`}>
+                    <span aria-hidden="true" className="mr-[.08em] align-[-.25em] text-[1.6em] leading-[0] text-vermilion-bright">“</span>
+                    {r.body.trim()}
+                  </blockquote>
+                  <figcaption className="folio mt-4 flex items-center gap-2.5 text-[11px] normal-case tracking-[0.06em]">
+                    <Image src={r.img} alt="" width={28} height={28} className="size-7 rounded-full object-cover grayscale" />
+                    <b className="font-medium uppercase tracking-[0.12em]">{r.name}</b>
+                    <em className="not-italic text-ink/60">{r.username}</em>
+                  </figcaption>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </section>
       <Footer />
