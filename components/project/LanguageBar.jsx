@@ -60,14 +60,14 @@ const LanguageBar = ({ languages = {}, max = 6 }) => {
         {segments.map(([name, bytes]) => (
           <li
             key={name}
-            className="flex items-baseline gap-2 font-body text-[11.5px] text-ink/60"
+            className="flex items-baseline gap-2 font-body text-[11.5px] text-ink/70"
           >
             <span
               className="h-[6px] w-[6px] shrink-0 self-center"
               style={{ backgroundColor: LANGUAGE_COLORS[name] || FALLBACK }}
             />
             {name}
-            <span className="tabular-nums text-ink/60">
+            <span className="tabular-nums text-ink/70">
               {((bytes / total) * 100).toFixed(1)}%
             </span>
           </li>

@@ -91,7 +91,6 @@ const Footer = () => {
         <button
           onClick={() => navigate("/contact", "• Contact", "down")}
           className="group mt-[3vh] w-fit text-left focus:outline-none focus-visible:outline-2 focus-visible:outline-vermilion"
-          aria-label="Contact — let's work together"
         >
           <span className="display block text-[clamp(3.6rem,13vw,14rem)] font-light leading-[.9] tracking-[-0.05em]">
             <Words text="Write to me." />
@@ -113,7 +112,7 @@ const Footer = () => {
           <div>
             <h3 className="folio mb-2 text-ink">Elsewhere</h3>
             {socialLinks.map((s) => (
-              <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="block hover:text-vermilion">{s.name} ↗</a>
+              <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="block w-fit py-1 hover:text-vermilion">{s.name} ↗</a>
             ))}
           </div>
 

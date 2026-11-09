@@ -53,7 +53,7 @@ const Blogs = () => {
     <section id="blogs" aria-labelledby="blogs-title" className="bg-ground px-[3vw] pb-[10vh] pt-[8vh]">
       <div className="mx-auto max-w-[1500px]">
         <header className="mb-[6vh] grid gap-x-[3vw] border-t border-ink pt-4 md:grid-cols-[2fr_8fr]">
-          <p className="folio text-vermilion">№ 06 — Articles <span className="text-ink/60">({String(blogs.length).padStart(2, "0")})</span></p>
+          <p className="folio text-vermilion">№ 06 — Articles <span className="text-ink/70">({String(blogs.length).padStart(2, "0")})</span></p>
           <h2 id="blogs-title" className="display text-[clamp(2.6rem,6vw,6rem)] font-light leading-none"><WordsInView text="My articles" /></h2>
         </header>
 
@@ -62,7 +62,7 @@ const Blogs = () => {
             <div className="overflow-hidden border border-ink bg-ink/5 p-2">
               <div className="relative aspect-[16/10] overflow-hidden"><Thumb blog={lead} className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.035]" /></div>
             </div>
-            <time dateTime={lead.pubDate} className="folio text-[10.5px] text-ink/60">{fmt(lead.pubDate)} — Lead</time>
+            <time dateTime={lead.pubDate} className="folio text-[10.5px] text-ink/70">{fmt(lead.pubDate)} — Lead</time>
             <h3 className="display text-[clamp(1.8rem,3.4vw,3.2rem)] font-normal leading-[1.05] tracking-[-0.02em] group-hover:text-vermilion">{lead.title}</h3>
             <p className="display max-w-[52ch] text-[1.1rem] italic leading-[1.5] text-ink/70">{lead.snippet}</p>
             <span className="w-max border-b border-ink text-[.9rem] font-medium">Continue reading →</span>
@@ -73,7 +73,7 @@ const Blogs = () => {
               <Reveal as="a" key={b.link} delay={i * 90} href={b.link} target="_blank" rel="noopener noreferrer" className="group grid grid-cols-[7.4rem_1fr] gap-5 border-b border-ink/20 pb-6">
                 <div className="relative aspect-square overflow-hidden bg-ink/5"><Thumb blog={b} className="object-cover grayscale transition-[filter] duration-500 group-hover:grayscale-0" /></div>
                 <div>
-                  <time dateTime={b.pubDate} className="folio text-[10.5px] text-ink/60">{fmt(b.pubDate)}</time>
+                  <time dateTime={b.pubDate} className="folio text-[10.5px] text-ink/70">{fmt(b.pubDate)}</time>
                   <h4 className="display my-1.5 text-[1.35rem] leading-[1.15] group-hover:text-vermilion">{b.title}</h4>
                   <p className="line-clamp-2 text-[.85rem] leading-[1.5] text-ink/70">{b.snippet}</p>
                 </div>

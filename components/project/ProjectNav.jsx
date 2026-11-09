@@ -10,7 +10,7 @@ export function BackToWork() {
   return (
     <button
       onClick={() => navigate("/", "• Home", "up")}
-      className="group flex items-center gap-2.5 font-body text-[10px] uppercase tracking-[0.24em] text-ink/60 transition-colors hover:text-vermilion/80"
+      className="group flex items-center gap-2.5 font-body text-[10px] uppercase tracking-[0.24em] text-ink/70 transition-colors hover:text-vermilion/80"
     >
       <ArrowLeft
         size={14}
@@ -48,12 +48,12 @@ export function NextProject({ previous, next }) {
             />
           </span>
 
-          <span className="block font-display text-[42px] leading-[0.95] text-ink/60 transition-colors duration-500 group-hover:text-ink/95 sm:text-[58px]">
+          <span className="block font-display text-[42px] leading-[0.95] text-ink/70 transition-colors duration-500 group-hover:text-ink/95 sm:text-[58px]">
             {next.title}
           </span>
 
           {next.tagline && (
-            <span className="mt-5 block max-w-[540px] font-body text-[13.5px] font-light leading-relaxed text-ink/60 transition-colors duration-500 group-hover:text-ink/60">
+            <span className="mt-5 block max-w-[540px] font-body text-[13.5px] font-light leading-relaxed text-ink/70 transition-colors duration-500 group-hover:text-ink/70">
               {next.tagline}
             </span>
           )}
@@ -63,7 +63,7 @@ export function NextProject({ previous, next }) {
       {previous && (
         <button
           onClick={() => go(previous)}
-          className="group mt-8 flex items-center gap-2.5 font-body text-[11px] tracking-[0.06em] text-ink/60 transition-colors duration-300 hover:text-ink/60"
+          className="group mt-8 flex items-center gap-2.5 font-body text-[11px] tracking-[0.06em] text-ink/70 transition-colors duration-300 hover:text-ink/70"
         >
           <ArrowLeft
             size={12}
@@ -85,7 +85,7 @@ export function ExternalLink({ href, label, icon }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group inline-flex items-center gap-2 border-b border-ink/15 pb-1.5 font-body text-[12.5px] tracking-[0.04em] text-ink/60 transition-colors duration-300 hover:border-vermilion/60 hover:text-vermilion"
+      className="group inline-flex items-center gap-2 border-b border-ink/15 pb-1.5 font-body text-[12.5px] tracking-[0.04em] text-ink/70 transition-colors duration-300 hover:border-vermilion/60 hover:text-vermilion"
     >
       {icon}
       {label}

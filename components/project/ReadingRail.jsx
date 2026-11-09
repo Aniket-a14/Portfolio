@@ -126,7 +126,7 @@ const ReadingRail = ({ headings = [], articleId, showContents = true }) => {
         aria-label="Contents"
         className="sticky top-32 hidden max-h-[calc(100vh-14rem)] w-[196px] shrink-0 overflow-y-auto xl:block"
       >
-        <p className="mb-6 font-body text-[9px] font-medium uppercase tracking-[0.32em] text-ink/60">
+        <p className="mb-6 font-body text-[9px] font-medium uppercase tracking-[0.32em] text-ink/70">
           Contents
         </p>
 
@@ -159,13 +159,13 @@ const ReadingRail = ({ headings = [], articleId, showContents = true }) => {
                     } ${
                       isActive
                         ? "text-ink/85"
-                        : "text-ink/60 hover:text-ink/60"
+                        : "text-ink/70 hover:text-ink/70"
                     }`}
                   >
                     {isSection && (
                       <span
                         className={`shrink-0 pt-[3px] font-body text-[9px] tabular-nums tracking-[0.12em] transition-colors duration-300 ${
-                          isActive ? "text-vermilion" : "text-ink/60"
+                          isActive ? "text-vermilion" : "text-ink/70"
                         }`}
                       >
                         {String(sectionNumber).padStart(2, "0")}

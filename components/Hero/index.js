@@ -29,7 +29,7 @@ export default function Hero() {
     <section id="hero" className={`relative flex min-h-[100svh] flex-col overflow-hidden pt-[6.5rem] md:pt-[8.5rem] ${on ? "hero-on" : ""}`}>
       <div className="mx-auto grid w-full max-w-[1500px] flex-1 grid-cols-1 items-end gap-y-8 px-[4vw] pb-10 md:grid-cols-[7fr_5fr] md:gap-x-[3vw] md:pb-14">
         <div className="relative z-10 order-2 md:order-1">
-          <p className="folio mb-5 flex gap-4 text-ink/60"><span className="text-vermilion">№ 01</span> The engineer</p>
+          <p className="folio mb-5 flex gap-4 text-ink/70"><span className="text-vermilion">№ 01</span> The engineer</p>
           <h1 className="display text-[clamp(4.6rem,15vw,15rem)] font-light leading-[0.8] tracking-[-0.045em]">
             <span className="block"><Words text="Aniket" on={on} base={100} step={110} /></span>
             <span className="block pl-[0.7em] italic text-vermilion"><Words text="Saha" on={on} base={260} step={110} /></span>
@@ -40,7 +40,7 @@ export default function Hero() {
           <p className="mt-5 max-w-[52ch] text-[clamp(.98rem,1.2vw,1.15rem)] leading-[1.6] text-ink/70">
             {withLinks(heroData.description, { React: heroData.links.react, "Next.js": heroData.links.nextjs })}
           </p>
-          <p className="mt-3 max-w-[52ch] text-[.95rem] leading-[1.6] text-ink/60">
+          <p className="mt-3 max-w-[52ch] text-[.95rem] leading-[1.6] text-ink/70">
             {withLinks(heroData.socialDescription, { LinkedIn: heroData.links.linkedin, GitHub: heroData.links.github })}
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-4">
@@ -63,7 +63,7 @@ export default function Hero() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-t-full bg-ink/10 [clip-path:inset(100%_0_0_0)] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(.76,0,.24,1)] [.hero-on_&]:[clip-path:inset(0_0_0_0)]" style={{ transitionDelay: ".35s" }}>
             <Image src="/portrait-hero-bw.jpg" alt="Aniket Saha" fill priority sizes="(max-width: 768px) 70vw, 460px" className="object-cover" />
           </div>
-          <figcaption className="folio relative mt-3 text-[10px] text-ink/60">Fig. 1 — The author.</figcaption>
+          <figcaption className="folio relative mt-3 text-[10px] text-ink/70">Fig. 1 — The author.</figcaption>
         </figure>
       </div>
 

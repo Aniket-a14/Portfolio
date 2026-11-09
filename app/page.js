@@ -25,6 +25,7 @@ export default function Home() {
     image: project.image,
     languages: project.languages || [],
     stack: project.stack || [],
+    result: project.summary?.result || "",
   }));
 
   return (

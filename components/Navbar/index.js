@@ -88,11 +88,11 @@ const Navbar = () => {
         className={`folio grid grid-cols-1 items-center overflow-hidden border-b border-ink/15 px-[3vw] transition-all duration-500 ease-[cubic-bezier(.76,0,.24,1)] md:grid-cols-[1fr_auto_1fr] ${slim ? "max-h-0 border-transparent py-0 opacity-0" : "max-h-16 py-2 opacity-100"}`}
         aria-hidden={slim}
       >
-        <span className="hidden text-ink/60 md:block">{date || " "}</span>
+        <span className="hidden text-ink/70 md:block">{date || " "}</span>
         <button
           onClick={() => setIsSheetOpen(true)}
           className="group flex items-center gap-3 justify-self-start md:justify-self-center"
-          aria-label="Open profile"
+          aria-label="Aniket Saha, open profile"
         >
           <Avatar className="h-7 w-7 border border-ink/20">
             <AvatarImage src="/logo.jpeg" loading="eager" alt="" />
@@ -100,14 +100,14 @@ const Navbar = () => {
           </Avatar>
           <span className="display text-[clamp(1.4rem,3vw,2.2rem)] font-normal normal-case leading-none tracking-[-0.02em]">Aniket Saha</span>
         </button>
-        <span className="hidden text-right text-ink/60 md:block">Portfolio · Vol. 2026</span>
+        <span className="hidden text-right text-ink/70 md:block">Portfolio · Vol. 2026</span>
       </div>
 
       <nav aria-label="Primary" className="relative flex items-center justify-center px-[3vw] py-2.5 md:gap-[clamp(1rem,3.4vw,3.4rem)]">
         <button
           onClick={() => setIsSheetOpen(true)}
           className={`absolute left-[3vw] items-center gap-2 md:hidden ${slim ? "flex" : "hidden"}`}
-          aria-label="Open profile"
+          aria-label="Aniket Saha, open profile"
         >
           <span className="display text-xl leading-none tracking-[-0.02em]">Aniket Saha</span>
         </button>
@@ -153,7 +153,7 @@ const Navbar = () => {
             data-lenis-prevent
           >
             <div className="px-[4vw] pb-8 pt-3">
-              <p className="folio my-3 text-ink/60">Contents</p>
+              <p className="folio my-3 text-ink/70">Contents</p>
               {navLinks.map((link, i) => (
                 <a
                   key={link.name}

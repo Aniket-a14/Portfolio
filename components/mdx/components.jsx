@@ -9,9 +9,9 @@ const Mermaid = dynamic(() => import("./Mermaid"));
 /* ------------------------------------------------------------------ */
 
 const CALLOUT_STYLES = {
-  note: { label: "Note", tone: "text-ink/60", rule: "bg-ink/15" },
+  note: { label: "Note", tone: "text-ink/70", rule: "bg-ink/15" },
   insight: { label: "What I learned", tone: "text-vermilion/80", rule: "bg-vermilion/50" },
-  warning: { label: "Caveat", tone: "text-ink/60", rule: "bg-ink/30" },
+  warning: { label: "Caveat", tone: "text-ink/70", rule: "bg-ink/30" },
 };
 
 /**
@@ -53,7 +53,7 @@ export function Stat({ value, label }) {
       <p className="font-display text-[30px] leading-none text-ink/90 sm:text-[34px]">
         {value}
       </p>
-      <p className="mt-3 max-w-[130px] font-body text-[10.5px] uppercase leading-snug tracking-[0.14em] text-ink/60">
+      <p className="mt-3 max-w-[130px] font-body text-[10.5px] uppercase leading-snug tracking-[0.14em] text-ink/70">
         {label}
       </p>
     </div>
@@ -82,7 +82,7 @@ export function TechGrid({ groups = [], items = [] }) {
             {group.items.map((item) => (
               <li
                 key={item}
-                className="font-body text-[13.5px] font-light leading-snug text-ink/60"
+                className="font-body text-[13.5px] font-light leading-snug text-ink/70"
               >
                 {item}
               </li>
@@ -113,7 +113,7 @@ function Heading({ level, children, chapter }) {
   const sizes = {
     2: "font-display text-[30px] sm:text-[36px] leading-[1.15] text-ink/95 mt-20 mb-6",
     3: "font-body text-[17px] sm:text-[18px] font-medium tracking-[-0.005em] text-ink/80 mt-12 mb-4",
-    4: "font-body text-[14.5px] font-medium uppercase tracking-[0.1em] text-ink/60 mt-9 mb-3",
+    4: "font-body text-[14.5px] font-medium uppercase tracking-[0.1em] text-ink/70 mt-9 mb-3",
   };
 
   const heading = (
@@ -266,7 +266,7 @@ export const mdxComponents = {
   ),
 
   td: ({ children }) => (
-    <td className="border-t border-ink/[0.05] px-4 py-3.5 font-body text-[13.5px] font-light text-ink/60 first:pl-0">
+    <td className="border-t border-ink/[0.05] px-4 py-3.5 font-body text-[13.5px] font-light text-ink/70 first:pl-0">
       {children}
     </td>
   ),

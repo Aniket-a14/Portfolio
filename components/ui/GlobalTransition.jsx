@@ -71,14 +71,14 @@ const GlobalTransition = () => {
             exit={{ y: "-104%", borderBottomLeftRadius: "50% 8vh", borderBottomRightRadius: "50% 8vh", transition: { duration: 1.1, ease: EASE } }}
             className="fixed inset-0 z-[9999] flex flex-col justify-between bg-ground px-[4vw] py-[4vh] text-ink"
           >
-            <div className="folio flex justify-between text-ink/60">
+            <div className="folio flex justify-between text-ink/70">
               <span>Folio</span>
               <span>{String(index + 1).padStart(2, "0")} / {String(GREETINGS.length).padStart(2, "0")}</span>
             </div>
             <div key={index} lang={GREETING_LANG[index] || "en"} className="display select-none text-center text-[clamp(5rem,20vw,19rem)] font-light italic leading-[0.9] animate-[folioIn_.26s_cubic-bezier(.22,1,.36,1)_both]">
               {GREETINGS[index]}<span className="text-vermilion-bright">.</span>
             </div>
-            <div className="folio flex items-center justify-between text-ink/60">
+            <div className="folio flex items-center justify-between text-ink/70">
               <span>Aniket Saha — Portfolio</span>
               <span aria-hidden="true" className="block h-px w-[min(28vw,260px)] bg-ink/20">
                 <i className="block h-full origin-left bg-ink transition-transform duration-200" style={{ transform: `scaleX(${progress / 100})` }} />

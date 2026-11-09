@@ -134,7 +134,7 @@ export default async function ProjectDetailPage({ params }) {
         <div className="mt-10 border-t border-ink pt-4">
           <p className="folio text-vermilion">
             № {String(position).padStart(2, "0")} — Case study
-            <span className="text-ink/60"> · {frontmatter.timeline || frontmatter.year} · {String(position).padStart(2, "0")}/{String(all.length).padStart(2, "0")}</span>
+            <span className="text-ink/70"> · {frontmatter.timeline || frontmatter.year} · {String(position).padStart(2, "0")}/{String(all.length).padStart(2, "0")}</span>
           </p>
 
           <h1 className="display mt-8 max-w-[14em] text-[clamp(2.8rem,7.4vw,7.4rem)] font-light leading-[0.96] tracking-[-0.045em]">
@@ -175,7 +175,7 @@ export default async function ProjectDetailPage({ params }) {
             className="h-auto w-full object-contain"
           />
         </div>
-        <figcaption className="folio mt-3 text-[10.5px] text-ink/60">
+        <figcaption className="folio mt-3 text-[10.5px] text-ink/70">
           Fig. 1 — {frontmatter.title}{frontmatter.status ? `, ${frontmatter.status}` : ""}
         </figcaption>
       </figure>
@@ -188,7 +188,7 @@ export default async function ProjectDetailPage({ params }) {
               key={spec.label}
               className="border-b border-ink/[0.07] py-5 pr-5 sm:border-r sm:last:border-r-0 sm:pl-5 sm:first:pl-0"
             >
-              <dt className="font-body text-[9px] uppercase tracking-[0.28em] text-ink/60">
+              <dt className="font-body text-[9px] uppercase tracking-[0.28em] text-ink/70">
                 {spec.label}
               </dt>
               <dd className="mt-2.5 font-body text-[14px] font-light leading-snug text-ink/75">
@@ -201,7 +201,7 @@ export default async function ProjectDetailPage({ params }) {
         {stats?.languages && Object.keys(stats.languages).length > 0 && (
           <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div>
-              <p className="mb-4 font-body text-[9px] uppercase tracking-[0.3em] text-ink/60">
+              <p className="mb-4 font-body text-[9px] uppercase tracking-[0.3em] text-ink/70">
                 Composition
               </p>
               <LanguageBar languages={stats.languages} />
@@ -209,14 +209,14 @@ export default async function ProjectDetailPage({ params }) {
 
             {stats.topics?.length > 0 && (
               <div>
-                <p className="mb-4 font-body text-[9px] uppercase tracking-[0.3em] text-ink/60">
+                <p className="mb-4 font-body text-[9px] uppercase tracking-[0.3em] text-ink/70">
                   Topics
                 </p>
                 <ul className="flex flex-wrap gap-x-4 gap-y-2">
                   {stats.topics.map((topic) => (
                     <li
                       key={topic}
-                      className="font-body text-[11.5px] tracking-[0.04em] text-ink/60"
+                      className="font-body text-[11.5px] tracking-[0.04em] text-ink/70"
                     >
                       {topic}
                     </li>
@@ -250,7 +250,7 @@ export default async function ProjectDetailPage({ params }) {
                   {frontmatter.stack.map((item) => (
                     <li
                       key={item}
-                      className="font-body text-[13.5px] font-light text-ink/60"
+                      className="font-body text-[13.5px] font-light text-ink/70"
                     >
                       {item}
                     </li>
@@ -274,7 +274,7 @@ export default async function ProjectDetailPage({ params }) {
                   ([label, text]) =>
                     text && (
                       <div key={label} className="border-t border-ink/15 py-3 first:border-t-0 first:pt-0">
-                        <dt className="folio mb-1 text-[9.5px] text-ink/60">{label}</dt>
+                        <dt className="folio mb-1 text-[9.5px] text-ink/70">{label}</dt>
                         <dd>{text}</dd>
                       </div>
                     )

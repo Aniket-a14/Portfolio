@@ -27,7 +27,7 @@ export function Comments() {
                   <figcaption className="folio mt-4 flex items-center gap-2.5 text-[11px] normal-case tracking-[0.06em]">
                     <Image src={r.img} alt="" width={28} height={28} className="size-7 rounded-full object-cover grayscale" />
                     <b className="font-medium uppercase tracking-[0.12em]">{r.name}</b>
-                    <em className="not-italic text-ink/60">{r.username}</em>
+                    <em className="not-italic text-ink/70">{r.username}</em>
                   </figcaption>
                 </Reveal>
               );
