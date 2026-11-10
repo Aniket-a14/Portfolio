@@ -3,22 +3,29 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { heroData, profileData } from "@/lib/data";
+import { heroData, nowNote, profileData } from "@/lib/data";
 import { Words } from "@/components/ui/Reveal";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 
-const TextLink = ({ href, children }) => (
-  <Link href={href} target="_blank" rel="noopener noreferrer" className="group relative font-medium text-ink">
+// Highlighter-marker links: the band sweeps in once the hero has revealed (the stagger is --hl-d), and darkens on hover.
+const TextLink = ({ href, children, order }) => (
+  <Link
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hl hl-link font-medium text-ink"
+    style={{ "--hl-d": `${1.8 + order * 0.3}s` }}
+  >
     {children}
-    <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-50 bg-vermilion transition-transform duration-500 group-hover:scale-x-100" />
   </Link>
 );
 
 // Splits a sentence on named tokens and swaps each for a real link, so the existing
-// copy in lib/data.js stays the single source of truth.
-const withLinks = (text, map) => {
+// copy in lib/data.js stays the single source of truth. `first` is the order of the first link (for the stagger).
+const withLinks = (text, map, first = 0) => {
   const keys = Object.keys(map).map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-  return text.split(new RegExp(`(${keys.join("|")})`)).map((part, i) => (map[part] ? <TextLink key={i} href={map[part]}>{part}</TextLink> : part));
+  let n = first;
+  return text.split(new RegExp(`(${keys.join("|")})`)).map((part, i) => (map[part] ? <TextLink key={i} href={map[part]} order={n++}>{part}</TextLink> : part));
 };
 
 export default function Hero() {
@@ -29,6 +36,19 @@ export default function Hero() {
     <section id="hero" className={`relative flex min-h-[100svh] flex-col overflow-hidden pt-[5.25rem] md:pt-[8.5rem] ${on ? "hero-on" : ""}`}>
       <div className="mx-auto grid w-full max-w-[1500px] flex-1 grid-cols-1 items-end gap-y-8 px-[4vw] pb-10 md:grid-cols-[7fr_5fr] md:gap-x-[3vw] md:pb-14">
         <div className="relative z-10 order-2 md:order-1">
+          {/* "Right now" note: a taped-on aside with a hand-drawn arrow to the name. Wide screens only, where
+              there is room beside the name; the footer carries the same availability line everywhere else. */}
+          <aside
+            aria-label={nowNote.label}
+            className="absolute right-[1%] top-[4.2rem] hidden w-[205px] rotate-[3deg] border border-ink/20 px-4 py-3.5 opacity-0 shadow-[4px_6px_0_rgb(var(--ink)/0.12)] transition-opacity duration-700 [background:color-mix(in_srgb,rgb(var(--ink))_6%,rgb(var(--ground)))] [.hero-on_&]:opacity-100 xl:block"
+            style={{ transitionDelay: "1.9s" }}
+          >
+            <p className="folio mb-1.5 flex items-center gap-1.5 text-[10px] text-ink"><span aria-hidden="true" className="size-1.5 rounded-full bg-vermilion" />{nowNote.label}</p>
+            <p className="display text-[1.02rem] italic font-light leading-[1.3]">{nowNote.text}</p>
+            <svg aria-hidden="true" viewBox="0 0 110 50" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" className="absolute -left-[4.4rem] top-[3.2rem] w-[5.6rem] -rotate-[8deg] text-vermilion">
+              <path d="M104 8C70 2 40 14 10 40M10 40l12-3M10 40l3-12" />
+            </svg>
+          </aside>
           <p className="folio mb-5 flex gap-4 text-ink/70"><span className="text-vermilion">№ 01</span> The engineer</p>
           <h1 className="display text-[clamp(4.6rem,15vw,15rem)] font-light leading-[0.8] tracking-[-0.045em]">
             <span className="block"><Words text="Aniket" on={on} base={100} step={110} /></span>
@@ -41,7 +61,7 @@ export default function Hero() {
             {withLinks(heroData.description, { React: heroData.links.react, "Next.js": heroData.links.nextjs })}
           </p>
           <p className="mt-3 max-w-[52ch] text-[.95rem] leading-[1.6] text-ink/70">
-            {withLinks(heroData.socialDescription, { LinkedIn: heroData.links.linkedin, GitHub: heroData.links.github })}
+            {withLinks(heroData.socialDescription, { LinkedIn: heroData.links.linkedin, GitHub: heroData.links.github }, 2)}
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-4">
             <a

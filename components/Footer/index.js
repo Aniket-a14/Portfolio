@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 import { profileData, socialLinks } from "@/lib/data";
 import { Words } from "@/components/ui/Reveal";
+import CopyEmail from "@/components/CopyEmail";
 
 const Footer = () => {
   const { navigate } = useTransitionContext();
@@ -101,12 +102,12 @@ const Footer = () => {
           </span>
         </button>
 
-        <a
-          href={`mailto:${profileData.contact.email}`}
-          className="display mt-[3vh] w-max max-w-full break-all border-b border-vermilion text-[clamp(1.4rem,4vw,4rem)] font-light italic leading-none text-vermilion transition-colors hover:border-ink hover:text-ink"
-        >
-          {profileData.contact.email}
-        </a>
+        <div className="mt-[3vh]">
+          <CopyEmail
+            email={profileData.contact.email}
+            className="display border-b border-vermilion text-[clamp(1.4rem,4vw,4rem)] font-light italic text-vermilion transition-colors hover:border-ink hover:text-ink"
+          />
+        </div>
 
         <div className="mt-[8vh] grid gap-[3vw] border-t border-ink pt-5 text-[12px] leading-[1.7] text-ink/70 md:grid-cols-3">
           <div>

@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useSyncExternalStore } from "react";
-import { flushSync } from "react-dom";
-import { THEME_KEY, applyTheme as apply, readTheme as read } from "./theme";
+import { readTheme as read, toggleTheme } from "./theme";
 
 const subscribe = (cb) => {
   window.addEventListener("themechange", cb);
@@ -18,24 +17,7 @@ export default function ThemeToggle({ className = "" }) {
   const theme = useSyncExternalStore(subscribe, read, () => "light");
   const dark = theme === "dark";
 
-  const onClick = () => {
-    const next = dark ? "light" : "dark";
-    try { window.localStorage.setItem(THEME_KEY, next); } catch { /* choice just won't persist */ }
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce || !document.startViewTransition) return apply(next);
-
-    const root = document.documentElement;
-    root.dataset.vt = "theme";
-    const t = document.startViewTransition(() => flushSync(() => apply(next)));
-    t.ready.then(() => {
-      root.animate(
-        { clipPath: ["polygon(0 0, 0 0, -28% 100%, 0 100%)", "polygon(0 0, 128% 0, 100% 100%, 0 100%)"] },
-        { duration: 850, easing: "cubic-bezier(.76,0,.24,1)", pseudoElement: "::view-transition-new(root)", fill: "both" }
-      );
-    }).catch(() => {});
-    t.finished.finally(() => { delete root.dataset.vt; });
-  };
+  const onClick = toggleTheme;
 
   return (
     <button

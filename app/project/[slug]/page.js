@@ -18,6 +18,7 @@ import { getRepoStats } from "@/lib/github";
 import { makeMdxComponents } from "@/components/mdx/components";
 import remarkKeySentence from "@/lib/remark-key-sentence";
 import ReadingRail from "@/components/project/ReadingRail";
+import HighlightReveal from "@/components/project/HighlightReveal";
 import LanguageBar from "@/components/project/LanguageBar";
 import {
   BackToWork,
@@ -45,7 +46,6 @@ export async function generateMetadata({ params }) {
     title: frontmatter.fullTitle || frontmatter.title,
     description: frontmatter.description || frontmatter.tagline,
     path: `/project/${slug}`,
-    image: frontmatter.image,
   });
 }
 
@@ -231,7 +231,8 @@ export default async function ProjectDetailPage({ params }) {
       {/* ---------------- Body: annotated essay ---------------- */}
       <div className={`${SHELL} pb-24 pt-24`}>
         <div className="flex flex-col gap-12 xl:grid xl:grid-cols-[190px_minmax(0,1fr)_240px] xl:gap-x-7">
-          <ReadingRail headings={headings} articleId="case-study" showContents={false} />
+          <ReadingRail headings={headings} chapters={chapters} articleId="case-study" showContents={false} />
+          <HighlightReveal articleId="case-study" />
 
           {/* Left column is reserved for each chapter's margin note (positioned by the heading). */}
           <div className="hidden xl:block" aria-hidden="true" />

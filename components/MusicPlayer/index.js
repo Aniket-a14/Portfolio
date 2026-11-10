@@ -209,6 +209,21 @@ export default function MusicPlayer() {
     else { setMessage(""); p.playVideo(); }
   };
 
+  // The command palette's "Play / pause music": same effect as pressing the disc's play button, and it starts
+  // the player (card stays closed) if it has not been created yet.
+  useEffect(() => {
+    const on = () => {
+      const p = playerRef.current;
+      if (playing) { p?.pauseVideo?.(); return; }
+      if (p && ready) { setMessage(""); p.playVideo(); return; }
+      setAsk(false);
+      setEngaged(true);
+      wantPlay.current = true;
+    };
+    window.addEventListener("music-toggle", on);
+    return () => window.removeEventListener("music-toggle", on);
+  }, [playing, ready]);
+
   const chooseLang = (l) => {
     setLang(l);
     const q = musicTracks.filter((t) => l === "All" || t.lang === l);

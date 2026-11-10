@@ -91,6 +91,7 @@
     --ink: 21 20 15;
     --vermilion: 184 50 26;
     --vermilion-bright: 207 59 27;
+    --marker: 255 196 46; /* highlighter marigold (.hl): the one bright, non-red colour on the site */
     --vermilion-fill: 207 59 27; /* large fills only (hero block); text uses --vermilion / --vermilion-bright */
     --hard-shadow: 21 20 15;
     --background: 0 0% 0%;
@@ -370,8 +371,30 @@ body {
   color: rgb(var(--vermilion-bright));
 }
 
-/* Annotated essay: the opening sentence of each chapter, marked like a highlighter underline. */
-.case-study mark.key-sentence{background:linear-gradient(transparent 58%,rgb(var(--vermilion) / .22) 58%);color:inherit;padding:0}
+/* Highlighter marker. A marigold band sweeps across the text. Case studies: key sentences and bold phrases, revealed
+   as they scroll into view (components/project/HighlightReveal). Hero: the four links, revealed with the hero.
+   Light mode: bright marigold. Dark mode: a deeper, quieter amber under the normal light text. */
+.hl {
+  --hl-a: .85;
+  background-color: transparent; /* <mark> has a built-in yellow background; only the band may colour it */
+  background-image: linear-gradient(transparent 30%, rgb(var(--marker) / var(--hl-a)) 30%, rgb(var(--marker) / var(--hl-a)) 94%, transparent 94%);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 0% 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size .9s cubic-bezier(.76, 0, .24, 1) var(--hl-d, 0s);
+  padding: 0 .14em;
+  margin: 0 -.14em;
+  color: inherit;
+}
+.hl.is-in, .hero-on .hl-link { background-size: 100% 100%; }
+.dark .hl { --hl-a: .5; }
+.hl-link:hover, .hl-link:focus-visible { --hl-a: 1; }
+.dark .hl-link:hover, .dark .hl-link:focus-visible { --hl-a: .62; }
+@media (prefers-reduced-motion: reduce) {
+  .hl { background-size: 100% 100%; transition: none; }
+}
 
 /* Music player sliders (components/MusicPlayer). */
 .mp-range { -webkit-appearance: none; appearance: none; background: transparent; height: 22px; cursor: pointer; }
@@ -393,6 +416,7 @@ body {
   --ground: 26 20 16;
   --ink: 239 230 214;
   --vermilion: 240 105 58;
+  --marker: 224 138 40; /* dark ground: a deep amber, not the bright light-mode yellow */
   --vermilion-bright: 240 105 58;
   --vermilion-fill: 207 59 27;
   --hard-shadow: 0 0 0;
@@ -403,6 +427,7 @@ body {
     --ground: 26 20 16;
     --ink: 239 230 214;
     --vermilion: 240 105 58;
+  --marker: 224 138 40; /* dark ground: a deep amber, not the bright light-mode yellow */
     --vermilion-bright: 240 105 58;
     --vermilion-fill: 207 59 27;
     --hard-shadow: 0 0 0;
@@ -415,3 +440,61 @@ body {
 :root[data-vt="theme"]::view-transition-group(root) { animation: none; }
 :root[data-vt="theme"]::view-transition-old(root),
 :root[data-vt="theme"]::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+
+/* ---------------------------------------------------------------------------------------------
+   Print: on the home page Ctrl+P prints the résumé sheet (components/PrintSheet) instead of the
+   page. Everything else is removed from the print, and colours are fixed so dark mode prints on white.
+   --------------------------------------------------------------------------------------------- */
+#print-sheet { display: none; }
+
+@media print {
+  @page { size: A4; margin: 11mm 12mm; }
+  :root { color-scheme: light !important; } /* dark mode must never print a dark page */
+
+  html[data-print="cv"],
+  html[data-print="cv"] body { background: #fff !important; color: #111 !important; }
+  html[data-print="cv"] body > *:not(#print-sheet) { display: none !important; }
+  html[data-print="cv"] #print-sheet {
+    display: block;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 8.7pt;
+    line-height: 1.42;
+    color: #111;
+  }
+
+  #print-sheet .ps-mast { display: flex; justify-content: space-between; border-top: 3pt double #111; border-bottom: 0.6pt solid #111; padding: 3pt 0; margin-bottom: 9pt; font: 500 6.6pt/1 var(--font-mono), monospace; letter-spacing: .16em; text-transform: uppercase; }
+  #print-sheet .ps-name { font-family: var(--font-display), Georgia, serif; font-weight: 300; font-size: 36pt; line-height: .95; letter-spacing: -.035em; margin: 0; }
+  #print-sheet .ps-name i { color: #b8321a; }
+  #print-sheet .ps-roles { margin: 4pt 0 0; font-family: var(--font-display), Georgia, serif; font-style: italic; font-size: 10.5pt; color: #333; }
+  #print-sheet .ps-rule { border: 0; border-top: 1.2pt solid #111; margin: 9pt 0 4pt; }
+  #print-sheet .ps-cols { display: grid; grid-template-columns: 1.55fr 1fr; gap: 0 20pt; }
+  #print-sheet h2 { margin: 11pt 0 4pt; font: 500 6.8pt/1 var(--font-mono), monospace; letter-spacing: .18em; text-transform: uppercase; color: #b8321a; }
+  #print-sheet .ps-item { break-inside: avoid; margin: 0 0 6pt; }
+  #print-sheet .ps-row { display: flex; justify-content: space-between; gap: 8pt; }
+  #print-sheet .ps-row span { white-space: nowrap; font: 7.2pt/1.4 var(--font-mono), monospace; color: #444; }
+  #print-sheet .ps-sub { font: 7.2pt/1.4 var(--font-mono), monospace; color: #555; }
+  #print-sheet ul { margin: 2pt 0 0 11pt; padding: 0; list-style: disc; }
+  #print-sheet li { margin: 1pt 0; }
+  #print-sheet .ps-skill { margin: 0 0 3pt; }
+  #print-sheet .ps-url { font: 7pt/1.5 var(--font-mono), monospace; color: #444; word-break: break-all; }
+  #print-sheet .ps-contact { font-size: 7.4pt; line-height: 1.7; }
+}
+
+/* Copy email ("Letter roll"): each character of the address rolls up and out while the message rolls in. */
+.ce-line { display: block; word-break: break-all; }
+.ce-ch { display: inline-block; transition: transform .55s cubic-bezier(.76, 0, .24, 1) calc(var(--i) * 24ms); }
+.ce-msg { color: rgb(var(--ink)); word-break: normal; }
+.ce-msg .ce-ch { transform: translateY(125%); }
+.ce[data-copied="true"] .ce-line:not(.ce-msg) .ce-ch { transform: translateY(-125%); }
+.ce[data-copied="true"] .ce-msg .ce-ch { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { .ce-ch { transition: none; } }
+
+/* Command palette entrance (skipped for reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .pal-in { animation: palFade .2s ease-out; }
+  .pal-in > [role="dialog"] { animation: palRise .28s cubic-bezier(.22, 1, .36, 1); }
+}
+@keyframes palFade { from { opacity: 0; } }
+@keyframes palRise { from { transform: translateY(10px); opacity: 0; } }

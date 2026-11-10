@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 import { WordsInView } from "@/components/ui/Reveal";
 import ThemeToggle from "@/components/ThemeToggle";
+import SearchButton from "@/components/CommandPalette/SearchButton";
 
 const pad = (n) => String(n).padStart(2, "0");
 const fmt = (d) =>
@@ -79,7 +80,10 @@ export default function BlogsClient() {
             <ArrowUpRight size={14} className="-rotate-90" />
             Back to home
           </button>
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <SearchButton />
+            <ThemeToggle />
+          </div>
         </div>
 
         <header className="mb-8 border-t border-ink pt-4">

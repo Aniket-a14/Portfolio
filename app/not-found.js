@@ -1,69 +1,48 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import {
-  Terminal,
-  AnimatedSpan,
-  TypingAnimation,
-} from "@/components/magicui/terminal";
+import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
+import SearchButton from "@/components/CommandPalette/SearchButton";
 
-export default function NotFound() {
-
-  const router = useRouter();
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      router.push("/");
-    }, 8200);
-    return () => clearTimeout(timeout);
-  }, [router]);
-
-  return (
-    <div className="flex flex-col bg-ground  items-center justify-center h-screen">
-      <Terminal className="bg-ink">
-        <TypingAnimation>&gt; npm found page@latest init</TypingAnimation>
-
-        <AnimatedSpan delay={1500} className="text-green-500">
-          <span>✔ Preflight checks.</span>
-        </AnimatedSpan>
-
-        <AnimatedSpan delay={2000} className="text-green-500">
-          <span>✔ Verifying framework. Found Next.js.</span>
-        </AnimatedSpan>
-
-        <AnimatedSpan delay={2500} className="text-green-500">
-          <span>✔ Tailwind CSS is installed.</span>
-        </AnimatedSpan>
-
-        <AnimatedSpan delay={3000} className="text-red-500">
-          <span>✘ Could not validate import alias.</span>
-        </AnimatedSpan>
-
-        <AnimatedSpan delay={3500} className="text-red-500">
-          <span>✘ Error: Writing components.json.</span>
-        </AnimatedSpan>
-
-        <AnimatedSpan delay={4000} className="text-red-500">
-          <span>✘ Error: Updating tailwind.config.ts</span>
-        </AnimatedSpan>
-
-        <AnimatedSpan delay={4500} className="text-red-500">
-          <span>✘ Error: Updating app/globals.css</span>
-        </AnimatedSpan>
-
-        <AnimatedSpan delay={5000} className="text-green-500">
-          <span>✔ Initiating lockdown.</span>
-        </AnimatedSpan>
-
-        <AnimatedSpan delay={6000} className="text-blue-500">
-          <span>ℹ Updated 1 file:</span>
-          <span className="pl-2">Fixed all errors.</span>
-        </AnimatedSpan>
-
-        <TypingAnimation delay={6500}  className="text-muted-foreground">
-          Returning to main menu.
-        </TypingAnimation>
-      </Terminal>
-    </div>
-  );
+export const metadata = {
+  title: "Page not found | Portfolio",
+  robots: { index: false, follow: true },
 };
 
+const LINK =
+  "folio inline-flex min-h-[40px] items-center border border-ink px-4 py-2 text-ink transition-colors hover:bg-ink hover:text-ground focus-visible:bg-ink focus-visible:text-ground";
+
+/**
+ * 404, set as a newspaper correction ("Erratum"). It used to play a fake terminal install and redirect home
+ * after eight seconds, which threw visitors off a page they might want to read; this one stays put and offers
+ * three ways back in.
+ */
+export default function NotFound() {
+  return (
+    <div className="flex min-h-[100svh] flex-col bg-ground text-ink">
+      <header className="mx-auto flex w-full max-w-[1180px] items-center justify-between border-b border-ink px-6 py-4 md:px-12">
+        <Link href="/" className="display text-xl leading-none tracking-[-0.02em] hover:text-vermilion">Aniket Saha</Link>
+        <div className="flex items-center gap-2">
+          <SearchButton />
+          <ThemeToggle />
+        </div>
+      </header>
+
+      <main className="grid flex-1 place-items-center px-6 py-[6vh]">
+        <section className="w-full max-w-[640px] border-[3px] border-double border-ink p-[clamp(1.3rem,4vw,3.4rem)] text-center">
+          <p className="folio border-b border-ink pb-2.5 tracking-[0.3em] text-vermilion">Erratum</p>
+          <h1 className="display mt-6 text-[clamp(2.2rem,6vw,4.4rem)] font-light leading-[1.02] tracking-[-0.04em]">
+            The page you asked for was not printed in this edition.
+          </h1>
+          <p className="mx-auto mt-5 max-w-[32em] leading-[1.6] text-ink/70">
+            It may have moved, been renamed or never existed. Nothing is wrong on your end.
+          </p>
+          <nav aria-label="Where to next" className="mt-7 flex flex-wrap justify-center gap-3">
+            <Link href="/" className={LINK}>Back to the front page</Link>
+            <Link href="/#projects" className={LINK}>Projects</Link>
+            <Link href="/blogs" className={LINK}>Articles</Link>
+          </nav>
+          <p className="folio mt-7 text-[10.5px] text-ink/70">Error 404 · Corrected in the next issue</p>
+        </section>
+      </main>
+    </div>
+  );
+}

@@ -10,12 +10,18 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
  * element offsets, refreshed on resize, so the scroll handler never triggers
  * layout.
  */
-const ReadingRail = ({ headings = [], articleId, showContents = true }) => {
+const NO_CHAPTERS = []; // stable default: a fresh [] each render would re-run the measuring effect forever
+
+const ReadingRail = ({ headings = [], chapters = NO_CHAPTERS, articleId, showContents = true }) => {
   const [progress, setProgress] = useState(0);
+  const [ticks, setTicks] = useState([]); // chapter positions along the margin ruler, 0..1
+  const [chapterId, setChapterId] = useState(null);
+  const [inView, setInView] = useState(false);
   const [activeId, setActiveId] = useState(headings[0]?.id ?? null);
   const [marker, setMarker] = useState({ top: 0, height: 0 });
 
   const offsetsRef = useRef([]);
+  const chapterTopsRef = useRef([]);
   const frameRef = useRef(0);
   const listRef = useRef(null);
 
@@ -31,6 +37,20 @@ const ReadingRail = ({ headings = [], articleId, showContents = true }) => {
             : null;
         })
         .filter(Boolean);
+
+      const article = articleId ? document.getElementById(articleId) : null;
+      const tops = chapters
+        .map((c) => {
+          const el = document.getElementById(c.id);
+          return el ? { ...c, top: el.getBoundingClientRect().top + window.scrollY } : null;
+        })
+        .filter(Boolean);
+      chapterTopsRef.current = tops;
+      if (article && tops.length) {
+        const start = article.getBoundingClientRect().top + window.scrollY;
+        const span = Math.max(1, article.offsetHeight - window.innerHeight);
+        setTicks(tops.map((c) => ({ id: c.id, number: c.number, title: c.title, pos: Math.min(1, Math.max(0, (c.top - 96 - start) / span)) })));
+      }
     };
 
     const update = () => {
@@ -38,11 +58,19 @@ const ReadingRail = ({ headings = [], articleId, showContents = true }) => {
 
       const article = articleId ? document.getElementById(articleId) : null;
       if (article) {
-        const start = article.offsetTop;
+        const start = article.getBoundingClientRect().top + window.scrollY;
         const span = article.offsetHeight - window.innerHeight;
         const ratio = span > 0 ? (window.scrollY - start) / span : 0;
         setProgress(Math.min(1, Math.max(0, ratio)));
+        setInView(window.scrollY > start - window.innerHeight * 0.6);
       }
+
+      let ch = null;
+      for (const c of chapterTopsRef.current) {
+        if (c.top <= window.scrollY + window.innerHeight * 0.3) ch = c.id;
+        else break;
+      }
+      setChapterId(ch);
 
       const limit = window.scrollY + window.innerHeight * 0.3;
       const offsets = offsetsRef.current;
@@ -75,7 +103,7 @@ const ReadingRail = ({ headings = [], articleId, showContents = true }) => {
       window.removeEventListener("resize", onResize);
       if (frameRef.current) cancelAnimationFrame(frameRef.current);
     };
-  }, [headings, articleId]);
+  }, [headings, chapters, articleId]);
 
   // The indicator slides along the rail rather than the active row simply
   // changing colour. Measured only when the active entry changes.
@@ -112,7 +140,7 @@ const ReadingRail = ({ headings = [], articleId, showContents = true }) => {
   return (
     <>
       <div
-        className="fixed left-0 top-0 z-[60] h-[2px] w-full bg-transparent"
+        className={`fixed left-0 top-0 z-[60] h-[2px] w-full bg-transparent ${ticks.length ? "xl:hidden" : ""}`}
         aria-hidden="true"
       >
         <div
@@ -120,6 +148,37 @@ const ReadingRail = ({ headings = [], articleId, showContents = true }) => {
           style={{ transform: `scaleX(${progress})` }}
         />
       </div>
+
+      {ticks.length > 0 && (
+        // Margin ruler (xl and up): a printer's ruler in the left margin. The fill is how far you have read, each
+        // tick is a chapter, and the dot is you. Pointer-only; the "In short" chapter list is the keyboard route.
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none fixed bottom-[18vh] left-3 top-[18vh] z-40 hidden w-px bg-ink/15 transition-opacity duration-500 xl:block ${inView ? "opacity-100" : "opacity-0"}`}
+        >
+          <span className="absolute -left-px top-0 w-[3px] bg-vermilion" style={{ height: `${progress * 100}%` }} />
+          <span className="absolute -left-[5px] size-[11px] -translate-y-1/2 rounded-full bg-vermilion" style={{ top: `${progress * 100}%` }} />
+          {ticks.map((t) => {
+            const active = t.id === chapterId;
+            return (
+              <a
+                key={t.id}
+                href={`#${t.id}`}
+                tabIndex={-1}
+                onClick={(event) => jumpTo(event, t.id)}
+                className="group pointer-events-auto absolute left-0 flex -translate-y-1/2 items-center"
+                style={{ top: `${t.pos * 100}%` }}
+              >
+                <span className={`h-px w-3 ${active ? "bg-vermilion" : "bg-ink"}`} />
+                <span className={`folio ml-2 bg-ground py-px pr-1 text-[10px] tabular-nums ${active ? "text-vermilion" : "text-ink/70"}`}>
+                  {String(t.number).padStart(2, "0")}
+                  <span className={`ml-2 normal-case tracking-[0.02em] group-hover:inline min-[1700px]:inline ${active ? "min-[1700px]:text-vermilion" : ""} hidden`}>{t.title}</span>
+                </span>
+              </a>
+            );
+          })}
+        </div>
+      )}
 
       {showContents && (
       <nav

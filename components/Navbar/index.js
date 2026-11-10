@@ -8,6 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { profileData } from "@/lib/data";
 import ProfileSheet from "@/components/ProfileSheet";
 import ThemeToggle from "@/components/ThemeToggle";
+import SearchButton, { PALETTE_EVENT } from "@/components/CommandPalette/SearchButton";
+import CopyEmail from "@/components/CopyEmail";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 
 // `href` without a leading slash is a section on the home page; with one it is a route.
@@ -113,8 +115,11 @@ const Navbar = () => {
           <span className="display text-[clamp(1.4rem,3vw,2.2rem)] font-normal normal-case leading-none tracking-[-0.02em]">Aniket Saha</span>
         </button>
         <div className="hidden items-center justify-end gap-5 md:flex">
-          <span className="text-ink/70">Portfolio · Vol. 2026</span>
-          <ThemeToggle />
+          <span className="hidden text-ink/70 lg:inline">Portfolio · Vol. 2026</span>
+          <div className="flex items-center gap-2">
+            <SearchButton labelFrom="lg" />
+            <ThemeToggle />
+          </div>
         </div>
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
@@ -152,7 +157,8 @@ const Navbar = () => {
           {indexButton("")}
         </div>
         {slim && (
-          <div className="absolute right-[3vw] hidden md:block">
+          <div className="absolute right-[3vw] hidden items-center gap-2 md:flex">
+            <SearchButton labelFrom="lg" />
             <ThemeToggle />
           </div>
         )}
@@ -173,6 +179,13 @@ const Navbar = () => {
             data-lenis-prevent
           >
             <div className="px-[4vw] pb-8 pt-3">
+              <button
+                type="button"
+                onClick={() => { setIsOpen(false); setTimeout(() => window.dispatchEvent(new Event(PALETTE_EVENT)), 350); }}
+                className="folio mt-3 flex min-h-[44px] w-full items-center justify-between border border-ink px-4 text-left"
+              >
+                Search the site <span aria-hidden="true">⌕</span>
+              </button>
               <p className="folio my-3 text-ink/70">Contents</p>
               {navLinks.map((link, i) => (
                 <a
@@ -190,7 +203,7 @@ const Navbar = () => {
                   <a key={n} href={u} target="_blank" rel="noopener noreferrer" className="hover:text-vermilion">{n} ↗</a>
                 ))}
               </div>
-              <a href={`mailto:${profileData.contact.email}`} className="mt-4 block break-all font-body text-base underline underline-offset-4">{profileData.contact.email}</a>
+              <div className="mt-4"><CopyEmail email={profileData.contact.email} className="font-body text-base underline underline-offset-4" /></div>
             </div>
           </motion.div>
         )}

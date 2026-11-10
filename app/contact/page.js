@@ -5,6 +5,8 @@ import { ArrowUpRight } from "lucide-react";
 import { useTransitionContext } from "@/components/providers/TransitionProvider";
 import { socialLinks, profileData } from "@/lib/data";
 import ThemeToggle from "@/components/ThemeToggle";
+import SearchButton from "@/components/CommandPalette/SearchButton";
+import CopyEmail from "@/components/CopyEmail";
 
 const TOPICS = ["a role", "a project", "your work", "something else"];
 
@@ -22,18 +24,7 @@ export default function ContactHub() {
   const { navigate } = useTransitionContext();
   const [status, setStatus] = useState("idle");
   const [honeypot, setHoneypot] = useState("");
-  const [copied, setCopied] = useState(false);
   const email = profileData.contact.email;
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
-    } catch {
-      /* clipboard blocked: the address is still a visible mailto link */
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +61,10 @@ export default function ContactHub() {
             <ArrowUpRight size={14} className="-rotate-90" />
             Back to home
           </button>
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <SearchButton />
+            <ThemeToggle />
+          </div>
         </div>
 
         <div className="mx-auto max-w-[48rem]">
@@ -180,10 +174,8 @@ export default function ContactHub() {
         <footer className="folio mt-16 grid gap-x-8 gap-y-6 border-t border-ink pt-5 text-[11px] normal-case tracking-[0.04em] md:grid-cols-3">
           <div>
             <p className="mb-2 uppercase tracking-[0.14em] text-vermilion">Email</p>
-            <a href={`mailto:${email}`} className="break-all border-b border-ink/40 hover:text-vermilion">{email}</a>
-            <button type="button" onClick={copyEmail} aria-live="polite" className="ml-3 border border-ink px-2 py-0.5 uppercase tracking-[0.1em] hover:bg-ink hover:text-ground">
-              {copied ? "Copied ✓" : "Copy"}
-            </button>
+            <CopyEmail email={email} className="border-b border-ink/40 hover:text-vermilion" />
+            <a href={`mailto:${email}?subject=Hello`} className="ml-3 whitespace-nowrap border border-ink px-2 py-0.5 uppercase tracking-[0.1em] hover:bg-ink hover:text-ground">Mail app</a>
           </div>
           <div>
             <p className="mb-2 uppercase tracking-[0.14em] text-vermilion">Elsewhere</p>

@@ -156,7 +156,7 @@ export const mdxComponents = {
   h1: ({ children }) => <Heading level={2}>{children}</Heading>,
   h2: ({ children }) => <Heading level={2}>{children}</Heading>,
   mark: ({ children }) => (
-    <mark className="key-sentence">{children}</mark>
+    <mark className="key-sentence hl">{children}</mark>
   ),
   h3: ({ children }) => <Heading level={3}>{children}</Heading>,
   h4: ({ children }) => <Heading level={4}>{children}</Heading>,
@@ -168,7 +168,7 @@ export const mdxComponents = {
   ),
 
   strong: ({ children }) => (
-    <strong className="font-medium text-ink/95">{children}</strong>
+    <strong className="hl font-medium text-ink/95">{children}</strong>
   ),
 
   em: ({ children }) => <em className="italic text-ink/85">{children}</em>,

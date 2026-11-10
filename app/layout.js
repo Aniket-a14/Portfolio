@@ -43,7 +43,10 @@ export const metadata = getMetadata();
 
 import CustomCursor from "@/components/CustomCursor";
 import MusicPlayer from "@/components/MusicPlayer";
+import CommandPalette from "@/components/CommandPalette";
 import ThemeSync from "@/components/ThemeToggle/ThemeSync";
+import PrintSheet from "@/components/PrintSheet";
+import PrintGate from "@/components/PrintSheet/PrintGate";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { TransitionProvider } from "@/components/providers/TransitionProvider";
 
@@ -99,11 +102,16 @@ export default function RootLayout({ children }) {
             />
             {children}
             <MusicPlayer />
+            <CommandPalette />
             <ThemeSync />
             <Analytics />
             <SpeedInsights />
           </LenisProvider>
         </TransitionProvider>
+        {/* Direct child of <body> so the print rules can hide everything else (home page only). */}
+        <PrintGate>
+          <PrintSheet />
+        </PrintGate>
       </body>
     </html>
   );
