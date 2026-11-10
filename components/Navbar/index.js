@@ -115,7 +115,7 @@ const Navbar = () => {
           <span className="display text-[clamp(1.4rem,3vw,2.2rem)] font-normal normal-case leading-none tracking-[-0.02em]">Aniket Saha</span>
         </button>
         <div className="hidden items-center justify-end gap-5 md:flex">
-          <span className="hidden text-ink/70 lg:inline">Portfolio · Vol. 2026</span>
+          <span className="hidden text-ink/70 xl:inline">Portfolio · Vol. 2026</span>
           <div className="flex items-center gap-2">
             <SearchButton labelFrom="lg" />
             <ThemeToggle />

@@ -60,9 +60,6 @@ export default function Hero() {
           <p className="mt-5 max-w-[52ch] text-[clamp(.98rem,1.2vw,1.15rem)] leading-[1.6] text-ink/70">
             {withLinks(heroData.description, { React: heroData.links.react, "Next.js": heroData.links.nextjs })}
           </p>
-          <p className="mt-3 max-w-[52ch] text-[.95rem] leading-[1.6] text-ink/70">
-            {withLinks(heroData.socialDescription, { LinkedIn: heroData.links.linkedin, GitHub: heroData.links.github }, 2)}
-          </p>
           <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-4">
             <a
               href="#projects"
@@ -75,7 +72,6 @@ export default function Hero() {
               Résumé (PDF)
             </a>
           </div>
-          <p className="mt-6 text-[.95rem] font-medium text-ink/70">{heroData.ctaText}</p>
         </div>
 
         <figure className="relative order-1 w-[74%] justify-self-center md:order-2 md:justify-self-end md:w-full md:max-w-[460px]">

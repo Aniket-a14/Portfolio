@@ -248,7 +248,7 @@ export default function MusicPlayer() {
         <div
           role="dialog"
           aria-labelledby="music-ask-title"
-          className="fixed bottom-[5.2rem] left-4 z-40 w-[min(19rem,calc(100vw-2rem))] border border-ink bg-ground p-4 shadow-[6px_6px_0_0_rgb(var(--hard-shadow))] md:bottom-[5.6rem] md:left-6"
+          className="fixed bottom-[5.2rem] right-4 z-40 w-[min(19rem,calc(100vw-2rem))] border border-ink bg-ground p-4 shadow-[6px_6px_0_0_rgb(var(--hard-shadow))] md:bottom-[5.6rem] md:right-6"
         >
           <p className="folio text-[10.5px] text-vermilion">Soundtrack</p>
           <p id="music-ask-title" className="display mt-1 text-[1.35rem] font-light leading-[1.15]">Want some music while you look around?</p>
@@ -273,7 +273,7 @@ export default function MusicPlayer() {
         aria-label="Music player"
         aria-hidden={!open}
         data-lenis-prevent
-        className={`${open ? "" : "invisible pointer-events-none"} fixed bottom-[5.2rem] left-4 z-40 w-[min(20rem,calc(100vw-2rem))] border border-ink bg-ground p-3 shadow-[6px_6px_0_0_rgb(var(--hard-shadow))] md:left-6 md:bottom-[5.6rem]`}
+        className={`${open ? "" : "invisible pointer-events-none"} fixed bottom-[5.2rem] right-4 z-40 w-[min(20rem,calc(100vw-2rem))] border border-ink bg-ground p-3 shadow-[6px_6px_0_0_rgb(var(--hard-shadow))] md:right-6 md:bottom-[5.6rem]`}
       >
         <div className="mb-2 flex items-center justify-between">
           <p className="folio text-[10.5px] text-vermilion">{playing ? "Now playing" : "Music"}</p>
@@ -380,7 +380,7 @@ export default function MusicPlayer() {
         aria-expanded={open}
         aria-controls="music-player"
         aria-label={open ? "Close music player" : playing ? "Open music player (playing)" : "Open music player"}
-        className="fixed bottom-4 left-4 z-40 h-14 w-14 rounded-full md:bottom-6 md:left-6"
+        className="fixed bottom-4 right-4 z-40 h-14 w-14 rounded-full md:bottom-6 md:right-6"
       >
         <span
           aria-hidden="true"
