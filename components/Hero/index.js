@@ -83,17 +83,6 @@ export default function Hero() {
         </figure>
       </div>
 
-      <div className="border-t border-ink pt-[6vh] leading-none" aria-hidden="true">
-        <div className="flex w-max items-center gap-[2.4rem] whitespace-nowrap font-display text-[clamp(1.4rem,2.6vw,2.4rem)] italic [--duration:46s] [--gap:2.4rem]">
-          {[0, 1].map((k) => (
-            <div key={k} className="flex shrink-0 animate-marquee items-center gap-[2.4rem]">
-              {[...profileData.roles, "Python", "TypeScript", "Next.js", "LLM systems", "Automation"].map((t) => (
-                <span key={t + k} className="inline-flex items-center gap-[.45em] pb-[.12em] leading-none">{t} <em className="not-italic text-vermilion-bright">✶</em></span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }

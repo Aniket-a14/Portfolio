@@ -51,3 +51,9 @@ skills-lock.json
 
 # Local design exploration lab (not part of the site)
 design-lab/
+
+# Trailer kit (captures and renders are binaries; rebuilt with npm run all)
+trailer-kit/
+
+# Trailer film is hosted on Vercel Blob; the local copy is for development only
+public/trailer/film*.mp4

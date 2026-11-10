@@ -224,6 +224,13 @@ export default function MusicPlayer() {
     return () => window.removeEventListener("music-toggle", on);
   }, [playing, ready]);
 
+  // The trailer has its own soundtrack: pause the music when it starts.
+  useEffect(() => {
+    const on = () => { if (playing) playerRef.current?.pauseVideo?.(); };
+    window.addEventListener("music-pause", on);
+    return () => window.removeEventListener("music-pause", on);
+  }, [playing]);
+
   const chooseLang = (l) => {
     setLang(l);
     const q = musicTracks.filter((t) => l === "All" || t.lang === l);

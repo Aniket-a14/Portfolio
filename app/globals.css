@@ -502,3 +502,20 @@ body {
 /* Headings break into even lines (no one-word last line); body copy avoids orphans. */
 h1, h2, h3, .display { text-wrap: balance; }
 p { text-wrap: pretty; }
+
+/* Trailer ("Now showing"): --s (0..1, set from scroll in components/Trailer) takes the screen from a window to the whole
+   viewport and back. Desktop grows in both directions to 100vw x 100svh; phones keep 16:9 and only widen. */
+.tr-screen { width: calc(88vw + 12vw * var(--s, 1)); aspect-ratio: 16 / 9; }
+@media (min-width: 768px) {
+  .tr-screen { aspect-ratio: auto; width: calc(62vw + 38vw * var(--s, 1)); height: calc(34.875vw + (100svh - 34.875vw) * var(--s, 1)); }
+}
+
+/* The masthead darkens with the page as the trailer's veil comes up (--cin is the veil's opacity, set on <html> from
+   scroll), then slides away once the screen is more than half open or the film plays. */
+header.fixed { transition: transform .32s cubic-bezier(.4,0,.2,1); }
+header.fixed::after { content: ""; position: absolute; inset: 0; background: #000; opacity: var(--cin, 0); pointer-events: none; }
+html[data-cinema="on"] header.fixed, html[data-film="on"] header.fixed { transform: translateY(-101%); }
+
+/* Full screen puts only the screen element on top, so the custom cursor (a sibling) cannot show: give the system cursor back there. */
+.tr-screen:fullscreen, .tr-screen:fullscreen * { cursor: auto !important; }
+.tr-screen:fullscreen button, .tr-screen:fullscreen input[type="range"] { cursor: pointer !important; }

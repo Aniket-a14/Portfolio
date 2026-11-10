@@ -23,6 +23,7 @@ const CustomCursor = () => {
   const frameRef = useRef(0);
   const [enabled, setEnabled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [onDark, setOnDark] = useState(false); // over a black stage (the trailer): the ink dot would vanish, so it turns paper-coloured
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)");
@@ -56,6 +57,7 @@ const CustomCursor = () => {
       const target = event.target;
       if (!(target instanceof Element)) return;
       setIsHovered(Boolean(target.closest(HOVERABLE)));
+      setOnDark(Boolean(target.closest("[data-cursor-dark]")));
     };
 
     const onLeave = () => {
@@ -89,7 +91,7 @@ const CustomCursor = () => {
     >
       <div className="relative grid size-5 place-items-center">
         <span
-          className="absolute rounded-full bg-ink transition-[width,height,opacity] duration-200 ease-[cubic-bezier(.22,1,.36,1)]"
+          className={`absolute rounded-full shadow-[0_0_0_1px_rgba(0,0,0,.35)] transition-[width,height,opacity] duration-200 ease-[cubic-bezier(.22,1,.36,1)] ${onDark ? "bg-[#ebe7dd]" : "bg-ink"}`}
           style={{ width: isHovered ? 0 : 8, height: isHovered ? 0 : 8, opacity: isHovered ? 0 : 1 }}
         />
         <span

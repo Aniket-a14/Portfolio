@@ -1,5 +1,7 @@
 import HomeClient from "./HomeClient";
 import Hero from "@/components/Hero";
+import Trailer from "@/components/Trailer";
+import Marquee from "@/components/Marquee";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
@@ -31,6 +33,8 @@ export default function Home() {
   return (
     <HomeClient>
       <Hero />
+      <Trailer />
+      <Marquee />
       <About />
       <Skills projects={projects} />
       <Projects projects={projects} />

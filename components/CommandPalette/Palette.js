@@ -115,6 +115,10 @@ export default function Palette({ projects }) {
       ...projects.map((p, i) => ({ group: "Projects", label: p.title, no: `P${i + 1}`, hint: p.year, run: () => navigate(`/project/${p.slug}`, `• ${p.title.toUpperCase()}`, "down", "project") })),
       ...(articles ?? []).map((a, i) => ({ group: "Articles", label: a.title.split(":")[0], no: `A${i + 1}`, hint: "Medium ↗", run: () => open_(a.link) })),
       { group: "Actions", label: dark ? "Switch to light mode" : "Switch to dark mode", no: "→", hint: "Theme", run: toggleTheme },
+      ...(process.env.NEXT_PUBLIC_TRAILER_URL ? [{ group: "Actions", label: "Watch the trailer", no: "→", hint: "0:48", run: () => {
+        if (window.location.pathname === "/") window.dispatchEvent(new Event("trailer:play"));
+        else navigate("/#trailer", "• Home", "up");
+      } }] : []),
       { group: "Actions", label: "Play or pause music", no: "→", hint: "Music", run: () => window.dispatchEvent(new Event("music-toggle")) },
       { group: "Actions", label: "Copy email address", no: "→", hint: "Copy", run: () => { navigator.clipboard?.writeText(email).then(() => say("Email address copied"), () => say(email)); } },
       { group: "Actions", label: "Download résumé (PDF)", no: "→", hint: "PDF", run: () => open_(heroData.links.resume) },
