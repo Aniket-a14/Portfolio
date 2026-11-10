@@ -71,11 +71,11 @@ export default function BlogsClient() {
 
   return (
     <div className="min-h-screen bg-ground text-ink selection:bg-vermilion-bright selection:text-ground">
-      <main className="mx-auto max-w-[1180px] px-6 pb-24 pt-10 md:px-12">
+      <main id="main" tabIndex={-1} className="mx-auto max-w-[1180px] outline-none px-6 pb-24 pt-10 md:px-12">
         <div className="mb-10 flex items-center justify-between">
           <button
             onClick={() => navigate("/", "• Home", "up")}
-            className="folio flex w-fit items-center gap-2 text-ink/70 hover:text-vermilion focus:outline-none focus-visible:text-vermilion"
+            className="folio flex min-h-7 w-fit items-center gap-2 text-ink/70 hover:text-vermilion focus:outline-none focus-visible:text-vermilion"
           >
             <ArrowUpRight size={14} className="-rotate-90" />
             Back to home
@@ -124,7 +124,7 @@ export default function BlogsClient() {
                     {blog.thumbnail && (
                       <div className="border border-ink bg-ink/5 p-1.5 md:self-start">
                         <div className="relative aspect-[16/10] overflow-hidden">
-                          <Image src={blog.thumbnail} alt="" fill unoptimized sizes="(max-width: 768px) 100vw, 400px" className="object-cover" />
+                          <Image src={blog.thumbnail} alt="" fill priority={n === 0} sizes="(max-width: 768px) 100vw, 400px" className="object-cover" />
                         </div>
                       </div>
                     )}
@@ -133,7 +133,7 @@ export default function BlogsClient() {
                         {blog.excerpt || blog.snippet}
                       </p>
                       {blog.tags?.length > 0 && (
-                        <ul className="folio mt-4 flex flex-wrap gap-x-4 gap-y-1 text-[10.5px] normal-case tracking-[0.04em] text-ink/70" aria-label="Topics">
+                        <ul className="folio mt-4 flex flex-wrap gap-x-4 gap-y-1 text-[11px] normal-case tracking-[0.04em] text-ink/70" aria-label="Topics">
                           {blog.tags.map((t) => (
                             <li key={t}><span className="text-vermilion">#</span>{t}</li>
                           ))}

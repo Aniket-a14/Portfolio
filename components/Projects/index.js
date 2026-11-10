@@ -37,7 +37,7 @@ function ProjectSpread({ project, index }) {
         <p className="display my-6 max-w-[38ch] text-[1.08rem] italic leading-[1.55] text-ink/70">{project.tagline}</p>
         {project.result && (
           <p className="mb-6 max-w-[44ch] border-l-2 border-vermilion pl-4 text-[.98rem] leading-[1.5]">
-            <span className="folio mr-2 text-[10px] text-vermilion">Result</span>{project.result}
+            <span className="folio mr-2 text-[11px] text-vermilion">Result</span>{project.result}
           </p>
         )}
         <dl className="folio border-t border-ink text-[11px] normal-case tracking-[0.04em]">
@@ -59,7 +59,7 @@ function ProjectSpread({ project, index }) {
             <Image src={project.image} alt="" fill sizes="(max-width: 768px) 100vw, 58vw" className="object-cover object-center transition-transform duration-[1200ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.035]" />
           </div>
         </a>
-        <figcaption className="folio mt-3 text-[10.5px] text-ink/70">Fig. {index + 1} — {project.fullTitle || project.title}</figcaption>
+        <figcaption className="folio mt-3 text-[11px] text-ink/70">Fig. {index + 1} — {project.fullTitle || project.title}</figcaption>
       </figure>
     </Reveal>
   );

@@ -99,7 +99,7 @@ const Navbar = () => {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-ink bg-ground">
       <div
-        className={`folio flex items-center justify-between overflow-hidden px-[3vw] transition-all duration-500 ease-[cubic-bezier(.76,0,.24,1)] md:grid md:grid-cols-[1fr_auto_1fr] md:border-b md:border-ink/15 ${slim ? "max-h-0 border-transparent py-0 opacity-0" : "max-h-16 py-2.5 opacity-100 md:py-2"}`}
+        className={`folio flex items-center justify-between overflow-hidden px-[3vw] transition-[max-height,padding,opacity,border-color] duration-500 ease-[cubic-bezier(.76,0,.24,1)] md:grid md:grid-cols-[1fr_auto_1fr] md:border-b md:border-ink/15 ${slim ? "max-h-0 border-transparent py-0 opacity-0" : "max-h-16 py-2.5 opacity-100 md:py-2"}`}
         aria-hidden={slim}
       >
         <span className="hidden text-ink/70 md:block">{date || " "}</span>
@@ -109,8 +109,8 @@ const Navbar = () => {
           aria-label="Aniket Saha, open profile"
         >
           <Avatar className="h-7 w-7 border border-ink/20">
-            <AvatarImage src="/logo.jpeg" loading="eager" alt="" />
-            <AvatarFallback className="bg-ink/5 text-[9px]">AS</AvatarFallback>
+            <AvatarImage src="/logo-112.jpg" loading="eager" alt="" />
+            <AvatarFallback className="bg-ink/5 text-[11px]">AS</AvatarFallback>
           </Avatar>
           <span className="display text-[clamp(1.4rem,3vw,2.2rem)] font-normal normal-case leading-none tracking-[-0.02em]">Aniket Saha</span>
         </button>
@@ -145,7 +145,7 @@ const Navbar = () => {
               aria-current={isActive(link) ? "page" : undefined}
               className="group relative py-1 text-[0.85rem] font-medium"
             >
-              <em className="folio mr-2 align-super text-[10px] not-italic text-vermilion">{pad(i + 1)}</em>
+              <em className="folio mr-2 align-super text-[11px] not-italic text-vermilion">{pad(i + 1)}</em>
               {link.name}
               <span className={`absolute inset-x-0 bottom-0 h-px origin-left bg-ink transition-transform duration-500 ease-[cubic-bezier(.76,0,.24,1)] ${isActive(link) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
             </a>

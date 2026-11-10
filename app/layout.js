@@ -10,7 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const display = Fraunces({
   variable: "--font-display",
   subsets: ["latin"],
-  axes: ["opsz", "SOFT"],
+  axes: ["opsz"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -64,6 +64,12 @@ export default function RootLayout({ children }) {
         className={`${display.variable} ${body.variable} ${mono.variable} font-body antialiased w-full bg-ground text-ink`}
         suppressHydrationWarning
       >
+        <a
+          href="#main"
+          className="fixed left-3 top-3 z-[300] -translate-y-24 border border-ink bg-ground px-4 py-2.5 text-[.9rem] font-medium text-ink focus:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-vermilion"
+        >
+          Skip to content
+        </a>
         <TransitionProvider>
           <LenisProvider>
             <CustomCursor />

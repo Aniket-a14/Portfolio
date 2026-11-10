@@ -52,11 +52,11 @@ export default function ContactHub() {
 
   return (
     <div className="min-h-screen bg-ground text-ink selection:bg-vermilion-bright selection:text-ground">
-      <main className="mx-auto max-w-[1180px] px-6 pb-16 pt-10 md:px-12">
+      <main id="main" tabIndex={-1} className="mx-auto max-w-[1180px] outline-none px-6 pb-16 pt-10 md:px-12">
         <div className="mb-10 flex items-center justify-between">
           <button
             onClick={() => navigate("/", "• Home", "up")}
-            className="folio flex w-fit items-center gap-2 text-ink/70 hover:text-vermilion focus:outline-none focus-visible:text-vermilion"
+            className="folio flex min-h-7 w-fit items-center gap-2 text-ink/70 hover:text-vermilion focus:outline-none focus-visible:text-vermilion"
           >
             <ArrowUpRight size={14} className="-rotate-90" />
             Back to home
@@ -120,7 +120,7 @@ export default function ContactHub() {
               </p>
 
               <label className="flex flex-col-reverse gap-2">
-                <span className="folio text-[10.5px] text-ink/70">A few lines, in your own words *</span>
+                <span className="folio text-[11px] text-ink/70">A few lines, in your own words *</span>
                 <textarea
                   name="message"
                   rows={5}

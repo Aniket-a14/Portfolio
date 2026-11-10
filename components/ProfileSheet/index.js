@@ -293,7 +293,7 @@ const ProfileSheet = ({ isOpen, onClose }) => {
                     href={profileData.contact.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 font-body text-[12px] font-medium tracking-wide opacity-0 -translate-y-1 group-hover/heatmap:opacity-100 group-hover/heatmap:translate-y-0 text-ink/70 hover:text-ink transition-all duration-300"
+                    className="flex items-center gap-1.5 font-body text-[12px] font-medium tracking-wide opacity-0 -translate-y-1 group-hover/heatmap:opacity-100 group-hover/heatmap:translate-y-0 text-ink/70 hover:text-ink transition-[color,background-color,border-color,opacity,transform] duration-300"
                   >
                     <span>View Profile</span>
                     <FaGithub className="text-[13px]" />
@@ -339,20 +339,20 @@ const ProfileSheet = ({ isOpen, onClose }) => {
                       href={profile.url} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="group flex flex-col gap-1.5 transition-all duration-300"
+                      className="group flex flex-col gap-1.5 transition-[color,background-color,border-color,opacity,transform] duration-300"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-5 h-5 flex items-center justify-center shrink-0">
                           <img 
                             src={`https://cdn.simpleicons.org/${profile.slug}`} 
                             alt={profile.name} 
-                            className="w-4 h-4 transition-all duration-300 group-hover:scale-110"
+                            className="w-4 h-4 transition-[color,background-color,border-color,opacity,transform] duration-300 group-hover:scale-110"
                           />
                         </div>
-                        <h4 className="font-display text-[17px] md:text-[19px] text-ink font-normal leading-none transition-all duration-300">
+                        <h4 className="font-display text-[17px] md:text-[19px] text-ink font-normal leading-none transition-[color,background-color,border-color,opacity,transform] duration-300">
                           {profile.name}
                         </h4>
-                        <ArrowUpRight className="size-3 text-ink/40 group-hover:text-ink transition-all" strokeWidth={1.5} />
+                        <ArrowUpRight className="size-3 text-ink/40 group-hover:text-ink transition-[color,background-color,border-color,opacity,transform]" strokeWidth={1.5} />
                       </div>
                       <span className="font-body text-[12px] font-light text-ink/70 pl-8">
                         {profile.stats}

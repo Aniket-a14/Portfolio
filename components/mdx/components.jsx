@@ -27,7 +27,7 @@ export function Callout({ type = "note", children }) {
       <div className="mb-3.5 flex items-center gap-3">
         <span className={`h-px w-7 shrink-0 ${style.rule}`} aria-hidden="true" />
         <p
-          className={`font-body text-[9.5px] font-medium uppercase tracking-[0.3em] ${style.tone}`}
+          className={`font-body text-[11px] font-medium uppercase tracking-[0.3em] ${style.tone}`}
         >
           {style.label}
         </p>
@@ -53,7 +53,7 @@ export function Stat({ value, label }) {
       <p className="font-display text-[30px] leading-none text-ink/90 sm:text-[34px]">
         {value}
       </p>
-      <p className="mt-3 max-w-[130px] font-body text-[10.5px] uppercase leading-snug tracking-[0.14em] text-ink/70">
+      <p className="mt-3 max-w-[130px] font-body text-[11px] uppercase leading-snug tracking-[0.14em] text-ink/70">
         {label}
       </p>
     </div>
@@ -69,7 +69,7 @@ export function TechGrid({ groups = [], items = [] }) {
         <div key={group.label || index}>
           {group.label && (
             <>
-              <p className="font-body text-[9.5px] font-medium uppercase tracking-[0.3em] text-vermilion">
+              <p className="font-body text-[11px] font-medium uppercase tracking-[0.3em] text-vermilion">
                 {group.label}
               </p>
               <span
@@ -133,7 +133,7 @@ function Heading({ level, children, chapter }) {
         aria-label={`Chapter ${chapter.number} in brief`}
         className="-mt-3 mb-7 xl:absolute xl:right-[calc(100%+1.75rem)] xl:top-1 xl:mb-0 xl:mt-0 xl:w-[190px]"
       >
-        <p className="folio text-[10px] text-vermilion">
+        <p className="folio text-[11px] text-vermilion">
           {String(chapter.number).padStart(2, "0")} · {chapter.minutes} min
         </p>
         {chapter.takeaway && (
@@ -228,7 +228,7 @@ export const mdxComponents = {
     return (
       <div className="group relative my-9 -mx-1 sm:mx-0">
         {lang && (
-          <span className="absolute right-4 top-3.5 font-body text-[9px] uppercase tracking-[0.26em] text-vermilion">
+          <span className="absolute right-4 top-3.5 font-body text-[11px] uppercase tracking-[0.26em] text-vermilion">
             {lang}
           </span>
         )}
@@ -260,7 +260,7 @@ export const mdxComponents = {
   ),
 
   th: ({ children }) => (
-    <th className="whitespace-nowrap px-4 py-3.5 font-body text-[9.5px] font-medium uppercase tracking-[0.2em] text-vermilion first:pl-0">
+    <th className="whitespace-nowrap px-4 py-3.5 font-body text-[11px] font-medium uppercase tracking-[0.2em] text-vermilion first:pl-0">
       {children}
     </th>
   ),

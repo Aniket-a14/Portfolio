@@ -498,3 +498,7 @@ body {
 }
 @keyframes palFade { from { opacity: 0; } }
 @keyframes palRise { from { transform: translateY(10px); opacity: 0; } }
+
+/* Headings break into even lines (no one-word last line); body copy avoids orphans. */
+h1, h2, h3, .display { text-wrap: balance; }
+p { text-wrap: pretty; }

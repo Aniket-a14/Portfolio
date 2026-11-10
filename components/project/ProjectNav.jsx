@@ -10,7 +10,7 @@ export function BackToWork() {
   return (
     <button
       onClick={() => navigate("/", "• Home", "up")}
-      className="group flex items-center gap-2.5 font-body text-[10px] uppercase tracking-[0.24em] text-ink/70 transition-colors hover:text-vermilion/80"
+      className="group flex min-h-7 items-center gap-2.5 font-body text-[11px] uppercase tracking-[0.24em] text-ink/70 transition-colors hover:text-vermilion/80"
     >
       <ArrowLeft
         size={14}
@@ -39,7 +39,7 @@ export function NextProject({ previous, next }) {
           onClick={() => go(next)}
           className="group relative block w-full overflow-hidden border-y border-ink/10 py-12 text-left transition-colors duration-500 hover:border-ink/20"
         >
-          <span className="mb-4 flex items-center gap-2.5 font-body text-[9px] uppercase tracking-[0.3em] text-vermilion">
+          <span className="mb-4 flex items-center gap-2.5 font-body text-[11px] uppercase tracking-[0.3em] text-vermilion">
             Next case study
             <ArrowRight
               size={11}

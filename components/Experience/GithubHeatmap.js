@@ -101,7 +101,7 @@ export default function GithubHeatmap({ days }) {
 
 export function Legend() {
   return (
-    <p className="folio mt-3 flex items-center justify-end gap-1.5 text-[10px] text-ink/70" aria-hidden="true">
+    <p className="folio mt-3 flex items-center justify-end gap-1.5 text-[11px] text-ink/70" aria-hidden="true">
       Less
       {LEVELS.map((c) => (
         <i key={c} className="inline-block h-[11px] w-[11px] rounded-[2px]" style={{ background: c }} />

@@ -43,7 +43,7 @@ export default function Hero() {
             className="absolute right-[1%] top-[4.2rem] hidden w-[205px] rotate-[3deg] border border-ink/20 px-4 py-3.5 opacity-0 shadow-[4px_6px_0_rgb(var(--ink)/0.12)] transition-opacity duration-700 [background:color-mix(in_srgb,rgb(var(--ink))_6%,rgb(var(--ground)))] [.hero-on_&]:opacity-100 xl:block"
             style={{ transitionDelay: "1.9s" }}
           >
-            <p className="folio mb-1.5 flex items-center gap-1.5 text-[10px] text-ink"><span aria-hidden="true" className="size-1.5 rounded-full bg-vermilion" />{nowNote.label}</p>
+            <p className="folio mb-1.5 flex items-center gap-1.5 text-[11px] text-ink"><span aria-hidden="true" className="size-1.5 rounded-full bg-vermilion" />{nowNote.label}</p>
             <p className="display text-[1.02rem] italic font-light leading-[1.3]">{nowNote.text}</p>
             <svg aria-hidden="true" viewBox="0 0 110 50" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" className="absolute -left-[4.4rem] top-[3.2rem] w-[5.6rem] -rotate-[8deg] text-vermilion">
               <path d="M104 8C70 2 40 14 10 40M10 40l12-3M10 40l3-12" />
@@ -79,7 +79,7 @@ export default function Hero() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-t-full bg-ink/10 [clip-path:inset(100%_0_0_0)] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(.76,0,.24,1)] [.hero-on_&]:[clip-path:inset(0_0_0_0)]" style={{ transitionDelay: ".35s" }}>
             <Image src="/portrait-hero-bw.jpg" alt="Aniket Saha" fill priority sizes="(max-width: 768px) 70vw, 460px" className="object-cover" />
           </div>
-          <figcaption className="folio relative mt-3 text-[10px] text-ink/70">Fig. 1 — The author.</figcaption>
+          <figcaption className="folio relative mt-3 text-[11px] text-ink/70">Fig. 1 — The author.</figcaption>
         </figure>
       </div>
 

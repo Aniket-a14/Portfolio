@@ -250,7 +250,7 @@ export default function MusicPlayer() {
           aria-labelledby="music-ask-title"
           className="fixed bottom-[5.2rem] right-4 z-40 w-[min(19rem,calc(100vw-2rem))] border border-ink bg-ground p-4 shadow-[6px_6px_0_0_rgb(var(--hard-shadow))] md:bottom-[5.6rem] md:right-6"
         >
-          <p className="folio text-[10.5px] text-vermilion">Soundtrack</p>
+          <p className="folio text-[11px] text-vermilion">Soundtrack</p>
           <p id="music-ask-title" className="display mt-1 text-[1.35rem] font-light leading-[1.15]">Want some music while you look around?</p>
           <p className="mt-1.5 text-[.88rem] leading-snug text-ink/70">A short playlist in English and Hindi. Pause it any time.</p>
           <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -276,8 +276,8 @@ export default function MusicPlayer() {
         className={`${open ? "" : "invisible pointer-events-none"} fixed bottom-[5.2rem] right-4 z-40 w-[min(20rem,calc(100vw-2rem))] border border-ink bg-ground p-3 shadow-[6px_6px_0_0_rgb(var(--hard-shadow))] md:right-6 md:bottom-[5.6rem]`}
       >
         <div className="mb-2 flex items-center justify-between">
-          <p className="folio text-[10.5px] text-vermilion">{playing ? "Now playing" : "Music"}</p>
-          <button type="button" onClick={close} className="folio -mr-1 px-2 py-2 text-[10.5px] hover:text-vermilion focus-visible:text-vermilion">Close ×</button>
+          <p className="folio text-[11px] text-vermilion">{playing ? "Now playing" : "Music"}</p>
+          <button type="button" onClick={close} className="folio -mr-1 px-2 py-2 text-[11px] hover:text-vermilion focus-visible:text-vermilion">Close ×</button>
         </div>
 
         {/* YouTube's embed rules require the player to be visible (at least 200 x 200) while it plays. */}
@@ -302,7 +302,7 @@ export default function MusicPlayer() {
           aria-valuetext={`${mmss(time)} of ${mmss(dur)}`}
           className="mp-range mt-1 w-full"
         />
-        <div className="folio flex justify-between text-[10.5px] normal-case tracking-[0.04em] text-ink/70">
+        <div className="folio flex justify-between text-[11px] normal-case tracking-[0.04em] text-ink/70">
           <span>{mmss(time)}</span>
           <span>{mmss(dur)}</span>
         </div>
@@ -330,7 +330,7 @@ export default function MusicPlayer() {
           />
         </div>
 
-        <p role="status" className="folio min-h-[1.2rem] text-[10.5px] normal-case tracking-[0.04em] text-vermilion">
+        <p role="status" className="folio min-h-[1.2rem] text-[11px] normal-case tracking-[0.04em] text-vermilion">
           {message || (!ready && open ? "Loading player…" : "")}
         </p>
 
@@ -341,7 +341,7 @@ export default function MusicPlayer() {
               type="button"
               aria-pressed={lang === l}
               onClick={() => chooseLang(l)}
-              className={`folio border px-3 py-2 text-[10.5px] ${lang === l ? "border-ink bg-ink text-ground" : "border-ink/30 hover:border-ink"}`}
+              className={`folio border px-3 py-2 text-[11px] ${lang === l ? "border-ink bg-ink text-ground" : "border-ink/30 hover:border-ink"}`}
             >
               {l} <span className="opacity-70">{count(l)}</span>
             </button>
@@ -360,12 +360,12 @@ export default function MusicPlayer() {
                   disabled={!ready}
                   className={`grid min-h-11 w-full grid-cols-[1.6rem_1fr_auto] items-center gap-2 py-1.5 text-left hover:text-vermilion disabled:opacity-50 ${on ? "text-vermilion" : ""}`}
                 >
-                  <span className="folio text-[10.5px]">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="folio text-[11px]">{String(i + 1).padStart(2, "0")}</span>
                   <span className="min-w-0">
                     <span className="block truncate text-[.9rem] leading-tight">{t.title}</span>
                     <span className="block truncate text-[.75rem] text-ink/70">{t.artist}</span>
                   </span>
-                  <span className="folio text-[9.5px] text-ink/70">{t.lang === "Hindi" ? "HI" : "EN"}</span>
+                  <span className="folio text-[11px] text-ink/70">{t.lang === "Hindi" ? "HI" : "EN"}</span>
                 </button>
               </li>
             );

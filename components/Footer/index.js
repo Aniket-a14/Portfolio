@@ -124,7 +124,7 @@ const Footer = () => {
               {/* Honeypot field - hidden from people, filled by bots */}
               <input type="text" name="b_phone" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} style={{ display: "none" }} tabIndex="-1" autoComplete="off" />
               <label htmlFor="newsletter-email" className="sr-only">Email address</label>
-              <div className="flex border-b border-ink">
+              <div className="flex border-b border-ink focus-within:border-vermilion">
                 <input
                   id="newsletter-email"
                   type="email"
@@ -138,7 +138,7 @@ const Footer = () => {
                   {subscribeStatus === "loading" ? <span className="block size-4 animate-spin rounded-full border border-ink/20 border-t-ink" /> : "→"}
                 </button>
               </div>
-              <p role="status" aria-live="polite" className={`folio mt-2 min-h-4 text-[10px] ${subscribeStatus === "error" ? "text-vermilion" : "text-green-800"}`}>
+              <p role="status" aria-live="polite" className={`folio mt-2 min-h-4 text-[11px] ${subscribeStatus === "error" ? "text-vermilion" : "text-green-800"}`}>
                 {subscribeStatus === "success" || subscribeStatus === "error" ? subscribeMessage : ""}
               </p>
             </form>
@@ -162,7 +162,7 @@ const Footer = () => {
                     e.preventDefault();
                     navigate(link.href, `• ${link.name.toUpperCase()}`, "down");
                   }}
-                  className="hover:text-vermilion"
+                  className="inline-block py-1 hover:text-vermilion"
                 >
                   {link.name}
                 </a>

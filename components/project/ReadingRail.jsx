@@ -170,7 +170,7 @@ const ReadingRail = ({ headings = [], chapters = NO_CHAPTERS, articleId, showCon
                 style={{ top: `${t.pos * 100}%` }}
               >
                 <span className={`h-px w-3 ${active ? "bg-vermilion" : "bg-ink"}`} />
-                <span className={`folio ml-2 bg-ground py-px pr-1 text-[10px] tabular-nums ${active ? "text-vermilion" : "text-ink/70"}`}>
+                <span className={`folio ml-2 bg-ground py-px pr-1 text-[11px] tabular-nums ${active ? "text-vermilion" : "text-ink/70"}`}>
                   {String(t.number).padStart(2, "0")}
                   <span className={`ml-2 normal-case tracking-[0.02em] group-hover:inline min-[1700px]:inline ${active ? "min-[1700px]:text-vermilion" : ""} hidden`}>{t.title}</span>
                 </span>
@@ -185,7 +185,7 @@ const ReadingRail = ({ headings = [], chapters = NO_CHAPTERS, articleId, showCon
         aria-label="Contents"
         className="sticky top-32 hidden max-h-[calc(100vh-14rem)] w-[196px] shrink-0 overflow-y-auto xl:block"
       >
-        <p className="mb-6 font-body text-[9px] font-medium uppercase tracking-[0.32em] text-ink/70">
+        <p className="mb-6 font-body text-[11px] font-medium uppercase tracking-[0.32em] text-ink/70">
           Contents
         </p>
 
@@ -196,7 +196,7 @@ const ReadingRail = ({ headings = [], chapters = NO_CHAPTERS, articleId, showCon
             aria-hidden="true"
           />
           <span
-            className="absolute left-0 w-px bg-vermilion transition-all duration-500 ease-out"
+            className="absolute left-0 w-px bg-vermilion transition-[top,height] duration-500 ease-out"
             style={{ top: marker.top, height: marker.height }}
             aria-hidden="true"
           />
@@ -223,7 +223,7 @@ const ReadingRail = ({ headings = [], chapters = NO_CHAPTERS, articleId, showCon
                   >
                     {isSection && (
                       <span
-                        className={`shrink-0 pt-[3px] font-body text-[9px] tabular-nums tracking-[0.12em] transition-colors duration-300 ${
+                        className={`shrink-0 pt-[3px] font-body text-[11px] tabular-nums tracking-[0.12em] transition-colors duration-300 ${
                           isActive ? "text-vermilion" : "text-ink/70"
                         }`}
                       >

@@ -41,7 +41,7 @@ export default function About() {
             <div className="relative aspect-[4/5] overflow-hidden border border-ink bg-ink/5">
               <Image src="/portrait-about-cafe.jpg" alt="Aniket Saha seated at a café window, chin on hand, looking out" fill sizes="(max-width: 1024px) 80vw, 360px" className="object-cover object-center" />
             </div>
-            <figcaption className="folio mt-3 text-[10.5px] text-ink/70">Fig. 2 — Aniket Saha</figcaption>
+            <figcaption className="folio mt-3 text-[11px] text-ink/70">Fig. 2 — Aniket Saha</figcaption>
           </Reveal>
         </div>
       </div>

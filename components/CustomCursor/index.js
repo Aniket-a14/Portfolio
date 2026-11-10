@@ -89,11 +89,11 @@ const CustomCursor = () => {
     >
       <div className="relative grid size-5 place-items-center">
         <span
-          className="absolute rounded-full bg-ink transition-all duration-200 ease-[cubic-bezier(.22,1,.36,1)]"
+          className="absolute rounded-full bg-ink transition-[width,height,opacity] duration-200 ease-[cubic-bezier(.22,1,.36,1)]"
           style={{ width: isHovered ? 0 : 8, height: isHovered ? 0 : 8, opacity: isHovered ? 0 : 1 }}
         />
         <span
-          className="absolute text-[26px] leading-none text-vermilion-bright transition-all duration-200 ease-[cubic-bezier(.22,1,.36,1)]"
+          className="absolute text-[26px] leading-none text-vermilion-bright transition-[opacity,transform] duration-200 ease-[cubic-bezier(.22,1,.36,1)]"
           style={{ opacity: isHovered ? 1 : 0, transform: `scale(${isHovered ? 1 : 0.4}) rotate(${isHovered ? 0 : -90}deg)` }}
         >
           ✶

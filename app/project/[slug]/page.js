@@ -127,6 +127,7 @@ export default async function ProjectDetailPage({ params }) {
         <Navbar />
       </div>
 
+      <main id="main" tabIndex={-1} className="outline-none">
       {/* ---------------- Article opener ---------------- */}
       <header className={`${SHELL} pb-10 pt-32 sm:pt-40`}>
         <BackToWork />
@@ -175,7 +176,7 @@ export default async function ProjectDetailPage({ params }) {
             className="h-auto w-full object-contain"
           />
         </div>
-        <figcaption className="folio mt-3 text-[10.5px] text-ink/70">
+        <figcaption className="folio mt-3 text-[11px] text-ink/70">
           Fig. 1 — {frontmatter.title}{frontmatter.status ? `, ${frontmatter.status}` : ""}
         </figcaption>
       </figure>
@@ -188,7 +189,7 @@ export default async function ProjectDetailPage({ params }) {
               key={spec.label}
               className="border-b border-ink/[0.07] py-5 pr-5 sm:border-r sm:last:border-r-0 sm:pl-5 sm:first:pl-0"
             >
-              <dt className="font-body text-[9px] uppercase tracking-[0.28em] text-ink/70">
+              <dt className="font-body text-[11px] uppercase tracking-[0.28em] text-ink/70">
                 {spec.label}
               </dt>
               <dd className="mt-2.5 font-body text-[14px] font-light leading-snug text-ink/75">
@@ -201,7 +202,7 @@ export default async function ProjectDetailPage({ params }) {
         {stats?.languages && Object.keys(stats.languages).length > 0 && (
           <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div>
-              <p className="mb-4 font-body text-[9px] uppercase tracking-[0.3em] text-ink/70">
+              <p className="mb-4 font-body text-[11px] uppercase tracking-[0.3em] text-ink/70">
                 Composition
               </p>
               <LanguageBar languages={stats.languages} />
@@ -209,7 +210,7 @@ export default async function ProjectDetailPage({ params }) {
 
             {stats.topics?.length > 0 && (
               <div>
-                <p className="mb-4 font-body text-[9px] uppercase tracking-[0.3em] text-ink/70">
+                <p className="mb-4 font-body text-[11px] uppercase tracking-[0.3em] text-ink/70">
                   Topics
                 </p>
                 <ul className="flex flex-wrap gap-x-4 gap-y-2">
@@ -244,7 +245,7 @@ export default async function ProjectDetailPage({ params }) {
 
             {frontmatter.stack?.length > 0 && (
               <section className="mt-24 border-t border-ink/10 pt-10">
-                <h2 className="mb-7 font-body text-[9.5px] font-medium uppercase tracking-[0.3em] text-vermilion">
+                <h2 className="mb-7 font-body text-[11px] font-medium uppercase tracking-[0.3em] text-vermilion">
                   Colophon
                 </h2>
                 <ul className="grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3">
@@ -268,14 +269,14 @@ export default async function ProjectDetailPage({ params }) {
             aria-label="In short"
             className="order-first self-start border border-ink bg-ink/[0.03] p-5 xl:sticky xl:top-28 xl:order-none"
           >
-            <h2 className="folio mb-4 text-[10px] text-vermilion">In short</h2>
+            <h2 className="folio mb-4 text-[11px] text-vermilion">In short</h2>
             {summary && (
               <dl className="font-display text-[15.5px] leading-[1.45] text-ink/85">
                 {[["Problem", summary.problem], ["Built", summary.built], ["Result", summary.result]].map(
                   ([label, text]) =>
                     text && (
                       <div key={label} className="border-t border-ink/15 py-3 first:border-t-0 first:pt-0">
-                        <dt className="folio mb-1 text-[9.5px] text-ink/70">{label}</dt>
+                        <dt className="folio mb-1 text-[11px] text-ink/70">{label}</dt>
                         <dd>{text}</dd>
                       </div>
                     )
@@ -289,7 +290,7 @@ export default async function ProjectDetailPage({ params }) {
                     <li key={c.id}>
                       <a
                         href={`#${c.id}`}
-                        className="folio flex min-h-6 items-center gap-2 py-0.5 text-[10.5px] normal-case leading-snug tracking-[0.03em] text-ink/70 hover:text-vermilion"
+                        className="folio flex min-h-6 items-center gap-2 py-0.5 text-[11px] normal-case leading-snug tracking-[0.03em] text-ink/70 hover:text-vermilion"
                       >
                         <span className="text-vermilion">{String(c.number).padStart(2, "0")}</span>
                         {c.title}
@@ -302,6 +303,7 @@ export default async function ProjectDetailPage({ params }) {
           </aside>
         </div>
       </div>
+      </main>
     </div>
   );
 }

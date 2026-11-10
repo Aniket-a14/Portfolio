@@ -22,7 +22,7 @@ export default function SearchButton({ className = "", labelFrom = "sm" }) {
         <circle cx="7" cy="7" r="4.6" /><path d="M10.6 10.6L14 14" />
       </svg>
       <span className={label}>Search</span>
-      {mac !== null && <kbd className="hidden border border-ink/25 px-1 text-[9px] normal-case tracking-normal lg:inline">{mac ? "⌘K" : "Ctrl K"}</kbd>}
+      {mac !== null && <kbd className="hidden border border-ink/25 px-1 text-[11px] normal-case tracking-normal lg:inline">{mac ? "⌘K" : "Ctrl K"}</kbd>}
     </button>
   );
 }

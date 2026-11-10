@@ -8,17 +8,16 @@ const GREETINGS = ["Hi", "Hola", "Bonjour", "Hallo", "Ciao", "Sawasdee", "Aloha"
 const GREETING_LANG = { 8: "bn", 9: "hi" };
 const EASE = [0.76, 0, 0.24, 1];
 
-// What the opening sequence waits for besides its own timing: the web fonts and the
-// hero photograph. Without this the sheet could lift onto a half-rendered page.
-const HERO_IMAGE = "/portrait-hero-bw.jpg";
+// What the opening sequence waits for besides its own timing: the web fonts and, on the home page, the hero
+// photograph (already in the DOM, served optimised by next/image). It used to fetch the raw 185 KB JPEG itself on
+// every page, which the visitor then downloaded twice and which contact/project pages never show.
 function useAssetsReady() {
   const [ready, setReady] = useState(false);
   useEffect(() => {
     let dead = false;
     const fonts = document.fonts?.ready ?? Promise.resolve();
-    const img = new Image();
-    img.src = HERO_IMAGE;
-    const decoded = img.decode ? img.decode().catch(() => {}) : Promise.resolve();
+    const img = document.querySelector("#hero img");
+    const decoded = img?.decode ? img.decode().catch(() => {}) : Promise.resolve();
     // Never block forever on a slow network: give assets 4 s, then proceed.
     const cap = new Promise((r) => setTimeout(r, 4000));
     Promise.race([Promise.all([fonts, decoded]), cap]).then(() => !dead && setReady(true));

@@ -224,7 +224,7 @@ export default function Palette({ projects }) {
               {rows.length === 0 && <p className="py-6 text-ink/70">No match. Try “project”, “dark” or “résumé”.</p>}
               {groups.map((g) => (
                 <div key={g.name} role="group" aria-label={g.name}>
-                  <p aria-hidden="true" className="folio mt-2 border-t border-ink/15 pb-1 pt-3 text-[10.5px] text-ink/70">{g.name}</p>
+                  <p aria-hidden="true" className="folio mt-2 border-t border-ink/15 pb-1 pt-3 text-[11px] text-ink/70">{g.name}</p>
                   {g.items.map(({ it, i }) => (
                     <div
                       key={`${g.name}-${it.label}`}
@@ -245,7 +245,7 @@ export default function Palette({ projects }) {
               ))}
             </div>
 
-            <div className="folio flex flex-wrap gap-x-5 gap-y-1 border-t border-ink/15 py-2.5 text-[10.5px] text-ink/70" aria-hidden="true">
+            <div className="folio flex flex-wrap gap-x-5 gap-y-1 border-t border-ink/15 py-2.5 text-[11px] text-ink/70" aria-hidden="true">
               <span><kbd className="border border-ink/25 px-1">↑</kbd> <kbd className="border border-ink/25 px-1">↓</kbd> move</span>
               <span><kbd className="border border-ink/25 px-1">↵</kbd> open</span>
               <span><kbd className="border border-ink/25 px-1">esc</kbd> close</span>

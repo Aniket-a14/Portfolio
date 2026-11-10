@@ -26,7 +26,7 @@ export default function NotFound() {
         </div>
       </header>
 
-      <main className="grid flex-1 place-items-center px-6 py-[6vh]">
+      <main id="main" tabIndex={-1} className="grid flex-1 outline-none place-items-center px-6 py-[6vh]">
         <section className="w-full max-w-[640px] border-[3px] border-double border-ink p-[clamp(1.3rem,4vw,3.4rem)] text-center">
           <p className="folio border-b border-ink pb-2.5 tracking-[0.3em] text-vermilion">Erratum</p>
           <h1 className="display mt-6 text-[clamp(2.2rem,6vw,4.4rem)] font-light leading-[1.02] tracking-[-0.04em]">
@@ -40,7 +40,7 @@ export default function NotFound() {
             <Link href="/#projects" className={LINK}>Projects</Link>
             <Link href="/blogs" className={LINK}>Articles</Link>
           </nav>
-          <p className="folio mt-7 text-[10.5px] text-ink/70">Error 404 · Corrected in the next issue</p>
+          <p className="folio mt-7 text-[11px] text-ink/70">Error 404 · Corrected in the next issue</p>
         </section>
       </main>
     </div>

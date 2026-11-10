@@ -36,7 +36,7 @@ export default function HomeClient({ children }) {
   return (
     <div className="relative min-h-screen w-full bg-ground">
       <Navbar />
-      <main className={`transition-opacity duration-1000 ease-in-out ${isInitialLoadComplete ? "opacity-100" : "opacity-0"}`}>{children}</main>
+      <main id="main" tabIndex={-1} className={`outline-none transition-opacity duration-1000 ease-in-out ${isInitialLoadComplete ? "opacity-100" : "opacity-0"}`}>{children}</main>
     </div>
   );
 }

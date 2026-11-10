@@ -12,6 +12,8 @@ const nextConfig = {
     minimumCacheTTL: 31536000,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [64, 128, 256, 384],
+    // Medium article covers are optimised too (a single cover was a 1.1 MB PNG).
+    remotePatterns: [{ protocol: "https", hostname: "**.medium.com" }],
   },
   experimental: {
     // These three are barrel packages: a bare `import { X } from "react-icons/fa"`
